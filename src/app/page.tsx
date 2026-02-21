@@ -27,7 +27,6 @@ export default function HomePage() {
     nextTurn,
     playAgain,
     backToTitle,
-    updateKaijuImage,
   } = useGameState();
 
   const renderScreen = () => {
@@ -95,7 +94,6 @@ export default function HomePage() {
             onSetAIThinking={setAIThinking}
             onApplyAttack={applyAttack}
             onNextTurn={nextTurn}
-            updateKaijuImage={updateKaijuImage}
           />
         </motion.div>
       );

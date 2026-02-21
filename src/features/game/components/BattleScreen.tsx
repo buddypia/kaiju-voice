@@ -13,7 +13,6 @@ import type {
 import { calculateDamage } from '@/features/battle/hooks/useBattleEngine';
 import { BattleArena } from '@/features/battle/components/BattleArena';
 import { AttackSequence } from '@/features/battle/components/AttackSequence';
-import { useKaijuGeneration } from '@/features/kaiju/hooks/useKaijuGeneration';
 import { useBattleBGM } from '@/features/music/hooks/useBattleBGM';
 import { useCommentary } from '@/features/commentary';
 import type { CommentaryEvent } from '@/features/commentary';
@@ -33,7 +32,6 @@ interface BattleScreenProps {
   onSetAIThinking: () => void;
   onApplyAttack: (attack: AttackResult) => void;
   onNextTurn: () => void;
-  updateKaijuImage: (playerId: 0 | 1, imageUrl: string) => void;
 }
 
 /** バトル画面コンポーネント */
@@ -50,14 +48,11 @@ export function BattleScreen({
   onSetAIThinking,
   onApplyAttack,
   onNextTurn,
-  updateKaijuImage,
 }: BattleScreenProps) {
-  const { generateImage } = useKaijuGeneration();
   const { startBGM, stopBGM } = useBattleBGM();
   const { commentary, generateCommentary, stopSpeaking } = useCommentary();
   const { generateAIAttack, prefetchAIAttack, consumePrefetched, isPrefetched } = useAIOpponent();
   const bgmStartedRef = useRef(false);
-  const imageGeneratedRef = useRef(false);
   const commentaryInitRef = useRef(false);
   const aiTurnProcessingRef = useRef(false);
 
@@ -80,16 +75,6 @@ export function BattleScreen({
     if (!bgmStartedRef.current) {
       bgmStartedRef.current = true;
       startBGM(players[0].kaiju.element, players[1].kaiju.element);
-    }
-
-    if (!imageGeneratedRef.current) {
-      imageGeneratedRef.current = true;
-      generateImage(players[0].kaiju).then((url) => {
-        if (url) updateKaijuImage(0, url);
-      });
-      generateImage(players[1].kaiju).then((url) => {
-        if (url) updateKaijuImage(1, url);
-      });
     }
 
     if (!commentaryInitRef.current) {

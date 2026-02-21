@@ -54,11 +54,7 @@ export async function POST(req: Request) {
 
     const response = await gemini.models.generateContent({
       model: 'gemini-2.5-flash-preview-tts',
-      contents: [
-        { role: 'user', parts: [{ text: SYSTEM_PROMPT }] },
-        { role: 'model', parts: [{ text: '了解！熱い実況いきます！' }] },
-        { role: 'user', parts: [{ text: prompt }] },
-      ],
+      contents: `${SYSTEM_PROMPT}\n\n${prompt}`,
       config: {
         responseModalities: [Modality.AUDIO],
         speechConfig: {
