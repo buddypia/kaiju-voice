@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "skill_id": "manual-generator",
+  "skill_version": "1.0.0",
+  "display_name": "Manual Generator",
+  "description": "スキル/エージェント/パイプラインの使用マニュアルを自動生成・更新するスキル",
+  "tier": 2,
+  "tier_description": "Pipeline",
+  "status": "active",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "scan_and_extract": "haiku",
+      "generate_manual": "sonnet",
+      "generate_pipeline": "opus",
+      "verify": "haiku"
+    }
+  },
+  "public_api": {
+    "trigger_keywords": [
+      "マニュアル更新",
+      "マニュアルアップデート",
+      "manual update",
+      "マニュアル生成"
+    ],
+    "args_pattern": "{tool-id} | --all | --check | --pipeline {id} | --index | --refresh-stale"
+  },
+  "calls": [],
+  "called_by": [],
+  "outputs": [
+    { "type": "file", "path_pattern": "docs/manuals/**/*.md" },
+    { "type": "file", "path_pattern": "docs/manuals/manifest.json" },
+    { "type": "file", "path_pattern": "docs/manuals/CHANGELOG.md" }
+  ],
+  "created": "2026-02-08",
+  "updated": "2026-02-08"
+}

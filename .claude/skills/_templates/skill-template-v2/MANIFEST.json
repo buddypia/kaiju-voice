@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "skill_id": "{{SKILL_ID}}",
+  "skill_version": "1.0.0",
+  "tier": "{{TIER: 1=Orchestrator, 2=Pipeline, 3=Utility}}",
+  "tier_description": "{{TIER_DESCRIPTION}}",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": true
+  },
+  "model_routing": {
+    "default_model": "{{DEFAULT_MODEL: haiku/sonnet/opus}}",
+    "task_specific": {
+      "read_operations": "haiku",
+      "write_operations": "sonnet",
+      "complex_analysis": "opus"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "cacheable_validations": [
+      {
+        "type": "{{VALIDATION_TYPE}}",
+        "validity_minutes": 30,
+        "invalidation_patterns": ["{{GLOB_PATTERN}}"]
+      }
+    ],
+    "cache_location": "CONTEXT.json > evidence_cache"
+  },
+  "preflight_checks": [
+    {
+      "id": "PF-001",
+      "description": "{{CHECK_DESCRIPTION}}",
+      "blocking": true
+    }
+  ],
+  "postflight_checks": [
+    {
+      "id": "POF-001",
+      "description": "{{CHECK_DESCRIPTION}}",
+      "blocking": true
+    }
+  ],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["{{TRIGGER_KEYWORD_1}}", "{{TRIGGER_KEYWORD_2}}"],
+    "args_pattern": "[--force] [--{{OPTION_1}}]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": [],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "{{OUTPUT_TYPE: report|log|file|state}}",
+      "format": "markdown",
+      "description": "{{OUTPUT_DESCRIPTION}}"
+    }
+  ],
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "{{YYYY-MM-DD}}",
+      "changes": "新規作成 - Enforced Skill Pattern v2.0 適用"
+    }
+  ]
+}

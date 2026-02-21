@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="'Inter','Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <marker id="arrow4" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow4Green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#34d399"/>
+    </marker>
+    <marker id="arrow4Red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#f87171"/>
+    </marker>
+    <filter id="shadow4">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="520" fill="url(#bgGrad4)" rx="12"/>
+
+  <!-- Title -->
+  <text x="480" y="38" fill="#f8fafc" font-size="20" font-weight="700" text-anchor="middle">制約の消費と逸脱フロー</text>
+  <text x="480" y="58" fill="#94a3b8" font-size="12" text-anchor="middle">Platform 制約が Feature 決定にどう伝播するか</text>
+
+  <!-- Source: PADR -->
+  <rect x="60" y="90" width="180" height="70" rx="10" fill="#312e81" fill-opacity="0.5" stroke="#7c3aed" stroke-width="1.5" filter="url(#shadow4)"/>
+  <text x="150" y="115" fill="#c4b5fd" font-size="12" font-weight="700" text-anchor="middle">PADR-001~006</text>
+  <text x="150" y="135" fill="#a78bfa" font-size="9" text-anchor="middle">ルールセクション</text>
+  <text x="150" y="150" fill="#818cf8" font-size="8" text-anchor="middle">必須 / 禁止</text>
+
+  <!-- Arrow -->
+  <path d="M240 125 L310 125" stroke="#a78bfa" stroke-width="2" marker-end="url(#arrow4)"/>
+  <text x="275" y="118" fill="#c4b5fd" font-size="8" text-anchor="middle">抽出</text>
+
+  <!-- constraints.json -->
+  <rect x="320" y="80" width="280" height="90" rx="10" fill="#312e81" fill-opacity="0.6" stroke="#a78bfa" stroke-width="2" filter="url(#shadow4)"/>
+  <text x="460" y="104" fill="#e9d5ff" font-size="13" font-weight="700" text-anchor="middle">constraints.json</text>
+  <line x1="340" y1="112" x2="580" y2="112" stroke="#7c3aed" stroke-width="0.5" stroke-opacity="0.4"/>
+
+  <!-- JSON fields -->
+  <text x="350" y="130" fill="#c4b5fd" font-size="10">constraints[]: PC-001..008</text>
+  <text x="350" y="146" fill="#c4b5fd" font-size="10">tech_stack: { frontend, backend }</text>
+  <text x="350" y="162" fill="#c4b5fd" font-size="10">deviation_policy: { allowed: true }</text>
+
+  <!-- Arrow down to consumers -->
+  <path d="M460 170 L460 210" stroke="#a78bfa" stroke-width="2" marker-end="url(#arrow4)"/>
+  <text x="475" y="194" fill="#c4b5fd" font-size="9">ロード</text>
+
+  <!-- Consumer: feature-pilot Step 1.5A -->
+  <rect x="340" y="218" width="240" height="50" rx="8" fill="#164e63" fill-opacity="0.5" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="460" y="240" fill="#67e8f9" font-size="11" font-weight="600" text-anchor="middle">feature-pilot Step 1.5A</text>
+  <text x="460" y="256" fill="#0ea5e9" font-size="9" text-anchor="middle">制約の自動ロード</text>
+
+  <!-- Arrow to architecture-selector -->
+  <path d="M460 268 L460 310" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrow4)"/>
+  <text x="475" y="292" fill="#7dd3fc" font-size="9">引き渡し</text>
+
+  <!-- Consumer: architecture-selector Step 0.5 -->
+  <rect x="310" y="318" width="300" height="50" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="460" y="340" fill="#fde68a" font-size="11" font-weight="600" text-anchor="middle">architecture-selector Step 0.5</text>
+  <text x="460" y="356" fill="#f59e0b" font-size="9" text-anchor="middle">制約を解析し、技術制約ベースを設定</text>
+
+  <!-- Decision: Comply or Deviate -->
+  <!-- Diamond -->
+  <polygon points="460,400 520,430 460,460 400,430" fill="#1e293b" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="460" y="428" fill="#e2e8f0" font-size="10" text-anchor="middle">準拠?</text>
+  <text x="460" y="440" fill="#94a3b8" font-size="8" text-anchor="middle">PC-NNN に対して</text>
+
+  <!-- Arrow from architecture-selector to diamond -->
+  <path d="M460 368 L460 400" stroke="#64748b" stroke-width="1.5"/>
+
+  <!-- YES path -->
+  <path d="M400 430 L200 430" stroke="#34d399" stroke-width="2" marker-end="url(#arrow4Green)"/>
+  <text x="300" y="422" fill="#4ade80" font-size="10" font-weight="600" text-anchor="middle">YES</text>
+
+  <!-- Standard Feature ADR -->
+  <rect x="60" y="405" width="140" height="56" rx="8" fill="#065f46" fill-opacity="0.4" stroke="#34d399" stroke-width="1.5"/>
+  <text x="130" y="428" fill="#6ee7b7" font-size="11" font-weight="600" text-anchor="middle">Feature ADR</text>
+  <text x="130" y="444" fill="#34d399" font-size="9" text-anchor="middle">標準テンプレート</text>
+  <text x="130" y="456" fill="#059669" font-size="8" text-anchor="middle">逸脱不要</text>
+
+  <!-- NO path -->
+  <path d="M520 430 L680 430" stroke="#f87171" stroke-width="2" marker-end="url(#arrow4Red)"/>
+  <text x="600" y="422" fill="#f87171" font-size="10" font-weight="600" text-anchor="middle">NO（逸脱）</text>
+
+  <!-- Feature ADR with Deviation -->
+  <rect x="690" y="390" width="220" height="84" rx="8" fill="#7f1d1d" fill-opacity="0.3" stroke="#f87171" stroke-width="1.5"/>
+  <text x="800" y="415" fill="#fca5a5" font-size="11" font-weight="600" text-anchor="middle">Feature ADR + 逸脱</text>
+  <line x1="710" y1="423" x2="890" y2="423" stroke="#f87171" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="710" y="440" fill="#fca5a5" font-size="9">逸脱対象: PC-NNN</text>
+  <text x="710" y="456" fill="#fca5a5" font-size="9">正当化: 必須</text>
+  <text x="710" y="468" fill="#f87171" font-size="9" font-weight="600">ATAM Lite 根拠: 必須</text>
+
+  <!-- Fallback note -->
+  <rect x="660" y="90" width="250" height="60" rx="8" fill="#1e293b" stroke="#64748b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="785" y="112" fill="#94a3b8" font-size="10" text-anchor="middle">フォールバック: constraints.json なし</text>
+  <text x="785" y="130" fill="#64748b" font-size="9" text-anchor="middle">architecture-selector は</text>
+  <text x="785" y="144" fill="#64748b" font-size="9" text-anchor="middle">ハードコードデフォルトを使用（後方互換）</text>
+
+  <!-- Dotted line from constraints.json to fallback -->
+  <path d="M600 110 L660 110" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Footer -->
+  <line x1="40" y1="500" x2="920" y2="500" stroke="#334155" stroke-width="0.5"/>
+  <text x="480" y="514" fill="#64748b" font-size="9" text-anchor="middle">Hackathon Project - 制約の消費と逸脱フロー</text>
+</svg>

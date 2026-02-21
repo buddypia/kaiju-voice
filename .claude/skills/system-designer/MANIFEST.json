@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "skill_id": "system-designer",
+  "skill_version": "1.0.0",
+  "tier": 2,
+  "tier_description": "Pipeline - Phase 0 System Design (C4 Model L1-L2)",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "boundary_scan": "haiku",
+      "system_analysis": "sonnet",
+      "diagram_generation": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["system design", "システム設計", "C4", "container diagram"],
+    "args_pattern": "--feature-id <feature_id>"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["domain-modeler", "architecture-selector"]
+  },
+  "called_by": ["feature-pilot"],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/features/<id>-<name>/SYSTEM-DESIGN.md",
+      "description": "システム設計文書（C4 Level 1-2 + Mermaid図）"
+    }
+  ],
+  "state_transitions": {
+    "context_json_field": "architecture.system_design",
+    "note": "feature-architectがCONTEXT.jsonのarchitectureセクションを更新する（Option B原則）"
+  },
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "Phase 0 Discovery & Architecture パイプライン初期実装"
+    }
+  ]
+}

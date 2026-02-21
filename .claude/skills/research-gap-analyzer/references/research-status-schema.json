@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "research-status-schema.json",
+  "title": "Research Status Schema",
+  "description": "Hackathon Project プロジェクトのリサーチ作業状態トラッキングスキーマ。AIがresearch-status.json生成/修正時に参照するルール定義。",
+
+  "type": "object",
+  "required": ["schema_version", "jobs"],
+
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1,
+      "description": "スキーマバージョン"
+    },
+
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "最終更新時間 (ISO 8601)"
+    },
+
+    "jobs": {
+      "type": "array",
+      "description": "リサーチ作業リスト",
+      "items": {
+        "type": "object",
+        "required": ["job_id", "topic", "phase", "created_at"],
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$",
+            "description": "一意識別子 (slug形式、例: churn-prevention-2026)"
+          },
+
+          "topic": {
+            "type": "string",
+            "minLength": 5,
+            "description": "リサーチテーマ (日本語または英語)"
+          },
+
+          "phase": {
+            "type": "string",
+            "enum": ["pending", "processing", "completed", "failed", "stale"],
+            "description": "現在の状態。pending: 待機、processing: ディープリサーチ進行中、completed: 完了、failed: 失敗、stale: 更新必要(180日+)"
+          },
+
+          "doc_path": {
+            "type": "string",
+            "pattern": "^docs/research/.+\\.md$",
+            "description": "生成された文書パス (completed状態の時必須)"
+          },
+
+          "provider": {
+            "type": "string",
+            "enum": ["openai", "google"],
+            "description": "ディープリサーチプロバイダー (processing/completed時必須)"
+          },
+
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "作業生成時間"
+          },
+
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ディープリサーチ開始時間 (processing時必須)"
+          },
+
+          "completed_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "完了時間 (completed時必須)"
+          },
+
+          "ttl_expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "processingタイムアウト時間 (started_at + 24時間)"
+          },
+
+          "kpi_target": {
+            "type": "string",
+            "enum": ["d7_retention", "paid_conversion", "monthly_churn", "ltv", "ai_max_upgrade"],
+            "description": "関連KPI目標"
+          },
+
+          "priority": {
+            "type": "string",
+            "enum": ["P0", "P1", "P2"],
+            "description": "優先順位。P0: 即時、P1: 1ヶ月以内、P2: 1年以内"
+          },
+
+          "attempt": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1,
+            "description": "試行回数 (リトライ時に増加)"
+          },
+
+          "last_error": {
+            "type": "string",
+            "description": "最後のエラーメッセージ (failed時)"
+          },
+
+          "notes": {
+            "type": "string",
+            "description": "追加メモ (自由形式)"
+          }
+        },
+
+        "allOf": [
+          {
+            "if": { "properties": { "phase": { "const": "processing" } } },
+            "then": { "required": ["started_at", "provider"] }
+          },
+          {
+            "if": { "properties": { "phase": { "const": "completed" } } },
+            "then": { "required": ["doc_path", "completed_at"] }
+          },
+          {
+            "if": { "properties": { "phase": { "const": "failed" } } },
+            "then": { "required": ["last_error"] }
+          }
+        ]
+      }
+    }
+  }
+}

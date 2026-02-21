@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hackathon-project.app/schemas/api_endpoint.schema.json",
+  "title": "API Endpoint Schema (Hybrid v3.1)",
+  "description": "Edge Function API契約定義のためのメタスキーマ。SPEC §0.5およびAPI文書で使用。Schema + Exampleハイブリッド方式対応.",
+  "type": "object",
+  "required": ["id", "method", "path"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "API識別子 (例: API-029-01)",
+      "pattern": "^API-[0-9]{3}-[0-9]{2}$"
+    },
+    "method": {
+      "type": "string",
+      "description": "HTTPメソッド",
+      "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    },
+    "path": {
+      "type": "string",
+      "description": "エンドポイントパス",
+      "pattern": "^/.*$"
+    },
+    "description": {
+      "type": "string",
+      "description": "API説明"
+    },
+    "auth": {
+      "type": "boolean",
+      "description": "認証必須の可否",
+      "default": true
+    },
+    "idempotent": {
+      "type": "boolean",
+      "description": "冪等性の可否 (同じリクエストの繰り返し時に同じ結果)",
+      "default": false
+    },
+    "request": {
+      "type": "object",
+      "description": "リクエストスキーマ (JSON Schema)",
+      "$ref": "#/$defs/jsonSchema"
+    },
+    "response": {
+      "type": "object",
+      "description": "レスポンススキーマ (JSON Schema)",
+      "$ref": "#/$defs/jsonSchema"
+    },
+    "request_example": {
+      "type": "object",
+      "description": "リクエスト例 (実際のJSON値). requestスキーマと一致する必要があります."
+    },
+    "response_example": {
+      "type": "object",
+      "description": "成功レスポンス例 (実際のJSON値). responseスキーマと一致する必要があります."
+    },
+    "error_examples": {
+      "type": "array",
+      "description": "エラーレスポンス例一覧",
+      "items": {
+        "$ref": "#/$defs/errorExample"
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "エラー コード 一覧",
+      "items": {
+        "$ref": "#/$defs/errorCode"
+      }
+    },
+    "rate_limit": {
+      "type": "object",
+      "description": "レート制限ポリシー",
+      "$ref": "#/$defs/rateLimit"
+    },
+    "ssot_path": {
+      "type": "string",
+      "description": "SSOT Edge Function ファイルパス (例: infra/supabase/functions/sync-vocabulary/index.ts)"
+    }
+  },
+  "$defs": {
+    "jsonSchema": {
+      "type": "object",
+      "description": "JSON スキーマ (Draft 2020-12 互換)",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["object", "array", "string", "number", "integer", "boolean", "null"]
+        },
+        "required": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "items": {
+          "type": "object"
+        },
+        "enum": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "minLength": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxLength": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["date", "date-time", "time", "email", "uri", "uuid", "hostname", "ipv4", "ipv6"]
+        },
+        "default": {}
+      }
+    },
+    "errorCode": {
+      "type": "object",
+      "required": ["http", "code", "condition", "client_action"],
+      "properties": {
+        "http": {
+          "type": "integer",
+          "description": "HTTP ステータスコード",
+          "enum": [400, 401, 403, 404, 409, 422, 429, 500, 502, 503]
+        },
+        "code": {
+          "type": "string",
+          "description": "アプリケーションエラーコード (UPPER_SNAKE_CASE)",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "condition": {
+          "type": "string",
+          "description": "エラー発生条件"
+        },
+        "user_message": {
+          "type": "string",
+          "description": "ユーザーに表示するメッセージ"
+        },
+        "client_action": {
+          "type": "string",
+          "description": "クライアントへの対応方法"
+        }
+      }
+    },
+    "errorExample": {
+      "type": "object",
+      "required": ["http", "code", "body"],
+      "properties": {
+        "http": {
+          "type": "integer",
+          "description": "HTTP ステータスコード",
+          "enum": [400, 401, 403, 404, 409, 422, 429, 500, 502, 503]
+        },
+        "code": {
+          "type": "string",
+          "description": "エラーコード",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "body": {
+          "type": "object",
+          "description": "エラー応答本文の例",
+          "required": ["status", "error"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "const": "error"
+            },
+            "error": {
+              "type": "object",
+              "required": ["code", "message"],
+              "properties": {
+                "code": { "type": "string" },
+                "message": { "type": "string" },
+                "details": { "type": "object" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rateLimit": {
+      "type": "object",
+      "properties": {
+        "requests_per_minute": {
+          "type": "integer",
+          "description": "1分あたりのリクエスト制限",
+          "minimum": 1
+        },
+        "requests_per_day": {
+          "type": "integer",
+          "description": "1日あたりのリクエスト制限",
+          "minimum": 1
+        },
+        "burst_limit": {
+          "type": "integer",
+          "description": "バーストリクエスト制限 (瞬時最大)",
+          "minimum": 1
+        },
+        "tier": {
+          "type": "string",
+          "description": "適用プラン",
+          "enum": ["free", "premium", "all"]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "API-029-01",
+      "method": "POST",
+      "path": "/functions/v1/sync-vocabulary",
+      "description": "単語帳同期 - 単語追加/修正/削除",
+      "auth": true,
+      "idempotent": false,
+      "ssot_path": "infra/supabase/functions/sync-vocabulary/index.ts",
+      "request": {
+        "type": "object",
+        "required": ["action", "data"],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["add", "update", "delete"],
+            "description": "実行する作業"
+          },
+          "data": {
+            "type": "object",
+            "required": ["word", "meaning"],
+            "properties": {
+              "word": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "description": "韓国語の単語"
+              },
+              "meaning": { "type": "string", "maxLength": 500, "description": "L1 翻訳" },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6,
+                "default": 1,
+                "description": "TOPIK レベル"
+              },
+              "example": { "type": "string", "maxLength": 1000, "description": "例文" }
+            }
+          }
+        }
+      },
+      "response": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["ok", "error"],
+            "description": "処理結果"
+          },
+          "data": {
+            "type": "object",
+            "description": "成功時の結果データ",
+            "properties": {
+              "id": { "type": "string", "format": "uuid", "description": "生成/修正された項目 ID" },
+              "created_at": { "type": "string", "format": "date-time", "description": "生成時間" }
+            }
+          },
+          "error": {
+            "type": "object",
+            "description": "エラー情報",
+            "properties": {
+              "code": { "type": "string", "description": "エラーコード" },
+              "message": { "type": "string", "description": "エラーメッセージ" },
+              "details": { "type": "object", "description": "追加エラー情報" }
+            }
+          }
+        }
+      },
+      "request_example": {
+        "action": "add",
+        "data": {
+          "word": "こんにちは",
+          "meaning": "こんにちは",
+          "level": 1,
+          "example": "こんにちは、よろしくお願いします"
+        }
+      },
+      "response_example": {
+        "status": "ok",
+        "data": {
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "created_at": "2026-01-28T10:30:00Z"
+        }
+      },
+      "errors": [
+        {
+          "http": 400,
+          "code": "INVALID_INPUT",
+          "condition": "必須フィールドの欠落または形式エラー",
+          "user_message": "入力内容を確認してください",
+          "client_action": "インラインエラー表示"
+        },
+        {
+          "http": 400,
+          "code": "DUPLICATE_ENTRY",
+          "condition": "重複データ存在",
+          "user_message": "すでに登録されています",
+          "client_action": "重複通知表示"
+        },
+        {
+          "http": 401,
+          "code": "UNAUTHENTICATED",
+          "condition": "JWTなしまたは期限切れ",
+          "user_message": "再ログインが必要です",
+          "client_action": "ログイン画面へ移動"
+        },
+        {
+          "http": 403,
+          "code": "FORBIDDEN",
+          "condition": "RLS ポリシー違反 (他者データアクセス)",
+          "user_message": "アクセス権限がありません",
+          "client_action": "ホームに移動"
+        },
+        {
+          "http": 429,
+          "code": "RATE_LIMITED",
+          "condition": "リクエスト制限超過",
+          "user_message": "しばらく待ってから再試行してください",
+          "client_action": "指数バックオフ後再試行"
+        },
+        {
+          "http": 500,
+          "code": "INTERNAL_ERROR",
+          "condition": "サーバ内部エラー",
+          "user_message": "エラーが発生しました",
+          "client_action": "再試行（最大2回）"
+        }
+      ],
+      "error_examples": [
+        {
+          "http": 400,
+          "code": "INVALID_INPUT",
+          "body": {
+            "status": "error",
+            "error": {
+              "code": "INVALID_INPUT",
+              "message": "単語は必須です",
+              "details": {
+                "field": "data.word",
+                "reason": "required"
+              }
+            }
+          }
+        },
+        {
+          "http": 401,
+          "code": "UNAUTHENTICATED",
+          "body": {
+            "status": "error",
+            "error": {
+              "code": "UNAUTHENTICATED",
+              "message": "再ログインが必要です"
+            }
+          }
+        },
+        {
+          "http": 429,
+          "code": "RATE_LIMITED",
+          "body": {
+            "status": "error",
+            "error": {
+              "code": "RATE_LIMITED",
+              "message": "しばらく待ってから再試行してください",
+              "details": {
+                "retry_after_seconds": 60
+              }
+            }
+          }
+        }
+      ],
+      "rate_limit": {
+        "requests_per_minute": 30,
+        "requests_per_day": 1000,
+        "burst_limit": 10,
+        "tier": "all"
+      }
+    }
+  ]
+}

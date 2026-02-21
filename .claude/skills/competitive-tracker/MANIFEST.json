@@ -1,0 +1,137 @@
+{
+  "schema_version": 2,
+  "skill_id": "competitive-tracker",
+  "skill_version": "3.0.0",
+  "tier": 1,
+  "tier_description": "Orchestrator - 競合ベンチマーク基盤ポートフォリオギャップ追跡 + JTBD 機会定量化",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "registry_loading": "haiku",
+      "feature_scanning": "haiku",
+      "audit_runner": "none",
+      "gap_analysis": "sonnet",
+      "opportunity_scoring": "sonnet",
+      "report_generation": "sonnet",
+      "import_parsing": "sonnet",
+      "diff_tracking": "haiku"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"],
+    "notes": "audit-runner.mjsはNode.jsスクリプトでAIトークンコスト$0"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "競合比較",
+      "ベンチマーク",
+      "業界標準チェック",
+      "ポートフォリオチェック",
+      "competitive",
+      "ギャップ追跡",
+      "競合追跡",
+      "JTBD",
+      "機会スコア",
+      "opportunity"
+    ],
+    "args_pattern": "[--summary] [--gaps-only] [--validate] [--json] [--save] [--diff] [--snapshot] [--import] [--refresh] [--action] [--refresh-plan] [--add-competitor <name>] [--remove-competitor <app_id>] [--extract <file> --app <id>]"
+  },
+  "automation": {
+    "scripts": [
+      {
+        "id": "audit-runner",
+        "script": ".claude/scripts/audit-runner.mjs",
+        "runtime": "node",
+        "token_cost": "$0",
+        "description": "決定論的競合分析エンジン。registry.json + CONTEXT.jsonを読み取りレポート生成"
+      },
+      {
+        "id": "competitor-importer",
+        "script": ".claude/scripts/competitor-importer.mjs",
+        "runtime": "node",
+        "token_cost": "$0",
+        "description": "競合アプリ追加/削除パイプライン。テンプレート生成 → 検証 → マージ自動化"
+      },
+      {
+        "id": "dr-extractor",
+        "script": ".claude/scripts/dr-extractor.mjs",
+        "runtime": "node",
+        "token_cost": "$0.02-0.05/app (Gemini API)",
+        "description": "DR Markdown → Gemini 構造化抽出 → competitor-app-profile-v2 生成"
+      }
+    ]
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["deep-research"]
+  },
+  "called_by": ["analyze-what-to-build"],
+  "calls": ["market-intelligence-scanner", "deep-research"],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/analysis/competitor-registry.json",
+      "description": "競合機能構造化データ (SSOT)"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/analysis/mece-feature-analysis.md",
+      "description": "MECE 分析レポート (--saveで自動更新)"
+    },
+    {
+      "type": "directory",
+      "path_pattern": ".claude/state/audit-snapshots/",
+      "description": "監査履歴スナップショット (--diff用)"
+    }
+  ],
+  "ssot_files": ["docs/analysis/competitor-registry.json"],
+  "pipeline": {
+    "stage": 1,
+    "data_products": {
+      "produces": [
+        {
+          "artifact_id": "gap-candidates",
+          "path": "docs/analysis/gap-candidates.json",
+          "schema": "gap-candidates-v1",
+          "freshness_slo_days": 90,
+          "auto_emit": true,
+          "cost": "$0 (deterministic Node.js)"
+        }
+      ],
+      "consumes": []
+    }
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-07",
+      "changes": "初期生成 - 競合registry基盤MECEギャップ追跡、既存パイプライン(MIS→architect→pilot)連携"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-07",
+      "changes": "Level 1+2+3 全面アップグレード: audit-runner.mjs v2.0 自動化エンジン、3-tierカバレッジ(binary/weighted/effective)、JTBD Opportunity Score(Strategyn ODI)、双方向比較(our_differentiators 12個)、フィードバックループ検出、Diff追跡/スナップショット、registry v2スキーマ(depth score, gap_type, sub_category)"
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-07",
+      "changes": "competitor-importer.mjs 追加: 競合アプリ追加/削除自動化パイプライン (7-Step: generate-template → validate → dry-run → apply)、15個の検証ルール、atomic write、自動バックアップ、summary再計算"
+    },
+    {
+      "version": "2.2.0",
+      "date": "2026-02-07",
+      "changes": "Pipeline Contract System: gap-candidates.json Bridge Artifact 生成 (pipeline.data_products.produces)、audit-runner.mjsにcross-referenceエンジン追加 (diceCoefficient, assertGapCandidatesSchema)"
+    },
+    {
+      "version": "3.0.0",
+      "date": "2026-02-08",
+      "changes": "v3 スキーマアップグレード: 2-Phase LLM Pipeline (dr-extractor.mjs Gemini API基盤自動抽出)、per-feature assessments + confidenceモデル、extraction_log、confidence_thresholds、audit-runner v3.0 (--refresh-plan 更新優先順位、信頼度レポートセクション)、competitor-importer V16-V19検証 + assessmentsマージ"
+    }
+  ]
+}

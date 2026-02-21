@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" font-family="'Inter','Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <marker id="arr6Cyan" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#22d3ee"/>
+    </marker>
+    <marker id="arr6Purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#a78bfa"/>
+    </marker>
+    <marker id="arr6Green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#34d399"/>
+    </marker>
+    <marker id="arr6Amber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#fbbf24"/>
+    </marker>
+    <marker id="arr6Red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#f87171"/>
+    </marker>
+    <filter id="sh6">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="1200" fill="url(#bgGrad6)" rx="12"/>
+
+  <!-- Title -->
+  <text x="500" y="36" fill="#f8fafc" font-size="20" font-weight="700" text-anchor="middle">スクラッチから開発完了までの全パイプラインフロー</text>
+  <text x="500" y="56" fill="#94a3b8" font-size="12" text-anchor="middle">Hackathon Project - NEW_FEATURE ワークフロー完全版</text>
+
+  <!-- ====== Phase -1: Research ====== -->
+  <rect x="60" y="80" width="880" height="60" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1" stroke-dasharray="4,3" filter="url(#sh6)"/>
+  <text x="80" y="105" fill="#94a3b8" font-size="10" font-weight="700">Phase -1</text>
+  <text x="150" y="105" fill="#e2e8f0" font-size="12" font-weight="600">Research Pilot（条件付き）</text>
+  <text x="80" y="125" fill="#64748b" font-size="10">"リサーチ"/"タダ性検証" キーワード時のみ → BUILD / SKIP / DEFER 判定</text>
+  <text x="880" y="105" fill="#64748b" font-size="9" text-anchor="end">任意</text>
+  <path d="M500 140 L500 160" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr6Cyan)"/>
+
+  <!-- ====== Step 0: Turbo Mode ====== -->
+  <rect x="60" y="168" width="880" height="60" rx="10" fill="#1e293b" stroke="#22d3ee" stroke-width="1" filter="url(#sh6)"/>
+  <circle cx="82" cy="193" r="10" fill="#22d3ee" fill-opacity="0.2" stroke="#22d3ee" stroke-width="1"/>
+  <text x="82" y="197" fill="#22d3ee" font-size="9" font-weight="700" text-anchor="middle">0</text>
+  <text x="100" y="193" fill="#67e8f9" font-size="12" font-weight="600">Turbo Mode コンテキスト収集</text>
+  <text x="100" y="213" fill="#94a3b8" font-size="10">4並列タスク: 既存パターン | DBスキーマ | テストパターン | 再利用候補</text>
+  <text x="880" y="193" fill="#0ea5e9" font-size="9" text-anchor="end">Haiku × 4 並列</text>
+  <path d="M500 228 L500 248" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arr6Cyan)"/>
+
+  <!-- ====== Step 1: Feature Architect ====== -->
+  <rect x="60" y="256" width="880" height="60" rx="10" fill="#1e293b" stroke="#22d3ee" stroke-width="1.5" filter="url(#sh6)"/>
+  <circle cx="82" cy="281" r="10" fill="#22d3ee" fill-opacity="0.2" stroke="#22d3ee" stroke-width="1"/>
+  <text x="82" y="285" fill="#22d3ee" font-size="9" font-weight="700" text-anchor="middle">1</text>
+  <text x="100" y="281" fill="#67e8f9" font-size="12" font-weight="600">feature-architect → BRIEF.md + CONTEXT.json</text>
+  <text x="100" y="301" fill="#94a3b8" font-size="10">「何を作るか」の定義。CONTEXT.json = 全パイプラインの SSOT（唯一の真実のソース）</text>
+  <text x="880" y="281" fill="#22d3ee" font-size="9" text-anchor="end">必須ゲート</text>
+  <path d="M500 316 L500 336" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr6Purple)"/>
+
+  <!-- ====== Step 1.5A: Platform Constraints ====== -->
+  <rect x="60" y="344" width="880" height="56" rx="10" fill="#312e81" fill-opacity="0.5" stroke="#a78bfa" stroke-width="2" filter="url(#sh6)"/>
+  <text x="80" y="369" fill="#e9d5ff" font-size="10" font-weight="700">Step 1.5A</text>
+  <text x="160" y="369" fill="#c4b5fd" font-size="12" font-weight="600">Platform 制約ロード（自動）</text>
+  <text x="80" y="389" fill="#a5b4fc" font-size="10">constraints.json → must[] / must_not[] / tech_stack 抽出 | フォールバック: ハードコードデフォルト</text>
+  <text x="880" y="369" fill="#c084fc" font-size="9" text-anchor="end">NEW!</text>
+  <path d="M500 400 L500 418" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr6Purple)"/>
+
+  <!-- ====== Step 1.5B: Discovery ====== -->
+  <rect x="60" y="426" width="880" height="90" rx="10" fill="#0c4a6e" fill-opacity="0.3" stroke="#0ea5e9" stroke-width="1.5" filter="url(#sh6)"/>
+  <text x="80" y="451" fill="#7dd3fc" font-size="10" font-weight="700">Step 1.5B</text>
+  <text x="160" y="451" fill="#67e8f9" font-size="12" font-weight="600">Discovery &amp; Architecture（Tier M+ のみ）</text>
+  <text x="880" y="451" fill="#38bdf8" font-size="9" text-anchor="end">条件付き</text>
+
+  <!-- Tier boxes -->
+  <rect x="80" y="465" width="120" height="38" rx="6" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+  <text x="140" y="481" fill="#94a3b8" font-size="9" font-weight="600" text-anchor="middle">Tier S</text>
+  <text x="140" y="496" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">全スキップ</text>
+
+  <rect x="220" y="465" width="180" height="38" rx="6" fill="#1e293b" stroke="#22d3ee" stroke-width="1"/>
+  <text x="310" y="481" fill="#22d3ee" font-size="9" font-weight="600" text-anchor="middle">Tier M</text>
+  <text x="310" y="496" fill="#e2e8f0" font-size="9" text-anchor="middle">domain-modeler</text>
+
+  <rect x="420" y="465" width="220" height="38" rx="6" fill="#1e293b" stroke="#a78bfa" stroke-width="1"/>
+  <text x="530" y="481" fill="#a78bfa" font-size="9" font-weight="600" text-anchor="middle">Tier L</text>
+  <text x="530" y="496" fill="#e2e8f0" font-size="9" text-anchor="middle">domain + architecture-selector</text>
+
+  <rect x="660" y="465" width="260" height="38" rx="6" fill="#1e293b" stroke="#f472b6" stroke-width="1"/>
+  <text x="790" y="481" fill="#f472b6" font-size="9" font-weight="600" text-anchor="middle">Tier XL</text>
+  <text x="790" y="496" fill="#e2e8f0" font-size="9" text-anchor="middle">domain + architecture + system-designer</text>
+
+  <path d="M500 516 L500 538" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr6Green)"/>
+
+  <!-- Discovery Gate -->
+  <rect x="360" y="524" width="280" height="26" rx="6" fill="#065f46" fill-opacity="0.4" stroke="#34d399" stroke-width="1"/>
+  <text x="500" y="542" fill="#6ee7b7" font-size="10" font-weight="600" text-anchor="middle">Discovery ゲート: Go / Conditional / No-Go</text>
+  <path d="M500 550 L500 572" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr6Green)"/>
+
+  <!-- ====== Step 2: SPEC Generation ====== -->
+  <rect x="60" y="580" width="880" height="60" rx="10" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5" filter="url(#sh6)"/>
+  <circle cx="82" cy="605" r="10" fill="#fbbf24" fill-opacity="0.2" stroke="#fbbf24" stroke-width="1"/>
+  <text x="82" y="609" fill="#fbbf24" font-size="9" font-weight="700" text-anchor="middle">2</text>
+  <text x="100" y="605" fill="#fde68a" font-size="12" font-weight="600">feature-spec-generator → SPEC.md + screens/*.md</text>
+  <text x="100" y="625" fill="#94a3b8" font-size="10">「どう作るか」の契約文書。FR（機能要件）一覧 + 画面仕様 + テスト条件</text>
+  <text x="880" y="605" fill="#f59e0b" font-size="9" text-anchor="end">Sonnet</text>
+  <path d="M500 640 L500 660" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr6Amber)"/>
+
+  <!-- ====== Step 3: Readiness Gate ====== -->
+  <rect x="60" y="668" width="880" height="70" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.5" filter="url(#sh6)"/>
+  <circle cx="82" cy="693" r="10" fill="#f87171" fill-opacity="0.2" stroke="#f87171" stroke-width="1"/>
+  <text x="82" y="697" fill="#f87171" font-size="9" font-weight="700" text-anchor="middle">3</text>
+  <text x="100" y="693" fill="#fca5a5" font-size="12" font-weight="600">Readiness Gate（内蔵 Go / No-Go 判定）</text>
+  <text x="100" y="713" fill="#94a3b8" font-size="10">Phase 0: 機械検証 | Phase 1: 上流契約整合 | Phase 2: 技術契約完備 | Phase 3: 実装安全性</text>
+  <text x="100" y="728" fill="#f87171" font-size="9">🔴 No-Go → Step 2 へ差し戻し | 🟢 Go → 実装へ</text>
+  <path d="M500 738 L500 758" stroke="#34d399" stroke-width="2" marker-end="url(#arr6Green)"/>
+
+  <!-- ====== Step 4: Implementation ====== -->
+  <rect x="60" y="766" width="880" height="80" rx="10" fill="#065f46" fill-opacity="0.3" stroke="#34d399" stroke-width="1.5" filter="url(#sh6)"/>
+  <circle cx="82" cy="791" r="10" fill="#34d399" fill-opacity="0.2" stroke="#34d399" stroke-width="1"/>
+  <text x="82" y="795" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">4</text>
+  <text x="100" y="791" fill="#6ee7b7" font-size="12" font-weight="600">実装（TDD: Red → Green → Refactor）</text>
+  <text x="880" y="791" fill="#34d399" font-size="9" text-anchor="end">Sonnet</text>
+
+  <!-- Layer batches -->
+  <rect x="80" y="808" width="140" height="26" rx="4" fill="#1e293b" stroke="#34d399" stroke-width="0.5"/>
+  <text x="150" y="825" fill="#94a3b8" font-size="9" text-anchor="middle">バッチ1: Model+Repo</text>
+  <rect x="240" y="808" width="140" height="26" rx="4" fill="#1e293b" stroke="#34d399" stroke-width="0.5"/>
+  <text x="310" y="825" fill="#94a3b8" font-size="9" text-anchor="middle">バッチ2: ViewModel</text>
+  <rect x="400" y="808" width="140" height="26" rx="4" fill="#1e293b" stroke="#34d399" stroke-width="0.5"/>
+  <text x="470" y="825" fill="#94a3b8" font-size="9" text-anchor="middle">バッチ3: Widget</text>
+  <rect x="560" y="808" width="140" height="26" rx="4" fill="#1e293b" stroke="#34d399" stroke-width="0.5"/>
+  <text x="630" y="825" fill="#94a3b8" font-size="9" text-anchor="middle">バッチ4: テスト</text>
+
+  <path d="M500 846 L500 866" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr6Green)"/>
+
+  <!-- ====== Step 4.5: Wiring ====== -->
+  <rect x="60" y="874" width="880" height="50" rx="10" fill="#1e293b" stroke="#22d3ee" stroke-width="1" filter="url(#sh6)"/>
+  <text x="80" y="899" fill="#22d3ee" font-size="10" font-weight="700">Step 4.5</text>
+  <text x="150" y="899" fill="#67e8f9" font-size="12" font-weight="600">feature-wiring（アトミック連動）</text>
+  <text x="80" y="915" fill="#94a3b8" font-size="10">データソース連動（Repository → Supabase）+ ナビゲーション接続（Route 追加）</text>
+  <path d="M500 924 L500 944" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arr6Cyan)"/>
+
+  <!-- ====== Steps 5-7: Final ====== -->
+  <rect x="60" y="952" width="280" height="56" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+  <circle cx="82" cy="975" r="10" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
+  <text x="82" y="979" fill="#94a3b8" font-size="9" font-weight="700" text-anchor="middle">5</text>
+  <text x="100" y="975" fill="#e2e8f0" font-size="11" font-weight="600">feature-status-sync</text>
+  <text x="100" y="995" fill="#64748b" font-size="9">CONTEXT.json → index.md 同期</text>
+
+  <rect x="360" y="952" width="280" height="56" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+  <circle cx="382" cy="975" r="10" fill="#64748b" fill-opacity="0.2" stroke="#64748b" stroke-width="1"/>
+  <text x="382" y="979" fill="#94a3b8" font-size="9" font-weight="700" text-anchor="middle">6</text>
+  <text x="400" y="975" fill="#e2e8f0" font-size="11" font-weight="600">priority-analyzer（選択的）</text>
+  <text x="400" y="995" fill="#64748b" font-size="9">RICE スコア再計算</text>
+
+  <rect x="660" y="952" width="280" height="56" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+  <circle cx="682" cy="975" r="10" fill="#34d399" fill-opacity="0.2" stroke="#34d399" stroke-width="1"/>
+  <text x="682" y="979" fill="#34d399" font-size="9" font-weight="700" text-anchor="middle">7</text>
+  <text x="700" y="975" fill="#6ee7b7" font-size="11" font-weight="600">pre-quality-gate</text>
+  <text x="700" y="995" fill="#34d399" font-size="9">make q.check（lint + test）</text>
+
+  <!-- Final Arrow -->
+  <path d="M500 1008 L500 1040" stroke="#34d399" stroke-width="2" marker-end="url(#arr6Green)"/>
+
+  <!-- Done -->
+  <rect x="400" y="1048" width="200" height="40" rx="20" fill="#065f46" stroke="#34d399" stroke-width="2"/>
+  <text x="500" y="1073" fill="#6ee7b7" font-size="14" font-weight="700" text-anchor="middle">Done ✅</text>
+
+  <!-- State Machine sidebar -->
+  <rect x="60" y="1110" width="880" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="80" y="1132" fill="#94a3b8" font-size="10" font-weight="600">CONTEXT.json 状態遷移:</text>
+  <text x="80" y="1152" fill="#7dd3fc" font-size="9">Idle → Briefing → Discovery → SpecDrafting → UiApproval → Implementing → SyncingStatus → Reviewing → Done</text>
+  <text x="880" y="1152" fill="#64748b" font-size="9" text-anchor="end">例外: AwaitingUser | Blocked | Failed</text>
+
+  <!-- Footer -->
+  <line x1="40" y1="1185" x2="960" y2="1185" stroke="#334155" stroke-width="0.5"/>
+  <text x="500" y="1198" fill="#64748b" font-size="9" text-anchor="middle">Hackathon Project - スクラッチから開発完了までの全パイプラインフロー | 2026-02-11</text>
+</svg>

@@ -1,0 +1,99 @@
+{
+  "schema_version": 2,
+  "skill_id": "deep-explain",
+  "skill_version": "1.3.0",
+  "tier": 3,
+  "tier_description": "Utility - プロジェクト内/外部対象の構造化深層分析",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false,
+    "read_only": true
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "context_discovery": "haiku",
+      "analysis": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "preflight_checks": [
+    {
+      "id": "target_identified",
+      "description": "分析対象が識別されたか?",
+      "blocking": true
+    },
+    {
+      "id": "target_type_resolved",
+      "description": "対象タイプ(skill/feature/oss/library/general)が決定されたか?",
+      "blocking": true
+    },
+    {
+      "id": "context_sources_found",
+      "description": "コンテキストソースファイルが確認されたか?",
+      "blocking": true
+    }
+  ],
+  "postflight_checks": [],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "説明して",
+      "何?",
+      "どう動作する",
+      "忘れた",
+      "理解できない",
+      "分析して",
+      "deep-explain"
+    ],
+    "args_pattern": "<対象> [--no-save]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": [],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "conversation",
+      "description": "構造化5セクション分析結果 (会話内出力)"
+    },
+    {
+      "type": "file",
+      "path": "docs/explain/{target}.md",
+      "description": "--save 時マークダウンファイル保存",
+      "conditional": "--save flag"
+    }
+  ],
+  "safety_rules": {
+    "allowed_modifications": ["docs/explain/**/*.md"],
+    "forbidden_modifications": ["lib/**/*", "infra/**/*", "test/**/*"],
+    "read_only_mode": true
+  },
+  "changelog": [
+    {
+      "version": "1.3.0",
+      "date": "2026-02-07",
+      "changes": [
+        "デフォルト保存に変更: --save オプトイン → デフォルト保存 + --no-save オプトアウト",
+        "ダイアグラムもデフォルト生成 (--no-save 時無効化)"
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-02-06",
+      "changes": [
+        "セクション6 '関連項目マップ' 追加: タイプ別関連項目収集・分析, 依存グラフ, 関連スキル/機能/文書含む"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-06",
+      "changes": ["初期バージョン: 5セクション構造化分析, 対象タイプ自動検知, --save オプション"]
+    }
+  ]
+}

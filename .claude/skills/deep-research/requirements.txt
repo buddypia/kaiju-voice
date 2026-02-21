@@ -1,0 +1,12 @@
+# Deep Research スキル依存関係
+# Phase 1-2: 基本実装
+openai>=1.0.0           # OpenAI Deep Research API
+google-genai>=0.1.0     # Google Gemini Deep Research API
+
+# Phase 4: Smart Provider Selection
+pyyaml>=6.0             # config.yaml パース
+
+# 標準ライブラリ (Python 3.8+ 基本同梱、参考用)
+# - time, sys, os, argparse, datetime
+# - logging, json, functools
+# - typing, collections

@@ -1,0 +1,161 @@
+{
+  "schema_version": 2,
+  "skill_id": "skill-health-check",
+  "skill_version": "2.2.0",
+  "tier": 3,
+  "tier_description": "Utility - スキルシステムガバナンス自動監査 + ESP 検証 + Documentation Contract",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "haiku",
+    "task_specific": {
+      "manifest_scan": "haiku",
+      "dependency_analysis": "haiku",
+      "esp_verification": "sonnet",
+      "report_generation": "haiku"
+    },
+    "fallback_chain": ["haiku", "sonnet"],
+    "subskill_inheritance": "NOT_APPLICABLE"
+  },
+  "preflight_checks": [
+    {
+      "id": "PF-001",
+      "description": "GOVERNANCE.md アクセス可能",
+      "blocking": true
+    },
+    {
+      "id": "PF-002",
+      "description": "スキルディレクトリアクセス可能",
+      "blocking": true
+    },
+    {
+      "id": "PF-003",
+      "description": "監査範囲確定 (全体/単一スキル)",
+      "blocking": true
+    }
+  ],
+  "postflight_checks": [
+    {
+      "id": "POF-001",
+      "description": "ヘルスレポート出力完了",
+      "blocking": true
+    },
+    {
+      "id": "POF-002",
+      "description": "ヘルススコア計算完了",
+      "blocking": true
+    },
+    {
+      "id": "POF-003",
+      "description": "推奨措置リスト提示",
+      "blocking": false
+    }
+  ],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "スキルヘルスチェック",
+      "ガバナンス検査",
+      "スキル監査",
+      "health check",
+      "スキル状態確認",
+      "ESP 検証"
+    ],
+    "args_pattern": "[--manifest-only] [--dependencies-only] [--esp-only] [--save <path>]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": [],
+  "calls": [],
+  "audit_checks": [
+    {
+      "id": "manifest_presence",
+      "name": "MANIFEST 保有検査",
+      "weight": 25,
+      "rule": "全スキルはMANIFEST.json 保有必須"
+    },
+    {
+      "id": "esp_compliance",
+      "name": "ESP 文書構造検査",
+      "weight": 20,
+      "rule": "ESP スキルのMANIFEST.json ESP 設定 + SKILL.md EXECUTION PROTOCOL 一貫性"
+    },
+    {
+      "id": "dependency_consistency",
+      "name": "依存性一貫性検査",
+      "weight": 15,
+      "rule": "calls ↔ called_by 双方向参照一致"
+    },
+    {
+      "id": "deprecated_management",
+      "name": "Deprecated 管理検査",
+      "weight": 10,
+      "rule": "6ヶ月経過時Archive 必要"
+    },
+    {
+      "id": "version_schema",
+      "name": "バージョンスキーマ検査",
+      "weight": 10,
+      "rule": "vMAJOR.MINOR.PATCH 形式遵守"
+    },
+    {
+      "id": "tier_classification",
+      "name": "Tier 分類検査",
+      "weight": 10,
+      "rule": "tierは1, 2, 3のいずれか"
+    },
+    {
+      "id": "documentation_contract",
+      "name": "Documentation Contract 検査",
+      "weight": 10,
+      "rule": "全スキル/エージェントは最新マニュアル保有必須"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "report",
+      "format": "markdown",
+      "description": "ヘルスレポート (監査結果 + 推奨措置 + ESP 遵守率)"
+    }
+  ],
+  "execution_schedule": {
+    "recommended": "monthly",
+    "trigger_events": ["skill_change", "pre_pr", "esp_violation"]
+  },
+  "ssot_files": [
+    ".claude/skills/GOVERNANCE.md",
+    ".claude/skills/*/MANIFEST.json",
+    ".claude/skills/*/SKILL.md",
+    ".claude/scripts/doc-contract.mjs",
+    "docs/manuals/manifest.json"
+  ],
+  "changelog": [
+    {
+      "version": "2.2.0",
+      "date": "2026-02-09",
+      "changes": "Documentation Contract 検査追加 (doc-contract.mjs 基盤). 加重値再調整: manifest 30→25, dependency 20→15, doc_contract 10% 新規."
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-01",
+      "changes": "ESP 検証方式根本再設計: ランタイムロギング → 静的文書検証. ssot_filesをスキル文書に変更."
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-01",
+      "changes": "ESP v2.0 適用 - schema_version 2, Pre-flight/Post-flight, ESP 検証機能追加"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-01",
+      "changes": "新規生成 - 自動化ガバナンス監査スキル"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "skill_version": "1.0.0",
+  "min_compatible_version": "1.0.0",
+  "status": "Active",
+  "tier": 1,
+  "public_api": true,
+  "created": "2026-02-04",
+  "last_updated": "2026-02-04",
+  "calls": [],
+  "called_by": ["research-gap-analyzer", "market-intelligence-scanner"],
+  "tags": [
+    "research",
+    "openai",
+    "google",
+    "deep-research",
+    "market-analysis",
+    "technical-research"
+  ],
+  "deprecates": ["openai-deep-research", "google-deep-research"],
+  "description": "OpenAIとGoogle Gemini Deep Research APIを統合したスキル. --provider フラグでプロバイダーを選択して深層リサーチを実行する."
+}

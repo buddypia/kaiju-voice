@@ -1,0 +1,202 @@
+%% 開発パイプライン詳細フロー図
+%% feature-pilotが調整する全体開発フロー
+
+flowchart TB
+    %% 開始
+    Start([ユーザーリクエスト])
+
+    %% Step 0: 作業タイプ判別
+    subgraph Step0["Step 0: 作業タイプ判別"]
+        FP[feature-pilot]
+
+        Classify{作業タイプ分類}
+
+        NEW[NEW_FEATURE]
+        MODIFY[MODIFY_FEATURE]
+        BUG[BUG_FIX]
+
+        FP --> Classify
+        Classify -->|新機能| NEW
+        Classify -->|機能修正| MODIFY
+        Classify -->|バグ| BUG
+    end
+
+    %% Step 1: 分析/設計 (NEW_FEATURE)
+    subgraph Step1["Step 1: 分析/設計"]
+        FA[feature-architect]
+
+        A1[ユーザーストーリー分析]
+        A2[コードベーススキャン]
+        A3[依存関係把握]
+        A4[CONTEXT.json 生成]
+
+        FA --> A1 --> A2 --> A3 --> A4
+
+        PA[priority-analyzer]
+        A4 -.-> PA
+        PA -.->|優先順位更新| A4
+    end
+
+    %% Step 2: SPEC 生成
+    subgraph Step2["Step 2: SPEC 生成"]
+        FSG[feature-spec-generator]
+
+        S1[API 設計]
+        S2[Data Models 定義]
+        S3[State Management 設計]
+        S4[Navigation Flows 設計]
+        S5[Error Handling 定義]
+        S6[SPEC.md 生成]
+        S7[screens/*.md 生成]
+
+        FSG --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+    end
+
+    %% Step 2-B: SPEC 修正 (MODIFY_FEATURE)
+    subgraph Step2B["Step 2-B: SPEC 修正"]
+        FSU[feature-spec-updater]
+
+        M1[既存 SPEC ロード]
+        M2[変更分析]
+        M3[影響範囲把握]
+        M4[SPEC 更新]
+        M5[変更履歴記録]
+
+        FSU --> M1 --> M2 --> M3 --> M4 --> M5
+    end
+
+    %% Step 3: UI 承認
+    subgraph Step3["Step 3: UI 承認ゲート"]
+        UAG[ui-approval-gate]
+        WM[wireframe-manager]
+
+        U1[画面一覧抽出]
+        U2[ASCII ワイヤーフレーム生成]
+        U3{ユーザーレビュー}
+        U4[修正反映]
+        U5[承認完了]
+
+        UAG --> U1 --> U2
+        U2 --> WM
+        WM --> U3
+        U3 -->|修正リクエスト| U4 --> WM
+        U3 -->|承認| U5
+    end
+
+    %% Step 4: Readiness Gate
+    subgraph Step4["Step 4: Readiness Gate"]
+        RG[内蔵 Readiness Gate]
+
+        R0[Phase 0: 機械検証<br/>JSON Schema]
+        R1[Phase 1: 上流契約<br/>Why/Value 完全性]
+        R2[Phase 2: 技術契約<br/>コア5セクション]
+        R3[Phase 3: 安全性<br/>BLOCKING パターン]
+
+        RJ{判定}
+
+        RG --> R0 --> R1 --> R2 --> R3 --> RJ
+    end
+
+    %% Step 5: TDD 実装
+    subgraph Step5["Step 5: TDD 実装"]
+        FI[feature-implementer]
+
+        I1[Red: 失敗テスト作成]
+        I2[Green: テスト通過コード]
+        I3[Refactor: コード整理]
+        I4{次の機能?}
+        I5[実装完了]
+
+        FI --> I1 --> I2 --> I3 --> I4
+        I4 -->|Yes| I1
+        I4 -->|No| I5
+    end
+
+    %% Step 5-B: バグ修正 (BUG_FIX)
+    subgraph Step5B["Step 5-B: バグ修正"]
+        BF[bug-fix]
+
+        B1[症状確認]
+        B2[再現手順把握]
+        B3[原因分析]
+        B4[修正コード作成]
+        B5[回帰テスト]
+
+        BF --> B1 --> B2 --> B3 --> B4 --> B5
+    end
+
+    %% Step 6: アプリ連携
+    subgraph Step6["Step 6: アプリ連携"]
+        FW[feature-wiring]
+
+        W1[ViewModel バインディング]
+        W2[Provider 登録]
+        W3[Navigation 登録]
+        W4[エントリポイント接続]
+
+        FW --> W1 --> W2 --> W3 --> W4
+    end
+
+    %% Step 7: 品質検証
+    subgraph Step7["Step 7: 品質検証"]
+        FQA[flutter-qa]
+        SS[security-scan]
+        PM[persistent-mode]
+
+        Q1[ビルドチェック]
+        Q2[静的解析]
+        Q3[テスト実行]
+        Q4{すべて通過?}
+        Q5[自動修正]
+
+        FQA --> Q1 --> Q2 --> Q3 --> Q4
+        Q4 -->|No| Q5 --> Q1
+        Q4 -->|Yes| SS
+
+        SS --> PM
+    end
+
+    %% Step 8: 状態同期
+    subgraph Step8["Step 8: 状態同期"]
+        FSS[feature-status-sync]
+
+        Y1[CONTEXT.json 更新]
+        Y2[コード存在検証]
+        Y3[index.md 同期]
+
+        FSS --> Y1 --> Y2 --> Y3
+    end
+
+    %% 接続
+    Start --> Step0
+
+    NEW --> Step1
+    Step1 --> Step2
+    Step2 --> Step3
+
+    MODIFY --> Step2B
+    Step2B --> Step3
+
+    Step3 --> Step4
+
+    RJ -->|Go| Step5
+    RJ -->|No-Go| Step2
+
+    BUG --> Step5B
+    Step5B --> Step7
+
+    Step5 --> Step6
+    Step6 --> Step7
+    Step7 --> Step8
+    Step8 --> Done([完了])
+
+    %% スタイル
+    classDef step fill:#e3f2fd,stroke:#1565c0
+    classDef decision fill:#fff3e0,stroke:#e65100
+    classDef endpoint fill:#c8e6c9,stroke:#2e7d32
+    classDef skill fill:#ffcdd2,stroke:#b71c1c
+
+    class Step0,Step1,Step2,Step2B,Step3,Step4,Step5,Step5B,Step6,Step7,Step8 step
+    class Classify,U3,RJ,I4,Q4 decision
+    class Start,Done endpoint
+    class FP,FA,FSG,FSU,UAG,WM,RG,FI,BF,FW,FQA,SS,PM,FSS,PA skill

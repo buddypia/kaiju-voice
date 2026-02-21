@@ -1,0 +1,177 @@
+{
+  "$schema": "keyword-mapping-schema",
+  "version": 1,
+  "description": "リサーチ → 機能ドメイン キーワードマッピング SSOT。keyword-mapping.md はこのファイルから自動生成される読み取り専用ビューアー。",
+  "generated_at": null,
+  "domains": {
+    "gamification": {
+      "feature_id": "015-gamification-system",
+      "label": "ゲーミフィケーション",
+      "keywords": {
+        "gamification": 1.0,
+        "streak": 0.9,
+        "badge": 0.9,
+        "leaderboard": 0.8,
+        "points": 0.8,
+        "achievement": 0.8,
+        "level up": 0.7,
+        "reward": 0.7,
+        "challenge": 0.6,
+        "daily goal": 0.6
+      }
+    },
+    "speech_pronunciation": {
+      "feature_id": "007-visual-pronunciation-feedback",
+      "label": "音声/発音学習",
+      "keywords": {
+        "speech recognition": 1.0,
+        "pronunciation": 1.0,
+        "ASR": 0.9,
+        "voice": 0.8,
+        "speaking": 0.8,
+        "intonation": 0.7,
+        "accent": 0.7,
+        "shadowing": 0.6,
+        "dictation": 0.6
+      }
+    },
+    "ai_tutor": {
+      "feature_id": "024-ai-tutor-system",
+      "label": "AI チューター",
+      "keywords": {
+        "AI tutor": 1.0,
+        "chatbot": 0.9,
+        "conversation AI": 0.9,
+        "LLM": 0.8,
+        "GPT": 0.8,
+        "personalized feedback": 0.7,
+        "intelligent tutoring": 0.7,
+        "adaptive learning": 0.6
+      }
+    },
+    "srs_review": {
+      "feature_id": "006-srs-review-system",
+      "label": "SRS/復習",
+      "keywords": {
+        "SRS": 1.0,
+        "spaced repetition": 1.0,
+        "flashcard": 0.9,
+        "review": 0.8,
+        "memorization": 0.7,
+        "retention": 0.7,
+        "Anki": 0.6,
+        "SM-2": 0.6
+      }
+    },
+    "monetization": {
+      "feature_id": "008-monetization-system",
+      "label": "収益化",
+      "keywords": {
+        "subscription": 1.0,
+        "paywall": 1.0,
+        "pricing": 0.9,
+        "freemium": 0.9,
+        "premium": 0.8,
+        "in-app purchase": 0.8,
+        "conversion": 0.7,
+        "ARPU": 0.7,
+        "LTV": 0.7
+      }
+    },
+    "onboarding": {
+      "feature_id": "023-onboarding-screens",
+      "secondary_feature_id": "004-onboarding-level-test",
+      "label": "オンボーディング",
+      "keywords": {
+        "onboarding": 1.0,
+        "FTUE": 1.0,
+        "first-time user": 0.9,
+        "placement test": 0.9,
+        "level test": 0.8,
+        "tutorial": 0.7,
+        "welcome flow": 0.7
+      }
+    },
+    "content": {
+      "feature_id": "003-ai-content-pipeline",
+      "secondary_feature_id": "011-k-content-scenario-generator",
+      "label": "コンテンツ",
+      "keywords": {
+        "K-drama": 1.0,
+        "K-pop": 1.0,
+        "Korean content": 0.9,
+        "scenario": 0.8,
+        "lesson content": 0.8,
+        "cultural content": 0.7,
+        "authentic material": 0.7
+      }
+    },
+    "retention": {
+      "feature_id": "019-retention-strategy",
+      "secondary_feature_id": "010-push-notification-retention",
+      "label": "リテンション",
+      "keywords": {
+        "retention": 1.0,
+        "churn": 1.0,
+        "engagement": 0.9,
+        "notification": 0.8,
+        "push": 0.8,
+        "habit": 0.7,
+        "reminder": 0.7,
+        "re-engagement": 0.7
+      }
+    },
+    "assessment": {
+      "feature_id": "012-topik-mock-test-module",
+      "label": "テスト/評価",
+      "keywords": {
+        "TOPIK": 1.0,
+        "EPS-TOPIK": 1.0,
+        "mock test": 0.9,
+        "assessment": 0.8,
+        "quiz": 0.7,
+        "test prep": 0.7,
+        "certification": 0.6
+      }
+    },
+    "hangul": {
+      "feature_id": "027-hangul-learning",
+      "label": "ハングル学習",
+      "keywords": {
+        "Hangul": 1.0,
+        "Korean alphabet": 1.0,
+        "character writing": 0.8,
+        "stroke order": 0.8,
+        "beginner": 0.6
+      }
+    }
+  },
+  "undefined_domains": [
+    {
+      "keyword": "vocabulary book",
+      "potential_domain": "単語帳管理",
+      "frequency": "high",
+      "note": "033-vocabulary-notebook に converted"
+    },
+    {
+      "keyword": "story mode",
+      "potential_domain": "ストーリー学習",
+      "frequency": "medium"
+    },
+    {
+      "keyword": "live class",
+      "potential_domain": "ライブ授業",
+      "frequency": "medium"
+    },
+    {
+      "keyword": "AR/VR",
+      "potential_domain": "没入型学習",
+      "frequency": "low"
+    },
+    {
+      "keyword": "social learning",
+      "potential_domain": "ソーシャル学習",
+      "frequency": "medium"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "skill-manifest-schema.json",
+  "title": "Skill Manifest Schema v1",
+  "description": "Feature-First原則に基づくスキル依存関係および階層定義スキーマ",
+  "type": "object",
+  "required": ["schema_version", "skill_id", "tier", "public_api"],
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "description": "スキーマバージョン (現在1固定)"
+    },
+    "skill_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "スキル固有識別子 (kebab-case)"
+    },
+    "tier": {
+      "enum": [1, 2, 3],
+      "description": "スキル階層: 1=Orchestrator, 2=Pipeline, 3=Utility"
+    },
+    "tier_description": {
+      "type": "string",
+      "description": "Tier役割説明"
+    },
+    "public_api": {
+      "type": "object",
+      "required": ["direct_invocable"],
+      "properties": {
+        "direct_invocable": {
+          "type": "boolean",
+          "description": "ユーザーが直接 /skill-name で呼び出し可能かどうか"
+        },
+        "trigger_keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "自然言語トリガーキーワード"
+        },
+        "args_pattern": {
+          "type": "string",
+          "description": "引数パターン説明 (例: '<feature-id> [--option]')"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "必須依存スキルID一覧 (呼び出し前に実行が必要)"
+        },
+        "optional": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "選択的依存スキルID一覧"
+        }
+      },
+      "additionalProperties": false
+    },
+    "called_by": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "このスキルを呼び出す上位スキルID一覧"
+    },
+    "calls": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "このスキルが呼び出す下位スキルID一覧"
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "path_pattern"],
+        "properties": {
+          "type": {
+            "enum": ["file", "directory", "state_update"],
+            "description": "成果物タイプ"
+          },
+          "path_pattern": {
+            "type": "string",
+            "description": "成果物パスパターン (glob対応)"
+          },
+          "description": {
+            "type": "string",
+            "description": "成果物説明"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "スキルの成果物一覧"
+    },
+    "state_transitions": {
+      "type": "object",
+      "properties": {
+        "context_json_field": {
+          "type": "string",
+          "description": "CONTEXT.json状態フィールドパス (例: 'quick_resume.current_state')"
+        },
+        "valid_transitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": { "type": "string" },
+              "to": { "type": "string" }
+            }
+          },
+          "description": "有効な状態遷移一覧"
+        }
+      },
+      "additionalProperties": false
+    },
+    "external_tools": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "外部ツール/エージェント依存関係 (例: 'google-deep-research')"
+    },
+    "ssot_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "このスキルが管理するSSOTファイルパス"
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["version", "date", "changes"],
+        "properties": {
+          "version": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "changes": { "type": "string" }
+        }
+      },
+      "description": "変更履歴"
+    }
+  },
+  "additionalProperties": false
+}

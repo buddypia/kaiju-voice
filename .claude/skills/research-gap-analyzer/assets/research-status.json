@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-01-27T02:30:00Z",
+  "jobs": [
+    {
+      "job_id": "ios-home-widget-retention-effect-2026",
+      "topic": "iOS Home Widget リテンション効果測定および DAU 増加戦略",
+      "phase": "completed",
+      "provider": "google",
+      "created_at": "2026-01-26T02:50:00Z",
+      "started_at": "2026-01-26T02:50:00Z",
+      "completed_at": "2026-01-26T02:56:00Z",
+      "doc_path": "docs/research/ios-home-widget-retention-effect-2026.md",
+      "kpi_target": "d7_retention",
+      "priority": "P2"
+    },
+    {
+      "job_id": "streak-burnout-prevention-day-off-2026",
+      "topic": "ストリークバーンアウト防止 & Day Off/Freeze 最適設計定量分析",
+      "phase": "completed",
+      "provider": "openai",
+      "created_at": "2026-01-26T02:50:00Z",
+      "started_at": "2026-01-26T02:50:00Z",
+      "completed_at": "2026-01-26T03:10:00Z",
+      "doc_path": "docs/research/streak-burnout-prevention-day-off-optimization-2026.md",
+      "kpi_target": "monthly_churn",
+      "priority": "P2"
+    },
+    {
+      "job_id": "output-hypothesis-korean-learning-effectiveness-2026",
+      "topic": "Output Hypothesis 基盤韓国語学習効果検証 - スピーキング/ライティング/ディベートアウトプット強制のリテンション・LTV・差別化影響",
+      "phase": "completed",
+      "provider": "google",
+      "created_at": "2026-01-27T00:00:00Z",
+      "started_at": "2026-01-27T00:00:00Z",
+      "completed_at": "2026-01-27T02:15:00Z",
+      "doc_path": "docs/research/output-hypothesis-korean-learning-effectiveness-2026.md",
+      "kpi_target": "ltv",
+      "priority": "P2"
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "schema_version": 2,
+  "skill_id": "feature-pilot",
+  "skill_version": "1.0.0",
+  "tier": 1,
+  "tier_description": "Orchestrator - AI駆動機能開発の統合オーケストレーター",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": true
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "work_type_classification": "haiku",
+      "context_collection": "haiku",
+      "readiness_gate": "sonnet",
+      "implementation": "sonnet",
+      "architecture_decision": "opus"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "npm_lint": {
+      "ttl_minutes": 30,
+      "invalidation": "src/**/*.{ts,tsx} changes"
+    },
+    "npm_test": {
+      "ttl_minutes": 30,
+      "invalidation": "tests/**/*.{ts,tsx}, src/**/*.{ts,tsx} changes"
+    },
+    "readiness_gate": {
+      "ttl_minutes": 60,
+      "invalidation": "SPEC-*.md, screens/*.md changes"
+    },
+    "security_scan": {
+      "ttl_minutes": 60,
+      "invalidation": ".env* changes"
+    }
+  },
+  "preflight_checks": [
+    {
+      "id": "PF-001",
+      "description": "作業タイプ判別完了",
+      "blocking": true
+    },
+    {
+      "id": "PF-002",
+      "description": "CONTEXT.json アクセス可能または新規作成可能",
+      "blocking": true
+    },
+    {
+      "id": "PF-003",
+      "description": "CLAUDE.md ルール確認",
+      "blocking": true
+    },
+    {
+      "id": "PF-004",
+      "description": "Tier 判定完了",
+      "blocking": true
+    },
+    {
+      "id": "PF-005",
+      "description": "Evidence キャッシュ確認",
+      "blocking": false
+    },
+    {
+      "id": "PF-006",
+      "description": "下位スキル ESP 互換性確認",
+      "blocking": true
+    },
+    {
+      "id": "PF-007",
+      "description": "作業 ID 確定",
+      "blocking": true
+    }
+  ],
+  "postflight_checks": [
+    {
+      "id": "POF-001",
+      "description": "パイプライン完了または明示的中断",
+      "blocking": true
+    },
+    {
+      "id": "POF-002",
+      "description": "CONTEXT.json 最終状態更新",
+      "blocking": true
+    },
+    {
+      "id": "POF-003",
+      "description": "QA 検証通過 (pre-quality-gate)",
+      "blocking": true
+    },
+    {
+      "id": "POF-004",
+      "description": "下位スキル Post-flight すべて完了",
+      "blocking": true
+    },
+    {
+      "id": "POF-005",
+      "description": "Evidence キャッシュ完了",
+      "blocking": false
+    },
+    {
+      "id": "POF-006",
+      "description": "DoD 検証完了 (completion_contract verdict = passed)",
+      "blocking": true
+    }
+  ],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["新機能", "バグ修正", "機能修正", "開発要求", "実装して", "feature-pilot"],
+    "args_pattern": "<自然言語の要求> [--quick] [--docs-only]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": [],
+  "calls": [
+    "feature-architect",
+    "feature-spec-generator",
+    "feature-spec-updater",
+    "ui-approval-gate",
+    "feature-implementer",
+    "feature-wiring",
+    "feature-status-sync",
+    "bug-fix",
+    "pre-quality-gate",
+    "priority-analyzer",
+    "turbo-mode",
+    "persistent-mode",
+    "research-pilot"
+  ],
+  "work_types": {
+    "NEW_FEATURE": {
+      "triggers": ["新機能", "追加", "SPEC未存在"],
+      "pipeline": [
+        "research-pilot (conditional)",
+        "turbo-mode (context collection)",
+        "feature-architect",
+        "feature-spec-generator",
+        "ui-approval-gate",
+        "readiness-gate (built-in)",
+        "implementation",
+        "feature-wiring",
+        "pre-quality-gate",
+        "feature-status-sync",
+        "priority-analyzer (optional)",
+        "pre-quality-gate (final)"
+      ]
+    },
+    "MODIFY_FEATURE": {
+      "triggers": ["修正", "変更", "既存SPEC有り"],
+      "pipeline": [
+        "feature-spec-updater",
+        "ui-approval-gate",
+        "readiness-gate (built-in)",
+        "implementation",
+        "feature-wiring (conditional)",
+        "feature-status-sync",
+        "priority-analyzer (optional)",
+        "pre-quality-gate (optional)"
+      ]
+    },
+    "BUG_FIX": {
+      "triggers": ["バグ", "エラー", "修正"],
+      "pipeline": ["bug-fix", "pre-quality-gate (optional)"]
+    },
+    "DOCS_ONLY": {
+      "triggers": ["文書のみ", "SPECのみ"],
+      "pipeline": ["specified skill only"]
+    }
+  },
+  "execution_model": {
+    "type": "orchestrator",
+    "phases": [
+      {
+        "id": 0,
+        "name": "要求受付と分類",
+        "description": "作業タイプ自動判別、Tier判定、CLAUDE.mdチェック"
+      },
+      {
+        "id": 1,
+        "name": "計画提示",
+        "description": "パイプライン計画をユーザーに提示"
+      },
+      {
+        "id": 2,
+        "name": "パイプライン実行",
+        "description": "作業タイプ別パイプラインの順次実行"
+      },
+      {
+        "id": 3,
+        "name": "進行状況追跡",
+        "description": "各段階完了時の状態更新と報告"
+      }
+    ],
+    "built_in_features": [
+      "Readiness Gate (5 Phase検証)",
+      "State Machine (CONTEXT.json)",
+      "7問上限ルール",
+      "自律性制御"
+    ]
+  },
+  "inputs": [
+    {
+      "type": "user_request",
+      "description": "自然言語の開発要求"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "implementation",
+      "format": "typescript",
+      "description": "完全な機能実装"
+    },
+    {
+      "type": "context",
+      "format": "json",
+      "description": "CONTEXT.json 状態更新"
+    }
+  ],
+  "ssot_files": ["Makefile"],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "Hackathon Project 向け新規作成: Flutter/Korean → Next.js/Japanese 全面移行。CONVERT_CANDIDATE/REVERT_CANDIDATE削除、Team Mode削除、flutter-qa→pre-quality-gate置換、Evidence Cache更新"
+    }
+  ]
+}

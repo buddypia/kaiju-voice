@@ -1,0 +1,74 @@
+{
+  "schema_version": 2,
+  "skill_id": "feature-spec-updater",
+  "skill_version": "2.0.0",
+  "tier": 2,
+  "tier_description": "Pipeline - 既存SPEC修正 (変更追跡が可能な修正)",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "spec_loading": "haiku",
+      "diff_analysis": "sonnet",
+      "spec_modification": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet"]
+  },
+  "evidence_policy": {
+    "note": "SPEC修正は変更履歴記録。キャッシング不要"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["SPEC修正", "SPEC更新", "機能変更", "FR追加", "FR修正"],
+    "args_pattern": "<機能ID> [--add-fr <説明>] [--modify <FR-XXXXX> <説明>] [--section <セクション>]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": ["feature-pilot"],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/features/*/SPEC-*.md",
+      "description": "修正されたSPEC文書"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/features/*/screens/*.md",
+      "description": "修正されたScreen文書"
+    },
+    {
+      "type": "state_update",
+      "path_pattern": "docs/features/*/CONTEXT.json",
+      "description": "decisions, historyセクション更新"
+    }
+  ],
+  "state_transitions": {
+    "context_json_field": "quick_resume.current_state",
+    "valid_transitions": [
+      { "from": "Idle", "to": "SpecUpdating" },
+      { "from": "SpecUpdating", "to": "SpecUpdating" }
+    ]
+  },
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "MANIFEST.json初期生成 (Next.js/React適応)"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-11",
+      "changes": "ESP Lite適用 - schema_version 2, model_routing追加"
+    }
+  ]
+}

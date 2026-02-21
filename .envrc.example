@@ -1,0 +1,7 @@
+export CODEX_HOME=$PWD/.codex
+
+# Google Cloud project ID used for analytics or deployments
+export GOOGLE_CLOUD_PROJECT=your-gcp-project-id
+
+# Supabase personal access token for CLI/automation (avoid committing real value)
+export SUPABASE_ACCESS_TOKEN=sbp_your_supabase_access_token

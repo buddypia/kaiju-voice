@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rice-section-schema.json",
+  "title": "CONTEXT.json Priority Section Schema (RICE v2)",
+  "description": "RICE v2 フレームワーク基盤の優先順位データスキーマ。競合社データを別途 post-multiplier として分離。",
+  "type": "object",
+  "properties": {
+    "priority": {
+      "type": "object",
+      "required": ["version", "schema", "last_updated", "phase", "rice_inputs", "calculated"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$",
+          "description": "スキーマバージョン (例: 3.0)"
+        },
+        "schema": {
+          "type": "string",
+          "enum": ["rice-v2"],
+          "description": "使用中のスコアリングフレームワーク識別子"
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "最終更新日時 (ISO 8601)"
+        },
+        "phase": {
+          "type": "string",
+          "enum": ["exploration", "mvp", "growth", "stability"],
+          "description": "プロジェクト段階"
+        },
+
+        "rice_inputs": {
+          "type": "object",
+          "required": ["reach", "impact", "confidence", "effort"],
+          "properties": {
+            "reach": {
+              "$ref": "#/$defs/rice_reach"
+            },
+            "impact": {
+              "$ref": "#/$defs/rice_impact"
+            },
+            "confidence": {
+              "$ref": "#/$defs/rice_confidence"
+            },
+            "effort": {
+              "$ref": "#/$defs/rice_effort"
+            }
+          }
+        },
+
+        "competitive_adjustment": {
+          "$ref": "#/$defs/competitive_adjustment",
+          "description": "競合社データ基盤の post-multiplier (0.8-1.3)。RICE サブスコアと分離。"
+        },
+
+        "calculated": {
+          "type": "object",
+          "required": ["rice_score", "formula"],
+          "properties": {
+            "rice_score": {
+              "type": "number",
+              "minimum": 0,
+              "description": "純粋 RICE 点数 = (Reach × Impact × Confidence) / Effort"
+            },
+            "adjusted_score": {
+              "type": "number",
+              "minimum": 0,
+              "description": "最終点数 = rice_score × competitive_adjustment × manual_override"
+            },
+            "competitive_adjustment": {
+              "type": "number",
+              "minimum": 0.8,
+              "maximum": 1.3,
+              "description": "適用された競合社調整係数"
+            },
+            "manual_override_applied": {
+              "type": "number",
+              "minimum": 0.8,
+              "maximum": 1.2,
+              "description": "適用された手動補正係数"
+            },
+            "formula": {
+              "type": "string",
+              "description": "計算公式参照"
+            },
+            "component_breakdown": {
+              "type": "object",
+              "properties": {
+                "numerator": {
+                  "type": "number",
+                  "description": "Reach × Impact × Confidence"
+                },
+                "denominator": {
+                  "type": "number",
+                  "description": "Effort (person-weeks)"
+                }
+              }
+            }
+          }
+        },
+
+        "data_sources_read": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "点数算出時に実際に読み込んだデータソース一覧 (ファイル名 + 日付)"
+        },
+
+        "manual_override": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number",
+              "minimum": 0.8,
+              "maximum": 1.2,
+              "default": 1.0,
+              "description": "手動補正係数 (0.8-1.2、デフォルト 1.0)"
+            },
+            "reason": {
+              "type": ["string", "null"],
+              "description": "補正事由 (null なら補正なし)"
+            }
+          }
+        },
+
+        "ai_rationale": {
+          "type": "string",
+          "description": "AI が作成した統合算出根拠説明"
+        },
+
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "actor", "change_summary"],
+            "properties": {
+              "timestamp": { "type": "string", "format": "date-time" },
+              "actor": { "type": "string", "enum": ["ai", "human"] },
+              "change_summary": { "type": "string" },
+              "rice_score": { "type": "number" },
+              "adjusted_score": { "type": "number" },
+              "inputs_snapshot": { "type": "object" },
+              "notes": { "type": "string" }
+            }
+          },
+          "description": "変更履歴"
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "rice_reach": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 10,
+          "description": "到達範囲 (1=niche ~ 10=全ユーザー)。score = user_scope*0.40 + biz*0.35 + progress*0.25"
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "target_user_scope": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "string" },
+                "source": { "type": "string" }
+              }
+            },
+            "business_metrics": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "string" },
+                "source": { "type": "string" }
+              }
+            },
+            "progress_adjustment": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "number", "description": "完了度 (0-100)" },
+                "source": { "type": "string" }
+              }
+            }
+          }
+        },
+        "rationale": { "type": "string" }
+      }
+    },
+
+    "rice_impact": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "enum": [0.25, 0.5, 1, 2, 3],
+          "description": "影響度 — Intercom 5段階: 0.25(Minimal), 0.5(Low), 1(Medium), 2(High), 3(Massive)"
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "core_goal": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "string" },
+                "source": { "type": "string" }
+              }
+            },
+            "ltv_contribution": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "string" },
+                "source": { "type": "string" }
+              }
+            },
+            "gap_severity": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "string" },
+                "source": { "type": "string" }
+              }
+            }
+          }
+        },
+        "rationale": { "type": "string" }
+      }
+    },
+
+    "rice_confidence": {
+      "type": "object",
+      "required": ["score", "factors"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 1.0,
+          "description": "加重合算信頼度 (0.05-1.0)。4ファクター: brief(0.30), spec(0.25), research(0.25), impl(0.20)"
+        },
+        "factors": {
+          "type": "object",
+          "required": [
+            "brief_completeness",
+            "spec_quality",
+            "research_evidence",
+            "implementation_status"
+          ],
+          "properties": {
+            "brief_completeness": {
+              "$ref": "#/$defs/confidence_factor",
+              "description": "BRIEF 仕様完成度 (加重値 0.30)"
+            },
+            "spec_quality": {
+              "$ref": "#/$defs/confidence_factor_spec",
+              "description": "SPEC 存在 + 品質 (加重値 0.25)"
+            },
+            "research_evidence": {
+              "$ref": "#/$defs/confidence_factor_research",
+              "description": "リサーチ根拠 (加重値 0.25)"
+            },
+            "implementation_status": {
+              "$ref": "#/$defs/confidence_factor_impl",
+              "description": "実装実績 (加重値 0.20)"
+            }
+          }
+        }
+      }
+    },
+
+    "rice_effort": {
+      "type": "object",
+      "required": ["score", "unit"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 20,
+          "description": "予想工数 (person-weeks)。完了した FR は除外。"
+        },
+        "unit": {
+          "type": "string",
+          "const": "person-weeks"
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "fr_count": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "integer" },
+                "source": { "type": "string" }
+              }
+            },
+            "target_files": {
+              "type": "object",
+              "properties": {
+                "value": { "type": ["integer", "null"] },
+                "source": { "type": "string" }
+              }
+            },
+            "constraint_count": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "integer" },
+                "source": { "type": "string" }
+              }
+            },
+            "remaining_pct": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "number", "minimum": 0, "maximum": 100 },
+                "source": { "type": "string" }
+              }
+            }
+          }
+        },
+        "rationale": { "type": "string" }
+      }
+    },
+
+    "competitive_adjustment": {
+      "type": "object",
+      "required": ["adjustment", "has_data"],
+      "properties": {
+        "adjustment": {
+          "type": "number",
+          "minimum": 0.8,
+          "maximum": 1.3,
+          "default": 1.0,
+          "description": "競合社調整係数。データなければ 1.0 (中立)"
+        },
+        "has_data": {
+          "type": "boolean",
+          "description": "競合社データ存在有無"
+        },
+        "evidence": {
+          "type": "object",
+          "properties": {
+            "assessment_count": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "integer" },
+                "contribution": { "type": "number" },
+                "source": { "type": "string" }
+              }
+            },
+            "is_industry_standard": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "boolean" },
+                "contribution": { "type": "number" },
+                "source": { "type": "string" }
+              }
+            },
+            "opportunity_score": {
+              "type": "object",
+              "properties": {
+                "value": { "type": ["number", "null"] },
+                "contribution": { "type": "number" },
+                "source": { "type": "string" }
+              }
+            },
+            "gap_severity": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "string" },
+                "contribution": { "type": "number" },
+                "source": { "type": "string" }
+              }
+            }
+          }
+        },
+        "rationale": { "type": "string" }
+      }
+    },
+
+    "confidence_factor": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "section_count": {
+          "type": "integer",
+          "description": "BRIEF.md 内の実質的内容があるセクション数"
+        },
+        "source": { "type": "string" }
+      }
+    },
+
+    "confidence_factor_spec": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "fr_count": {
+          "type": "integer",
+          "description": "SPEC 内の FR 定義個数"
+        },
+        "source": { "type": "string" }
+      }
+    },
+
+    "confidence_factor_research": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "research_count": {
+          "type": "integer",
+          "description": "連結された Research 数"
+        },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Research ID 一覧。空配列なら score=0.0 強制。"
+        }
+      }
+    },
+
+    "confidence_factor_impl": {
+      "type": "object",
+      "required": ["score"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "progress_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "source": { "type": "string" }
+      }
+    }
+  }
+}

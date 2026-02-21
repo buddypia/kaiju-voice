@@ -1,0 +1,11 @@
+{
+  "skill_id": "feature-architect",
+  "version": "1.0.0",
+  "description": "ユーザーストーリー/Why/要求事項を入力として受け取り、CONTEXT.json生成の唯一の責任者としてコンテキストを収集し、feature-spec-generatorを呼び出してSPEC.md + Screen文書を生成するオーケストレーター",
+  "triggers": ["/feature-architect", "architect", "コンテキスト生成", "意図分析"],
+  "calls": ["feature-spec-generator"],
+  "called_by": ["feature-pilot"],
+  "inputs": ["ユーザーストーリー / Why / 要求事項 / タスク", "--quick (Tier 3簡易モード)"],
+  "outputs": ["docs/features/<id>-<name>/BRIEF.md", "docs/features/<id>-<name>/CONTEXT.json"],
+  "model": "sonnet"
+}

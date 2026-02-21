@@ -1,0 +1,15 @@
+{
+  "skill_id": "feature-implementer",
+  "version": "1.0.0",
+  "description": "SPEC.mdとScreen文書を入力としてTDD方式でコードを実装する実行者スキル",
+  "triggers": ["実装して", "コード作成", "TDD実装", "FR実装", "feature-implementer"],
+  "calls": [],
+  "called_by": ["feature-pilot"],
+  "inputs": ["SPEC.md", "screens/*.md", "CONTEXT.json"],
+  "outputs": [
+    "src/features/**/*.ts(x)",
+    "tests/unit/features/**/*.test.ts(x)",
+    "CONTEXT.json progress更新"
+  ],
+  "model": "sonnet"
+}

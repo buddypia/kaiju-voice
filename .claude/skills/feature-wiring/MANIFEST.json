@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "skill_id": "feature-wiring",
+  "skill_version": "2.0.0",
+  "tier": 2,
+  "tier_description": "Pipeline - Export/ルート/データフロー/Lint統合検証",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "dependency_analysis": "haiku",
+      "export_verification": "haiku",
+      "dataflow_verification": "sonnet",
+      "lint_verification": "haiku"
+    },
+    "fallback_chain": ["haiku", "sonnet"]
+  },
+  "evidence_policy": {
+    "note": "Wiringは検証スキル。Lint結果は30分キャッシュ可能"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["統合検証して", "接続確認", "wiring", "連携確認", "データフロー検証"],
+    "args_pattern": "<機能ID>"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": ["feature-pilot"],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "report",
+      "path_pattern": "N/A (コンソール出力)",
+      "description": "検証レポート (Pass/Fail + 修正案)"
+    }
+  ],
+  "state_transitions": {
+    "context_json_field": "quick_resume.current_state",
+    "valid_transitions": [{ "from": "Implementing", "to": "Implementing" }]
+  },
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "MANIFEST.json初期生成 (Next.js/React適応)"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-11",
+      "changes": "ESP Lite適用 - schema_version 2, model_routing追加"
+    }
+  ]
+}

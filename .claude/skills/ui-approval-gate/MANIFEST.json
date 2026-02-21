@@ -1,0 +1,11 @@
+{
+  "skill_id": "ui-approval-gate",
+  "version": "1.0.0",
+  "description": "SPEC生成後のUI/ワイヤーフレーム承認ゲート。実装前の視覚的確認を保証する",
+  "triggers": ["UI承認", "ワイヤーフレーム確認", "画面レビュー", "ui approval", "wireframe review"],
+  "calls": [],
+  "called_by": ["feature-pilot"],
+  "inputs": ["SPEC.md", "screens/*.md", "CONTEXT.json"],
+  "outputs": ["docs/wireframes/feature-{id}-wireframe.md", "CONTEXT.json ui_approval更新"],
+  "model": "sonnet"
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "skill_id": "analyze-what-to-build",
+  "skill_version": "1.0.0",
+  "tier": 1,
+  "tier_description": "Orchestrator - 競合分析パイプライン統合実行",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "audit_runner": "none",
+      "candidate_generation": "sonnet",
+      "priority_ranking": "sonnet",
+      "summary_report": "haiku"
+    }
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "何を作る",
+      "次の機能",
+      "パイプライン分析",
+      "ポートフォリオ分析",
+      "what to build"
+    ],
+    "args_pattern": "[--stage <1|2|3>] [--skip-audit] [--dry-run]"
+  },
+  "dependencies": {
+    "required": ["competitive-tracker", "market-intelligence-scanner", "priority-analyzer"]
+  },
+  "called_by": [],
+  "calls": ["competitive-tracker", "market-intelligence-scanner", "priority-analyzer"],
+  "outputs": [
+    {
+      "type": "report",
+      "description": "統合優先順位ランキング + 意思決定プロンプト"
+    }
+  ],
+  "pipeline": {
+    "stage": 0,
+    "role": "orchestrator",
+    "data_products": {
+      "produces": [],
+      "consumes": [
+        {
+          "artifact_id": "gap-candidates",
+          "source_skill": "competitive-tracker",
+          "path": "docs/analysis/gap-candidates.json"
+        },
+        {
+          "artifact_id": "candidate-registry",
+          "source_skill": "market-intelligence-scanner",
+          "path": ".claude/skills/market-intelligence-scanner/assets/scan-status.json"
+        },
+        {
+          "artifact_id": "priority-rankings",
+          "source_skill": "priority-analyzer",
+          "path": "docs/features/*/CONTEXT.json"
+        }
+      ]
+    }
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-07",
+      "changes": "初期生成 - Pipeline Contract System オーケストレーター"
+    }
+  ]
+}

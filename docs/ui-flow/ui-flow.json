@@ -1,0 +1,403 @@
+{
+  "version": "1.0.0",
+
+  "statechart": {
+    "id": "hackathonproject-session",
+    "initial": "idle",
+    "states": {
+      "idle": {
+        "entry": ["showWelcomeHeader"],
+        "on": {
+          "SUBMIT_CODE": {
+            "target": "analyzing",
+            "actions": ["resetAll", "startStreamingMode", "startSession"]
+          },
+          "RESTORE_SESSION": {
+            "target": "complete",
+            "actions": ["restoreSessionData"]
+          }
+        },
+        "meta": { "description": "初期状態 — コード入力待ち、ウェルカムヘッダー表示" }
+      },
+      "analyzing": {
+        "entry": ["showAnalysisProgress"],
+        "on": {
+          "SSE_EXPLANATION": { "target": "explaining" },
+          "SSE_COMPLETE": { "target": "complete" },
+          "CANCEL": { "target": "idle", "actions": ["abortRequest", "finishStreaming"] },
+          "ERROR": { "target": "idle", "actions": ["setErrorMessage"] }
+        },
+        "meta": { "description": "AI分析中 — エージェントログ表示、SSE接続中" }
+      },
+      "explaining": {
+        "entry": ["scrollToExplanation"],
+        "on": {
+          "SSE_QUIZ": { "target": "quizzing" },
+          "SSE_COMPLETE": { "target": "complete" },
+          "CANCEL": { "target": "idle", "actions": ["abortRequest", "finishStreaming"] },
+          "ERROR": { "target": "idle", "actions": ["setErrorMessage"] }
+        },
+        "meta": { "description": "説明ストリーミング中 — ExplanationPanel表示" }
+      },
+      "quizzing": {
+        "entry": ["scrollToQuiz"],
+        "on": {
+          "SSE_DIFF": { "target": "diffReady" },
+          "SSE_COMPLETE": { "target": "complete" },
+          "ERROR": { "target": "idle", "actions": ["setErrorMessage"] }
+        },
+        "meta": { "description": "理解度チェック中 — 説明直後にQuizPanel表示" }
+      },
+      "diffReady": {
+        "entry": ["scrollToDiff"],
+        "on": {
+          "SSE_COMPLETE": { "target": "complete" },
+          "ERROR": { "target": "idle", "actions": ["setErrorMessage"] }
+        },
+        "meta": {
+          "description": "コード修正提案表示 — ProgressiveHintsPanel + DiffViewPanel表示（Quiz回答後）"
+        }
+      },
+      "complete": {
+        "entry": ["scrollToCompletion", "finishStreaming"],
+        "on": {
+          "NEW_ANALYSIS": {
+            "target": "idle",
+            "actions": ["resetAll", "resetCodeInput", "scrollToTop"]
+          }
+        },
+        "meta": { "description": "分析完了 — CompletionCard + FollowUpChat + LearningHistory表示" }
+      }
+    }
+  },
+
+  "panels": {
+    "CodeInputPanel": {
+      "feature": "code-input",
+      "component": "CodeInputPanel",
+      "visibility": {
+        "type": "always",
+        "condition": "true"
+      },
+      "description": "コード/エラー/目標の入力フォーム（常時表示、レイアウトのみ変化）"
+    },
+    "AgentLogPanel": {
+      "feature": "agent-log",
+      "component": "AgentLogPanel",
+      "visibility": {
+        "type": "state_based",
+        "condition": "status !== 'idle'"
+      },
+      "description": "AIの推論プロセス可視化（Plan→Act→Observe→Reflect→Result）"
+    },
+    "AnalysisProgress": {
+      "feature": "shared",
+      "component": "AnalysisProgress",
+      "visibility": {
+        "type": "state_based",
+        "condition": "status !== 'idle'"
+      },
+      "description": "フェーズ連動プログレスバー"
+    },
+    "ExplanationPanel": {
+      "feature": "explanation",
+      "component": "ExplanationPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "explanation.displayedText.length > 0"
+      },
+      "description": "ストリーミング形式の教育テキスト表示"
+    },
+    "VisualDiagramPanel": {
+      "feature": "visual-diagram",
+      "component": "VisualDiagramPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "visualDiagram.imageData !== null"
+      },
+      "description": "AI生成のコード図解画像（非ブロッキング、失敗時スキップ）"
+    },
+    "ProgressiveHintsPanel": {
+      "feature": "progressive-hints",
+      "component": "ProgressiveHintsPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "progressiveHints.isLoaded && progressiveHints.hints.length > 0"
+      },
+      "description": "段階的ヒント表示（Diff表示前のスキャフォールディング）"
+    },
+    "DiffViewPanel": {
+      "feature": "diff-view",
+      "component": "DiffViewPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "diffData !== null && (diffRevealed || !progressiveHints.isLoaded)"
+      },
+      "description": "Before/Afterのコード比較表示"
+    },
+    "QuizPanel": {
+      "feature": "quiz",
+      "component": "QuizPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "quiz.quiz !== null"
+      },
+      "description": "理解度チェック多肢選択問題"
+    },
+    "CodeSandboxPanel": {
+      "feature": "code-sandbox",
+      "component": "CodeSandboxPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "status !== 'idle' && code.length > 0"
+      },
+      "description": "コード実行サンドボックス"
+    },
+    "CompletionCard": {
+      "feature": "shared",
+      "component": "CompletionCard",
+      "visibility": {
+        "type": "state_based",
+        "condition": "status === 'complete'"
+      },
+      "description": "分析完了サマリーカード"
+    },
+    "FollowUpChatPanel": {
+      "feature": "follow-up-chat",
+      "component": "FollowUpChatPanel",
+      "visibility": {
+        "type": "state_based",
+        "condition": "status === 'complete'"
+      },
+      "description": "フォローアップ質問チャット"
+    },
+    "LearningHistoryPanel": {
+      "feature": "learning-history",
+      "component": "LearningHistoryPanel",
+      "visibility": {
+        "type": "data_based",
+        "condition": "status === 'complete' || learningHistory.totalSessions > 0"
+      },
+      "description": "学習履歴・統計パネル"
+    },
+    "ErrorBanner": {
+      "feature": "shared",
+      "component": "ErrorBanner",
+      "visibility": {
+        "type": "flag_based",
+        "condition": "!!errorMessage"
+      },
+      "description": "エラーメッセージバナー（インライン）"
+    },
+    "VibeStructureCard": {
+      "feature": "vibe-understanding",
+      "component": "VibeStructureCard",
+      "visibility": {
+        "type": "data_based",
+        "condition": "vibeUnderstanding.vibeStructure !== null"
+      },
+      "description": "Vibeモード: コード構造分解カード（パーツ名・種別・役割・依存関係を表示）"
+    },
+    "VibeModificationGuide": {
+      "feature": "vibe-understanding",
+      "component": "VibeModificationGuide",
+      "visibility": {
+        "type": "data_based",
+        "condition": "vibeUnderstanding.vibeModification !== null"
+      },
+      "description": "Vibeモード: 修正ポイントガイド（修正対象・難易度・影響を表示）"
+    }
+  },
+
+  "phases": {
+    "idle": {
+      "layout": "centered (max-w-3xl)",
+      "active_panels": ["CodeInputPanel"],
+      "auto_scroll_ref": null,
+      "description": "初期状態 — 中央寄せの集中レイアウト、ウェルカムヘッダー表示"
+    },
+    "analyzing": {
+      "layout": "grid-2col",
+      "active_panels": ["CodeInputPanel", "AgentLogPanel", "AnalysisProgress"],
+      "auto_scroll_ref": null,
+      "description": "分析中 — 2カラムグリッド（入力 + エージェントログ）"
+    },
+    "explaining": {
+      "layout": "grid-2col",
+      "active_panels": [
+        "CodeInputPanel",
+        "AgentLogPanel",
+        "AnalysisProgress",
+        "ExplanationPanel",
+        "VisualDiagramPanel"
+      ],
+      "auto_scroll_ref": "explanationRef",
+      "description": "説明ストリーミング — ExplanationPanel追加表示"
+    },
+    "quizzing": {
+      "layout": "grid-2col",
+      "active_panels": [
+        "CodeInputPanel",
+        "AgentLogPanel",
+        "AnalysisProgress",
+        "ExplanationPanel",
+        "VisualDiagramPanel",
+        "QuizPanel",
+        "CodeSandboxPanel"
+      ],
+      "auto_scroll_ref": "quizRef",
+      "description": "理解度チェック — 説明直後にQuizPanel表示"
+    },
+    "diffReady": {
+      "layout": "grid-2col",
+      "active_panels": [
+        "CodeInputPanel",
+        "AgentLogPanel",
+        "AnalysisProgress",
+        "ExplanationPanel",
+        "VisualDiagramPanel",
+        "QuizPanel",
+        "ProgressiveHintsPanel",
+        "DiffViewPanel",
+        "CodeSandboxPanel"
+      ],
+      "auto_scroll_ref": null,
+      "description": "コード修正提案 — ProgressiveHintsPanel + DiffViewPanel静かに追加（Quiz回答中にスクロール強制しない）"
+    },
+    "complete": {
+      "layout": "grid-2col",
+      "active_panels": [
+        "CodeInputPanel",
+        "AgentLogPanel",
+        "AnalysisProgress",
+        "ExplanationPanel",
+        "VisualDiagramPanel",
+        "QuizPanel",
+        "ProgressiveHintsPanel",
+        "DiffViewPanel",
+        "CodeSandboxPanel",
+        "CompletionCard",
+        "FollowUpChatPanel",
+        "LearningHistoryPanel"
+      ],
+      "auto_scroll_ref": "completionRef",
+      "description": "完了 — CompletionCard + FollowUpChat + LearningHistory追加"
+    }
+  },
+
+  "sse_mapping": {
+    "agent-log": {
+      "status_change": "analyzing",
+      "target_panel": "AgentLogPanel",
+      "description": "AIエージェントの推論ログ（Plan/Act/Observe/Reflect）"
+    },
+    "explanation": {
+      "status_change": "explaining",
+      "target_panel": "ExplanationPanel",
+      "description": "教育テキストのストリーミングチャンク"
+    },
+    "visual-diagram": {
+      "status_change": null,
+      "target_panel": "VisualDiagramPanel",
+      "description": "AI生成コード図解画像（状態変更なし、失敗時スキップ）"
+    },
+    "error-category": {
+      "status_change": null,
+      "target_panel": "LearningHistoryPanel",
+      "description": "エラーカテゴリ分類（学習履歴用、状態変更なし）"
+    },
+    "hints": {
+      "status_change": null,
+      "target_panel": "ProgressiveHintsPanel",
+      "description": "段階的ヒントデータ（状態変更なし）"
+    },
+    "diff": {
+      "status_change": "diffReady",
+      "target_panel": "DiffViewPanel",
+      "description": "Before/Afterコード差分データ"
+    },
+    "quiz": {
+      "status_change": "quizzing",
+      "target_panel": "QuizPanel",
+      "description": "理解度チェッククイズデータ"
+    },
+    "complete": {
+      "status_change": "complete",
+      "target_panel": "CompletionCard",
+      "description": "分析完了シグナル"
+    },
+    "error": {
+      "status_change": "idle",
+      "target_panel": "ErrorBanner",
+      "description": "エラー発生シグナル（idle状態へリセット）"
+    },
+    "vibe-structure": {
+      "status_change": null,
+      "target_panel": "VibeStructureCard",
+      "description": "Vibeモード: コード構造分解データ（状態変更なし）"
+    },
+    "vibe-modification": {
+      "status_change": null,
+      "target_panel": "VibeModificationGuide",
+      "description": "Vibeモード: 修正ポイントガイドデータ（状態変更なし）"
+    }
+  },
+
+  "transitions": [
+    { "from": "idle", "event": "SUBMIT_CODE", "to": "analyzing" },
+    { "from": "idle", "event": "RESTORE_SESSION", "to": "complete" },
+    { "from": "analyzing", "event": "SSE_EXPLANATION", "to": "explaining" },
+    { "from": "analyzing", "event": "SSE_COMPLETE", "to": "complete" },
+    { "from": "explaining", "event": "SSE_QUIZ", "to": "quizzing" },
+    { "from": "explaining", "event": "SSE_COMPLETE", "to": "complete" },
+    { "from": "quizzing", "event": "SSE_DIFF", "to": "diffReady" },
+    { "from": "quizzing", "event": "SSE_COMPLETE", "to": "complete" },
+    { "from": "diffReady", "event": "SSE_COMPLETE", "to": "complete" },
+    { "from": "complete", "event": "NEW_ANALYSIS", "to": "idle" },
+    { "from": "analyzing", "event": "CANCEL", "to": "idle" },
+    { "from": "explaining", "event": "CANCEL", "to": "idle" },
+    { "from": "analyzing", "event": "ERROR", "to": "idle" },
+    { "from": "explaining", "event": "ERROR", "to": "idle" },
+    { "from": "quizzing", "event": "ERROR", "to": "idle" },
+    { "from": "diffReady", "event": "ERROR", "to": "idle" }
+  ],
+
+  "user_actions": {
+    "submitCode": {
+      "handler": "handleAnalyze",
+      "trigger_event": "SUBMIT_CODE",
+      "available_in": ["idle"],
+      "description": "コード分析を開始（リクエストビルド→SSE接続→分析開始）"
+    },
+    "cancelAnalysis": {
+      "handler": "handleCancel",
+      "trigger_event": "CANCEL",
+      "available_in": ["analyzing", "explaining"],
+      "description": "進行中の分析をキャンセル（AbortController.abort）"
+    },
+    "startNewAnalysis": {
+      "handler": "handleNewAnalysis",
+      "trigger_event": "NEW_ANALYSIS",
+      "available_in": ["complete"],
+      "description": "全状態リセットして新しい分析を開始"
+    },
+    "restoreSession": {
+      "handler": "handleRestoreSession",
+      "trigger_event": "RESTORE_SESSION",
+      "available_in": ["idle"],
+      "description": "過去のセッションデータをワークスペースに復元"
+    },
+    "submitQuizAnswer": {
+      "handler": "handleQuizSubmit",
+      "trigger_event": "QUIZ_SUBMIT",
+      "available_in": ["quizzing", "complete"],
+      "description": "クイズ回答を送信して学習履歴を更新"
+    },
+    "revealDiff": {
+      "handler": "handleShowDiff",
+      "trigger_event": "SHOW_DIFF",
+      "available_in": ["diffReady", "quizzing", "complete"],
+      "description": "ヒント完了後にDiffを表示（diffRevealed = true）"
+    }
+  }
+}

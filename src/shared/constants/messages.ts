@@ -1,0 +1,55 @@
+/** UI メッセージ定数 (ハードコーディング禁止) */
+export const MESSAGES = {
+  game_title: 'KAIJU VOICE',
+  game_subtitle: '声で戦え、怪獣バトル',
+  game_start: 'スタート',
+  game_mode_pvp: 'VS プレイヤー',
+  game_mode_vsai: 'VS AI',
+  game_mode_hero: 'ヒーロー VS 怪獣',
+  game_mode_pvp_desc: '2人で対戦',
+  game_mode_vsai_desc: 'AIと対戦',
+  game_mode_hero_desc: '正義 VS 悪',
+
+  select_title: '怪獣を選べ',
+  select_title_hero: 'ヒーローを選べ',
+  select_title_kaiju: '怪獣を選べ',
+  select_player1: 'プレイヤー1 の番',
+  select_player2: 'プレイヤー2 の番',
+  select_hero_player: 'ヒーローを選択',
+  select_kaiju_opponent: '対戦相手の怪獣を選択',
+  select_ai: 'AI の番',
+  select_ai_choosing: 'AIが怪獣を選んでいます...',
+  select_confirm: '選択確定',
+
+  battle_yourTurn: (name: string) => `${name}のターン！叫べ！`,
+  battle_aiTurn: 'AIのターン...',
+  battle_aiThinking: 'AIが必殺技を練っている...',
+  battle_recording: '録音中...',
+  battle_analyzing: 'AI分析中...',
+  battle_damage: (damage: number) => `${damage} ダメージ！`,
+  battle_critical: 'クリティカル！！',
+  battle_round: (n: number) => `ラウンド ${n}`,
+  battle_shout: '叫ぶ！',
+  battle_vs: 'VS',
+
+  result_winner: (name: string) => `${name} の勝利！`,
+  result_playAgain: 'もう一度戦う',
+  result_backToTitle: 'タイトルに戻る',
+  result_summary: 'バトルサマリー',
+  result_rounds: 'ラウンド数',
+  result_maxDamage: '最高ダメージ',
+  result_mvpShout: 'MVPの叫び',
+
+  error_micPermission: 'マイクの使用を許可してください',
+  error_analysisTimeout: '分析がタイムアウトしました。もう一度叫べ！',
+  error_imagenFailed: '画像生成に失敗しました',
+  error_generic: 'エラーが発生しました。もう一度お試しください',
+
+  battle_log: 'バトルログ',
+
+  commentary_label: 'AI実況',
+  commentary_speaking: '実況中...',
+  commentary_waiting: '次のアクションを待機中...',
+
+  vfx_energy_charging: 'エネルギー充填中...',
+} as const;

@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" font-family="'Inter','Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <marker id="arrow3Cyan" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#22d3ee"/>
+    </marker>
+    <marker id="arrow3Purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow3Gray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <path d="M0,0 L10,3.5 L0,7" fill="#64748b"/>
+    </marker>
+    <filter id="shadow3">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="580" fill="url(#bgGrad3)" rx="12"/>
+
+  <!-- Title -->
+  <text x="480" y="38" fill="#f8fafc" font-size="20" font-weight="700" text-anchor="middle">スキル依存関係グラフ</text>
+  <text x="480" y="58" fill="#94a3b8" font-size="12" text-anchor="middle">アーキテクチャスキルエコシステム</text>
+
+  <!-- User -->
+  <circle cx="480" cy="100" r="22" fill="#334155" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="480" y="96" fill="#e2e8f0" font-size="10" text-anchor="middle">ユーザー</text>
+  <text x="480" y="108" fill="#94a3b8" font-size="8" text-anchor="middle">リクエスト</text>
+
+  <!-- Arrows from User -->
+  <path d="M458 108 L200 170" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow3Gray)"/>
+  <path d="M480 122 L480 170" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrow3Cyan)"/>
+
+  <!-- ====================== -->
+  <!-- Platform Architect (Independent) -->
+  <!-- ====================== -->
+  <rect x="90" y="175" width="220" height="80" rx="10" fill="#312e81" fill-opacity="0.5" stroke="#a78bfa" stroke-width="2" filter="url(#shadow3)"/>
+  <text x="200" y="200" fill="#e9d5ff" font-size="12" font-weight="700" text-anchor="middle">platform-architect</text>
+  <text x="200" y="216" fill="#c4b5fd" font-size="9" text-anchor="middle">第1層管理</text>
+  <text x="200" y="232" fill="#818cf8" font-size="9" text-anchor="middle">独立実行 | ユーザー直接呼び出し</text>
+  <text x="200" y="246" fill="#6366f1" font-size="8" text-anchor="middle">PADR-*.md + constraints.json</text>
+
+  <!-- Tag: Tier 2 -->
+  <rect x="268" y="178" width="38" height="16" rx="4" fill="#7c3aed"/>
+  <text x="287" y="190" fill="#fff" font-size="8" font-weight="600" text-anchor="middle">Tier 2</text>
+
+  <!-- ====================== -->
+  <!-- Feature Pilot (Orchestrator) -->
+  <!-- ====================== -->
+  <rect x="370" y="175" width="220" height="80" rx="10" fill="#164e63" fill-opacity="0.5" stroke="#22d3ee" stroke-width="2" filter="url(#shadow3)"/>
+  <text x="480" y="200" fill="#67e8f9" font-size="12" font-weight="700" text-anchor="middle">feature-pilot</text>
+  <text x="480" y="216" fill="#22d3ee" font-size="9" text-anchor="middle">オーケストレーター</text>
+  <text x="480" y="232" fill="#0ea5e9" font-size="9" text-anchor="middle">単一エントリーポイント</text>
+  <text x="480" y="246" fill="#0284c7" font-size="8" text-anchor="middle">自動分類 + パイプライン</text>
+
+  <!-- Tag: Tier 1 -->
+  <rect x="548" y="178" width="38" height="16" rx="4" fill="#0ea5e9"/>
+  <text x="567" y="190" fill="#fff" font-size="8" font-weight="600" text-anchor="middle">Tier 1</text>
+
+  <!-- constraints.json data flow (platform-architect → pipeline) -->
+  <path d="M310 215 L370 215" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrow3Purple)"/>
+  <text x="340" y="208" fill="#c4b5fd" font-size="8" text-anchor="middle" transform="rotate(-5 340 208)">制約データ</text>
+
+  <!-- ====================== -->
+  <!-- Step 1.5A/B Skills -->
+  <!-- ====================== -->
+
+  <!-- Arrows from feature-pilot -->
+  <path d="M420 255 L200 345" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow3Cyan)"/>
+  <path d="M480 255 L480 345" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow3Cyan)"/>
+  <path d="M540 255 L760 345" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow3Cyan)"/>
+
+  <!-- Step 1.5A label -->
+  <rect x="388" y="285" width="90" height="18" rx="4" fill="#312e81" stroke="#a78bfa" stroke-width="0.5"/>
+  <text x="433" y="298" fill="#c4b5fd" font-size="8" font-weight="600" text-anchor="middle">Step 1.5A 自動</text>
+
+  <!-- Step 1.5B label -->
+  <rect x="388" y="308" width="90" height="18" rx="4" fill="#164e63" stroke="#0ea5e9" stroke-width="0.5"/>
+  <text x="433" y="321" fill="#7dd3fc" font-size="8" font-weight="600" text-anchor="middle">Step 1.5B 条件付き</text>
+
+  <!-- Domain Modeler -->
+  <rect x="90" y="350" width="220" height="70" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="1.5" filter="url(#shadow3)"/>
+  <text x="200" y="375" fill="#6ee7b7" font-size="12" font-weight="600" text-anchor="middle">domain-modeler</text>
+  <text x="200" y="393" fill="#34d399" font-size="9" text-anchor="middle">DDD 戦略パターン</text>
+  <text x="200" y="408" fill="#064e3b" font-size="8" text-anchor="middle">Tier M+ | DOMAIN-MODEL.md</text>
+  <rect x="268" y="353" width="38" height="16" rx="4" fill="#059669"/>
+  <text x="287" y="365" fill="#fff" font-size="8" font-weight="600" text-anchor="middle">Tier 2</text>
+
+  <!-- Architecture Selector -->
+  <rect x="370" y="350" width="220" height="70" rx="10" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow3)"/>
+  <text x="480" y="375" fill="#fde68a" font-size="12" font-weight="600" text-anchor="middle">architecture-selector</text>
+  <text x="480" y="393" fill="#f59e0b" font-size="9" text-anchor="middle">ATAM Lite + ADR 生成</text>
+  <text x="480" y="408" fill="#92400e" font-size="8" text-anchor="middle">Tier L+ | ADR-&lt;id&gt;.md</text>
+  <rect x="548" y="353" width="38" height="16" rx="4" fill="#d97706"/>
+  <text x="567" y="365" fill="#fff" font-size="8" font-weight="600" text-anchor="middle">Tier 2</text>
+
+  <!-- constraints.json consumed by architecture-selector -->
+  <rect x="380" y="425" width="200" height="20" rx="4" fill="#312e81" fill-opacity="0.5" stroke="#a78bfa" stroke-width="0.5" stroke-dasharray="3,2"/>
+  <text x="480" y="439" fill="#c4b5fd" font-size="8" text-anchor="middle">Step 0.5: constraints.json 自動ロード</text>
+
+  <!-- System Designer -->
+  <rect x="650" y="350" width="220" height="70" rx="10" fill="#1e293b" stroke="#ec4899" stroke-width="1.5" filter="url(#shadow3)"/>
+  <text x="760" y="375" fill="#fbcfe8" font-size="12" font-weight="600" text-anchor="middle">system-designer</text>
+  <text x="760" y="393" fill="#ec4899" font-size="9" text-anchor="middle">C4 モデル Level 1-2</text>
+  <text x="760" y="408" fill="#831843" font-size="8" text-anchor="middle">Tier XL only | Mermaid C4</text>
+  <rect x="828" y="353" width="38" height="16" rx="4" fill="#db2777"/>
+  <text x="847" y="365" fill="#fff" font-size="8" font-weight="600" text-anchor="middle">Tier 2</text>
+
+  <!-- Output boxes -->
+  <rect x="100" y="460" width="200" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="200" y="482" fill="#94a3b8" font-size="10" text-anchor="middle">DOMAIN-MODEL.md</text>
+  <text x="200" y="498" fill="#64748b" font-size="8" text-anchor="middle">境界コンテキスト、集約</text>
+  <path d="M200 420 L200 460" stroke="#334155" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <rect x="380" y="460" width="200" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="480" y="482" fill="#94a3b8" font-size="10" text-anchor="middle">ADR-&lt;id&gt;.md</text>
+  <text x="480" y="498" fill="#64748b" font-size="8" text-anchor="middle">機能アーキテクチャ決定</text>
+  <path d="M480 420 L480 460" stroke="#334155" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <rect x="660" y="460" width="200" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="760" y="482" fill="#94a3b8" font-size="10" text-anchor="middle">SYSTEM-DESIGN-*.md</text>
+  <text x="760" y="498" fill="#64748b" font-size="8" text-anchor="middle">C4 図 + コンテナビュー</text>
+  <path d="M760 420 L760 460" stroke="#334155" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- Legend -->
+  <rect x="40" y="525" width="880" height="36" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <line x1="48" y1="543" x2="68" y2="543" stroke="#22d3ee" stroke-width="2"/>
+  <text x="75" y="547" fill="#94a3b8" font-size="9">呼び出し（パイプライン）</text>
+  <line x1="190" y1="543" x2="210" y2="543" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="217" y="547" fill="#94a3b8" font-size="9">制約データフロー</text>
+  <line x1="370" y1="543" x2="390" y2="543" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="397" y="547" fill="#94a3b8" font-size="9">ユーザー呼び出し</text>
+  <circle cx="510" cy="543" r="4" fill="#a78bfa" fill-opacity="0.3" stroke="#a78bfa" stroke-width="1"/>
+  <text x="520" y="547" fill="#94a3b8" font-size="9">第1層（Platform）</text>
+  <circle cx="640" cy="543" r="4" fill="#22d3ee" fill-opacity="0.3" stroke="#22d3ee" stroke-width="1"/>
+  <text x="650" y="547" fill="#94a3b8" font-size="9">第2層（Feature）</text>
+
+  <!-- Footer -->
+  <line x1="40" y1="568" x2="920" y2="568" stroke="#334155" stroke-width="0.5"/>
+</svg>

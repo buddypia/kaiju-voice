@@ -1,0 +1,334 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="archGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="archGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bgGrad)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.03" stroke="#3b82f6">
+    <line x1="0" y1="0" x2="0" y2="900" stroke-width="1"/>
+    <line x1="60" y1="0" x2="60" y2="900" stroke-width="1"/>
+    <line x1="120" y1="0" x2="120" y2="900" stroke-width="1"/>
+    <line x1="180" y1="0" x2="180" y2="900" stroke-width="1"/>
+    <line x1="240" y1="0" x2="240" y2="900" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="900" stroke-width="1"/>
+    <line x1="360" y1="0" x2="360" y2="900" stroke-width="1"/>
+    <line x1="420" y1="0" x2="420" y2="900" stroke-width="1"/>
+    <line x1="480" y1="0" x2="480" y2="900" stroke-width="1"/>
+    <line x1="540" y1="0" x2="540" y2="900" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="900" stroke-width="1"/>
+    <line x1="660" y1="0" x2="660" y2="900" stroke-width="1"/>
+    <line x1="720" y1="0" x2="720" y2="900" stroke-width="1"/>
+    <line x1="780" y1="0" x2="780" y2="900" stroke-width="1"/>
+    <line x1="840" y1="0" x2="840" y2="900" stroke-width="1"/>
+    <line x1="900" y1="0" x2="900" y2="900" stroke-width="1"/>
+    <line x1="960" y1="0" x2="960" y2="900" stroke-width="1"/>
+    <line x1="1020" y1="0" x2="1020" y2="900" stroke-width="1"/>
+    <line x1="1080" y1="0" x2="1080" y2="900" stroke-width="1"/>
+    <line x1="1140" y1="0" x2="1140" y2="900" stroke-width="1"/>
+    <line x1="1200" y1="0" x2="1200" y2="900" stroke-width="1"/>
+    <line x1="0" y1="60" x2="1200" y2="60" stroke-width="1"/>
+    <line x1="0" y1="120" x2="1200" y2="120" stroke-width="1"/>
+    <line x1="0" y1="180" x2="1200" y2="180" stroke-width="1"/>
+    <line x1="0" y1="240" x2="1200" y2="240" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke-width="1"/>
+    <line x1="0" y1="360" x2="1200" y2="360" stroke-width="1"/>
+    <line x1="0" y1="420" x2="1200" y2="420" stroke-width="1"/>
+    <line x1="0" y1="480" x2="1200" y2="480" stroke-width="1"/>
+    <line x1="0" y1="540" x2="1200" y2="540" stroke-width="1"/>
+    <line x1="0" y1="600" x2="1200" y2="600" stroke-width="1"/>
+    <line x1="0" y1="660" x2="1200" y2="660" stroke-width="1"/>
+    <line x1="0" y1="720" x2="1200" y2="720" stroke-width="1"/>
+    <line x1="0" y1="780" x2="1200" y2="780" stroke-width="1"/>
+    <line x1="0" y1="840" x2="1200" y2="840" stroke-width="1"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="45" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="600">
+    feature-pilot パイプライン全体フロー（NEW_FEATURE / Tier L）
+  </text>
+  <text x="600" y="68" text-anchor="middle" fill="#60a5fa" font-size="13">
+    Hackathon Project — アーキテクチャ選定のタイミング
+  </text>
+  <line x1="200" y1="80" x2="1000" y2="80" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+
+  <!-- ============ Phase 0: 要求受付 ============ -->
+  <text x="40" y="120" fill="#94a3b8" font-size="11" font-weight="600" letter-spacing="2">PHASE 0</text>
+  <text x="40" y="135" fill="#475569" font-size="10">要求受付</text>
+
+  <!-- Step: ユーザー要求 -->
+  <rect x="130" y="100" width="180" height="48" rx="8" fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.6"/>
+  <rect x="130" y="100" width="180" height="48" rx="8" fill="#1e3a8a" fill-opacity="0.2"/>
+  <text x="220" y="120" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">ユーザー要求</text>
+  <text x="220" y="136" text-anchor="middle" fill="#60a5fa" font-size="9">作業タイプ自動判別</text>
+
+  <!-- Arrow -->
+  <line x1="310" y1="124" x2="370" y2="124" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#3b82f6" stroke-width="1.2"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="none" stroke="#10b981" stroke-width="1.2"/>
+    </marker>
+  </defs>
+
+  <!-- Tier判定 -->
+  <polygon points="440,95 510,124 440,153 370,124" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="440" y="120" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">Tier</text>
+  <text x="440" y="133" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="600">判定</text>
+
+  <!-- Tier Labels -->
+  <line x1="510" y1="108" x2="560" y2="108" stroke="#475569" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="565" y="102" fill="#475569" font-size="9">S: 5ステップ</text>
+  <text x="565" y="114" fill="#475569" font-size="9">M: 9ステップ</text>
+
+  <line x1="510" y1="138" x2="560" y2="138" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="565" y="135" fill="#fbbf24" font-size="10" font-weight="600">L/XL: 11ステップ</text>
+  <text x="565" y="148" fill="#d97706" font-size="9">← このフローを表示中</text>
+
+  <!-- ============ Phase 1: 計画 ============ -->
+  <text x="40" y="195" fill="#94a3b8" font-size="11" font-weight="600" letter-spacing="2">PHASE 1</text>
+  <text x="40" y="210" fill="#475569" font-size="10">計画策定</text>
+
+  <!-- Step 1: feature-architect -->
+  <rect x="130" y="180" width="220" height="55" rx="8" fill="none" stroke="url(#blueGrad)" stroke-width="1.5"/>
+  <rect x="130" y="180" width="220" height="55" rx="8" fill="#1e3a8a" fill-opacity="0.15"/>
+  <circle cx="148" cy="196" r="10" fill="url(#blueGrad)"/>
+  <text x="148" y="200" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">1</text>
+  <text x="255" y="200" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">feature-architect</text>
+  <text x="255" y="216" text-anchor="middle" fill="#60a5fa" font-size="9">CONTEXT.json + BRIEF.md 生成</text>
+  <text x="255" y="228" text-anchor="middle" fill="#475569" font-size="8">Model: Sonnet</text>
+
+  <!-- Arrow down -->
+  <line x1="240" y1="235" x2="240" y2="260" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- Step 2: constraints_load -->
+  <rect x="130" y="262" width="220" height="45" rx="8" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+  <rect x="130" y="262" width="220" height="45" rx="8" fill="#1e3a8a" fill-opacity="0.1"/>
+  <circle cx="148" cy="278" r="10" fill="url(#blueGrad)" opacity="0.7"/>
+  <text x="148" y="282" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">2</text>
+  <text x="255" y="280" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="600">constraints_load</text>
+  <text x="255" y="296" text-anchor="middle" fill="#60a5fa" font-size="9">Platform制約読み込み</text>
+
+  <!-- Arrow down -->
+  <line x1="240" y1="307" x2="240" y2="332" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowAmber)"/>
+
+  <!-- ============ Phase 2: Discovery (HIGHLIGHTED) ============ -->
+  <text x="40" y="355" fill="#fbbf24" font-size="11" font-weight="600" letter-spacing="2">PHASE 2</text>
+  <text x="40" y="370" fill="#d97706" font-size="10" font-weight="600">Discovery</text>
+  <text x="40" y="383" fill="#92400e" font-size="9">★ Tier L/XL のみ</text>
+
+  <!-- discovery_full highlight box -->
+  <rect x="120" y="334" width="900" height="160" rx="12" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,3" filter="url(#archGlow)"/>
+  <rect x="120" y="334" width="900" height="160" rx="12" fill="#f59e0b" fill-opacity="0.04"/>
+  <text x="135" y="354" fill="#fbbf24" font-size="11" font-weight="600">Step 3: discovery_full</text>
+  <text x="135" y="368" fill="#d97706" font-size="9">Tier L/XL 専用 — 3つの設計スキルが連携実行</text>
+
+  <!-- Sub-step: domain-modeler -->
+  <rect x="150" y="380" width="240" height="55" rx="8" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="150" y="380" width="240" height="55" rx="8" fill="#7c3aed" fill-opacity="0.1"/>
+  <text x="168" y="400" fill="#a78bfa" font-size="10" font-weight="600">3a</text>
+  <text x="270" y="400" text-anchor="middle" fill="#c4b5fd" font-size="12" font-weight="600">domain-modeler</text>
+  <text x="270" y="416" text-anchor="middle" fill="#a78bfa" font-size="9">DDD戦略パターン + Event Storming</text>
+  <text x="270" y="428" text-anchor="middle" fill="#7c3aed" font-size="8">出力: DOMAIN-MODEL.md | Model: Sonnet</text>
+
+  <!-- Arrow right -->
+  <line x1="390" y1="407" x2="430" y2="407" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowAmber)"/>
+
+  <!-- Sub-step: architecture-selector (MAIN HIGHLIGHT) -->
+  <rect x="432" y="374" width="270" height="68" rx="10" fill="none" stroke="#f59e0b" stroke-width="2.5" filter="url(#archGlow)"/>
+  <rect x="432" y="374" width="270" height="68" rx="10" fill="#f59e0b" fill-opacity="0.12"/>
+  <!-- Star icon -->
+  <text x="450" y="398" fill="#fbbf24" font-size="16">★</text>
+  <text x="470" y="398" fill="#fbbf24" font-size="10" font-weight="600">3b</text>
+  <text x="570" y="398" text-anchor="middle" fill="#fde68a" font-size="14" font-weight="700">architecture-selector</text>
+  <text x="570" y="414" text-anchor="middle" fill="#fbbf24" font-size="9">ATAM Lite評価 + ADR生成</text>
+  <text x="570" y="428" text-anchor="middle" fill="#d97706" font-size="8">出力: ADR-&lt;id&gt;.md | Model: Opus</text>
+  <text x="570" y="440" text-anchor="middle" fill="#92400e" font-size="7">3案以上比較 → トレードオフ分析</text>
+
+  <!-- Arrow right -->
+  <line x1="702" y1="407" x2="742" y2="407" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowAmber)"/>
+
+  <!-- Sub-step: system-designer -->
+  <rect x="744" y="380" width="250" height="55" rx="8" fill="none" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="744" y="380" width="250" height="55" rx="8" fill="#7c3aed" fill-opacity="0.1"/>
+  <text x="762" y="400" fill="#a78bfa" font-size="10" font-weight="600">3c</text>
+  <text x="870" y="400" text-anchor="middle" fill="#c4b5fd" font-size="12" font-weight="600">system-designer</text>
+  <text x="870" y="416" text-anchor="middle" fill="#a78bfa" font-size="9">C4モデル Level 1 + 2</text>
+  <text x="870" y="428" text-anchor="middle" fill="#7c3aed" font-size="8">出力: SYSTEM-DESIGN.md | Model: Sonnet</text>
+
+  <!-- Input labels -->
+  <text x="170" y="478" fill="#64748b" font-size="8">入力: BRIEF.md</text>
+  <text x="460" y="478" fill="#92400e" font-size="8">入力: BRIEF.md + DOMAIN-MODEL.md</text>
+  <text x="770" y="478" fill="#64748b" font-size="8">入力: ADR + DOMAIN-MODEL</text>
+
+  <!-- ============ Phase 3: 仕様 ============ -->
+  <text x="40" y="520" fill="#94a3b8" font-size="11" font-weight="600" letter-spacing="2">PHASE 3</text>
+  <text x="40" y="535" fill="#475569" font-size="10">仕様策定</text>
+
+  <!-- Arrow down from discovery -->
+  <line x1="240" y1="494" x2="240" y2="510" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- Step 4: spec -->
+  <rect x="130" y="510" width="220" height="48" rx="8" fill="none" stroke="url(#blueGrad)" stroke-width="1.5"/>
+  <rect x="130" y="510" width="220" height="48" rx="8" fill="#1e3a8a" fill-opacity="0.15"/>
+  <circle cx="148" cy="526" r="10" fill="url(#blueGrad)"/>
+  <text x="148" y="530" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">4</text>
+  <text x="255" y="530" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">feature-spec-generator</text>
+  <text x="255" y="546" text-anchor="middle" fill="#60a5fa" font-size="9">SPEC.md + screens/ 生成</text>
+
+  <!-- Step 5: ui-approval -->
+  <line x1="350" y1="534" x2="410" y2="534" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <rect x="410" y="510" width="210" height="48" rx="8" fill="none" stroke="url(#blueGrad)" stroke-width="1.5"/>
+  <rect x="410" y="510" width="210" height="48" rx="8" fill="#1e3a8a" fill-opacity="0.15"/>
+  <circle cx="428" cy="526" r="10" fill="url(#blueGrad)"/>
+  <text x="428" y="530" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">5</text>
+  <text x="530" y="530" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="600">ui-approval-gate</text>
+  <text x="530" y="546" text-anchor="middle" fill="#60a5fa" font-size="9">ワイヤーフレーム承認</text>
+
+  <!-- Step 6: readiness gate -->
+  <line x1="620" y1="534" x2="680" y2="534" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+  <rect x="680" y="510" width="210" height="48" rx="8" fill="none" stroke="url(#redGrad)" stroke-width="1.5"/>
+  <rect x="680" y="510" width="210" height="48" rx="8" fill="#dc2626" fill-opacity="0.1"/>
+  <circle cx="698" cy="526" r="10" fill="url(#redGrad)"/>
+  <text x="698" y="530" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">6</text>
+  <text x="800" y="530" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="600">Readiness Gate</text>
+  <text x="800" y="546" text-anchor="middle" fill="#f87171" font-size="9">5 Phase Go/No-Go 検証</text>
+
+  <!-- ============ Phase 4: 実装 ============ -->
+  <text x="40" y="600" fill="#94a3b8" font-size="11" font-weight="600" letter-spacing="2">PHASE 4</text>
+  <text x="40" y="615" fill="#475569" font-size="10">実装</text>
+
+  <!-- Arrow down -->
+  <line x1="785" y1="558" x2="785" y2="580" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <text x="795" y="575" fill="#10b981" font-size="8">Go!</text>
+
+  <!-- Step 7: implement -->
+  <rect x="130" y="585" width="220" height="48" rx="8" fill="none" stroke="url(#greenGrad)" stroke-width="1.5"/>
+  <rect x="130" y="585" width="220" height="48" rx="8" fill="#059669" fill-opacity="0.1"/>
+  <circle cx="148" cy="601" r="10" fill="url(#greenGrad)"/>
+  <text x="148" y="605" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">7</text>
+  <text x="255" y="601" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="600">feature-implementer</text>
+  <text x="255" y="620" text-anchor="middle" fill="#34d399" font-size="9">TDD実装 (Red→Green→Refactor)</text>
+
+  <!-- Step 8: wiring -->
+  <line x1="350" y1="609" x2="410" y2="609" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <rect x="410" y="585" width="210" height="48" rx="8" fill="none" stroke="url(#greenGrad)" stroke-width="1.5"/>
+  <rect x="410" y="585" width="210" height="48" rx="8" fill="#059669" fill-opacity="0.1"/>
+  <circle cx="428" cy="601" r="10" fill="url(#greenGrad)"/>
+  <text x="428" y="605" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">8</text>
+  <text x="530" y="601" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="600">feature-wiring</text>
+  <text x="530" y="620" text-anchor="middle" fill="#34d399" font-size="9">統合連動検証</text>
+
+  <!-- Step 9: quality gate -->
+  <line x1="620" y1="609" x2="680" y2="609" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <rect x="680" y="585" width="210" height="48" rx="8" fill="none" stroke="url(#greenGrad)" stroke-width="1.5"/>
+  <rect x="680" y="585" width="210" height="48" rx="8" fill="#059669" fill-opacity="0.1"/>
+  <circle cx="698" cy="601" r="10" fill="url(#greenGrad)"/>
+  <text x="698" y="605" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">9</text>
+  <text x="800" y="601" text-anchor="middle" fill="#6ee7b7" font-size="12" font-weight="600">pre-quality-gate</text>
+  <text x="800" y="620" text-anchor="middle" fill="#34d399" font-size="9">lint / test / arch検査</text>
+
+  <!-- ============ Phase 5: 完了 ============ -->
+  <text x="40" y="675" fill="#94a3b8" font-size="11" font-weight="600" letter-spacing="2">PHASE 5</text>
+  <text x="40" y="690" fill="#475569" font-size="10">完了処理</text>
+
+  <!-- Arrow down -->
+  <line x1="240" y1="633" x2="240" y2="660" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- Step 10: status sync -->
+  <rect x="130" y="660" width="220" height="45" rx="8" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.6"/>
+  <rect x="130" y="660" width="220" height="45" rx="8" fill="#1e3a8a" fill-opacity="0.1"/>
+  <circle cx="148" cy="676" r="10" fill="url(#blueGrad)" opacity="0.7"/>
+  <text x="148" y="680" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">10</text>
+  <text x="255" y="678" text-anchor="middle" fill="#93c5fd" font-size="11">feature-status-sync</text>
+  <text x="255" y="694" text-anchor="middle" fill="#60a5fa" font-size="9">index.md 状態同期</text>
+
+  <!-- Step 11: priority -->
+  <line x1="350" y1="682" x2="410" y2="682" stroke="#3b82f6" stroke-width="1" opacity="0.6" marker-end="url(#arrowBlue)"/>
+  <rect x="410" y="660" width="210" height="45" rx="8" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.6"/>
+  <rect x="410" y="660" width="210" height="45" rx="8" fill="#1e3a8a" fill-opacity="0.1"/>
+  <circle cx="428" cy="676" r="10" fill="url(#blueGrad)" opacity="0.7"/>
+  <text x="428" y="680" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">11</text>
+  <text x="530" y="678" text-anchor="middle" fill="#93c5fd" font-size="11">priority-analyzer</text>
+  <text x="530" y="694" text-anchor="middle" fill="#60a5fa" font-size="9">RICE優先順位再計算</text>
+
+  <!-- Done -->
+  <line x1="620" y1="682" x2="680" y2="682" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <rect x="680" y="660" width="120" height="45" rx="22" fill="url(#greenGrad)" fill-opacity="0.8"/>
+  <text x="740" y="687" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Done</text>
+
+  <!-- ============ Legend ============ -->
+  <rect x="40" y="740" width="1120" height="130" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+
+  <text x="60" y="768" fill="#94a3b8" font-size="12" font-weight="600">凡例</text>
+
+  <!-- Legend items -->
+  <rect x="60" y="785" width="16" height="16" rx="3" fill="#1e3a8a" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="84" y="797" fill="#93c5fd" font-size="10">計画・仕様フェーズ</text>
+
+  <rect x="60" y="812" width="16" height="16" rx="3" fill="#f59e0b" fill-opacity="0.12" stroke="#f59e0b" stroke-width="2"/>
+  <text x="84" y="824" fill="#fbbf24" font-size="10" font-weight="600">★ アーキテクチャ選定 (Tier L/XL のみ)</text>
+
+  <rect x="60" y="839" width="16" height="16" rx="3" fill="#059669" fill-opacity="0.1" stroke="#10b981" stroke-width="1.5"/>
+  <text x="84" y="851" fill="#6ee7b7" font-size="10">実装フェーズ</text>
+
+  <rect x="370" y="785" width="16" height="16" rx="3" fill="#dc2626" fill-opacity="0.1" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="394" y="797" fill="#fca5a5" font-size="10">品質ゲート（Go/No-Go判定）</text>
+
+  <rect x="370" y="812" width="16" height="16" rx="3" fill="#7c3aed" fill-opacity="0.1" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="394" y="824" fill="#c4b5fd" font-size="10">設計サブスキル（discovery_full 内）</text>
+
+  <!-- Model routing -->
+  <text x="700" y="768" fill="#94a3b8" font-size="12" font-weight="600">モデルルーティング</text>
+  <circle cx="710" cy="792" r="6" fill="#3b82f6"/>
+  <text x="724" y="796" fill="#93c5fd" font-size="10">Haiku — コンテキスト収集</text>
+  <circle cx="710" cy="815" r="6" fill="#10b981"/>
+  <text x="724" y="819" fill="#6ee7b7" font-size="10">Sonnet — SPEC生成・実装</text>
+  <circle cx="710" cy="838" r="6" fill="#f59e0b"/>
+  <text x="724" y="842" fill="#fbbf24" font-size="10" font-weight="600">Opus — アーキテクチャ選定</text>
+  <text x="724" y="856" fill="#d97706" font-size="8">（最も高コストのモデルを使用）</text>
+</svg>

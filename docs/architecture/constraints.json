@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hackathon-project/schemas/architecture-constraints.json",
+  "title": "Web Project Template - Platform Architecture Constraints",
+  "description": "Machine-readable constraint contract derived from Platform Architecture Decision Records (PADR-001 through PADR-006)",
+  "schema_version": "1.0.0",
+  "generated_from": "docs/architecture/adr/PADR-*.md",
+  "last_updated": "2026-02-11T00:00:00+09:00",
+  "project": {
+    "name": "Web Project Template",
+    "platform": "Web (React/Next.js)",
+    "architecture": "Feature-First + Simplified Clean Architecture"
+  },
+  "tech_stack": {
+    "frontend": {
+      "framework": "Next.js",
+      "version": ">=14.0.0",
+      "language": "TypeScript"
+    },
+    "state_management": {
+      "library": "React hooks + Context",
+      "pattern": "Custom hooks"
+    },
+    "data_model": {
+      "library": "Zod + TypeScript interfaces",
+      "pattern": "Immutable by convention"
+    },
+    "backend": {
+      "platform": "To be configured",
+      "note": "Template - configure per project"
+    }
+  },
+  "deviation_policy": {
+    "allowed": true,
+    "requirements": [
+      "Feature ADR justification required",
+      "ATAM Lite evaluation required",
+      "Document tradeoffs and alternatives"
+    ]
+  },
+  "constraints": [
+    {
+      "id": "PC-001",
+      "source_padr": "PADR-001",
+      "category": "architecture",
+      "rule": "Feature-First + Clean Architecture",
+      "description": "Feature-First folder structure with simplified Clean Architecture layers (presentation, domain, data)",
+      "must": [
+        "Organize code by feature, not by layer",
+        "Use barrel files (index.ts) for feature exports",
+        "Follow dependency direction: presentation → domain → data",
+        "Allow feature → core dependencies",
+        "Allow feature → shared dependencies",
+        "Allow feature → feature through barrel files only",
+        "Separate concerns into presentation/domain/data layers",
+        "Keep domain layer framework-agnostic"
+      ],
+      "must_not": [
+        "Allow core → feature dependencies",
+        "Allow direct feature internal imports (bypass barrel files)",
+        "Allow circular dependencies (A → B → A)",
+        "Mix presentation logic with domain logic",
+        "Put framework-specific code in domain layer"
+      ],
+      "applies_to": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts"],
+      "override_allowed": false,
+      "enforcement": "critical"
+    },
+    {
+      "id": "PC-002",
+      "source_padr": "PADR-002",
+      "category": "state_management",
+      "rule": "React Hooks State Management",
+      "description": "Use React hooks (useState, useEffect, useCallback, useMemo) with custom hooks pattern for state management",
+      "must": [
+        "Use custom hooks for complex state logic",
+        "Use useEffect for side effects with proper cleanup",
+        "Use useCallback for memoized callbacks",
+        "Use useMemo for expensive computations",
+        "Handle async state properly with loading/error states",
+        "Keep hooks focused and single-responsibility",
+        "Follow React hooks rules (top-level, no conditionals)"
+      ],
+      "must_not": [
+        "Directly manipulate DOM outside React",
+        "Create global mutable state outside React context",
+        "Ignore error states in async operations",
+        "Use inline functions without useCallback in dependencies",
+        "Mutate state directly (use immutable updates)"
+      ],
+      "applies_to": ["src/**/*.tsx", "src/**/*.ts"],
+      "override_allowed": false,
+      "enforcement": "critical"
+    },
+    {
+      "id": "PC-003",
+      "source_padr": "PADR-003",
+      "category": "backend",
+      "rule": "API Security Best Practices",
+      "description": "Follow security best practices for API integration and data handling",
+      "must": [
+        "Validate all user inputs with Zod or similar",
+        "Use environment variables for API keys and secrets",
+        "Implement proper authentication middleware",
+        "Use parameterized queries to prevent injection",
+        "Implement proper error handling in API routes",
+        "Store sensitive credentials in environment variables only",
+        "Use HTTPS for all API communications"
+      ],
+      "must_not": [
+        "Hardcode API credentials in source code",
+        "Execute unsanitized user input",
+        "Store secrets in source code or git",
+        "Trust client-side validation alone",
+        "Expose internal implementation details in errors"
+      ],
+      "applies_to": ["src/**/*.ts", "src/api/**/*", "src/features/**/api/**/*"],
+      "override_allowed": false,
+      "enforcement": "critical"
+    },
+    {
+      "id": "PC-004",
+      "source_padr": "PADR-004",
+      "category": "data_model",
+      "rule": "TypeScript Immutable Data Patterns",
+      "description": "Use TypeScript interfaces with Readonly types and Zod schemas for data validation",
+      "must": [
+        "Define data models as TypeScript interfaces",
+        "Use Readonly<T> or readonly modifiers for immutable data",
+        "Use Zod schemas for runtime validation",
+        "Use spread operator for state updates",
+        "Implement proper type guards for validation",
+        "Use const assertions for literal types"
+      ],
+      "must_not": [
+        "Mutate object properties directly",
+        "Use 'any' type without justification",
+        "Skip runtime validation for external data",
+        "Use non-null assertions (!) without null checks",
+        "Create deeply nested mutable structures"
+      ],
+      "applies_to": ["src/**/*.ts", "src/features/**/types/**/*"],
+      "override_allowed": false,
+      "enforcement": "critical"
+    },
+    {
+      "id": "PC-006",
+      "source_padr": "PADR-006",
+      "category": "documentation",
+      "rule": "CONTEXT.json SSOT",
+      "description": "CONTEXT.json as single source of truth for development context state machine",
+      "must": [
+        "Reference CONTEXT.json for current development state",
+        "Update CONTEXT.json when switching tasks/features",
+        "Follow state machine transitions defined in schema",
+        "Document active feature, priority, and blockers",
+        "Keep CONTEXT.json in sync with actual development state"
+      ],
+      "must_not": [
+        "Maintain parallel state tracking systems",
+        "Skip CONTEXT.json updates during task switches",
+        "Ignore CONTEXT.json state in AI agent decisions"
+      ],
+      "applies_to": ["CONTEXT.json"],
+      "override_allowed": false,
+      "enforcement": "medium"
+    },
+    {
+      "id": "PC-007",
+      "source_padr": "PADR-001, PADR-002, PADR-004",
+      "category": "code_quality",
+      "rule": "Quality Enforcement",
+      "description": "Mandatory code quality checks and practices",
+      "must": [
+        "Run 'npm run lint' before commits (0 errors required)",
+        "Write unit tests for new features with jest/vitest",
+        "Use try-catch with proper logging for error handling",
+        "Add JSDoc comments (/** */) for public APIs",
+        "Use optional chaining (?.) and nullish coalescing (??)",
+        "Follow fail-fast principle for invalid input/state"
+      ],
+      "must_not": [
+        "Use console.log() for logging (use proper logger)",
+        "Ignore errors with empty catch blocks",
+        "Use non-null assertion (!) without checks",
+        "Allow silent failures",
+        "Skip tests for bug fixes",
+        "Commit code with lint errors"
+      ],
+      "applies_to": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts"],
+      "override_allowed": false,
+      "enforcement": "critical"
+    },
+    {
+      "id": "PC-008",
+      "source_padr": "PADR-003",
+      "category": "security",
+      "rule": "Security Best Practices",
+      "description": "Security requirements for data protection and authentication",
+      "must": [
+        "Validate all user inputs with Zod or similar",
+        "Use environment variables for secrets",
+        "Implement proper authentication checks",
+        "Sanitize data before operations",
+        "Follow principle of least privilege",
+        "Use HTTPS for all external communications"
+      ],
+      "must_not": [
+        "Store secrets in source code",
+        "Commit .env files to git",
+        "Trust client-side validation alone",
+        "Expose internal IDs without authorization",
+        "Use weak or predictable tokens"
+      ],
+      "applies_to": ["src/**/*.ts", "src/**/*.tsx"],
+      "override_allowed": false,
+      "enforcement": "critical"
+    }
+  ],
+  "validation_rules": {
+    "pre_commit": [
+      "npm run lint",
+      "Check for hardcoded UI strings (use MESSAGES constant)",
+      "Verify no .env files in staged changes"
+    ],
+    "pre_push": ["npm test", "npm run build"],
+    "pre_merge": ["All tests passing", "Code review approved", "Documentation updated"]
+  },
+  "evidence_freshness": {
+    "lint_analyze": {
+      "valid_for": "30 minutes",
+      "invalidate_on": "src/**/* changes"
+    },
+    "test": {
+      "valid_for": "30 minutes",
+      "invalidate_on": "tests/**/* or src/**/* changes"
+    },
+    "security_scan": {
+      "valid_for": "1 hour",
+      "invalidate_on": ".env* changes"
+    },
+    "build": {
+      "valid_for": "1 hour",
+      "invalidate_on": "src/**/* or package.json changes"
+    }
+  }
+}

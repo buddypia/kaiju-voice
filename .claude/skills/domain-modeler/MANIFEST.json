@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "skill_id": "domain-modeler",
+  "skill_version": "1.0.0",
+  "tier": 2,
+  "tier_description": "Pipeline - Phase 0 Domain Modeling (DDD Strategic + Event Storming Lite)",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "codebase_scan": "haiku",
+      "domain_analysis": "sonnet",
+      "event_storming": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "note": "DOMAIN-MODEL.md 生成は毎回 BRIEF.md からの fresh 分析が必要。キャッシュ不要"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["domain model", "ドメインモデル", "DDD", "bounded context"],
+    "args_pattern": "--feature-id <feature_id> [--lightweight]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": ["feature-pilot"],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/features/<id>-<name>/DOMAIN-MODEL.md",
+      "description": "ドメインモデル文書（BC識別、用語集、イベントフロー）"
+    }
+  ],
+  "state_transitions": {
+    "context_json_field": "architecture.domain_model",
+    "note": "feature-architectがCONTEXT.jsonのarchitectureセクションを更新する（Option B原則）"
+  },
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "Phase 0 Discovery & Architecture パイプライン初期実装"
+    }
+  ]
+}

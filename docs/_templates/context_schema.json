@@ -1,0 +1,872 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "context_schema.json",
+  "title": "Feature Context Schema",
+  "description": "Hackathon Project プロジェクトの機能開発統合コンテキストスキーマ。AI が CONTEXT.json を生成/修正する際に参照する規則定義。",
+
+  "type": "object",
+  "required": [
+    "schema_version",
+    "feature_id",
+    "title",
+    "quick_resume",
+    "why",
+    "artifacts",
+    "brief_context",
+    "traceability",
+    "execution",
+    "decisions",
+    "history",
+    "autonomy_control",
+    "progress"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "enum": [5, 6, 7],
+      "description": "スキーマバージョン。v5: 必須 13 個, progress.details object-only, competitive_data 追加, artifacts.brief_format_version 追加。 v6: architecture セクション追加 (Phase 0 Discovery & Architecture)。 v7: completion_contract セクション追加 (3 層 DoD システム)"
+    },
+
+    "feature_id": {
+      "type": "string",
+      "pattern": "^[0-9]{3}-[a-z0-9-]+$",
+      "description": "機能 ID (例: 029-vocabulary-book)"
+    },
+
+    "title": {
+      "type": "string",
+      "minLength": 2,
+      "description": "機能の韓国語タイトル"
+    },
+
+    "feature_type": {
+      "type": "string",
+      "enum": ["ui_feature", "backend_feature", "system_feature", "strategy_feature"],
+      "description": "機能の種類分類。 ui_feature: ユーザー対面画面を保有 (screens/ 必須), backend_feature: サーバーロジック専用 (Edge Function, DB), system_feature: インフラ/プラットフォーム (オフライン, プッシュ), strategy_feature: ビジネス戦略 (UA, リテンション)。 feature-architect が CONTEXT を生成する際には必ず設定。"
+    },
+
+    "archived_reason": {
+      "type": "string",
+      "enum": ["merged", "superseded", "deferred", "abandoned", "duplicate"],
+      "description": "Archived 状態の理由 (current_stateが Archived の時のみ有効). merged: 他の機能に統合, superseded: 新しい機能で代替, deferred: 無期限保留, abandoned: 廃棄, duplicate: 重複"
+    },
+
+    "archived_ref": {
+      "type": "string",
+      "pattern": "^[0-9]{3}-[a-z0-9-]+$",
+      "description": "統合/代替された対象 Feature ID (archived_reasonが merged または superseded の時必須)"
+    },
+
+    "quick_resume": {
+      "type": "object",
+      "description": "セッション再開時 3秒以内の状況把握用",
+      "required": ["current_state", "current_task", "next_actions", "last_updated_at"],
+      "properties": {
+        "current_state": {
+          "type": "string",
+          "enum": [
+            "Idle",
+            "Discovery",
+            "Briefing",
+            "SpecDrafting",
+            "SpecUpdating",
+            "Implementing",
+            "BugFixing",
+            "SyncingStatus",
+            "Reviewing",
+            "Done",
+            "Blocked",
+            "AwaitingUser",
+            "Failed",
+            "SpecApproved",
+            "Archived"
+          ],
+          "description": "現在の状態マシン状態. AwaitingUser: ユーザーの応答待ち, Failed: 復旧不可能な失敗, SpecApproved: SPEC承認後の実装待ち, Archived: 保留/廃棄"
+        },
+        "current_task": {
+          "type": "string",
+          "description": "現在進行中の作業 (1文)"
+        },
+        "next_actions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "次に行う作業リスト (2-3個)"
+        },
+        "blockers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "進行を妨げる障害物 (Blocked 状態の時)"
+        },
+        "last_updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "最終更新時間 (ISO 8601)"
+        },
+        "last_decision": {
+          "type": "object",
+          "description": "最も最近の決定 (迅速なコンテキスト復元用)",
+          "properties": {
+            "summary": { "type": "string" },
+            "at": { "type": "string", "format": "date-time" }
+          }
+        },
+        "current_rationale": {
+          "type": "string",
+          "description": "現在の作業を行う理由 (判断根拠)"
+        },
+        "active_constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "現在適用中の制約条件 (CLAUDE.mdから抜粋)"
+        },
+        "previous_state": {
+          "type": ["string", "null"],
+          "description": "以前の状態 (Blocked/AwaitingUserから復旧時の参照)"
+        },
+        "question_count": {
+          "type": "integer",
+          "default": 0,
+          "description": "現在セッションでユーザーにした質問数 (7文上限ルール)"
+        }
+      }
+    },
+
+    "progress": {
+      "type": "object",
+      "description": "FR ベースの進捗率",
+      "properties": {
+        "percentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "進捗率 (0-100)"
+        },
+        "fr_total": {
+          "type": "integer",
+          "description": "全体 FR 数"
+        },
+        "fr_completed": {
+          "type": "integer",
+          "description": "完了した FR 数"
+        },
+        "fr_in_progress": {
+          "type": "integer",
+          "description": "進行中の FR 数"
+        },
+        "details": {
+          "type": "object",
+          "description": "FR ごとの詳細状態. v5 では object 形式のみ許可 (string 禁止).",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["status"],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": ["not_started", "pending", "in_progress", "partial", "completed"]
+              },
+              "weight": {
+                "type": "number",
+                "default": 1
+              },
+              "files": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+
+    "why": {
+      "type": "string",
+      "minLength": 10,
+      "description": "この機能が必要な理由 (コンテキスト喪失防止の核心)"
+    },
+
+    "success_criteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "成功条件リスト"
+    },
+
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "制約条件 (技術的/ビジネス)"
+    },
+
+    "artifacts": {
+      "type": "object",
+      "description": "生成された成果物のパス",
+      "properties": {
+        "brief": {
+          "type": ["string", "null"],
+          "description": "BRIEF.md パス. feature-architect が生成. 例: docs/features/029-vocabulary-book/BRIEF.md"
+        },
+        "brief_format_version": {
+          "type": ["string", "null"],
+          "enum": ["v2.0", "auto-migrated", "candidate-derived", "legacy", null],
+          "description": "BRIEF.md フォーマットバージョン. v2.0: Template v2.0 準拠, auto-migrated: 自動マイグレーション, candidate-derived: 候補からの転換, legacy: 古いフォーマット"
+        },
+        "spec": { "type": ["string", "null"] },
+        "spec_version": {
+          "type": ["string", "null"],
+          "description": "SPEC バージョン (例: v1.0, v1.1)"
+        },
+        "spec_locked_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "SPEC バージョン固定時点 (Readiness Gate Go 時点)"
+        },
+        "spec_validation": {
+          "type": ["object", "null"],
+          "description": "SPEC 機械検証結果",
+          "properties": {
+            "last_run_at": { "type": ["string", "null"], "format": "date-time" },
+            "verdict": {
+              "type": ["string", "null"],
+              "enum": ["Go", "Conditional Go", "No-Go", null]
+            },
+            "blocking_count": { "type": "integer" },
+            "warning_count": { "type": "integer" }
+          }
+        },
+        "screens": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "design_assets": {
+          "type": ["object", "null"],
+          "description": "Optional. Figma Export などデザインアセット. design/ ディレクトリにファイルがある時のみ記入. SSOT は Screen Doc で、デザインアセットは視覚参考用.",
+          "properties": {
+            "directory": {
+              "type": ["string", "null"],
+              "description": "デザインアセットディレクトリパス (例: docs/features/025-authentication-flow/design/)"
+            },
+            "files": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "デザインアセットファイルリスト (例: [\"code.html\", \"screen.png\"])"
+            }
+          }
+        },
+        "index": { "type": ["string", "null"] }
+      }
+    },
+
+    "references": {
+      "type": "object",
+      "description": "参照文書およびコード (既存 context_manifest 役割)",
+      "properties": {
+        "priority_order": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["spec", "screens", "brief"]
+        },
+        "current_focus": {
+          "type": "object",
+          "properties": {
+            "document": { "type": "string" },
+            "section": { "type": "string" },
+            "reason": { "type": "string" }
+          }
+        },
+        "documents": {
+          "type": "object",
+          "description": "参照文書詳細 (spec, screens, brief パスおよびフォーカス)",
+          "properties": {
+            "spec": {
+              "type": "object",
+              "properties": {
+                "path": { "type": "string" },
+                "sections_to_read": { "type": "array", "items": { "type": "string" } },
+                "focus": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "screens": {
+              "type": "object",
+              "properties": {
+                "paths": { "type": "array", "items": { "type": "string" } },
+                "focus": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "brief": {
+              "type": "object",
+              "properties": {
+                "path": { "type": "string" },
+                "sections_to_read": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        },
+        "related_specs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "related_code": {
+          "type": "object",
+          "description": "関連コードファイルパス",
+          "properties": {
+            "feature_path": {
+              "type": ["string", "null"],
+              "description": "機能コードルートパス (例: lib/features/auth/)"
+            },
+            "barrel_file": { "type": ["string", "null"], "description": "バレルファイルパス" },
+            "di_providers": {
+              "type": ["string", "null"],
+              "description": "DI プロバイダファイルパス"
+            },
+            "models": { "type": "array", "items": { "type": "string" } },
+            "repositories": { "type": "array", "items": { "type": "string" } },
+            "viewmodels": { "type": "array", "items": { "type": "string" } },
+            "services": { "type": "array", "items": { "type": "string" } },
+            "pages": { "type": "array", "items": { "type": "string" } },
+            "widgets": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "db_tables": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "edge_functions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "dependencies": {
+          "type": "object",
+          "properties": {
+            "features": { "type": "array", "items": { "type": "string" } },
+            "packages": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "research_links": {
+          "type": "object",
+          "properties": {
+            "research_ids": { "type": "array", "items": { "type": "string" } },
+            "id_format": { "type": "string" },
+            "comp_ids": {
+              "type": "array",
+              "items": { "type": "string", "pattern": "^comp-[0-9]{3}$" },
+              "description": "関連する競合分析 ID リスト (gap-candidates.json 参照)"
+            }
+          }
+        }
+      }
+    },
+
+    "competitive_data": {
+      "type": ["object", "null"],
+      "description": "競合分析データ (gap-candidates + competitor-registry から抽出)",
+      "properties": {
+        "comp_ids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^comp-[0-9]{3}$" }
+        },
+        "gap_severity": {
+          "type": ["string", "null"],
+          "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW", "N/A", null]
+        },
+        "is_industry_standard": {
+          "type": "boolean",
+          "default": false
+        },
+        "app_count": {
+          "type": "integer",
+          "default": 0
+        },
+        "linked_at": {
+          "type": ["string", "null"],
+          "format": "date-time"
+        }
+      }
+    },
+
+    "architecture": {
+      "type": ["object", "null"],
+      "description": "Phase 0 Discovery & Architecture 成果物 (v6 新規). domain-modeler, architecture-selector, system-designer が生成した成果物パスおよび概要. feature-architect が Step 1 で null に初期化し、Step 1.5 Discovery Gate 通過後 feature-pilot が更新. Tier S(Phase 0 スキップ) 時 全体 null 維持.",
+      "properties": {
+        "domain_model": {
+          "type": ["object", "null"],
+          "description": "domain-modeler 成果物",
+          "properties": {
+            "path": {
+              "type": ["string", "null"],
+              "description": "DOMAIN-MODEL.md ファイルパス"
+            },
+            "bounded_contexts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "識別された Bounded Context リスト"
+            },
+            "ubiquitous_language_count": {
+              "type": "integer",
+              "description": "定義されたユビキタス言語用語数"
+            },
+            "generated_at": {
+              "type": ["string", "null"],
+              "format": "date-time"
+            }
+          }
+        },
+        "adr": {
+          "type": ["object", "null"],
+          "description": "architecture-selector 成果物",
+          "properties": {
+            "path": {
+              "type": ["string", "null"],
+              "description": "ADR ドキュメントファイルパス"
+            },
+            "decision_title": {
+              "type": ["string", "null"],
+              "description": "アーキテクチャ決定タイトル"
+            },
+            "chosen_option": {
+              "type": ["string", "null"],
+              "description": "選択されたアーキテクチャオプション"
+            },
+            "alternatives_count": {
+              "type": "integer",
+              "description": "検討された代替数 (最小 3)"
+            },
+            "generated_at": {
+              "type": ["string", "null"],
+              "format": "date-time"
+            }
+          }
+        },
+        "system_design": {
+          "type": ["object", "null"],
+          "description": "system-designer 成果物",
+          "properties": {
+            "path": {
+              "type": ["string", "null"],
+              "description": "SYSTEM-DESIGN.md ファイルパス"
+            },
+            "c4_levels": {
+              "type": "array",
+              "items": { "type": "string", "enum": ["L1-Context", "L2-Container"] },
+              "description": "生成された C4 ダイアグラムレベル"
+            },
+            "external_systems": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "識別された外部システムリスト"
+            },
+            "generated_at": {
+              "type": ["string", "null"],
+              "format": "date-time"
+            }
+          }
+        },
+        "discovery_gate": {
+          "type": ["object", "null"],
+          "description": "Discovery Gate 検証結果",
+          "properties": {
+            "verdict": {
+              "type": ["string", "null"],
+              "enum": ["Go", "Conditional Go", "No-Go", null]
+            },
+            "verified_at": {
+              "type": ["string", "null"],
+              "format": "date-time"
+            },
+            "blocking_count": {
+              "type": "integer",
+              "default": 0
+            },
+            "warning_count": {
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "tier_applied": {
+          "type": ["string", "null"],
+          "enum": ["S", "M", "L", "XL", null],
+          "description": "適用された Phase 0 Tier (S: 前スキップ, M: domain-modelerのみ, L: domain+architecture, XL: 全体)"
+        }
+      }
+    },
+
+    "execution": {
+      "type": "object",
+      "description": "実行状態",
+      "properties": {
+        "lock": {
+          "type": "object",
+          "properties": {
+            "locked": { "type": "boolean" },
+            "locked_by": { "type": ["string", "null"] },
+            "locked_at": { "type": ["string", "null"] },
+            "lock_expires_at": {
+              "type": ["string", "null"],
+              "format": "date-time",
+              "description": "ロック期限時間。 locked_at + 30分。この時間以降のロックは古くなったと見なす"
+            }
+          }
+        },
+        "active_branch": { "type": ["string", "null"] },
+        "rollback_point": { "type": ["string", "null"] }
+      }
+    },
+
+    "decisions": {
+      "type": "array",
+      "description": "決定履歴",
+      "items": {
+        "type": "object",
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "summary": { "type": "string" },
+          "rationale": { "type": "string" }
+        }
+      }
+    },
+
+    "open_questions": {
+      "type": "array",
+      "description": "未解決の質問",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "question": { "type": "string" },
+          "status": { "type": "string", "enum": ["open", "resolved"] },
+          "type": { "type": "string", "enum": ["question", "assumption", "risk"] },
+          "impact": { "type": "string" },
+          "resolution": { "type": ["string", "null"] }
+        }
+      }
+    },
+
+    "history": {
+      "type": "array",
+      "description": "状態遷移履歴",
+      "items": {
+        "type": "object",
+        "required": ["at", "from_state", "to_state", "triggered_by"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "from_state": { "type": ["string", "null"] },
+          "to_state": { "type": "string" },
+          "triggered_by": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+
+    "autonomy_control": {
+      "type": "object",
+      "description": "AI 自律性制御 (7文上限ルール、自律停止条件)",
+      "properties": {
+        "max_questions_per_session": {
+          "type": "integer",
+          "default": 7,
+          "description": "セッションあたり最大質問数 (超過時 AwaitingUser 遷移)"
+        },
+        "auto_stop_conditions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "自律停止条件リスト",
+          "default": [
+            "7文質問上限到達",
+            "BLOCKING パターン発見",
+            "Tier 1 セキュリティ関連作業",
+            "DB マイグレーション必要"
+          ]
+        },
+        "current_autonomy_level": {
+          "type": "string",
+          "enum": ["full", "supervised", "paused"],
+          "default": "supervised",
+          "description": "現在の自律性レベル。 full: 完全自律, supervised: 主要決定時確認, paused: ユーザー入力待機"
+        },
+        "tier": {
+          "type": ["integer", "string", "null"],
+          "description": "作業リスク度 Tier. 整数(1-3)または文字列(P0/P1/P2)許可。 null: 未設定"
+        },
+        "claude_md_checked": {
+          "type": "boolean",
+          "default": false,
+          "description": "CLAUDE.md 参照の有無 (Phase 0で強制チェック)"
+        },
+        "claude_md_version": {
+          "type": ["string", "null"],
+          "description": "参照した CLAUDE.md の最終修正日"
+        }
+      }
+    },
+
+    "traceability": {
+      "type": "object",
+      "description": "BRIEF ↔ SPEC 追跡性マッピング。 spec-generatorが SPEC生成後に記入。",
+      "properties": {
+        "user_story_to_fr": {
+          "type": "array",
+          "description": "User Story → FR マッピング",
+          "items": {
+            "type": "object",
+            "required": ["user_story_id", "fr_ids"],
+            "properties": {
+              "user_story_id": {
+                "type": "string",
+                "description": "BRIEF Section 2 の User Story ID (例: US-01)"
+              },
+              "fr_ids": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "マッピングされた FR ID リスト (例: [\"FR-02901\", \"FR-02902\"])"
+              }
+            }
+          }
+        },
+        "bdd_to_fr": {
+          "type": "array",
+          "description": "BDD Scenario → FR マッピング",
+          "items": {
+            "type": "object",
+            "required": ["scenario_name", "fr_ids"],
+            "properties": {
+              "scenario_name": {
+                "type": "string",
+                "description": "BRIEF Section 4 の AC シナリオ名 (例: AC-01)"
+              },
+              "fr_ids": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "マッピングされた FR ID リスト"
+              }
+            }
+          }
+        },
+        "unmapped_user_stories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "FR にマッピングされていない User Story ID リスト"
+        },
+        "unmapped_bdd_scenarios": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "FR にマッピングされていない BDD シナリオ名 リスト"
+        },
+        "validated_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "Readiness Gate Phase 1.5の最後の検証時点"
+        }
+      }
+    },
+
+    "priority": {
+      "type": "object",
+      "description": "RICE v2 優先順位 (priority-analyzerが管理). rice-section-schema.json が SSOT.",
+      "properties": {
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+        "schema": { "type": "string", "enum": ["rice-v2"] },
+        "last_updated": { "type": ["string", "null"], "format": "date-time" },
+        "phase": { "type": "string", "enum": ["exploration", "mvp", "growth", "stability"] },
+        "rice_inputs": {
+          "type": "object",
+          "properties": {
+            "reach": {
+              "type": "object",
+              "properties": {
+                "score": { "type": "number", "minimum": 1, "maximum": 10 },
+                "evidence": { "type": "object" },
+                "rationale": { "type": "string" }
+              }
+            },
+            "impact": {
+              "type": "object",
+              "properties": {
+                "score": { "type": "number", "enum": [0.25, 0.5, 1, 2, 3] },
+                "evidence": { "type": "object" },
+                "rationale": { "type": "string" }
+              }
+            },
+            "confidence": {
+              "type": "object",
+              "properties": {
+                "score": { "type": "number", "minimum": 0.05, "maximum": 1.0 },
+                "factors": { "type": "object" }
+              }
+            },
+            "effort": {
+              "type": "object",
+              "properties": {
+                "score": { "type": "number", "minimum": 0.5, "maximum": 20 },
+                "unit": { "type": "string", "const": "person-weeks" },
+                "evidence": { "type": "object" },
+                "rationale": { "type": "string" }
+              }
+            }
+          }
+        },
+        "competitive_adjustment": {
+          "type": "object",
+          "properties": {
+            "adjustment": { "type": "number", "minimum": 0.8, "maximum": 1.3, "default": 1.0 },
+            "has_data": { "type": "boolean" },
+            "evidence": { "type": "object" },
+            "rationale": { "type": "string" }
+          }
+        },
+        "calculated": {
+          "type": "object",
+          "required": ["rice_score", "formula"],
+          "properties": {
+            "rice_score": { "type": "number", "minimum": 0 },
+            "adjusted_score": { "type": "number", "minimum": 0 },
+            "competitive_adjustment": { "type": "number", "minimum": 0.8, "maximum": 1.3 },
+            "manual_override_applied": { "type": "number", "minimum": 0.8, "maximum": 1.2 },
+            "formula": { "type": "string" },
+            "component_breakdown": { "type": "object" }
+          }
+        },
+        "data_sources_read": { "type": "array", "items": { "type": "string" } },
+        "manual_override": {
+          "type": "object",
+          "properties": {
+            "value": { "type": "number", "minimum": 0.8, "maximum": 1.2, "default": 1.0 },
+            "reason": { "type": ["string", "null"] }
+          }
+        },
+        "ai_rationale": { "type": "string" },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timestamp": { "type": "string", "format": "date-time" },
+              "actor": { "type": "string", "enum": ["ai", "human"] },
+              "change_summary": { "type": "string" },
+              "rice_score": { "type": "number" },
+              "adjusted_score": { "type": "number" },
+              "inputs_snapshot": { "type": "object" },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "brief_context": {
+      "type": ["object", "null"],
+      "description": "BRIEF.md 核心要約 (brief_regenerator.pyが生成)",
+      "properties": {
+        "core_goal": { "type": ["string", "null"] },
+        "user_value": { "type": ["string", "null"] },
+        "business_metrics": { "type": ["array", "null"], "items": { "type": "string" } },
+        "user_story": { "type": ["string", "null"] },
+        "priority_label": { "type": ["string", "null"] }
+      }
+    },
+
+    "completion_contract": {
+      "type": ["object", "null"],
+      "description": "DoD (Definition of Done) 構造化追跡。BRIEF §7 を SSOT とし、パイプラインが自動追跡。v7 で追加。null の場合は未初期化（後方互換）。",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "completion_contract スキーマバージョン"
+        },
+        "work_type": {
+          "type": ["string", "null"],
+          "enum": ["NEW_FEATURE", "MODIFY_FEATURE", "BUG_FIX", null],
+          "description": "作業タイプ。base_dod のロードに使用"
+        },
+        "source": {
+          "type": "string",
+          "description": "DoD 定義のソース (例: BRIEF §7)"
+        },
+        "last_verified_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "最終検証時刻"
+        },
+        "verdict": {
+          "type": ["string", "null"],
+          "enum": ["passed", "failed", "partial", null],
+          "description": "最終判定。passed: 全項目通過、failed: machine/ai 失敗あり、partial: human 未確認のみ"
+        },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/dod_item" },
+          "description": "DoD 項目リスト"
+        },
+        "summary": {
+          "type": "object",
+          "description": "DoD 検証サマリー",
+          "properties": {
+            "total": { "type": "integer", "description": "全項目数" },
+            "passed": { "type": "integer", "description": "通過項目数" },
+            "failed": { "type": "integer", "description": "失敗項目数" },
+            "skipped": { "type": "integer", "description": "スキップ項目数" },
+            "pass_rate": {
+              "type": ["number", "null"],
+              "minimum": 0,
+              "maximum": 100,
+              "description": "通過率 (%)"
+            }
+          }
+        }
+      }
+    },
+
+    "esp_execution_log": {
+      "type": "object",
+      "description": "ESP (Enforced Skill Pattern) 実行記録 (長期運用証拠)"
+    }
+  },
+
+  "$defs": {
+    "dod_item": {
+      "type": "object",
+      "required": ["id", "level", "description", "verification_type", "status"],
+      "description": "DoD 個別項目定義",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^DoD-(FT|FS|FR)-[0-9]{2}$",
+          "description": "DoD 項目 ID。FT: Feature-Level (Base DoD), FS: Feature-Specific (§7.1), FR: FR-Level"
+        },
+        "level": {
+          "type": "string",
+          "enum": ["fr", "feature", "specific"],
+          "description": "DoD レベル。fr: FR 単位、feature: 機能全体 (Base DoD)、specific: 機能固有 (§7.1)"
+        },
+        "description": {
+          "type": "string",
+          "description": "完了条件の説明"
+        },
+        "verification_type": {
+          "type": "string",
+          "enum": ["machine", "ai", "human"],
+          "description": "検証タイプ。machine: コマンド実行で検証、ai: AI が判定、human: ユーザー確認"
+        },
+        "observation": {
+          "type": "string",
+          "description": "具体的な観測方法"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "passed", "failed", "skipped", "blocked"],
+          "description": "検証ステータス"
+        },
+        "verified_at": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "検証完了時刻"
+        },
+        "evidence": {
+          "type": ["string", "null"],
+          "description": "検証根拠（コマンド出力、AI 判定理由等）"
+        }
+      }
+    }
+  }
+}

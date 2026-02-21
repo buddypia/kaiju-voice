@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "skill_id": "deploy",
+  "skill_version": "1.2.0",
+  "tier": 3,
+  "tier_description": "Utility - Cloud Run デプロイ実行",
+  "enforced_protocol": {
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": false,
+    "evidence_caching_enabled": false
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["デプロイ", "deploy", "本番反映", "Cloud Run"],
+    "args_pattern": "[--skip-checks] [--project <id>] [--region <region>] [--service <name>]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["pre-quality-gate"]
+  },
+  "called_by": [],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "report",
+      "format": "markdown",
+      "description": "デプロイ結果サマリー (URL, ステータス, ヘルスチェック)"
+    }
+  ],
+  "ssot_files": ["docs/deployments/DEPLOY-LOG.md"],
+  "preflight_checks": [
+    "git status で uncommitted changes 確認",
+    "make q.critical で品質ゲート通過 (--skip-checks で省略可)",
+    "gcloud auth 認証状態確認",
+    "next.config.ts に serverExternalPackages: ['sucrase'] が設定されているか確認",
+    "npm run build → .next/standalone/node_modules/sucrase の存在確認",
+    "sucrase transform() の standalone 動作確認"
+  ],
+  "postflight_checks": [
+    "gcloud run services describe でサービス状態確認",
+    "デプロイ URL 取得・表示",
+    "ヘルスチェック (HTTP 200)",
+    "docs/deployments/DEPLOY-LOG.md にリビジョン記録"
+  ],
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "date": "2026-02-15",
+      "changes": "Standalone バンドル検証追加 (sucrase NFT チェック, next.config.ts 検証, transform() 動作確認)"
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-02-15",
+      "changes": "リビジョン記録機能追加 (Phase 4, DEPLOY-LOG.md 自動追記)"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-15",
+      "changes": "新規作成 - gcloud CLI ベースの Cloud Run デプロイスキル"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": 2,
+  "skill_id": "market-intelligence-scanner",
+  "skill_version": "2.0.0",
+  "tier": 1,
+  "tier_description": "Orchestrator - 市場分析基盤機能候補生成パイプライン",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "document_scanning": "haiku",
+      "trend_analysis": "sonnet",
+      "candidate_generation": "sonnet",
+      "deep_research": "opus"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "note": "市場スキャンはリアルタイムトレンド分析。キャッシュ不要"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "競合機能分析",
+      "未定義機能探索",
+      "機能ギャップ分析",
+      "市場トレンドスキャン",
+      "新機能候補",
+      "market scan"
+    ],
+    "args_pattern": "[--deep] [--focus=<領域>] [--competitor=<競合>] [--accept|--reject|--defer|--list|--merge|--triage <id>...]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["deep-research"]
+  },
+  "called_by": ["feature-pilot", "analyze-what-to-build", "competitive-tracker"],
+  "calls": ["deep-research", "feature-architect"],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/features/candidates/market/*.md",
+      "description": "機能候補文書"
+    },
+    {
+      "type": "state_update",
+      "path_pattern": "assets/scan-status.json",
+      "description": "スキャン作業および候補状態管理"
+    }
+  ],
+  "external_tools": ["deep-research"],
+  "ssot_files": ["assets/scan-status.json", "docs/_manifests/research-manifest.json"],
+  "pipeline": {
+    "stage": 2,
+    "data_products": {
+      "produces": [
+        {
+          "artifact_id": "candidate-registry",
+          "path": ".claude/skills/market-intelligence-scanner/assets/scan-status.json",
+          "schema": "scan-status-v4",
+          "freshness_slo_days": 30
+        }
+      ],
+      "consumes": [
+        {
+          "artifact_id": "gap-candidates",
+          "source_skill": "competitive-tracker",
+          "path": "docs/analysis/gap-candidates.json",
+          "schema": "gap-candidates-v1",
+          "required": false,
+          "freshness_slo_days": 90,
+          "on_missing": "skip_phase_0_5",
+          "on_stale": "auto_regenerate"
+        }
+      ]
+    }
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-01",
+      "changes": "MANIFEST.json 初期生成"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-02",
+      "changes": "ESP Lite 適用 - schema_version 2, model_routing 追加 (preflight/postflight 選択的)"
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-07",
+      "changes": "Pipeline Contract System: Phase 0.5 Competitor Gap Ingestion 追加、scan-status-schema v4 (source_type, competitor_gap_ref, competitor_evidence)、pipeline.data_products宣言 (produces: candidate-registry, consumes: gap-candidates)"
+    }
+  ]
+}

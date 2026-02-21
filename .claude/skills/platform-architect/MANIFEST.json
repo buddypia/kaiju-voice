@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "skill_id": "platform-architect",
+  "skill_version": "1.0.0",
+  "tier": 2,
+  "tier_description": "Independent - Platform Architecture 管理スキル（パイプライン外）",
+  "enforced_protocol": {
+    "version": "1.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "inventory_scan": "haiku",
+      "padr_generation": "sonnet",
+      "constraint_generation": "sonnet",
+      "platform_doc_generation": "sonnet",
+      "atam_lite_evaluation": "opus",
+      "verification": "haiku"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "プラットフォームアーキテクチャ",
+      "platform architecture",
+      "PADR",
+      "制約更新",
+      "constraints更新"
+    ],
+    "args_pattern": "[--phase <phase>] [--update <description>]"
+  },
+  "dependencies": {
+    "required": ["CLAUDE.md", "docs/technical/tech-stack-rules.md"],
+    "optional": [
+      "docs/technical/feature-first-architecture.md",
+      "docs/development/enhanced-pipeline-proposal.md"
+    ]
+  },
+  "called_by": [],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "document",
+      "path_pattern": "docs/architecture/adr/PADR-*.md",
+      "description": "Platform ADR（Nygard形式）"
+    },
+    {
+      "type": "config",
+      "path_pattern": "docs/architecture/constraints.json",
+      "description": "機械可読制約契約"
+    },
+    {
+      "type": "document",
+      "path_pattern": "docs/architecture/PLATFORM-ARCHITECTURE.md",
+      "description": "Arc42ベースプラットフォーム全体像"
+    },
+    {
+      "type": "document",
+      "path_pattern": "docs/architecture/tech-radar.md",
+      "description": "ThoughtWorks Tech Radar形式技術採用状況"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "初版作成: Two-Layer Architecture Contract Pattern, 5-Phase Protocol, PADR-001~006 + constraints.json 初期生成"
+    }
+  ]
+}

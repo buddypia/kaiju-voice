@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="amber2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="700" fill="url(#bgGrad2)"/>
+
+  <!-- Title -->
+  <text x="550" y="40" text-anchor="middle" fill="#e2e8f0" font-size="20" font-weight="600">
+    Tier別パイプライン比較 — アーキテクチャ選定の有無
+  </text>
+  <text x="550" y="60" text-anchor="middle" fill="#60a5fa" font-size="12">
+    NEW_FEATURE パイプラインにおける各Tierのステップ構成
+  </text>
+  <line x1="150" y1="72" x2="950" y2="72" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+
+  <!-- Column Headers -->
+  <text x="80" y="105" fill="#94a3b8" font-size="13" font-weight="600">ステップ</text>
+  <text x="330" y="105" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="600">Tier S</text>
+  <text x="330" y="120" text-anchor="middle" fill="#475569" font-size="9">小規模 (5ステップ)</text>
+  <text x="530" y="105" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="600">Tier M</text>
+  <text x="530" y="120" text-anchor="middle" fill="#475569" font-size="9">中規模 (9ステップ)</text>
+  <text x="780" y="105" text-anchor="middle" fill="#fbbf24" font-size="14" font-weight="700">Tier L / XL</text>
+  <text x="780" y="120" text-anchor="middle" fill="#d97706" font-size="9">大規模 (11ステップ)</text>
+
+  <line x1="40" y1="130" x2="1060" y2="130" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Row helper -->
+  <!-- Row 1: architect -->
+  <rect x="40" y="138" width="1020" height="38" rx="4" fill="#1e3a8a" fill-opacity="0.06"/>
+  <text x="80" y="162" fill="#93c5fd" font-size="11" font-weight="500">1. feature-architect</text>
+  <circle cx="330" cy="157" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="330" y="161" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="530" cy="157" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="530" y="161" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="157" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="161" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <!-- Row 2: constraints_load -->
+  <text x="80" y="200" fill="#93c5fd" font-size="11" font-weight="500">2. constraints_load</text>
+  <circle cx="330" cy="195" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="330" y="199" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <circle cx="530" cy="195" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="530" y="199" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="195" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="199" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <!-- Row 3: discovery -->
+  <rect x="40" y="214" width="1020" height="72" rx="4" fill="#f59e0b" fill-opacity="0.04"/>
+  <rect x="40" y="214" width="1020" height="72" rx="4" fill="none" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+  <text x="80" y="238" fill="#fbbf24" font-size="11" font-weight="600">3. discovery</text>
+  <text x="96" y="254" fill="#d97706" font-size="9">a. domain-modeler</text>
+  <text x="96" y="268" fill="#fbbf24" font-size="9" font-weight="700">b. architecture-selector ★</text>
+  <text x="96" y="282" fill="#d97706" font-size="9">c. system-designer</text>
+
+  <!-- S: none -->
+  <circle cx="330" cy="250" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="330" y="254" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <text x="330" y="274" text-anchor="middle" fill="#475569" font-size="8">スキップ</text>
+
+  <!-- M: discovery_lite only -->
+  <circle cx="530" cy="244" r="10" fill="#8b5cf6" opacity="0.6"/>
+  <text x="530" y="248" text-anchor="middle" fill="#fff" font-size="8">lite</text>
+  <text x="530" y="266" text-anchor="middle" fill="#a78bfa" font-size="8">domain-modeler</text>
+  <text x="530" y="278" text-anchor="middle" fill="#475569" font-size="8">のみ</text>
+
+  <!-- L: full -->
+  <rect x="720" y="222" width="120" height="56" rx="6" fill="#f59e0b" fill-opacity="0.12" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="780" y="242" text-anchor="middle" fill="#fde68a" font-size="10" font-weight="700">discovery_full</text>
+  <text x="780" y="256" text-anchor="middle" fill="#fbbf24" font-size="9">3スキル全実行</text>
+  <text x="780" y="270" text-anchor="middle" fill="#d97706" font-size="8">★ Opus使用</text>
+
+  <!-- Row 4: spec -->
+  <text x="80" y="310" fill="#93c5fd" font-size="11" font-weight="500">4. feature-spec-generator</text>
+  <circle cx="330" cy="305" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="330" y="309" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="530" cy="305" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="530" y="309" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="305" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="309" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <line x1="40" y1="324" x2="1060" y2="324" stroke="#1e293b" stroke-width="0.5"/>
+
+  <!-- Row 5: ui-approval -->
+  <rect x="40" y="330" width="1020" height="38" rx="4" fill="#1e3a8a" fill-opacity="0.06"/>
+  <text x="80" y="354" fill="#93c5fd" font-size="11" font-weight="500">5. ui-approval-gate</text>
+  <circle cx="330" cy="349" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="330" y="353" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <circle cx="530" cy="349" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="530" y="353" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="349" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="353" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <!-- Row 6: readiness gate -->
+  <text x="80" y="392" fill="#fca5a5" font-size="11" font-weight="500">6. Readiness Gate</text>
+  <circle cx="330" cy="387" r="10" fill="#ef4444" opacity="0.7"/>
+  <text x="330" y="391" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="530" cy="387" r="10" fill="#ef4444" opacity="0.7"/>
+  <text x="530" y="391" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="387" r="10" fill="#ef4444" opacity="0.7"/>
+  <text x="780" y="391" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <line x1="40" y1="406" x2="1060" y2="406" stroke="#1e293b" stroke-width="0.5"/>
+
+  <!-- Row 7: implement -->
+  <rect x="40" y="412" width="1020" height="38" rx="4" fill="#059669" fill-opacity="0.04"/>
+  <text x="80" y="436" fill="#6ee7b7" font-size="11" font-weight="500">7. feature-implementer</text>
+  <circle cx="330" cy="431" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="330" y="435" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="530" cy="431" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="530" y="435" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="431" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="780" y="435" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <!-- Row 8: wiring -->
+  <text x="80" y="474" fill="#6ee7b7" font-size="11" font-weight="500">8. feature-wiring</text>
+  <circle cx="330" cy="469" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="330" y="473" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <circle cx="530" cy="469" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="530" y="473" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="469" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="780" y="473" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <line x1="40" y1="488" x2="1060" y2="488" stroke="#1e293b" stroke-width="0.5"/>
+
+  <!-- Row 9: quality gate -->
+  <rect x="40" y="494" width="1020" height="38" rx="4" fill="#1e3a8a" fill-opacity="0.06"/>
+  <text x="80" y="518" fill="#6ee7b7" font-size="11" font-weight="500">9. pre-quality-gate</text>
+  <circle cx="330" cy="513" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="330" y="517" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="530" cy="513" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="530" y="517" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="513" r="10" fill="#10b981" opacity="0.8"/>
+  <text x="780" y="517" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <!-- Row 10: status sync -->
+  <text x="80" y="556" fill="#93c5fd" font-size="11" font-weight="500">10. feature-status-sync</text>
+  <circle cx="330" cy="551" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="330" y="555" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <circle cx="530" cy="551" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="530" y="555" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+  <circle cx="780" cy="551" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="555" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <line x1="40" y1="570" x2="1060" y2="570" stroke="#1e293b" stroke-width="0.5"/>
+
+  <!-- Row 11: priority -->
+  <rect x="40" y="576" width="1020" height="38" rx="4" fill="#1e3a8a" fill-opacity="0.06"/>
+  <text x="80" y="600" fill="#93c5fd" font-size="11" font-weight="500">11. priority-analyzer</text>
+  <circle cx="330" cy="595" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="330" y="599" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <circle cx="530" cy="595" r="10" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+  <text x="530" y="599" text-anchor="middle" fill="#475569" font-size="9">-</text>
+  <circle cx="780" cy="595" r="10" fill="#3b82f6" opacity="0.8"/>
+  <text x="780" y="599" text-anchor="middle" fill="#fff" font-size="9">&#x2713;</text>
+
+  <!-- Summary bar -->
+  <rect x="40" y="630" width="1020" height="55" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="80" y="652" fill="#94a3b8" font-size="11" font-weight="600">ステップ数</text>
+  <rect x="290" y="640" width="80" height="26" rx="13" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="330" y="658" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">5</text>
+  <rect x="490" y="640" width="80" height="26" rx="13" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="530" y="658" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="700">9</text>
+  <rect x="740" y="640" width="80" height="26" rx="13" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="780" y="658" text-anchor="middle" fill="#fbbf24" font-size="13" font-weight="700">11</text>
+  <text x="870" y="658" fill="#d97706" font-size="9">← architecture-selector 含む</text>
+</svg>

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "skill_id": "{{SKILL_ID}}",
+  "skill_version": "1.0.0",
+  "tier": "{{TIER: 1=Orchestrator, 2=Pipeline, 3=Utility}}",
+  "tier_description": "{{TIER_DESCRIPTION}}",
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["{{TRIGGER_KEYWORD_1}}", "{{TRIGGER_KEYWORD_2}}", "{{TRIGGER_KEYWORD_3}}"],
+    "args_pattern": "[--{{OPTION_1}}] [--{{OPTION_2}}]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": ["{{PARENT_SKILL_1}}", "{{PARENT_SKILL_2}}"],
+  "calls": ["{{CHILD_SKILL_1}}", "{{CHILD_SKILL_2}}"],
+  "outputs": [
+    {
+      "type": "{{OUTPUT_TYPE: report|log|file|state}}",
+      "format": "markdown",
+      "description": "{{OUTPUT_DESCRIPTION}}"
+    }
+  ],
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "{{YYYY-MM-DD}}",
+      "changes": "新規作成 - {{INITIAL_DESCRIPTION}}"
+    }
+  ]
+}

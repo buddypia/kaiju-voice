@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "priority-section-schema.json",
+  "title": "CONTEXT.json Priority Section Schema",
+  "description": "AI-Adjusted WSJF Lite モデル基盤の優先順位データスキーマ (v2.0)",
+  "type": "object",
+  "properties": {
+    "priority": {
+      "type": "object",
+      "required": [
+        "version",
+        "last_updated",
+        "phase",
+        "research_links",
+        "wsjf_inputs",
+        "confidence",
+        "calculated"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$",
+          "description": "スキーマバージョン (例: 1.0)"
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "最終更新日時 (ISO 8601)"
+        },
+        "phase": {
+          "type": "string",
+          "enum": ["exploration", "mvp", "growth", "stability"],
+          "description": "プロジェクト段階 - 加重値決定に使用"
+        },
+        "research_links": {
+          "type": "object",
+          "required": ["research_ids"],
+          "properties": {
+            "research_ids": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^R-\\d{8}-\\d{3}$"
+              },
+              "description": "連結された Research ID 一覧 (形式: R-YYYYMMDD-NNN)"
+            },
+            "id_format": {
+              "type": "string",
+              "const": "R-YYYYMMDD-NNN",
+              "description": "ID 形式参照用定数"
+            }
+          }
+        },
+        "wsjf_inputs": {
+          "type": "object",
+          "required": [
+            "business_value",
+            "time_criticality",
+            "risk_reduction",
+            "job_size",
+            "tech_risk"
+          ],
+          "properties": {
+            "business_value": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10,
+              "description": "ビジネス価値 (収益、リテンション、差別化貢献度)"
+            },
+            "time_criticality": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10,
+              "description": "時間感度 (競合社、規制、シーズン影響)"
+            },
+            "risk_reduction": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10,
+              "description": "リスク低減貢献度 (技術/ビジネス)"
+            },
+            "job_size": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10,
+              "description": "予想開発規模 (1=小さい、10=非常に大きい)"
+            },
+            "tech_risk": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "技術的不確実性/複雑度"
+            }
+          }
+        },
+        "confidence": {
+          "type": "object",
+          "required": ["eqs", "manual_override", "score"],
+          "properties": {
+            "eqs": {
+              "type": "object",
+              "required": ["score", "factors"],
+              "properties": {
+                "score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "EQS 合計 (0-1)"
+                },
+                "factors": {
+                  "type": "object",
+                  "required": [
+                    "user_problem_validation",
+                    "solution_prototype_validation",
+                    "technical_poc",
+                    "market_or_competitor_data",
+                    "roadmap_alignment"
+                  ],
+                  "properties": {
+                    "user_problem_validation": {
+                      "$ref": "#/$defs/eqs_factor",
+                      "description": "ユーザー問題検証 (加重値 0.30)"
+                    },
+                    "solution_prototype_validation": {
+                      "$ref": "#/$defs/eqs_factor",
+                      "description": "ソリューションプロトタイプ検証 (加重値 0.20)"
+                    },
+                    "technical_poc": {
+                      "$ref": "#/$defs/eqs_factor",
+                      "description": "技術 PoC 完了 (加重値 0.20)"
+                    },
+                    "market_or_competitor_data": {
+                      "$ref": "#/$defs/eqs_factor",
+                      "description": "市場/競合データ (加重値 0.15)"
+                    },
+                    "roadmap_alignment": {
+                      "$ref": "#/$defs/eqs_factor",
+                      "description": "ロードマップ整合性 (加重値 0.15)"
+                    }
+                  }
+                },
+                "weights": {
+                  "type": "object",
+                  "description": "EQS 要素別加重値 (参照用)",
+                  "properties": {
+                    "user_problem_validation": { "type": "number", "const": 0.3 },
+                    "solution_prototype_validation": { "type": "number", "const": 0.2 },
+                    "technical_poc": { "type": "number", "const": 0.2 },
+                    "market_or_competitor_data": { "type": "number", "const": 0.15 },
+                    "roadmap_alignment": { "type": "number", "const": 0.15 }
+                  }
+                }
+              }
+            },
+            "manual_override": {
+              "type": "number",
+              "minimum": 0.8,
+              "maximum": 1.2,
+              "default": 1.0,
+              "description": "手動補正係数 (0.8-1.2、デフォルト 1.0)"
+            },
+            "score": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 1.0,
+              "description": "最終 Confidence = clamp(EQS × manual_override, 0.05, 1.0)"
+            }
+          }
+        },
+        "phase_weights": {
+          "type": "object",
+          "description": "Phase に応じた CoD 要素別加重値 (自動設定)",
+          "properties": {
+            "business_value": { "type": "number" },
+            "time_criticality": { "type": "number" },
+            "risk_reduction": { "type": "number" }
+          }
+        },
+        "tech_risk": {
+          "type": "object",
+          "description": "Tech Risk 分母影響設定",
+          "properties": {
+            "multiplier": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 0.3,
+              "default": 0.2,
+              "description": "分母影響係数 (デフォルト 0.2)"
+            },
+            "multiplier_reason": { "type": "string" },
+            "allowed_range": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number", "const": 0.1 },
+                "max": { "type": "number", "const": 0.3 }
+              }
+            }
+          }
+        },
+        "calculated": {
+          "type": "object",
+          "required": ["cod_raw", "cod_adjusted", "denominator", "wsjf_score", "formula"],
+          "properties": {
+            "cod_raw": {
+              "type": "number",
+              "description": "CoD 原点数 = BV + TC + RR"
+            },
+            "cod_adjusted": {
+              "type": "number",
+              "description": "CoD 調整値 = BV×w_bv + TC×w_tc + RR×w_rr"
+            },
+            "denominator": {
+              "type": "number",
+              "description": "分母 = JobSize × (1 + Multiplier × TechRisk)"
+            },
+            "wsjf_score": {
+              "type": "number",
+              "description": "最終 WSJF 点数"
+            },
+            "formula": {
+              "type": "string",
+              "const": "Score=(CoD_adjusted*Confidence)/(JobSize*(1+0.2*TechRisk))",
+              "description": "計算公式参照"
+            }
+          }
+        },
+        "ai_rationale": {
+          "type": "string",
+          "description": "AI が作成した点数算出根拠説明"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["timestamp", "actor", "change_summary", "wsjf_score"],
+            "properties": {
+              "timestamp": { "type": "string", "format": "date-time" },
+              "actor": { "type": "string", "enum": ["ai", "human"] },
+              "change_summary": { "type": "string" },
+              "wsjf_score": { "type": "number" },
+              "inputs_snapshot": { "type": "object" },
+              "confidence_snapshot": { "type": "object" },
+              "notes": { "type": "string" }
+            }
+          },
+          "description": "変更履歴"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "eqs_factor": {
+      "type": "object",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "充足有無 (true/false)"
+        },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "根拠 Research ID 一覧"
+        },
+        "notes": {
+          "type": "string",
+          "description": "追加説明"
+        }
+      }
+    }
+  }
+}

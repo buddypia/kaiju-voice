@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hackathon-project/schemas/constraints-schema.json",
+  "title": "Platform Architecture Constraints Schema",
+  "description": "constraints.json のバリデーションスキーマ。Platform ADR (PADR) から生成される機械可読制約契約のスキーマ定義。",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_from",
+    "last_updated",
+    "tech_stack",
+    "constraints",
+    "deviation_policy"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema バージョン参照"
+    },
+    "$id": {
+      "type": "string",
+      "description": "スキーマの一意識別子"
+    },
+    "title": {
+      "type": "string",
+      "description": "制約契約のタイトル"
+    },
+    "description": {
+      "type": "string",
+      "description": "制約契約の説明"
+    },
+    "schema_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "制約スキーマのセマンティックバージョン"
+    },
+    "generated_from": {
+      "type": "string",
+      "description": "制約の生成元ファイルパターン（例: docs/architecture/adr/PADR-*.md）"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "最終更新日時（ISO 8601形式）"
+    },
+    "project": {
+      "type": "object",
+      "description": "プロジェクト識別情報",
+      "properties": {
+        "name": { "type": "string" },
+        "platform": { "type": "string" },
+        "architecture": { "type": "string" }
+      }
+    },
+    "tech_stack": {
+      "type": "object",
+      "description": "技術スタック定義",
+      "required": ["frontend", "state_management", "data_model", "backend"],
+      "properties": {
+        "frontend": {
+          "type": "object",
+          "required": ["framework"],
+          "properties": {
+            "framework": { "type": "string" },
+            "version": { "type": "string" },
+            "dart_version": { "type": "string" }
+          }
+        },
+        "state_management": {
+          "type": "object",
+          "required": ["library", "pattern"],
+          "properties": {
+            "library": { "type": "string" },
+            "version": { "type": "string" },
+            "pattern": { "type": "string" }
+          }
+        },
+        "data_model": {
+          "type": "object",
+          "required": ["library", "pattern"],
+          "properties": {
+            "library": { "type": "string" },
+            "version": { "type": "string" },
+            "pattern": { "type": "string" }
+          }
+        },
+        "backend": {
+          "type": "object",
+          "required": ["platform", "database"],
+          "properties": {
+            "platform": { "type": "string" },
+            "database": { "type": "string" },
+            "functions": { "type": "string" },
+            "region": { "type": "string" }
+          }
+        },
+        "language": {
+          "type": "object",
+          "required": ["primary"],
+          "properties": {
+            "primary": { "type": "string" }
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "description": "プラットフォーム制約の配列",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source_padr",
+          "category",
+          "rule",
+          "must",
+          "must_not",
+          "applies_to",
+          "override_allowed"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^PC-\\d{3}$",
+            "description": "制約ID（PC-NNN形式）"
+          },
+          "source_padr": {
+            "type": "string",
+            "description": "生成元PADR（例: PADR-001, または複数: PADR-001, PADR-002）"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "architecture",
+              "state_management",
+              "backend",
+              "data_model",
+              "documentation",
+              "code_quality",
+              "security"
+            ],
+            "description": "制約カテゴリ"
+          },
+          "rule": {
+            "type": "string",
+            "description": "ルール名（簡潔な名称）"
+          },
+          "description": {
+            "type": "string",
+            "description": "ルールの詳細説明"
+          },
+          "must": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "description": "必須事項の配列"
+          },
+          "must_not": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "description": "禁止事項の配列"
+          },
+          "applies_to": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "description": "適用対象ファイルパターン（glob形式）"
+          },
+          "override_allowed": {
+            "type": "boolean",
+            "description": "Feature ADRでのオーバーライドが可能か"
+          },
+          "enforcement": {
+            "type": "string",
+            "enum": ["critical", "high", "medium"],
+            "description": "適用レベル（critical=必須、high=強く推奨、medium=推奨）"
+          },
+          "reference_docs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "参照文書パスの配列"
+          }
+        }
+      }
+    },
+    "deviation_policy": {
+      "type": "object",
+      "description": "Platform制約からの逸脱ポリシー",
+      "required": ["allowed"],
+      "properties": {
+        "allowed": {
+          "type": "boolean",
+          "description": "逸脱が許可されるか"
+        },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "逸脱に必要な条件"
+        }
+      }
+    },
+    "validation_rules": {
+      "type": "object",
+      "description": "バリデーションルール",
+      "properties": {
+        "pre_commit": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pre_push": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pre_merge": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "evidence_freshness": {
+      "type": "object",
+      "description": "検証キャッシュルール",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "valid_for": { "type": "string" },
+          "invalidate_on": { "type": "string" }
+        }
+      }
+    }
+  }
+}

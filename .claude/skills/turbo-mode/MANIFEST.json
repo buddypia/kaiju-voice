@@ -1,0 +1,145 @@
+{
+  "schema_version": 2,
+  "skill_id": "turbo-mode",
+  "skill_version": "3.0.0",
+  "tier": 1,
+  "tier_description": "Orchestrator - 実際の並列実行エンジン",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "dependency_analysis": "haiku",
+      "batch_construction": "haiku",
+      "parallel_execution": "sonnet",
+      "conflict_resolution": "opus"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "note": "turbo-modeは実行エンジンのためEvidence キャッシング不要。毎回freshコンテキストを使用"
+  },
+  "preflight_checks": [
+    {
+      "id": "PF-001",
+      "description": "作業リスト明示的列挙完了",
+      "blocking": true
+    },
+    {
+      "id": "PF-002",
+      "description": "依存性グラフ分析完了",
+      "blocking": true
+    },
+    {
+      "id": "PF-003",
+      "description": "バッチ構成完了",
+      "blocking": true
+    },
+    {
+      "id": "PF-004",
+      "description": "並列制約条件検証",
+      "blocking": true
+    }
+  ],
+  "postflight_checks": [
+    {
+      "id": "POF-001",
+      "description": "全バッチ実行完了",
+      "blocking": true
+    },
+    {
+      "id": "POF-002",
+      "description": "ファイル/Import/状態の競合なし",
+      "blocking": true
+    },
+    {
+      "id": "POF-003",
+      "description": "実行メトリクスログ記録",
+      "blocking": false
+    }
+  ],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["ターボ", "turbo", "高速で", "並列で", "同時に", "turbo mode"],
+    "args_pattern": "[--task-list <作業リスト>] [--batch-only]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": ["feature-pilot"],
+  "calls": ["feature-architect", "feature-implementer"],
+  "execution_model": {
+    "type": "parallel_engine",
+    "phases": [
+      {
+        "id": 1,
+        "name": "作業リスト収集",
+        "description": "実行する全作業を明示的に列挙"
+      },
+      {
+        "id": 2,
+        "name": "依存性グラフ分析",
+        "description": "Read→独立、Write→順序確認、同一ファイル→順次"
+      },
+      {
+        "id": 3,
+        "name": "バッチ自動構成",
+        "description": "トポロジカルソートでバッチ構成"
+      },
+      {
+        "id": 4,
+        "name": "実際の並列実行",
+        "description": "単一応答で複数Task呼び出し"
+      },
+      {
+        "id": 5,
+        "name": "結果収集および競合検知",
+        "description": "ファイル/Import/状態の競合処理"
+      }
+    ],
+    "parallel_constraints": [
+      "同一ファイル同時修正禁止",
+      "CONTEXT.json 順次修正 (Lock)",
+      "pubspec.yaml 順次処理",
+      "レイヤー依存性順序遵守"
+    ]
+  },
+  "outputs": [
+    {
+      "type": "log",
+      "format": "markdown",
+      "description": "バッチ実行結果およびメトリクス"
+    }
+  ],
+  "metrics": {
+    "expected_improvement": {
+      "context_collection": "60-70% time reduction",
+      "implementation": "40-50% time reduction",
+      "token_cost": "40-60% reduction"
+    }
+  },
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-01",
+      "changes": "新規生成 - ultrawork + ecomode 統合、Flutter 特化"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-01",
+      "changes": "大幅強化 - ガイドライン→実行エンジン、依存性分析/バッチ構成/並列実行プロトコル追加"
+    },
+    {
+      "version": "3.0.0",
+      "date": "2026-02-02",
+      "changes": "Enforced Skill Pattern v2.0 適用 - schema_version 2, Pre/Post-flight, Model Routing, Evidence Policy"
+    }
+  ]
+}

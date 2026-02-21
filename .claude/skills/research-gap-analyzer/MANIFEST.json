@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "skill_id": "research-gap-analyzer",
+  "skill_version": "2.0.0",
+  "tier": 1,
+  "tier_description": "Orchestrator - リサーチギャップ分析および自動ディープリサーチパイプライン",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "gap_identification": "sonnet",
+      "deep_research_orchestration": "opus",
+      "result_synthesis": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "note": "リサーチギャップ分析はリアルタイム比較。キャッシング不要"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "リサーチギャップ",
+      "リサーチ分析",
+      "調査して",
+      "KPI ギャップ",
+      "研究漏れ"
+    ],
+    "args_pattern": "[<KPI 領域>] [--focus=<テーマ>]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["deep-research"]
+  },
+  "called_by": ["feature-pilot", "priority-analyzer"],
+  "calls": ["deep-research"],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/research/*.md",
+      "description": "ディープリサーチ結果文書"
+    },
+    {
+      "type": "state_update",
+      "path_pattern": "assets/research-status.json",
+      "description": "リサーチ作業状態管理"
+    }
+  ],
+  "external_tools": ["deep-research"],
+  "ssot_files": ["assets/research-status.json", "docs/_manifests/research-manifest.json"],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-01",
+      "changes": "MANIFEST.json 初期生成"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-02",
+      "changes": "ESP Lite 適用 - schema_version 2, model_routing 追加 (preflight/postflight 選択的)"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "description": "src/features/ ディレクトリ名 → docs/features/ SPEC番号のマッピングSSOT。CI検査スクリプトがこのファイルを読み取り、全featureの文書化を検証する。",
+  "mappings": {
+    "analysis": "001-code-analysis",
+    "code-input": "002-code-input",
+    "agent-log": "003-agent-log",
+    "explanation": "004-explanation",
+    "diff-view": "005-diff-view",
+    "quiz": "006-quiz",
+    "learning-history": "007-learning-history",
+    "follow-up-chat": "008-follow-up-chat",
+    "progressive-hints": "009-progressive-hints",
+    "code-sandbox": "010-code-sandbox",
+    "vibe-understanding": "011-vibe-code-understanding",
+    "visual-diagram": "012-visual-diagram",
+    "code-generation": "013-generation-advisor",
+    "code-chat": "014-code-chat",
+    "education": "015-education",
+    "file-explorer": "016-file-explorer",
+    "live-preview": "017-live-preview",
+    "error-decoder": "018-error-decoder",
+    "prompt-coach": "019-prompt-coach",
+    "web-scraping": "020-web-scraping",
+    "github-integration": "021-github-integration"
+  }
+}

@@ -1,0 +1,92 @@
+<svg viewBox="0 0 600 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e5e5" stroke-width="0.5"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#ccc"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="700" fill="#fafafa"/>
+  <rect width="600" height="700" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="40" y="40" font-family="monospace" font-size="14" fill="#333" font-weight="bold">USER JOURNEY</text>
+  <text x="160" y="40" font-family="monospace" font-size="12" fill="#888">[ FLOW ]</text>
+
+  <!-- Vertical Guide Line -->
+  <line x1="300" y1="70" x2="300" y2="650" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Start: Code Input -->
+  <g transform="translate(300, 100)">
+    <ellipse cx="0" cy="0" rx="80" ry="30" fill="#fff" stroke="#333" stroke-width="2"/>
+    <text x="0" y="5" font-family="monospace" font-size="11" fill="#333" text-anchor="middle">Input Code</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 300 130 L 300 160" stroke="#ccc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step: Thinking Mode -->
+  <g transform="translate(180, 160)">
+    <rect x="0" y="0" width="240" height="60" fill="#f0f9ff" stroke="#3498db" stroke-width="2" rx="4"/>
+    <text x="120" y="25" font-family="monospace" font-size="11" fill="#3498db" text-anchor="middle" font-weight="bold">THINKING MODE</text>
+    <text x="120" y="45" font-family="monospace" font-size="9" fill="#666" text-anchor="middle">Agent Log: Plan -> Act</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 300 220 L 300 250" stroke="#ccc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step: Explanation -->
+  <g transform="translate(180, 250)">
+    <rect x="0" y="0" width="240" height="60" fill="#fff" stroke="#666" stroke-width="2" rx="4"/>
+    <text x="120" y="25" font-family="monospace" font-size="11" fill="#333" text-anchor="middle">Explanation</text>
+    <text x="120" y="45" font-family="monospace" font-size="9" fill="#666" text-anchor="middle">Educational Concept</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 300 310 L 300 340" stroke="#ccc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Decision: Hints -->
+  <g transform="translate(300, 370)">
+    <polygon points="0,-30 80,0 0,30 -80,0" fill="#fff" stroke="#f39c12" stroke-width="2"/>
+    <text x="0" y="-5" font-family="monospace" font-size="10" fill="#f39c12" text-anchor="middle">Need Help?</text>
+    <text x="0" y="10" font-family="monospace" font-size="9" fill="#666" text-anchor="middle">(Hints)</text>
+  </g>
+
+  <!-- Hints Loop -->
+  <path d="M 380 370 L 420 370 L 420 420 L 380 420" fill="none" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow)"/>
+  <text x="450" y="390" font-family="monospace" font-size="9" fill="#f39c12">Progressive</text>
+  <text x="450" y="405" font-family="monospace" font-size="9" fill="#f39c12">Disclosure</text>
+
+  <!-- Arrow -->
+  <path d="M 300 400 L 300 450" stroke="#ccc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step: Diff View -->
+  <g transform="translate(180, 450)">
+    <rect x="0" y="0" width="240" height="50" fill="#fff" stroke="#27ae60" stroke-width="2" rx="4"/>
+    <text x="120" y="30" font-family="monospace" font-size="11" fill="#27ae60" text-anchor="middle" font-weight="bold">DIFF VIEW (FIX)</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 300 500 L 300 530" stroke="#ccc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step: Quiz -->
+  <g transform="translate(180, 530)">
+    <rect x="0" y="0" width="240" height="50" fill="#fff" stroke="#8e44ad" stroke-width="2" rx="4"/>
+    <text x="120" y="30" font-family="monospace" font-size="11" fill="#8e44ad" text-anchor="middle" font-weight="bold">QUIZ (Verify)</text>
+  </g>
+
+  <!-- End -->
+  <g transform="translate(300, 620)">
+    <ellipse cx="0" cy="0" rx="80" ry="25" fill="#f0fdf4" stroke="#27ae60" stroke-width="2"/>
+    <text x="0" y="5" font-family="monospace" font-size="11" fill="#27ae60" text-anchor="middle">LEARNED!</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 300 580 L 300 595" stroke="#ccc" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Bottom note -->
+  <text x="300" y="680" font-family="monospace" font-size="10" fill="#999" text-anchor="middle">linear flow · scaffolding approach</text>
+</svg>

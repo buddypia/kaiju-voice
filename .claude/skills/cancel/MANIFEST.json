@@ -1,0 +1,30 @@
+{
+  "$schema": "../_schemas/skill-manifest-schema.json",
+  "name": "cancel",
+  "version": "1.0.0",
+  "status": "stable",
+  "description": "持続モード(persistent-mode, web-qa, turbo-mode)を安全に終了するスキル",
+  "triggers": {
+    "keywords": ["キャンセル", "中断", "cancel", "stop mode", "モード終了"],
+    "commands": ["/cancel"]
+  },
+  "dependencies": {
+    "calls": [],
+    "called_by": ["persistent-mode", "web-qa", "turbo-mode"]
+  },
+  "io": {
+    "inputs": [],
+    "outputs": ["state_cleanup"]
+  },
+  "metrics": {
+    "estimated_tokens": "minimal",
+    "complexity": "low"
+  },
+  "metadata": {
+    "author": "Hackathon Project Team",
+    "created_at": "2026-02-05",
+    "updated_at": "2026-02-05",
+    "category": "utility",
+    "oss_origin": "oh-my-claudecode/cancel"
+  }
+}

@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 680" font-family="'Inter','Segoe UI',system-ui,sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="layer1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:0.08"/>
+    </linearGradient>
+    <linearGradient id="layer2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#0284c7;stop-opacity:0.08"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="680" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="480" y="42" fill="#f8fafc" font-size="20" font-weight="700" text-anchor="middle">2層アーキテクチャ契約パターン</text>
+  <text x="480" y="62" fill="#94a3b8" font-size="12" text-anchor="middle">Hackathon Project - プラットフォーム + 機能アーキテクチャ</text>
+
+  <!-- Layer 1: Platform Architecture -->
+  <rect x="40" y="85" width="880" height="260" rx="12" fill="url(#layer1Grad)" stroke="#7c3aed" stroke-width="1.5" stroke-opacity="0.5" filter="url(#shadow)"/>
+  <rect x="40" y="85" width="880" height="32" rx="12" fill="#7c3aed" fill-opacity="0.2"/>
+  <text x="60" y="106" fill="#c4b5fd" font-size="13" font-weight="700">第1層: プラットフォームアーキテクチャ</text>
+  <text x="820" y="106" fill="#a78bfa" font-size="10" text-anchor="end">更新頻度: 年1-2回</text>
+
+  <!-- PADR Box -->
+  <rect x="70" y="135" width="250" height="190" rx="8" fill="#1e1b4b" fill-opacity="0.6" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="195" y="158" fill="#c4b5fd" font-size="12" font-weight="600" text-anchor="middle">PADR (Platform ADR)</text>
+  <text x="195" y="173" fill="#818cf8" font-size="9" text-anchor="middle">人間可読 / 理由と背景</text>
+  <line x1="90" y1="182" x2="300" y2="182" stroke="#7c3aed" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="88" y="200" fill="#a5b4fc" font-size="10">PADR-001  Feature-First + Clean Arch</text>
+  <text x="88" y="218" fill="#a5b4fc" font-size="10">PADR-002  Riverpod State Management</text>
+  <text x="88" y="236" fill="#a5b4fc" font-size="10">PADR-003  Supabase Backend</text>
+  <text x="88" y="254" fill="#a5b4fc" font-size="10">PADR-004  Freezed Immutable Models</text>
+  <text x="88" y="272" fill="#a5b4fc" font-size="10">PADR-005  Japan-First i18n</text>
+  <text x="88" y="290" fill="#a5b4fc" font-size="10">PADR-006  CONTEXT.json SSOT</text>
+  <text x="88" y="312" fill="#6366f1" font-size="9" font-style="italic">docs/architecture/adr/PADR-*.md</text>
+
+  <!-- Sync Arrow -->
+  <path d="M335 225 L385 225" stroke="#a78bfa" stroke-width="2" marker-end="url(#arrowPurple)"/>
+  <path d="M385 235 L335 235" stroke="#a78bfa" stroke-width="2" marker-end="url(#arrowPurple)"/>
+  <text x="360" y="215" fill="#c4b5fd" font-size="9" text-anchor="middle">同期</text>
+  <defs>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#a78bfa"/>
+    </marker>
+  </defs>
+
+  <!-- constraints.json Box -->
+  <rect x="400" y="135" width="250" height="190" rx="8" fill="#1e1b4b" fill-opacity="0.6" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="525" y="158" fill="#c4b5fd" font-size="12" font-weight="600" text-anchor="middle">constraints.json</text>
+  <text x="525" y="173" fill="#818cf8" font-size="9" text-anchor="middle">機械可読 / 制約とルール</text>
+  <line x1="420" y1="182" x2="630" y2="182" stroke="#7c3aed" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="418" y="200" fill="#a5b4fc" font-size="10">PC-001  must[] / must_not[]</text>
+  <text x="418" y="218" fill="#a5b4fc" font-size="10">PC-002  applies_to: ["glob"]</text>
+  <text x="418" y="236" fill="#a5b4fc" font-size="10">PC-003  enforcement: critical</text>
+  <text x="418" y="254" fill="#a5b4fc" font-size="10">PC-004  override_allowed: bool</text>
+  <text x="418" y="272" fill="#a5b4fc" font-size="10">tech_stack: { frontend, backend }</text>
+  <text x="418" y="290" fill="#a5b4fc" font-size="10">deviation_policy: { allowed, req }</text>
+  <text x="418" y="312" fill="#6366f1" font-size="9" font-style="italic">docs/architecture/constraints.json</text>
+
+  <!-- Supporting Docs Box -->
+  <rect x="680" y="135" width="220" height="190" rx="8" fill="#1e1b4b" fill-opacity="0.6" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="790" y="158" fill="#c4b5fd" font-size="12" font-weight="600" text-anchor="middle">補助文書</text>
+  <line x1="700" y1="168" x2="880" y2="168" stroke="#7c3aed" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="698" y="188" fill="#a5b4fc" font-size="10">PLATFORM-ARCHITECTURE.md</text>
+  <text x="698" y="206" fill="#94a3b8" font-size="9">  Arc42 10セクション全体像</text>
+  <text x="698" y="228" fill="#a5b4fc" font-size="10">tech-radar.md</text>
+  <text x="698" y="246" fill="#94a3b8" font-size="9">  ThoughtWorks Radar 形式</text>
+  <text x="698" y="268" fill="#a5b4fc" font-size="10">c4/platform-c4.md</text>
+  <text x="698" y="286" fill="#94a3b8" font-size="9">  Mermaid C4 Level 1-2</text>
+  <text x="698" y="308" fill="#a5b4fc" font-size="10">cross-cutting/*.md</text>
+  <text x="698" y="326" fill="#94a3b8" font-size="9">  エラー、ログ、セキュリティ</text>
+
+  <!-- Downward Arrow from Layer 1 to Layer 2 -->
+  <path d="M480 355 L480 395" stroke="#64748b" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowGray)"/>
+  <rect x="405" y="362" width="150" height="22" rx="4" fill="#334155"/>
+  <text x="480" y="378" fill="#e2e8f0" font-size="10" font-weight="600" text-anchor="middle">制約が下位層に伝播</text>
+  <defs>
+    <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Layer 2: Feature Architecture -->
+  <rect x="40" y="400" width="880" height="240" rx="12" fill="url(#layer2Grad)" stroke="#0ea5e9" stroke-width="1.5" stroke-opacity="0.5" filter="url(#shadow)"/>
+  <rect x="40" y="400" width="880" height="32" rx="12" fill="#0ea5e9" fill-opacity="0.2"/>
+  <text x="60" y="421" fill="#7dd3fc" font-size="13" font-weight="700">第2層: 機能アーキテクチャ</text>
+  <text x="820" y="421" fill="#38bdf8" font-size="10" text-anchor="end">更新頻度: 機能ごと</text>
+
+  <!-- Feature ADR Boxes -->
+  <rect x="70" y="450" width="200" height="100" rx="8" fill="#0c4a6e" fill-opacity="0.4" stroke="#0ea5e9" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="170" y="473" fill="#7dd3fc" font-size="11" font-weight="600" text-anchor="middle">Feature ADR</text>
+  <text x="170" y="490" fill="#38bdf8" font-size="9" text-anchor="middle">Nygard 形式</text>
+  <line x1="90" y1="498" x2="250" y2="498" stroke="#0ea5e9" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="88" y="516" fill="#bae6fd" font-size="10">ADR-029: 単語キャッシュ</text>
+  <text x="88" y="534" fill="#bae6fd" font-size="10">ADR-035: 音声パイプライン</text>
+
+  <!-- Deviation Section -->
+  <rect x="300" y="450" width="260" height="100" rx="8" fill="#0c4a6e" fill-opacity="0.4" stroke="#0ea5e9" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="430" y="473" fill="#7dd3fc" font-size="11" font-weight="600" text-anchor="middle">Platform 制約逸脱の正当化</text>
+  <text x="430" y="490" fill="#38bdf8" font-size="9" text-anchor="middle">第1層から逸脱する場合に必須</text>
+  <line x1="320" y1="498" x2="540" y2="498" stroke="#0ea5e9" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="318" y="516" fill="#bae6fd" font-size="10">逸脱対象: PC-NNN</text>
+  <text x="318" y="534" fill="#bae6fd" font-size="10">ATAM Lite 根拠が必須</text>
+
+  <!-- Domain + System Design -->
+  <rect x="590" y="450" width="310" height="100" rx="8" fill="#0c4a6e" fill-opacity="0.4" stroke="#0ea5e9" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="745" y="473" fill="#7dd3fc" font-size="11" font-weight="600" text-anchor="middle">機能 Discovery 成果物</text>
+  <line x1="610" y1="483" x2="880" y2="483" stroke="#0ea5e9" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="608" y="502" fill="#bae6fd" font-size="10">DOMAIN-MODEL.md</text>
+  <text x="608" y="518" fill="#94a3b8" font-size="9">  境界コンテキスト、集約、イベント</text>
+  <text x="608" y="536" fill="#bae6fd" font-size="10">SYSTEM-DESIGN-*.md</text>
+  <text x="608" y="552" fill="#94a3b8" font-size="9">  C4 Level 1-2 Mermaid Diagrams</text>
+
+  <!-- Path indicator -->
+  <text x="170" y="560" fill="#0284c7" font-size="9" text-anchor="middle" font-style="italic">docs/features/&lt;id&gt;-&lt;name&gt;/</text>
+
+  <!-- Footer -->
+  <line x1="40" y1="655" x2="920" y2="655" stroke="#334155" stroke-width="0.5"/>
+  <text x="480" y="672" fill="#64748b" font-size="9" text-anchor="middle">Hackathon Project - Two-Layer Architecture Contract Pattern | 2026-02-11</text>
+</svg>

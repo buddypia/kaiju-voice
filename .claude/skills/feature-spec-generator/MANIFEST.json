@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "skill_id": "feature-spec-generator",
+  "skill_version": "2.0.0",
+  "tier": 2,
+  "tier_description": "Pipeline - CONTEXT.json基盤SPEC.md + Screen文書生成",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "context_reading": "haiku",
+      "spec_generation": "sonnet",
+      "screen_wireframe": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet"]
+  },
+  "evidence_policy": {
+    "note": "SPEC生成はCONTEXT.json基盤。毎回freshな文書を生成"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["SPEC生成", "SPEC作成", "仕様書生成", "明細書生成"],
+    "args_pattern": "<機能ID> [--req <追加要求事項>]"
+  },
+  "dependencies": {
+    "required": ["feature-architect"],
+    "optional": []
+  },
+  "called_by": ["feature-pilot", "feature-architect"],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "file",
+      "path_pattern": "docs/features/<id>-<name>/SPEC-<id>-<name>.md",
+      "description": "機能仕様書"
+    },
+    {
+      "type": "directory",
+      "path_pattern": "docs/features/<id>-<name>/screens/",
+      "description": "画面文書ディレクトリ"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/features/<id>-<name>/screens/*.md",
+      "description": "個別画面文書"
+    }
+  ],
+  "state_transitions": {
+    "context_json_field": "quick_resume.current_state",
+    "valid_transitions": [{ "from": "SpecDrafting", "to": "SpecDrafting" }]
+  },
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-11",
+      "changes": "MANIFEST.json初期生成 (Next.js/React適応)"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-11",
+      "changes": "ESP Lite適用 - schema_version 2, model_routing追加"
+    }
+  ]
+}

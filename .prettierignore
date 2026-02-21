@@ -1,0 +1,3 @@
+# Generated files (managed by codegen, not prettier)
+*.generated.ts
+docs/ui-flow/generated/

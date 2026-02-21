@@ -1,0 +1,180 @@
+%% 品質検証フロー図
+%% flutter-qa, security-scan, persistent-mode, pre-quality-gateの統合フロー
+
+flowchart TB
+    %% 開始
+    Start([実装完了])
+
+    %% Pre-Quality Gate
+    subgraph PreQuality["Pre-Quality Gate"]
+        PQG[pre-quality-gate]
+
+        PQ1[Makefile q.check 実行]
+        PQ2[結果パース]
+        PQ3{通過?}
+
+        PQG --> PQ1 --> PQ2 --> PQ3
+    end
+
+    %% Flutter QA サイクル
+    subgraph FlutterQA["Flutter QA サイクル (ESP v3.1)"]
+        FQA[flutter-qa]
+
+        %% Pre-flight
+        PreFlight1[/"✈️ Pre-flight Checklist"/]
+        PF1[Flutter SDK 確認]
+        PF2[目標タイプ確認]
+        PF3[Evidence キャッシュ確認]
+
+        %% サイクル
+        Cycle["Cycle N/5"]
+        C1[Step 1: ビルドチェック]
+        C2[Step 2: 静的解析]
+        C3[Step 3: テスト実行]
+        C4{すべて通過?}
+
+        %% 自動修正
+        AutoFix[自動修正]
+        AF1[unused_import 削除]
+        AF2[const 追加]
+        AF3[テストエラー分析]
+
+        %% Post-flight
+        PostFlight1[/"🛬 Post-flight Checklist"/]
+        POF1[目標検査通過]
+        POF2[自動修正完了]
+        POF3[Evidence キャッシング]
+
+        FQA --> PreFlight1
+        PreFlight1 --> PF1 --> PF2 --> PF3
+        PF3 --> Cycle
+
+        Cycle --> C1 --> C2 --> C3 --> C4
+        C4 -->|No| AutoFix
+        AutoFix --> AF1 --> AF2 --> AF3
+        AF3 --> Cycle
+
+        C4 -->|Yes| PostFlight1
+        PostFlight1 --> POF1 --> POF2 --> POF3
+    end
+
+    %% Security Scan
+    subgraph SecurityScan["Security Scan (ESP v2.1)"]
+        SS[security-scan]
+
+        %% Pre-flight
+        PreFlight2[/"✈️ Pre-flight Checklist"/]
+        SP1[検査対象確定]
+        SP2[ディレクトリアクセス可能]
+        SP3[前回キャッシュ確認]
+
+        %% 検査
+        Scan[セキュリティ検査実行]
+        S1[Supabase RLS 検査]
+        S2[ハードコーディングシークレット検査]
+        S3[Edge Function 検査]
+        S4[Flutter アプリ検査]
+
+        %% 結果
+        Report[セキュリティレポート生成]
+        R1{Critical/High<br/>発見?}
+
+        %% Post-flight
+        PostFlight2[/"🛬 Post-flight Checklist"/]
+        SOP1[レポート出力完了]
+        SOP2[Critical/High 0件確認]
+        SOP3[検査結果キャッシング]
+
+        SS --> PreFlight2
+        PreFlight2 --> SP1 --> SP2 --> SP3
+        SP3 --> Scan
+
+        Scan --> S1 --> S2 --> S3 --> S4
+        S4 --> Report --> R1
+
+        R1 -->|No| PostFlight2
+        PostFlight2 --> SOP1 --> SOP2 --> SOP3
+    end
+
+    %% Persistent Mode
+    subgraph PersistentMode["Persistent Mode (ESP v3.1)"]
+        PM[persistent-mode]
+
+        %% Pre-flight
+        PreFlight3[/"✈️ Pre-flight Checklist"/]
+        PP1[検証対象明確]
+        PP2[完了条件定義]
+        PP3[最大繰り返し回数]
+
+        %% 繰り返しループ
+        Loop["繰り返し N/5"]
+        L1[検証実行]
+        L2{通過?}
+        L3[分析 + 修正]
+        L4{同一エラー<br/>3回?}
+
+        %% Post-flight
+        PostFlight3[/"🛬 Post-flight Checklist"/]
+        POP1[すべての検証通過]
+        POP2[CONTEXT.json 更新]
+        POP3[繰り返しログ記録]
+
+        PM --> PreFlight3
+        PreFlight3 --> PP1 --> PP2 --> PP3
+        PP3 --> Loop
+
+        Loop --> L1 --> L2
+        L2 -->|No| L3 --> L4
+        L4 -->|No| Loop
+        L4 -->|Yes| EarlyStop([早期中断])
+
+        L2 -->|Yes| PostFlight3
+        PostFlight3 --> POP1 --> POP2 --> POP3
+    end
+
+    %% Evidence Cache
+    subgraph EvidenceCache["Evidence Cache"]
+        EC[(evidence_cache)]
+
+        E1[flutter analyze: 30分]
+        E2[flutter test: 30分]
+        E3[security-scan: 60分]
+
+        EC --- E1
+        EC --- E2
+        EC --- E3
+    end
+
+    %% 接続
+    Start --> PreQuality
+
+    PQ3 -->|No| FixRequired([修正必要])
+    PQ3 -->|Yes| FlutterQA
+
+    POF3 --> SecurityScan
+
+    R1 -->|Yes| Blocked([デプロイブロック])
+    SOP3 --> PersistentMode
+
+    POP3 --> Done([品質検証完了])
+
+    %% Evidence 接続
+    PF3 -.-> EC
+    SP3 -.-> EC
+    POF3 -.-> EC
+    SOP3 -.-> EC
+
+    %% スタイル
+    classDef preflight fill:#bbdefb,stroke:#1565c0
+    classDef postflight fill:#c8e6c9,stroke:#2e7d32
+    classDef decision fill:#fff3e0,stroke:#e65100
+    classDef skill fill:#ffcdd2,stroke:#b71c1c
+    classDef cache fill:#f3e5f5,stroke:#7b1fa2
+    classDef blocked fill:#ffcdd2,stroke:#b71c1c,stroke-width:2px
+
+    class PreFlight1,PreFlight2,PreFlight3 preflight
+    class PostFlight1,PostFlight2,PostFlight3 postflight
+    class PQ3,C4,R1,L2,L4 decision
+    class FQA,SS,PM,PQG skill
+    class EC,E1,E2,E3 cache
+    class Blocked,EarlyStop,FixRequired blocked

@@ -1,0 +1,116 @@
+{
+  "schema_version": 2,
+  "skill_id": "oss-analyzer",
+  "skill_version": "4.0.0",
+  "tier": 1,
+  "tier_description": "Atomic - OSS Problem-Decision-Recipe Analysis",
+  "enforced_protocol": {
+    "version": "4.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": true,
+    "read_only": true
+  },
+  "methodology": {
+    "phase_1": "Reconnaissance: C4 lightweight + Problem Discovery (Forces)",
+    "phase_2": "Decision Archaeology: ADR + Pattern Language Forces + GoF Mechanism",
+    "phase_3": "Adoption Engineering: ATAM-lite + TW Radar + Recipe (Pseudocode)"
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "phase_1_reconnaissance": "haiku",
+      "phase_2_decision_archaeology": "sonnet",
+      "phase_3_adoption_engineering": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "OSS 分析",
+      "パターン抽出",
+      "オープンソース分析",
+      "メカニズム抽出",
+      "oss analyze",
+      "PDR 分析"
+    ],
+    "args_pattern": "--source <path> [--problem <id>] [--focus <area>] [--oss-only] [--force]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": [],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "directory",
+      "path_pattern": "docs/oss/{oss-name}/v4/",
+      "description": "v4.0 PDR 分析結果ディレクトリ"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/oss/{oss-name}/v4/reconnaissance.md",
+      "description": "Phase 1: OSS Context + Problem Registry + Hypothesis"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/oss/{oss-name}/v4/decisions.md",
+      "description": "Phase 2: Decision Archaeology (ADR+Forces+Mechanism)"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/oss/{oss-name}/v4/adoption.md",
+      "description": "Phase 3: Adoption Engineering (TW Radar + Recipes)"
+    },
+    {
+      "type": "file",
+      "path_pattern": "docs/oss/_catalog/catalog.json",
+      "description": "PDR カタログ (v4.0 schema)"
+    }
+  ],
+  "state_transitions": {
+    "context_json_field": null,
+    "valid_transitions": [],
+    "note": "catalog.json 更新"
+  },
+  "ssot_files": ["docs/oss/_catalog/catalog.json"],
+  "safety_rules": {
+    "backup_required": false,
+    "verification_required": true,
+    "user_confirmation": false,
+    "allowed_modifications": ["docs/oss/{oss-name}/v4/**/*.md", "docs/oss/_catalog/catalog.json"],
+    "forbidden_modifications": ["oss-sources/**/*", "lib/**/*", "infra/**/*"],
+    "read_only_mode": true
+  },
+  "evidence_caching": {
+    "enabled": true,
+    "cache_duration_hours": 24,
+    "cache_key_pattern": "{oss-name}-{last-modified}",
+    "invalidation_triggers": ["OSS ソースディレクトリ変更", "--force フラグ"]
+  },
+  "changelog": [
+    {
+      "version": "4.0.0",
+      "date": "2026-02-07",
+      "changes": "Problem-Decision-Recipe フレームワーク: Mechanism→PDR 転換, Forces+Alternatives 必須, Recipe(Pseudocode), catalog.json 新規"
+    },
+    {
+      "version": "3.0.0",
+      "date": "2026-02-06",
+      "changes": "根本再設計: C4+GoF+ATAM+TW Radar, 6→3 成果物, シンボル中心, Context Fit 分析"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-06",
+      "changes": "行番号中心メカニズム抽出 (deprecated)"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-05",
+      "changes": "初期バージョン - 抽象的哲学抽出 (deprecated)"
+    }
+  ]
+}

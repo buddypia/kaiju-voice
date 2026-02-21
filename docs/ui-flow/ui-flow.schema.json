@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ui-flow.schema.json",
+  "title": "UI Flow Graph Schema",
+  "description": "Hackathon Project SPA UI Flow SSOT - XState互換 Statechart + SPA固有拡張",
+  "type": "object",
+  "required": ["version", "statechart", "panels", "phases", "sse_mapping"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "SemVer形式のバージョン（Major=破壊的変更, Minor=追加, Patch=修正）"
+    },
+    "statechart": {
+      "$ref": "#/$defs/Statechart"
+    },
+    "panels": {
+      "type": "object",
+      "description": "Layer 2: パネル定義（visibility条件 + レイアウト + feature参照）",
+      "additionalProperties": {
+        "$ref": "#/$defs/Panel"
+      },
+      "minProperties": 1
+    },
+    "phases": {
+      "type": "object",
+      "description": "Layer 3: フェーズ定義（状態→表示パネルセット→レイアウト→自動スクロール）",
+      "additionalProperties": {
+        "$ref": "#/$defs/Phase"
+      },
+      "minProperties": 1
+    },
+    "sse_mapping": {
+      "type": "object",
+      "description": "Layer 4: SSEイベント→状態遷移→ターゲットパネル",
+      "additionalProperties": {
+        "$ref": "#/$defs/SSEMapping"
+      },
+      "minProperties": 1
+    },
+    "transitions": {
+      "type": "array",
+      "description": "補助: 遷移一覧（全状態遷移のフラット表現）",
+      "items": {
+        "$ref": "#/$defs/Transition"
+      }
+    },
+    "user_actions": {
+      "type": "object",
+      "description": "補助: ユーザー操作定義（ハンドラ名→操作詳細）",
+      "additionalProperties": {
+        "$ref": "#/$defs/UserAction"
+      }
+    }
+  },
+  "$defs": {
+    "Statechart": {
+      "type": "object",
+      "description": "Layer 1: XState互換の状態マシン定義",
+      "required": ["id", "initial", "states"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "状態マシンID"
+        },
+        "initial": {
+          "type": "string",
+          "description": "初期状態"
+        },
+        "states": {
+          "type": "object",
+          "description": "状態定義マップ",
+          "additionalProperties": {
+            "$ref": "#/$defs/State"
+          },
+          "minProperties": 1
+        }
+      }
+    },
+    "State": {
+      "type": "object",
+      "description": "個別状態の定義（XState互換）",
+      "required": ["on"],
+      "additionalProperties": false,
+      "properties": {
+        "entry": {
+          "type": "array",
+          "description": "状態進入時のアクション",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exit": {
+          "type": "array",
+          "description": "状態退出時のアクション",
+          "items": {
+            "type": "string"
+          }
+        },
+        "on": {
+          "type": "object",
+          "description": "イベント→遷移マップ",
+          "additionalProperties": {
+            "$ref": "#/$defs/EventTransition"
+          }
+        },
+        "meta": {
+          "type": "object",
+          "description": "状態メタデータ",
+          "additionalProperties": true,
+          "properties": {
+            "description": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "EventTransition": {
+      "type": "object",
+      "description": "イベントによる遷移先定義",
+      "required": ["target"],
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "遷移先状態ID"
+        },
+        "actions": {
+          "type": "array",
+          "description": "遷移時のアクション",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guard": {
+          "type": "string",
+          "description": "遷移ガード条件"
+        }
+      }
+    },
+    "Panel": {
+      "type": "object",
+      "description": "パネル定義",
+      "required": ["feature", "visibility"],
+      "additionalProperties": false,
+      "properties": {
+        "feature": {
+          "type": "string",
+          "description": "所属featureモジュール名（src/features/ 配下のディレクトリ名、sharedも可）"
+        },
+        "component": {
+          "type": "string",
+          "description": "コンポーネント名"
+        },
+        "visibility": {
+          "$ref": "#/$defs/Visibility"
+        },
+        "description": {
+          "type": "string",
+          "description": "パネルの説明"
+        }
+      }
+    },
+    "Visibility": {
+      "type": "object",
+      "description": "パネル表示条件",
+      "required": ["type", "condition"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["state_based", "data_based", "flag_based", "always"],
+          "description": "表示条件の種別"
+        },
+        "condition": {
+          "type": "string",
+          "description": "表示条件式（人間可読な擬似コード）"
+        }
+      }
+    },
+    "Phase": {
+      "type": "object",
+      "description": "フェーズ定義",
+      "required": ["layout", "active_panels"],
+      "additionalProperties": false,
+      "properties": {
+        "layout": {
+          "type": "string",
+          "description": "レイアウトパターン（例: centered, grid-2col）"
+        },
+        "active_panels": {
+          "type": "array",
+          "description": "このフェーズで表示されるパネルID一覧",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "auto_scroll_ref": {
+          "type": ["string", "null"],
+          "description": "自動スクロールのターゲットref名（null=スクロールなし）"
+        },
+        "description": {
+          "type": "string",
+          "description": "フェーズの説明"
+        }
+      }
+    },
+    "SSEMapping": {
+      "type": "object",
+      "description": "SSEイベントマッピング",
+      "required": ["target_panel"],
+      "additionalProperties": false,
+      "properties": {
+        "status_change": {
+          "type": ["string", "null"],
+          "description": "このイベントで遷移する状態（null=状態変更なし）"
+        },
+        "target_panel": {
+          "type": "string",
+          "description": "データを受け取るパネルID"
+        },
+        "description": {
+          "type": "string",
+          "description": "SSEイベントの説明"
+        }
+      }
+    },
+    "Transition": {
+      "type": "object",
+      "description": "遷移定義（フラット表現）",
+      "required": ["from", "event", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "遷移元状態"
+        },
+        "event": {
+          "type": "string",
+          "description": "トリガーイベント"
+        },
+        "to": {
+          "type": "string",
+          "description": "遷移先状態"
+        },
+        "guard": {
+          "type": "string",
+          "description": "遷移ガード条件"
+        }
+      }
+    },
+    "UserAction": {
+      "type": "object",
+      "description": "ユーザー操作定義",
+      "required": ["handler", "trigger_event"],
+      "additionalProperties": false,
+      "properties": {
+        "handler": {
+          "type": "string",
+          "description": "ハンドラ関数名"
+        },
+        "trigger_event": {
+          "type": "string",
+          "description": "トリガーするstatechartイベント"
+        },
+        "available_in": {
+          "type": "array",
+          "description": "操作可能な状態一覧",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "操作の説明"
+        }
+      }
+    }
+  }
+}

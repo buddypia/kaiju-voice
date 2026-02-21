@@ -1,0 +1,370 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scan-status-schema.json",
+  "title": "Market Intelligence Scan Status Schema",
+  "description": "market-intelligence-scanner スキルのスキャン作業および候補状態を追跡するスキーマ",
+  "type": "object",
+  "required": ["schema_version", "scans", "candidates"],
+
+  "$defs": {
+    "candidate_status": {
+      "type": "string",
+      "enum": [
+        "pending_review",
+        "approved",
+        "rejected",
+        "converted",
+        "merged",
+        "deferred",
+        "reverted"
+      ],
+      "description": "候補状態 (SSOT)。他のファイルからこの enum を参照する必要あり"
+    },
+    "scan_phase": {
+      "type": "string",
+      "enum": ["pending", "scanning", "completed", "failed"],
+      "description": "スキャン状態"
+    },
+    "valid_transitions": {
+      "description": "許可される状態遷移マトリクス。key=現在の状態、value=遷移可能な状態配列。merged は Terminal State (遷移不可) であり、誤った merge は対象 Feature から関連内容を削除して解決",
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/candidate_status" },
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/candidate_status" }
+      },
+      "default": {
+        "pending_review": ["approved", "rejected", "merged", "deferred"],
+        "approved": ["converted", "rejected"],
+        "converted": ["reverted"],
+        "rejected": ["pending_review"],
+        "merged": [],
+        "deferred": ["pending_review", "rejected"],
+        "reverted": ["pending_review"]
+      }
+    },
+    "evidence_entry": {
+      "type": "object",
+      "required": ["source", "claim", "type"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "根拠の出典 (リサーチ文書パスまたは URL)"
+        },
+        "claim": {
+          "type": "string",
+          "description": "該当出典から抽出した核心的主張/データ"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "quantitative",
+            "qualitative",
+            "competitor_evidence",
+            "user_feedback",
+            "market_data"
+          ],
+          "description": "根拠の種類"
+        },
+        "strength": {
+          "type": "string",
+          "enum": ["strong", "moderate", "weak"],
+          "description": "根拠の強度",
+          "default": "moderate"
+        }
+      }
+    },
+    "success_metric": {
+      "type": "object",
+      "required": ["metric", "target"],
+      "properties": {
+        "metric": {
+          "type": "string",
+          "description": "測定指標名 (例: D7 リテンション、転換率)"
+        },
+        "current": {
+          "type": "string",
+          "description": "現在の値 (未測定時は '-')"
+        },
+        "target": {
+          "type": "string",
+          "description": "目標値 (例: '+5%', '80%')"
+        },
+        "measurement_method": {
+          "type": "string",
+          "description": "測定方法 (例: 'Supabase Analytics', 'A/B Test')"
+        },
+        "measurement_timing": {
+          "type": "string",
+          "description": "測定時期 (例: 'リリース2週間後', 'ベータ終了時')"
+        }
+      }
+    },
+    "validation_result": {
+      "type": "object",
+      "required": ["checked_at", "status"],
+      "properties": {
+        "checked_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "検証実行時間"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pass", "warning", "fail"],
+          "description": "検証結果"
+        },
+        "errors": {
+          "type": "integer",
+          "description": "エラー数"
+        },
+        "warnings": {
+          "type": "integer",
+          "description": "警告数"
+        }
+      }
+    },
+    "history_entry": {
+      "type": "object",
+      "required": ["at", "to_status", "triggered_by"],
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "from_status": {
+          "oneOf": [{ "$ref": "#/$defs/candidate_status" }, { "type": "null" }],
+          "description": "以前の状態。null は history[0] (初期生成) にのみ許可"
+        },
+        "to_status": { "$ref": "#/$defs/candidate_status" },
+        "triggered_by": {
+          "type": "string",
+          "description": "遷移をトリガーしたスキルまたはユーザー (例: feature-architect, manual)"
+        },
+        "note": { "type": "string", "description": "遷移理由またはメモ" }
+      }
+    }
+  },
+
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "enum": [1, 2, 3, 4],
+      "description": "スキーマバージョン。v1: 初期、v2: history + $defs + reverted、v3: evidence + success_metrics + validation_result + from_status nullable、v4: source_type + competitor_gap_ref + competitor_evidence (Pipeline Contract)"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "最終更新時間"
+    },
+    "scans": {
+      "type": "array",
+      "description": "スキャン作業リスト",
+      "items": {
+        "type": "object",
+        "required": ["scan_id", "phase", "created_at"],
+        "properties": {
+          "scan_id": {
+            "type": "string",
+            "description": "スキャン作業固有 ID (例: scan-2026-01-25)"
+          },
+          "phase": {
+            "$ref": "#/$defs/scan_phase"
+          },
+          "focus": {
+            "type": ["string", "null"],
+            "description": "集中領域 (例: gamification, monetization, ai-tutor)"
+          },
+          "target_competitor": {
+            "type": ["string", "null"],
+            "description": "特定競合社集中 (例: duolingo, speak, elsa)"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "scanned_docs_count": {
+            "type": "integer",
+            "description": "スキャンしたリサーチ文書数"
+          },
+          "candidates_generated": {
+            "type": "integer",
+            "description": "生成された候補数"
+          },
+          "notes": {
+            "type": "string",
+            "description": "追加メモ"
+          },
+          "validation_result": {
+            "$ref": "#/$defs/validation_result",
+            "description": "Phase 6.1 自動検証結果"
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "phase": { "const": "completed" } } },
+            "then": { "required": ["completed_at", "scanned_docs_count"] }
+          }
+        ]
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "description": "生成された機能候補リスト",
+      "items": {
+        "type": "object",
+        "required": ["candidate_id", "name", "status", "scan_id", "created_at"],
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "description": "候補固有 ID (ファイル名ベース)"
+          },
+          "name": {
+            "type": "string",
+            "description": "機能候補名"
+          },
+          "status": {
+            "$ref": "#/$defs/candidate_status"
+          },
+          "doc_path": {
+            "type": "string",
+            "description": "候補文書パス (docs/features/candidates/market/...)"
+          },
+          "scan_id": {
+            "type": "string",
+            "description": "この候補を生成したスキャン ID"
+          },
+          "ice_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "ICE スコア (v3 加重平均公式)。candidate 文書の ICE Score は生成時点のスナップショットであり、この値が公式スコア"
+          },
+          "ice_score_v1": {
+            "type": "number",
+            "description": "v1/v2 公式で算出された既存スコア (マイグレーション保存用)"
+          },
+          "japan_fit": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "Japan-Fit スコア (0-10、小数点許可)"
+          },
+          "source_docs": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "根拠リサーチ文書リスト"
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/evidence_entry" },
+            "description": "構造化された根拠リスト (v3 新規)。Phase 5 Evidence Gate で検証"
+          },
+          "success_metrics": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/success_metric" },
+            "description": "測定可能な成功指標 (v3 新規)"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "レビュー完了時間"
+          },
+          "converted_to": {
+            "type": "string",
+            "description": "承認後生成された Feature ID (例: 030-feature-name)"
+          },
+          "rejection_reason": {
+            "type": "string",
+            "description": "却下理由"
+          },
+          "merged_into": {
+            "type": "string",
+            "description": "統合先 Feature ID (merged 状態時必須)"
+          },
+          "merge_note": {
+            "type": "string",
+            "description": "統合理由"
+          },
+          "deferred_until": {
+            "type": "string",
+            "format": "date",
+            "description": "保留解除予定日"
+          },
+          "deferred_reason": {
+            "type": "string",
+            "description": "保留理由 (deferred 状態時必須)"
+          },
+          "reverted_from": {
+            "type": "string",
+            "description": "revert 以前の状態 (reverted 状態時必須)"
+          },
+          "revert_reason": {
+            "type": "string",
+            "description": "復元理由 (reverted 状態時必須)"
+          },
+          "source_type": {
+            "type": "string",
+            "enum": ["research", "competitor_gap", "hybrid"],
+            "default": "research",
+            "description": "候補の出典: research (リサーチ文書)、competitor_gap (競合ギャップ)、hybrid (複合)。v4 追加"
+          },
+          "competitor_gap_ref": {
+            "type": ["string", "null"],
+            "pattern": "^comp-\\d{3}$",
+            "default": null,
+            "description": "連結された competitor-registry gap ID (e.g., comp-025)。v4 追加"
+          },
+          "competitor_evidence": {
+            "type": ["object", "null"],
+            "default": null,
+            "properties": {
+              "gap_severity": { "enum": ["HIGH", "MEDIUM", "LOW"] },
+              "app_count": { "type": "integer" },
+              "apps": { "type": "array", "items": { "type": "string" } },
+              "opportunity_score": { "type": ["number", "null"] },
+              "is_industry_standard": { "type": "boolean" }
+            },
+            "description": "competitor-registry から取得した競合分析データ。v4 追加"
+          },
+          "history": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/history_entry" },
+            "description": "状態遷移履歴 (append-only)。v2 で追加"
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "const": "converted" } } },
+            "then": { "required": ["converted_to"] }
+          },
+          {
+            "if": { "properties": { "status": { "const": "rejected" } } },
+            "then": { "required": ["rejection_reason"] }
+          },
+          {
+            "if": { "properties": { "status": { "const": "merged" } } },
+            "then": { "required": ["merged_into"] }
+          },
+          {
+            "if": { "properties": { "status": { "const": "deferred" } } },
+            "then": { "required": ["deferred_reason"] }
+          },
+          {
+            "if": { "properties": { "status": { "const": "reverted" } } },
+            "then": { "required": ["reverted_from", "revert_reason"] }
+          }
+        ]
+      }
+    }
+  }
+}

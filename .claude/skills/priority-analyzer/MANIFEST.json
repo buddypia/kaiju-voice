@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "skill_id": "priority-analyzer",
+  "skill_version": "2.0.0",
+  "tier": 2,
+  "tier_description": "Pipeline - AI-Adjusted WSJF Lite モデル基盤優先順位分析",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": false,
+    "postflight_required": false,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "context_collection": "haiku",
+      "wsjf_calculation": "sonnet",
+      "priority_ranking": "sonnet"
+    },
+    "fallback_chain": ["haiku", "sonnet"]
+  },
+  "evidence_policy": {
+    "note": "優先順位分析は動的スコア算出。キャッシュ不要"
+  },
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "優先順位分析",
+      "機能優先順位",
+      "次に何を開発すべき",
+      "開発ロードマップ検討",
+      "MVPに何が必要"
+    ],
+    "args_pattern": "[<機能ID>] [--all] [--candidates] [--apply] [--set-phase <phase>]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["feature-status-sync"]
+  },
+  "called_by": ["feature-pilot", "analyze-what-to-build"],
+  "calls": ["research-gap-analyzer"],
+  "outputs": [
+    {
+      "type": "state_update",
+      "path_pattern": "docs/features/*/CONTEXT.json",
+      "description": "priorityセクション更新"
+    }
+  ],
+  "ssot_files": ["docs/features/*/CONTEXT.json"],
+  "pipeline": {
+    "stage": 3,
+    "data_products": {
+      "produces": [
+        {
+          "artifact_id": "priority-rankings",
+          "path": "docs/features/*/CONTEXT.json",
+          "schema": "priority-section-v1"
+        }
+      ],
+      "consumes": [
+        {
+          "artifact_id": "candidate-registry",
+          "source_skill": "market-intelligence-scanner",
+          "path": ".claude/skills/market-intelligence-scanner/assets/scan-status.json",
+          "schema": "scan-status-v4",
+          "required": false,
+          "freshness_slo_days": 30,
+          "on_missing": "skip_phase_0"
+        }
+      ]
+    }
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-01",
+      "changes": "MANIFEST.json 初期生成"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-02",
+      "changes": "ESP Lite 適用 - schema_version 2, model_routing 追加 (preflight/postflight 選択的)"
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-07",
+      "changes": "Pipeline Contract System: Phase 0 Candidate Pipeline Awareness 追加 (ICE→Provisional WSJFマッピング, competitor_urgency関数), pipeline.data_products宣言 (consumes: candidate-registry)"
+    }
+  ]
+}

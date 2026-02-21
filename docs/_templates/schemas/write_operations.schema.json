@@ -1,0 +1,353 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hackathon-project.app/schemas/write_operations.schema.json",
+  "title": "Write Operations Schema",
+  "description": "API→DB データ 変更 明細のための メタスキーマ。SPEC §0.4.5 で使用。",
+  "type": "object",
+  "required": ["feature_id", "operations"],
+  "properties": {
+    "feature_id": {
+      "type": "string",
+      "description": "機能 ID (3桁の数字)",
+      "pattern": "^[0-9]{3}$"
+    },
+    "operations": {
+      "type": "array",
+      "description": "API→DB 変更 マッピング リスト",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/operation"
+      }
+    },
+    "transactions": {
+      "type": "array",
+      "description": "トランザクション 境界 定義",
+      "items": {
+        "$ref": "#/$defs/transaction"
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "description": "冪等性 確保 戦略",
+      "$ref": "#/$defs/idempotency"
+    },
+    "audit": {
+      "type": "object",
+      "description": "監査 政策",
+      "$ref": "#/$defs/audit"
+    }
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "description": "単一 API→DB 変更 マッピング",
+      "required": ["api", "action", "table", "fields"],
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "API エンドポイント または イベント名",
+          "examples": ["POST /api/lessons/{id}/complete", "onLessonComplete"]
+        },
+        "action": {
+          "type": "string",
+          "description": "データ 操作 種類",
+          "enum": ["INSERT", "UPDATE", "UPSERT", "DELETE", "SOFT_DELETE"]
+        },
+        "table": {
+          "type": "string",
+          "description": "対象 テーブル名 (snake_case)",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "fields": {
+          "type": "array",
+          "description": "変更される フィールド リスト",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/field_change"
+          }
+        },
+        "condition": {
+          "type": "string",
+          "description": "WHERE 条件 (SQL 表現式)",
+          "examples": ["id = :lesson_id AND user_id = auth.uid()"]
+        },
+        "triggers": {
+          "type": "array",
+          "description": "連鎖トリガー/副作用 リスト",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "field_change": {
+      "type": "object",
+      "description": "フィールド変更詳細",
+      "required": ["name", "value_source"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "フィールド名 (snake_case)",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "value_source": {
+          "type": "string",
+          "description": "値の出所",
+          "enum": [
+            "request_body",
+            "path_param",
+            "query_param",
+            "auth_context",
+            "computed",
+            "default",
+            "now()"
+          ]
+        },
+        "computation": {
+          "type": "string",
+          "description": "computedの場合の計算ロジック",
+          "examples": ["current_streak + 1", "COALESCE(total_xp, 0) + :earned_xp"]
+        },
+        "validation": {
+          "type": "string",
+          "description": "値の有効性検証規則",
+          "examples": ["score >= 0 AND score <= 100"]
+        }
+      }
+    },
+    "transaction": {
+      "type": "object",
+      "description": "トランザクション 境界 定義",
+      "required": ["name", "operations", "isolation"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "トランザクション識別子",
+          "examples": ["TX_COMPLETE_LESSON", "TX_SUBMIT_REVIEW"]
+        },
+        "operations": {
+          "type": "array",
+          "description": "トランザクションに含まれる作業リスト (順序重要)",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "isolation": {
+          "type": "string",
+          "description": "トランザクション隔離レベル",
+          "enum": ["READ_COMMITTED", "REPEATABLE_READ", "SERIALIZABLE"],
+          "default": "READ_COMMITTED"
+        },
+        "rollback_conditions": {
+          "type": "array",
+          "description": "ロールバック条件リスト",
+          "items": {
+            "$ref": "#/$defs/rollback_condition"
+          }
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "description": "トランザクションタイムアウト (ミリ秒)",
+          "minimum": 1000,
+          "maximum": 30000,
+          "default": 5000
+        }
+      }
+    },
+    "rollback_condition": {
+      "type": "object",
+      "description": "ロールバック条件詳細",
+      "required": ["condition", "error_code"],
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "ロールバックトリガー条件",
+          "examples": ["affected_rows = 0", "duplicate_key_violation", "constraint_violation"]
+        },
+        "error_code": {
+          "type": "string",
+          "description": "返却エラーコード",
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "examples": ["LESSON_NOT_FOUND", "CONCURRENT_UPDATE_CONFLICT"]
+        },
+        "recovery_action": {
+          "type": "string",
+          "description": "復旧アクション (選択)",
+          "enum": ["RETRY", "NOTIFY_USER", "LOG_AND_CONTINUE", "ESCALATE"]
+        }
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "description": "冪等性 確保 戦略",
+      "required": ["strategy"],
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "description": "冪等性戦略",
+          "enum": ["IDEMPOTENCY_KEY", "UPSERT", "CONDITIONAL_INSERT", "NATURAL_IDEMPOTENT", "N/A"]
+        },
+        "key_source": {
+          "type": "string",
+          "description": "IDEMPOTENCY_KEY戦略時のキー出所",
+          "enum": ["request_header", "request_body", "computed"],
+          "examples": ["X-Idempotency-Key header", "client_request_id field"]
+        },
+        "key_ttl_seconds": {
+          "type": "integer",
+          "description": "冪等性キー有効期限 (秒)",
+          "minimum": 60,
+          "maximum": 86400,
+          "default": 3600
+        },
+        "duplicate_behavior": {
+          "type": "string",
+          "description": "重複リクエスト時の動作",
+          "enum": ["RETURN_CACHED", "RETURN_SUCCESS", "RETURN_CONFLICT"],
+          "default": "RETURN_CACHED"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "N/Aの場合の理由明記",
+          "examples": ["読み取り専用API", "自然に冪等なDELETE作業"]
+        }
+      }
+    },
+    "audit": {
+      "type": "object",
+      "description": "監査 政策",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "監査ロギング有効化の可否"
+        },
+        "level": {
+          "type": "string",
+          "description": "監査レベル",
+          "enum": ["NONE", "BASIC", "DETAILED", "FULL"],
+          "default": "BASIC"
+        },
+        "retention_days": {
+          "type": "integer",
+          "description": "監査ログ保存期間 (日)",
+          "minimum": 7,
+          "maximum": 365,
+          "default": 90
+        },
+        "fields_logged": {
+          "type": "array",
+          "description": "記録するフィールドリスト",
+          "items": {
+            "type": "string"
+          },
+          "examples": [["user_id", "action", "table", "old_value", "new_value", "timestamp"]]
+        },
+        "pii_handling": {
+          "type": "string",
+          "description": "PII(個人情報)処理方式",
+          "enum": ["MASK", "HASH", "EXCLUDE", "PLAIN"],
+          "default": "MASK"
+        },
+        "storage": {
+          "type": "string",
+          "description": "監査ログ保存位置",
+          "enum": ["audit_logs_table", "external_service", "both"],
+          "default": "audit_logs_table"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "enabled=falseの場合の理由明記",
+          "examples": ["非敏感データのみ処理", "一時データで監査不必要"]
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "feature_id": "005",
+      "operations": [
+        {
+          "api": "POST /api/lessons/{lesson_id}/complete",
+          "action": "UPDATE",
+          "table": "lesson_progress",
+          "fields": [
+            {
+              "name": "status",
+              "value_source": "computed",
+              "computation": "'completed'"
+            },
+            {
+              "name": "completed_at",
+              "value_source": "now()"
+            },
+            {
+              "name": "score",
+              "value_source": "request_body",
+              "validation": "score >= 0 AND score <= 100"
+            }
+          ],
+          "condition": "lesson_id = :lesson_id AND user_id = auth.uid()",
+          "triggers": ["update_user_stats", "check_achievement_unlock"]
+        },
+        {
+          "api": "POST /api/lessons/{lesson_id}/complete",
+          "action": "UPSERT",
+          "table": "user_stats",
+          "fields": [
+            {
+              "name": "total_lessons_completed",
+              "value_source": "computed",
+              "computation": "COALESCE(total_lessons_completed, 0) + 1"
+            },
+            {
+              "name": "total_xp",
+              "value_source": "computed",
+              "computation": "COALESCE(total_xp, 0) + :earned_xp"
+            },
+            {
+              "name": "updated_at",
+              "value_source": "now()"
+            }
+          ],
+          "condition": "user_id = auth.uid()"
+        }
+      ],
+      "transactions": [
+        {
+          "name": "TX_COMPLETE_LESSON",
+          "operations": ["UPDATE lesson_progress", "UPSERT user_stats"],
+          "isolation": "READ_COMMITTED",
+          "rollback_conditions": [
+            {
+              "condition": "lesson_progress.affected_rows = 0",
+              "error_code": "LESSON_NOT_FOUND",
+              "recovery_action": "NOTIFY_USER"
+            },
+            {
+              "condition": "constraint_violation",
+              "error_code": "DATA_INTEGRITY_ERROR",
+              "recovery_action": "LOG_AND_CONTINUE"
+            }
+          ],
+          "timeout_ms": 5000
+        }
+      ],
+      "idempotency": {
+        "strategy": "IDEMPOTENCY_KEY",
+        "key_source": "request_header",
+        "key_ttl_seconds": 3600,
+        "duplicate_behavior": "RETURN_CACHED"
+      },
+      "audit": {
+        "enabled": true,
+        "level": "BASIC",
+        "retention_days": 90,
+        "fields_logged": ["user_id", "lesson_id", "score", "completed_at"],
+        "pii_handling": "EXCLUDE",
+        "storage": "audit_logs_table"
+      }
+    }
+  ]
+}

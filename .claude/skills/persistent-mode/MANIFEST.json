@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "skill_id": "persistent-mode",
+  "skill_version": "3.1.0",
+  "tier": 3,
+  "tier_description": "Utility - 完了まで自動持続モード (Ralph Wiggum パターン)",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": true
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "status_check": "haiku",
+      "error_analysis": "sonnet",
+      "structural_diagnosis": "opus"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "note": "Evidence FreshnessはCLAUDE.md AI行動指針で処理。別途キャッシュ実装なし",
+    "recommended_freshness": [
+      { "type": "flutter_analyze", "minutes": 30, "invalidation": "lib/**/*.dart 変更時" },
+      { "type": "flutter_test", "minutes": 30, "invalidation": "test/**/*.dart 変更時" },
+      { "type": "todo_status", "minutes": 0, "invalidation": "毎回反復ごとに再検査" }
+    ]
+  },
+  "preflight_checks": [
+    {
+      "id": "PF-001",
+      "description": "検証対象明確",
+      "blocking": true
+    },
+    {
+      "id": "PF-002",
+      "description": "完了条件定義済み",
+      "blocking": true
+    },
+    {
+      "id": "PF-003",
+      "description": "最大反復回数設定",
+      "blocking": true
+    },
+    {
+      "id": "PF-004",
+      "description": "CONTEXT.json アクセス可能",
+      "blocking": true
+    },
+    {
+      "id": "PF-005",
+      "description": "Evidence キャッシュ確認",
+      "blocking": false
+    }
+  ],
+  "postflight_checks": [
+    {
+      "id": "POF-001",
+      "description": "全検証通過",
+      "blocking": true
+    },
+    {
+      "id": "POF-002",
+      "description": "CONTEXT.json 更新",
+      "blocking": true
+    },
+    {
+      "id": "POF-003",
+      "description": "反復ログ記録",
+      "blocking": false
+    },
+    {
+      "id": "POF-004",
+      "description": "同一エラー未発生",
+      "blocking": true
+    },
+    {
+      "id": "POF-005",
+      "description": "Evidence キャッシング完了",
+      "blocking": false
+    }
+  ],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": ["最後まで", "完了まで", "止めないで", "persistent", "ralph"],
+    "args_pattern": "[--max-iterations <N>] [--verification <command>] [--force]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": ["turbo-mode"]
+  },
+  "called_by": ["feature-pilot"],
+  "calls": ["pre-quality-gate"],
+  "execution_rules": {
+    "zero_tolerance": ["部分完了禁止", "範囲縮小禁止", "早期中断禁止", "検証なしの完了主張禁止"],
+    "verification_first": "完了主張前に必ず検証実行",
+    "termination": {
+      "success": "全検証通過",
+      "failure": "max_iterations 超過または同一エラー3回",
+      "manual": "ユーザー明示的中断"
+    }
+  },
+  "outputs": [
+    {
+      "type": "log",
+      "format": "markdown",
+      "description": "反復実行ログおよび最終結果"
+    },
+    {
+      "type": "state",
+      "format": "json",
+      "description": "CONTEXT.json 状態更新"
+    }
+  ],
+  "ssot_files": [],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-01",
+      "changes": "MANIFEST.json 生成 - oh-my-claudecode ralph パターン適用"
+    },
+    {
+      "version": "3.0.0",
+      "date": "2026-02-01",
+      "changes": "Enforced Skill Pattern v2.0 適用 - Pre/Post-flight, Model Routing, Evidence Policy"
+    },
+    {
+      "version": "3.1.0",
+      "date": "2026-02-02",
+      "changes": "希望事項文書化修正: cache_location 削除、evidence_policyをAI行動指針として再定義"
+    }
+  ]
+}

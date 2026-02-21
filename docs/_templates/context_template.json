@@ -1,0 +1,291 @@
+{
+  "$comment": "Hackathon Project プロジェクト統合コンテキストテンプレート v7. docs/features/{ID}/ フォルダーに CONTEXT.json としてコピーして使用. v7: completion_contract セクション追加 (3 層 DoD システム). v6 互換.",
+
+  "schema_version": 7,
+  "feature_id": "{NNN}-{feature-name}",
+  "title": "{機能の日本語タイトル}",
+  "feature_type": null,
+
+  "quick_resume": {
+    "$comment": "セッション再開時即時把握用 (3秒以内に状況把握)",
+    "current_state": "Idle",
+    "current_task": "",
+    "next_actions": [],
+    "blockers": [],
+    "last_updated_at": "{ISO_8601_DATETIME}",
+    "last_decision": {
+      "summary": "",
+      "at": null
+    },
+    "current_rationale": "",
+    "active_constraints": [
+      "Feature-First + Simplified Clean Architecture 準拠",
+      "TypeScript interface + Zod スキーマ使用"
+    ],
+    "previous_state": null,
+    "question_count": 0
+  },
+
+  "progress": {
+    "$comment": "FR 基づく進捗度 - 自動計算: (completed / total) * 100",
+    "percentage": 0,
+    "fr_total": 0,
+    "fr_completed": 0,
+    "fr_in_progress": 0,
+    "details": {}
+  },
+
+  "competitive_data": {
+    "comp_ids": [],
+    "gap_severity": null,
+    "is_industry_standard": false,
+    "app_count": 0,
+    "linked_at": null
+  },
+
+  "architecture": {
+    "$comment": "Phase 0 Discovery & Architecture 成果物. feature-architectが Step 1 で null に初期化. Step 1.5 Discovery Gate 通過後 feature-pilotが成果物経路で更新. Tier S(Phase 0 スキップ) の場合全体 null 維持.",
+    "domain_model": null,
+    "adr": null,
+    "system_design": null,
+    "discovery_gate": null,
+    "tier_applied": null
+  },
+
+  "why": "{この機能が必要な理由 - コンテキスト消失防止の鍵. 最低 10 文字以上}",
+  "success_criteria": ["{成功条件 1 - 測定可能に}", "{成功条件 2}"],
+  "constraints": [
+    "Feature-First + Simplified Clean Architecture 準拠",
+    "TypeScript interface + Zod スキーマ使用",
+    "Next.js API Routes バックエンド",
+    "日本語専用"
+  ],
+
+  "artifacts": {
+    "brief": "docs/features/{NNN}-{feature-name}/BRIEF.md",
+    "brief_format_version": null,
+    "spec": null,
+    "spec_version": null,
+    "spec_locked_at": null,
+    "spec_validation": {
+      "last_run_at": null,
+      "verdict": null,
+      "blocking_count": 0,
+      "warning_count": 0
+    },
+    "screens": [],
+    "design_assets": null,
+    "index": "docs/features/{NNN}-{feature-name}/index.md"
+  },
+
+  "references": {
+    "$comment": "現在の作業に応じて参照優先順位が動的に変更される",
+    "priority_order": ["spec", "screens"],
+    "current_focus": {
+      "document": "",
+      "section": "",
+      "reason": ""
+    },
+    "documents": {
+      "spec": {
+        "path": "",
+        "sections_to_read": [],
+        "focus": []
+      },
+      "screens": {
+        "paths": [],
+        "focus": []
+      }
+    },
+    "related_specs": [],
+    "related_code": {
+      "types": [],
+      "hooks": [],
+      "api": [],
+      "components": []
+    },
+    "dependencies": {
+      "features": [],
+      "packages": []
+    },
+    "research_links": {
+      "research_ids": [],
+      "id_format": "R-YYYYMMDD-NNN",
+      "comp_ids": []
+    }
+  },
+
+  "execution": {
+    "lock": {
+      "locked": false,
+      "locked_by": null,
+      "locked_at": null
+    },
+    "active_branch": null,
+    "rollback_point": null
+  },
+
+  "decisions": [
+    {
+      "$comment": "例 - 実際の使用時に削除",
+      "at": "{ISO_8601_DATETIME}",
+      "summary": "{決定要約}",
+      "rationale": "{決定根拠}"
+    }
+  ],
+
+  "open_questions": [
+    {
+      "$comment": "例 - 実際の使用時に削除",
+      "id": "Q1",
+      "question": "{未解決の質問}",
+      "status": "open",
+      "type": "question",
+      "impact": "{影響範囲}",
+      "resolution": null
+    }
+  ],
+
+  "history": [
+    {
+      "$comment": "例 - 実際の使用時に削除",
+      "at": "{ISO_8601_DATETIME}",
+      "from_state": "Idle",
+      "to_state": "Briefing",
+      "triggered_by": "feature-architect",
+      "note": ""
+    }
+  ],
+
+  "autonomy_control": {
+    "$comment": "AI 自律性制御 - 7 問上限ルール, 自律停止条件",
+    "max_questions_per_session": 7,
+    "auto_stop_conditions": [
+      "7問質問上限到達",
+      "BLOCKING パターン発見",
+      "Tier 1 セキュリティ関連作業",
+      "DB マイグレーション必要"
+    ],
+    "current_autonomy_level": "supervised",
+    "tier": null,
+    "claude_md_checked": false,
+    "claude_md_version": null
+  },
+
+  "esp_execution_log": {
+    "$comment": "ESP (Enforced Skill Pattern) 実行記録 - 長期運用のための検証可能な証拠",
+    "schema_version": 1,
+    "summary": {
+      "total_esp_calls": 0,
+      "preflight_completed": 0,
+      "postflight_completed": 0,
+      "violations": 0,
+      "compliance_rate": null
+    },
+    "executions": [
+      {
+        "$comment": "例 - 実際の使用時に削除",
+        "skill": "feature-pilot",
+        "esp_version": "v2.0",
+        "started_at": "{ISO_8601_DATETIME}",
+        "preflight": {
+          "completed": false,
+          "completed_at": null,
+          "all_passed": null,
+          "blocking_items": []
+        },
+        "postflight": {
+          "completed": false,
+          "completed_at": null,
+          "all_passed": null,
+          "failed_items": []
+        },
+        "model_routing": {
+          "task_calls": 0,
+          "with_model_param": 0,
+          "compliance": null
+        },
+        "evidence_used": [],
+        "ended_at": null,
+        "status": "pending"
+      }
+    ],
+    "violations_history": [
+      {
+        "$comment": "例 - 実際の使用時に削除",
+        "at": "{ISO_8601_DATETIME}",
+        "skill": "",
+        "violation_type": "",
+        "severity": "",
+        "action_taken": ""
+      }
+    ]
+  },
+
+  "traceability": {
+    "$comment": "BRIEF ↔ SPEC 追跡性マッピング. spec-generatorが SPEC 作成後に填補. Readiness Gate Phase 1.5で検証.",
+    "user_story_to_fr": [],
+    "bdd_to_fr": [],
+    "unmapped_user_stories": [],
+    "unmapped_bdd_scenarios": [],
+    "validated_at": null
+  },
+
+  "priority": {
+    "$comment": "priority-analyzer (RICE v2) が自動計算. rice-section-schema.json が SSOT.",
+    "version": "3.0",
+    "schema": "rice-v2",
+    "last_updated": null,
+    "phase": "mvp",
+    "rice_inputs": {
+      "reach": { "score": 5, "evidence": {}, "rationale": "" },
+      "impact": { "score": 1, "evidence": {}, "rationale": "" },
+      "confidence": { "score": 0.5, "factors": {} },
+      "effort": { "score": 2, "unit": "person-weeks", "evidence": {}, "rationale": "" }
+    },
+    "competitive_adjustment": {
+      "adjustment": 1.0,
+      "has_data": false,
+      "evidence": {},
+      "rationale": ""
+    },
+    "calculated": {
+      "rice_score": 0,
+      "adjusted_score": 0,
+      "competitive_adjustment": 1.0,
+      "manual_override_applied": 1.0,
+      "formula": "(Reach × Impact × Confidence) / Effort × CompAdj × ManualOverride",
+      "component_breakdown": {}
+    },
+    "data_sources_read": [],
+    "manual_override": { "value": 1.0, "reason": null },
+    "ai_rationale": "",
+    "history": []
+  },
+
+  "completion_contract": {
+    "$comment": "DoD 構造化追跡. BRIEF §7 を SSOT とし、パイプラインが自動追跡. v7 で追加.",
+    "version": "1.0",
+    "work_type": null,
+    "source": "BRIEF §7",
+    "last_verified_at": null,
+    "verdict": null,
+    "items": [],
+    "summary": {
+      "total": 0,
+      "passed": 0,
+      "failed": 0,
+      "skipped": 0,
+      "pass_rate": null
+    }
+  },
+
+  "brief_context": {
+    "$comment": "brief_regenerator.pyが BRIEF.md から自動抽出",
+    "core_goal": "",
+    "user_value": "",
+    "business_metrics": [],
+    "user_story": "",
+    "priority_label": ""
+  }
+}

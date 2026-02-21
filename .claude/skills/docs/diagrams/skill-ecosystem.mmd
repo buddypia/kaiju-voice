@@ -1,0 +1,153 @@
+%% Hackathon Project スキルエコシステム全体アーキテクチャ
+%% 51個のスキルの階層構造と呼び出し関係を視覚化
+
+flowchart TB
+    %% ユーザー入力
+    User([ユーザーリクエスト])
+
+    %% Tier 1: オーケストレーター
+    subgraph Tier1["Tier 1: オーケストレーター"]
+        FP[feature-pilot<br/>ESP v2.0]
+        TM[turbo-mode<br/>ESP v3.0]
+        MIS[market-intelligence<br/>-scanner]
+        RGA[research-gap<br/>-analyzer]
+    end
+
+    %% Tier 2: 設計
+    subgraph Tier2_Design["Tier 2: 設計段階"]
+        FA[feature-architect]
+        FSG[feature-spec-generator]
+        FSU[feature-spec-updater]
+        UAG[ui-approval-gate]
+        PA[priority-analyzer]
+        SV[spec-validator]
+    end
+
+    %% Tier 2: 実装
+    subgraph Tier2_Impl["Tier 2: 実装段階"]
+        FI[feature-implementer]
+        FW[feature-wiring]
+        FSS[feature-status-sync]
+        BF[bug-fix<br/>ESP v2.0]
+    end
+
+    %% Tier 2: マイグレーション
+    subgraph Tier2_Migrate["Tier 2: マイグレーション"]
+        LM[legacy-migration]
+        MS[migration-sync]
+    end
+
+    %% Tier 3: 品質検証
+    subgraph Tier3_QA["Tier 3: 品質検証"]
+        FQA[flutter-qa<br/>ESP v3.1]
+        SS[security-scan<br/>ESP v2.1]
+        PM[persistent-mode<br/>ESP v3.1]
+        PQG[pre-quality-gate]
+        SHC[skill-health-check<br/>ESP v2.1]
+    end
+
+    %% Tier 3: コードスキャン
+    subgraph Tier3_Scan["Tier 3: コードスキャン"]
+        HS[hardcoded-scan]
+        HTF[hardcoded-text-finder]
+        HCF[hardcoded-color-finder]
+        TCC[test-coverage-check]
+    end
+
+    %% ユーティリティ
+    subgraph Utility["ユーティリティ"]
+        AS[arb-sync]
+        GU[glossary-updater]
+        SCM[sync-claude-md]
+        WM[wireframe-manager]
+        FD[feature-doctor]
+    end
+
+    %% バックエンド
+    subgraph Backend["バックエンド管理"]
+        SUS[supabase-sync]
+        EFV[edge-function-validator]
+    end
+
+    %% AI/リサーチ
+    subgraph Research["AI/リサーチ"]
+        GEM[gemini]
+        GDR[google-deep-research]
+        ODR[openai-deep-research]
+    end
+
+    %% データストア
+    subgraph Storage["データストア"]
+        CTX[(CONTEXT.json)]
+        SPEC[(SPEC.md)]
+        SCREEN[(screens/*.md)]
+        CODE[(コード/テスト)]
+        INDEX[(index.md)]
+    end
+
+    %% ユーザー → Tier 1
+    User -->|開発リクエスト| FP
+    User -->|高速実行| TM
+    User -->|市場分析| MIS
+    User -->|リサーチギャップ| RGA
+
+    %% feature-pilot 下位スキル呼び出し
+    FP -->|NEW_FEATURE| FA
+    FP -->|MODIFY_FEATURE| FSU
+    FP -->|BUG_FIX| BF
+    FP -.->|品質検証| FQA
+    FP -.->|セキュリティ検査| SS
+    FP -.->|持続モード| PM
+
+    %% 設計フロー
+    FA -->|生成| CTX
+    FA -->|呼び出し| FSG
+    FSG -->|生成| SPEC
+    FSG -->|生成| SCREEN
+    FSU -->|修正| SPEC
+    UAG -->|参照| SCREEN
+    UAG -->|呼び出し| WM
+    PA -->|更新| CTX
+
+    %% 実装フロー
+    FI -->|参照| SPEC
+    FI -->|生成| CODE
+    FW -->|参照| CODE
+    FSS -->|更新| CTX
+    FSS -->|同期| INDEX
+    BF -->|修正| CODE
+
+    %% turbo-mode 接続
+    TM -.->|並列呼び出し| FA
+    TM -.->|並列呼び出し| FI
+
+    %% 品質検証接続
+    FQA -.->|検証| CODE
+    SS -.->|検証| CODE
+    PM -.->|繰り返し| FQA
+    PQG -.->|検証| CODE
+
+    %% コードスキャン接続
+    HS -->|呼び出し| HTF
+    HS -->|呼び出し| HCF
+
+    %% リサーチ接続
+    MIS -.->|呼び出し| GDR
+    RGA -.->|呼び出し| ODR
+    RGA -.->|呼び出し| GDR
+
+    %% スタイル
+    classDef tier1 fill:#ffcdd2,stroke:#b71c1c,stroke-width:2px
+    classDef tier2_design fill:#e3f2fd,stroke:#1565c0
+    classDef tier2_impl fill:#c8e6c9,stroke:#2e7d32
+    classDef tier3 fill:#fff3e0,stroke:#e65100
+    classDef utility fill:#f3e5f5,stroke:#7b1fa2
+    classDef storage fill:#eceff1,stroke:#455a64
+    classDef esp fill:#ffeb3b,stroke:#f57f17,stroke-width:2px
+
+    class FP,TM,MIS,RGA tier1
+    class FA,FSG,FSU,UAG,PA,SV tier2_design
+    class FI,FW,FSS,BF,LM,MS tier2_impl
+    class FQA,SS,PM,PQG,SHC,HS,HTF,HCF,TCC tier3
+    class AS,GU,SCM,WM,FD,SUS,EFV,GEM,GDR,ODR utility
+    class CTX,SPEC,SCREEN,CODE,INDEX storage
