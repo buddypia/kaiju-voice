@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
     const userMessage = `ラウンド${roundNumber}の攻撃を生成してください。`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
+      model: 'gemini-3-flash-preview',
       contents: [{ role: 'user', parts: [{ text: userMessage }] }],
       config: {
         systemInstruction: systemPrompt,
