@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" font-family="system-ui, sans-serif">
+  <rect width="600" height="320" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="300" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">VoiceVisualizer — 3レイヤー構造</text>
+
+  <!-- Canvas preview area -->
+  <rect x="150" y="50" width="300" height="150" rx="10" fill="#0f172a"/>
+
+  <!-- Layer 1: edge glow -->
+  <circle cx="300" cy="125" r="65" fill="none" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+  <circle cx="300" cy="125" r="60" fill="none" stroke="#3b82f6" stroke-width="2" opacity="0.5"/>
+
+  <!-- Layer 2: center pulse -->
+  <circle cx="300" cy="125" r="25" fill="#3b82f6" opacity="0.15"/>
+  <circle cx="300" cy="125" r="18" fill="#3b82f6" opacity="0.25"/>
+
+  <!-- Layer 3: frequency bars (simplified) -->
+  <rect x="262" y="88" width="3" height="30" rx="1" fill="#22d3ee" opacity="0.8"/>
+  <rect x="268" y="95" width="3" height="22" rx="1" fill="#22d3ee" opacity="0.7"/>
+  <rect x="274" y="82" width="3" height="40" rx="1" fill="#22d3ee" opacity="0.9"/>
+  <rect x="280" y="90" width="3" height="28" rx="1" fill="#22d3ee" opacity="0.8"/>
+  <rect x="286" y="100" width="3" height="18" rx="1" fill="#22d3ee" opacity="0.6"/>
+  <rect x="292" y="85" width="3" height="36" rx="1" fill="#22d3ee" opacity="0.9"/>
+  <rect x="298" y="78" width="3" height="48" rx="1" fill="#22d3ee"/>
+  <rect x="304" y="88" width="3" height="30" rx="1" fill="#22d3ee" opacity="0.8"/>
+  <rect x="310" y="95" width="3" height="22" rx="1" fill="#22d3ee" opacity="0.7"/>
+  <rect x="316" y="82" width="3" height="40" rx="1" fill="#22d3ee" opacity="0.9"/>
+  <rect x="322" y="92" width="3" height="26" rx="1" fill="#22d3ee" opacity="0.7"/>
+  <rect x="328" y="100" width="3" height="18" rx="1" fill="#22d3ee" opacity="0.6"/>
+  <rect x="334" y="88" width="3" height="30" rx="1" fill="#22d3ee" opacity="0.8"/>
+
+  <!-- Layer descriptions -->
+  <rect x="30" y="220" width="170" height="55" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="115" y="242" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">Layer 1: エッジグロー</text>
+  <text x="115" y="260" text-anchor="middle" font-size="9" fill="#64748b">外周リングの脈動</text>
+
+  <rect x="215" y="220" width="170" height="55" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="300" y="242" text-anchor="middle" font-size="10" font-weight="600" fill="#6b21a8">Layer 2: パルスリング</text>
+  <text x="300" y="260" text-anchor="middle" font-size="9" fill="#64748b">中心の呼吸エフェクト</text>
+
+  <rect x="400" y="220" width="170" height="55" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="485" y="242" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">Layer 3: 周波数バー</text>
+  <text x="485" y="260" text-anchor="middle" font-size="9" fill="#64748b">64本の円形配置</text>
+
+  <text x="300" y="302" text-anchor="middle" font-size="10" fill="#94a3b8">AnalyserNode (fftSize: 256) → getByteFrequencyData → requestAnimationFrame</text>
+</svg>

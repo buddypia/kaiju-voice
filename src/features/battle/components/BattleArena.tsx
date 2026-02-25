@@ -18,7 +18,6 @@ import { KaijuDisplay } from '@/features/kaiju/components/KaijuDisplay';
 import { VoiceRecorder } from '@/features/voice/components/VoiceRecorder';
 import { SpeechBubble } from '@/features/voice/components/SpeechBubble';
 import { ParticleCanvas, ImpactFlash, VoiceVisualizer, PinchOverlay } from '@/features/vfx';
-import { CommentaryOverlay } from '@/features/commentary';
 
 interface BattleArenaProps {
   players: [Player, Player];
@@ -30,16 +29,12 @@ interface BattleArenaProps {
   gameMode: GameMode;
   onStartRecording: () => void;
   onShout: (blob: Blob) => void;
-  commentaryText: string;
-  commentaryIsLoading: boolean;
-  commentaryIsSpeaking: boolean;
-  commentaryIsLiveVoice: boolean;
   shoutTranscript: { text: string; turn: 0 | 1 } | null;
 }
 
 /**
  * バトルアリーナ統合コンポーネント
- * 全バトルUIコンポーネント + VFX + AI実況を統合してバトル画面を構成する
+ * 全バトルUIコンポーネント + VFXを統合してバトル画面を構成する
  */
 export function BattleArena({
   players,
@@ -51,10 +46,6 @@ export function BattleArena({
   gameMode,
   onStartRecording,
   onShout,
-  commentaryText,
-  commentaryIsLoading,
-  commentaryIsSpeaking,
-  commentaryIsLiveVoice,
   shoutTranscript,
 }: BattleArenaProps) {
   const [showDamage, setShowDamage] = useState(false);
@@ -343,16 +334,6 @@ export function BattleArena({
             onAnalyserUpdate={handleAnalyserUpdate}
           />
         )}
-
-        {/* AI実況オーバーレイ */}
-        <div className="w-full max-w-2xl">
-          <CommentaryOverlay
-            text={commentaryText}
-            isLoading={commentaryIsLoading}
-            isSpeaking={commentaryIsSpeaking}
-            isLiveVoice={commentaryIsLiveVoice}
-          />
-        </div>
 
         {/* バトルログ */}
         <div className="w-full max-w-2xl">

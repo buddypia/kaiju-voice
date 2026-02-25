@@ -1,5 +1,5 @@
 %% 品質検証フロー図
-%% flutter-qa, security-scan, persistent-mode, pre-quality-gateの統合フロー
+%% pre-quality-gate, security-scan, persistent-mode, pre-quality-gateの統合フロー
 
 flowchart TB
     %% 開始
@@ -16,13 +16,13 @@ flowchart TB
         PQG --> PQ1 --> PQ2 --> PQ3
     end
 
-    %% Flutter QA サイクル
-    subgraph FlutterQA["Flutter QA サイクル (ESP v3.1)"]
-        FQA[flutter-qa]
+    %% Quality Gate サイクル
+    subgraph QualityGate["Quality Gate サイクル (ESP v3.1)"]
+        FQA[pre-quality-gate]
 
         %% Pre-flight
         PreFlight1[/"✈️ Pre-flight Checklist"/]
-        PF1[Flutter SDK 確認]
+        PF1[Node.js 確認]
         PF2[目標タイプ確認]
         PF3[Evidence キャッシュ確認]
 
@@ -73,7 +73,7 @@ flowchart TB
         S1[Supabase RLS 検査]
         S2[ハードコーディングシークレット検査]
         S3[Edge Function 検査]
-        S4[Flutter アプリ検査]
+        S4[Web アプリ検査]
 
         %% 結果
         Report[セキュリティレポート生成]
@@ -136,8 +136,8 @@ flowchart TB
     subgraph EvidenceCache["Evidence Cache"]
         EC[(evidence_cache)]
 
-        E1[flutter analyze: 30分]
-        E2[flutter test: 30分]
+        E1[npm run lint: 30分]
+        E2[npm test: 30分]
         E3[security-scan: 60分]
 
         EC --- E1
@@ -149,7 +149,7 @@ flowchart TB
     Start --> PreQuality
 
     PQ3 -->|No| FixRequired([修正必要])
-    PQ3 -->|Yes| FlutterQA
+    PQ3 -->|Yes| QualityGate
 
     POF3 --> SecurityScan
 

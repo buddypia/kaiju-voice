@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="540" viewBox="0 0 840 540">
+  <defs>
+    <!-- Organic background gradient -->
+    <linearGradient id="hco-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+
+    <!-- Blob for outer Harness Engineering area -->
+    <path id="blob-outer" d="M 220,-150 C 300,-170 380,-140 410,-80 C 440,-20 420,60 380,120 C 340,180 260,210 180,200 C 100,190 20,150 -30,90 C -80,30 -100,-50 -70,-110 C -40,-170 140,-130 220,-150 Z"/>
+
+    <!-- Blob for Context Engineering -->
+    <path id="blob-ctx" d="M 30,-55 C 60,-60 75,-30 70,5 C 65,45 35,65 -5,60 C -45,55 -65,25 -60,-10 C -55,-50 0,-50 30,-55 Z"/>
+
+    <!-- Small item blobs -->
+    <path id="blob-item" d="M 52,-26 C 70,-20 72,5 60,22 C 48,40 18,46 -8,38 C -34,30 -50,10 -46,-12 C -42,-34 -10,-42 20,-38 C 36,-35 44,-30 52,-26 Z"/>
+
+    <!-- Soft drop shadow -->
+    <filter id="hco-sh" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="3" dy="8" stdDeviation="12" flood-color="#cbd5e1" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Lighter shadow for inner items -->
+    <filter id="hco-sh-sm" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="2" dy="5" stdDeviation="8" flood-color="#cbd5e1" flood-opacity="0.3"/>
+    </filter>
+
+    <style>
+      .hco-title { font: 800 28px 'Nunito', 'Quicksand', system-ui, sans-serif; fill: #334155; letter-spacing: -0.3px; }
+      .hco-sub { font: 600 14px 'Nunito', 'Quicksand', system-ui, sans-serif; fill: #64748b; }
+      .hco-h { font: 800 14px 'Nunito', 'Quicksand', system-ui, sans-serif; fill: #1e293b; }
+      .hco-s { font: 600 11px 'Nunito', 'Quicksand', system-ui, sans-serif; fill: #475569; }
+      .hco-ctx-label { font: 700 12px 'Nunito', 'Quicksand', system-ui, sans-serif; fill: #64748b; }
+      .hco-outer-label { font: 600 12px 'Nunito', 'Quicksand', system-ui, sans-serif; fill: #94a3b8; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="840" height="540" fill="url(#hco-bg)"/>
+
+  <!-- Title -->
+  <text x="420" y="52" text-anchor="middle" class="hco-title">ハーネスエンジニアリング</text>
+
+  <!-- Outer: Harness Engineering blob -->
+  <g transform="translate(420, 295)" filter="url(#hco-sh)">
+    <use href="#blob-outer" fill="#eff6ff" transform="scale(1.6, 1.3)"/>
+  </g>
+  <!-- Inner: Context Engineering blob (dashed) -->
+  <g transform="translate(280, 290)" filter="url(#hco-sh-sm)">
+    <use href="#blob-ctx" fill="#ffffff" transform="scale(1.5)"/>
+    <use href="#blob-ctx" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8,5" transform="scale(1.5)"/>
+  </g>
+  <text x="280" y="283" text-anchor="middle" class="hco-ctx-label">コンテキスト</text>
+  <text x="280" y="299" text-anchor="middle" class="hco-ctx-label">エンジニアリング</text>
+
+  <!-- Organic dashed connectors from Context to items -->
+  <g stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 6" fill="none" stroke-linecap="round" opacity="0.5">
+    <path d="M 330,250 Q 400,210 500,195"/>
+    <path d="M 340,280 Q 420,275 490,265"/>
+    <path d="M 340,310 Q 420,325 490,335"/>
+    <path d="M 330,340 Q 400,380 500,395"/>
+  </g>
+
+  <!-- Item 1: MCP Servers (Pink) -->
+  <g transform="translate(540, 195)" filter="url(#hco-sh-sm)">
+    <use href="#blob-item" fill="#fbcfe8" transform="scale(1.15)"/>
+    <text x="8" y="2" text-anchor="middle" class="hco-h" fill="#be185d">MCP Servers</text>
+    <text x="8" y="17" text-anchor="middle" class="hco-s">外部ツール連携</text>
+  </g>
+
+  <!-- Item 2: SKILL.md (Blue) -->
+  <g transform="translate(540, 268)" filter="url(#hco-sh-sm)">
+    <use href="#blob-item" fill="#bfdbfe" transform="scale(1.15)"/>
+    <text x="8" y="2" text-anchor="middle" class="hco-h" fill="#1d4ed8">SKILL.md</text>
+    <text x="8" y="17" text-anchor="middle" class="hco-s">専門スキル設定</text>
+  </g>
+
+  <!-- Item 3: Agents (Green) -->
+  <g transform="translate(540, 341)" filter="url(#hco-sh-sm)">
+    <use href="#blob-item" fill="#bbf7d0" transform="scale(1.15)"/>
+    <text x="8" y="2" text-anchor="middle" class="hco-h" fill="#15803d">Agents</text>
+    <text x="8" y="17" text-anchor="middle" class="hco-s">カスタム専門家</text>
+  </g>
+
+  <!-- Item 4: AGENTS.md (Yellow) -->
+  <g transform="translate(540, 414)" filter="url(#hco-sh-sm)">
+    <use href="#blob-item" fill="#fef08a" transform="scale(1.15)"/>
+    <text x="8" y="2" text-anchor="middle" class="hco-h" fill="#a16207">AGENTS.md</text>
+    <text x="8" y="17" text-anchor="middle" class="hco-s">エージェント設定</text>
+  </g>
+
+</svg>

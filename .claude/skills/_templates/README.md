@@ -29,10 +29,10 @@ cp -r .claude/skills/_templates/skill-template .claude/skills/{{new-skill-name}}
 
 | プレースホルダー        | 説明                      | 例                                    |
 | ----------------------- | ------------------------- | ------------------------------------- |
-| `{{SKILL_ID}}`          | スキル固有ID (kebab-case) | `flutter-qa`                          |
-| `{{SKILL_NAME}}`        | スキル英文名              | `Flutter QA`                          |
-| `{{SKILL_KOREAN_NAME}}` | スキル日本語名            | `Flutter 品質検査`                    |
-| `{{SKILL_DESCRIPTION}}` | 簡単な説明 (1-2文)        | `Flutter プロジェクトのQAサイクル...` |
+| `{{SKILL_ID}}`          | スキル固有ID (kebab-case) | `web-qa`                          |
+| `{{SKILL_NAME}}`        | スキル英文名              | `Web QA`                          |
+| `{{SKILL_KOREAN_NAME}}` | スキル日本語名            | `Web 品質検査`                    |
+| `{{SKILL_DESCRIPTION}}` | 簡単な説明 (1-2文)        | `Web プロジェクトのQAサイクル...` |
 | `{{TRIGGER_KEYWORD_N}}` | トリガーキーワード        | `QA`, `品質検査`                      |
 
 **MANIFEST.json 必須プレースホルダー**:
@@ -53,10 +53,10 @@ cp -r .claude/skills/_templates/skill-template .claude/skills/{{new-skill-name}}
 A.calls = ["B"]  →  B.called_by = ["A"]
 ```
 
-例: `flutter-qa`が`pre-quality-gate`を呼び出す場合:
+例: `web-qa`が`pre-quality-gate`を呼び出す場合:
 
-- `flutter-qa/MANIFEST.json`: `"calls": ["pre-quality-gate"]`
-- `pre-quality-gate/MANIFEST.json`: `"called_by": ["flutter-qa"]`
+- `web-qa/MANIFEST.json`: `"calls": ["pre-quality-gate"]`
+- `pre-quality-gate/MANIFEST.json`: `"called_by": ["web-qa"]`
 
 ### 4. バージョンスキーマ準拠
 
@@ -94,7 +94,7 @@ A.calls = ["B"]  →  B.called_by = ["A"]
 | :--: | ------------ | -------------------------------- | ----------------------------------------- |
 |  1   | Orchestrator | 他のスキルを統制する最上位スキル | `feature-pilot`, `turbo-mode`             |
 |  2   | Pipeline     | パイプラインの特定段階を担当     | `feature-implementer`, `pre-quality-gate` |
-|  3   | Utility      | 独立実行可能な原子スキル         | `flutter-qa`, `security-scan`             |
+|  3   | Utility      | 独立実行可能な原子スキル         | `web-qa`, `security-scan`             |
 
 ---
 

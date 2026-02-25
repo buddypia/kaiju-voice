@@ -1,6 +1,6 @@
 ---
 name: pre-quality-gate
-description: Hackathon Project プロジェクトの品質検証スキル。MakefileのSSOT q.checkを実行し結果を解釈する。
+description: プロジェクト プロジェクトの品質検証スキル。MakefileのSSOT q.checkを実行し結果を解釈する。
 doc_contract:
   review_interval_days: 90
 ---

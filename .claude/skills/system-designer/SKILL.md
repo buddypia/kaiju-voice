@@ -80,8 +80,8 @@ Phase 0 Discovery & Architecture パイプラインの Step 1.5C として、C4�
    - 機能が触れるコンテナ/サービスを列挙
 
 2. **外部システム/アクターの列挙**:
-   - ユーザー（学習者、管理者等）
-   - 外部サービス（Google Cloud TTS, Gemini AI, RevenueCat 等）
+   - ユーザー（プレイヤー、管理者等）
+   - 外部サービス（Gemini AI, Imagen 3, Live API 等）
    - 既存の内部システムとの接点
 
 3. **データフローの把握**:
@@ -89,8 +89,8 @@ Phase 0 Discovery & Architecture パイプラインの Step 1.5C として、C4�
    - 非同期処理・バッチ処理の有無
 
 4. **既存システムとの統合ポイント確認**:
-   - 既存のEdge Functions との連携
-   - 既存のDBテーブルとの関係
+   - 既存の API Routes との連携
+   - 既存のデータモデルとの関係
    - 既存機能との依存関係（CONTEXT.json の dependencies 参照）
 
 ---
@@ -100,7 +100,7 @@ Phase 0 Discovery & Architecture パイプラインの Step 1.5C として、C4�
 > **モデル**: sonnet（システム分析）
 
 1. **システム全体のコンテキスト図を生成**:
-   - 中心に Hackathon Project System を配置
+   - 中心に プロジェクト System を配置
    - 外部ユーザー/アクターを配置
    - 外部システムを配置
    - 関係性（Relationship）を矢印で表現
@@ -120,17 +120,17 @@ Phase 0 Discovery & Architecture パイプラインの Step 1.5C として、C4�
 > **モデル**: sonnet（システム分析）
 
 1. **コンテナの識別**:
-   - Hackathon Project プロジェクトの標準コンテナ:
-     - **Flutter Web App**: フロントエンド（UI表示、状態管理 Riverpod）
-     - **Supabase PostgreSQL**: データベース（ユーザーデータ、学習データ）
-     - **Supabase Edge Functions**: サーバーレスAPI（AIチュータ、コンテンツ生成）
-     - **Google Cloud TTS**: 外部サービス（テキスト音声変換）
-     - **Gemini AI**: 外部サービス（AIコンテンツ生成・チュータリング）
-     - **RevenueCat**: 外部サービス（サブスクリプション管理）
+   - プロジェクト プロジェクトの標準コンテナ:
+     - **Next.js Web App: フロントエンド（UI表示、React Hooks 状態管理）
+     - **データベース: ゲームデータ（ユーザーデータ、対戦データ）
+     - **API Routes: サーバーレスAPI（AI対戦、コンテンツ生成）
+     - **Gemini AI: 外部サービス（AI対戦エンジン、コンテンツ生成）
+     - **Imagen 3: 外部サービス（画像生成）
+     - **Live API: 外部サービス（リアルタイム音声・映像対話）
    - 本機能で追加/変更されるコンテナがあれば追加
 
 2. **コンテナ間の通信プロトコル/データフローを定義**:
-   - HTTPS/REST, Supabase Client SDK, Gemini API, Cloud TTS API 等
+   - HTTPS/REST, Next.js Client SDK, Gemini API, Live API 等
    - 同期/非同期の区別
 
 3. **Mermaid C4Container 図で表現**:
@@ -264,7 +264,7 @@ Phase 0 Discovery & Architecture パイプラインの Step 1.5C として、C4�
 
 - C4 Level 1 と Level 2 を必ず両方生成する
 - Mermaid C4 拡張構文を使用して図を生成する（`references/mermaid-c4-patterns.md` 参照）
-- Hackathon Project の既存コンテナ（Flutter, Supabase, Edge Functions 等）を正確に反映する
+- プロジェクト の既存コンテナ（Next.js, API Routes, Gemini 等）を正確に反映する
 - 外部システム連携を漏れなく列挙する
 - BRIEF.md の要求事項に基づいてシステム境界を定義する
 - DOMAIN-MODEL.md が存在すれば、エンティティをコンテナのデータモデルとして反映する
@@ -279,7 +279,7 @@ Phase 0 Discovery & Architecture パイプラインの Step 1.5C として、C4�
 - 実装の詳細に踏み込まない（設計レベルに留まる）
 - 存在しないファイル/テーブルを参照しない
 - BRIEF.md なしで実行しない（必須入力）
-- 標準コンテナ（Flutter Web App, Supabase 等）を省略しない
+- 標準コンテナ（Next.js Web App, Supabase 等）を省略しない
 
 ---
 

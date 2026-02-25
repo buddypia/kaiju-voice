@@ -106,7 +106,7 @@
     "parallel_constraints": [
       "同一ファイル同時修正禁止",
       "CONTEXT.json 順次修正 (Lock)",
-      "pubspec.yaml 順次処理",
+      "package.json 順次処理",
       "レイヤー依存性順序遵守"
     ]
   },
@@ -129,7 +129,7 @@
     {
       "version": "1.0.0",
       "date": "2026-02-01",
-      "changes": "新規生成 - ultrawork + ecomode 統合、Flutter 特化"
+      "changes": "新規生成 - ultrawork + ecomode 統合、Web特化"
     },
     {
       "version": "2.0.0",

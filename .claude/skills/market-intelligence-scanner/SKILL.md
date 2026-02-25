@@ -1,7 +1,7 @@
 ---
 name: market-intelligence-scanner
 description: |
-  Hackathon Project プロジェクトの docs/research/で競合分析と市場トレンドをスキャンして未定義機能候補を発見し docs/features/candidates/market/に生成するスキル。
+  プロジェクト プロジェクトの docs/research/で競合分析と市場トレンドをスキャンして未定義機能候補を発見し docs/features/candidates/market/に生成するスキル。
   "競合機能分析", "未定義機能探し", "機能ギャップ分析", "市場トレンドスキャン", "新機能候補" などの要求でトリガーされる。
   候補管理サブコマンド: --accept, --reject, --defer, --list, --merge, --triage で候補状態を構造的に管理する。--force フラグで状態検証をバイパスした強制遷移をサポート。
 doc_contract:

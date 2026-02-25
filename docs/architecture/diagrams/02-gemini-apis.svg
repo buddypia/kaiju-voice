@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #1e293b; }
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 8; }
+      .card-blue { fill: #eff6ff; stroke: #3b82f6; stroke-width: 2; rx: 8; }
+      .edge { stroke: #94a3b8; stroke-width: 2; fill: none; }
+      .arrow { fill: #94a3b8; }
+      .label { font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .sub { font-size: 12px; fill: #64748b; text-anchor: middle; }
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" class="bg" />
+  <text x="30" y="40" class="title">2. 4 Gemini APIs Integration</text>
+
+  <!-- Center -->
+  <rect x="330" y="160" width="140" height="80" class="card" />
+  <text x="400" y="195" class="label">KAIJU VOICE</text>
+  <text x="400" y="215" class="sub">Core Engine</text>
+
+  <!-- Surrounding Nodes -->
+  <rect x="330" y="30" width="140" height="70" class="card-blue" />
+  <text x="400" y="60" class="label">Voice Analysis</text>
+  <text x="400" y="80" class="sub">Gemini 3 Flash</text>
+
+  <rect x="330" y="290" width="140" height="70" class="card-blue" />
+  <text x="400" y="320" class="label">AI Commentary</text>
+  <text x="400" y="340" class="sub">Gemini 2.5 TTS</text>
+
+  <rect x="80" y="165" width="140" height="70" class="card-blue" />
+  <text x="150" y="195" class="label">AI Logic</text>
+  <text x="150" y="215" class="sub">Gemini 3 Flash</text>
+
+  <rect x="580" y="165" width="140" height="70" class="card-blue" />
+  <text x="650" y="195" class="label">Asset Gen</text>
+  <text x="650" y="215" class="sub">Imagen 3</text>
+
+  <!-- Edges -->
+  <path d="M400,100 L400,150" class="edge" marker-end="url(#arrowhead)" />
+  <path d="M400,240 L400,290" class="edge" marker-end="url(#arrowhead)" />
+  <path d="M330,200 L220,200" class="edge" marker-end="url(#arrowhead)" />
+  <path d="M470,200 L580,200" class="edge" marker-end="url(#arrowhead)" />
+</svg>

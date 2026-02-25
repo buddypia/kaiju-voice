@@ -1,7 +1,7 @@
 # Mermaid C4 パターンガイド
 
 > Mermaid の C4 拡張構文を使用してシステム設計図を生成するためのガイド。
-> Hackathon Project プロジェクトでの具体的なサンプルを含む。
+> プロジェクト プロジェクトでの具体的なサンプルを含む。
 
 ---
 
@@ -60,24 +60,24 @@ C4Context
 4. **alias** はキャメルケースまたはスネークケースで一意に命名する
 5. **説明文** は日本語で簡潔に記述する（50文字以内目安）
 
-### Hackathon Project サンプル: System Context
+### プロジェクト サンプル: System Context
 
 ```mermaid
 C4Context
-  title System Context diagram for Hackathon Project
+  title System Context diagram for プロジェクト
 
-  Person(learner, "学習者", "韓国語を学ぶユーザー")
+  Person(player, "プレイヤー", "AI対戦ゲームをプレイするユーザー")
 
-  System(vibeMentorAI, "Hackathon Project", "AI駆動の韓国語学習Webアプリ")
+  System(gameSystem, "プロジェクト", "AI駆動のゲーム対戦Webアプリ")
 
-  System_Ext(googleTTS, "Google Cloud TTS", "テキスト音声変換")
-  System_Ext(geminiAI, "Gemini AI", "AIコンテンツ生成・チュータリング")
-  System_Ext(revenueCat, "RevenueCat", "サブスクリプション管理")
+  System_Ext(imagen3, "Imagen 3", "画像生成")
+  System_Ext(geminiAI, "Gemini AI", "AI対戦ロジック・コンテンツ生成")
+  System_Ext(liveAPI, "Live API", "リアルタイム音声・映像対話")
 
-  Rel(learner, vibeMentorAI, "学習する")
-  Rel(vibeMentorAI, googleTTS, "音声を要求")
-  Rel(vibeMentorAI, geminiAI, "AI処理を要求")
-  Rel(vibeMentorAI, revenueCat, "課金を管理")
+  Rel(player, gameSystem, "対戦する")
+  Rel(gameSystem, imagen3, "画像生成を要求")
+  Rel(gameSystem, geminiAI, "AI対戦を要求")
+  Rel(gameSystem, liveAPI, "リアルタイム対話")
 ```
 
 ---
@@ -107,33 +107,33 @@ C4Container
 
 1. **title** は必ず先頭に記述する
 2. 定義順序: **Person** → **Container/ContainerDb** → **System_Ext** → **Rel**
-3. **Container** の第3引数に技術スタックを明記する（例: "Flutter/Dart", "Deno/TypeScript"）
+3. **Container** の第3引数に技術スタックを明記する（例: "Next.js/React", "Next.js/TypeScript"）
 4. **ContainerDb** をデータベースに使用する（通常の Container と区別）
-5. **Rel** の第3引数に通信プロトコルを明記する（例: "HTTPS", "Supabase Client SDK"）
+5. **Rel** の第3引数に通信プロトコルを明記する（例: "HTTPS", "Client SDK"）
 6. 第4引数（任意）でより詳細な技術情報を追加可能
 
-### Hackathon Project サンプル: Container
+### プロジェクト サンプル: Container
 
 ```mermaid
 C4Container
-  title Container diagram for Hackathon Project
+  title Container diagram for プロジェクト
 
-  Person(learner, "学習者")
+  Person(player, "プレイヤー")
 
-  Container(webapp, "Flutter Web App", "Flutter/Dart", "UI表示、状態管理(Riverpod)")
-  ContainerDb(db, "Supabase PostgreSQL", "PostgreSQL", "ユーザーデータ、学習データ")
-  Container(edgeFn, "Edge Functions", "Deno/TypeScript", "AIチュータ、コンテンツ生成")
+  Container(webapp, "Next.js Web App", "Next.js/React", "UI表示、状態管理(React Hooks)")
+  ContainerDb(db, "データベース", "ゲームデータ", "ユーザーデータ、対戦データ")
+  Container(apiRoutes, "API Routes", "Next.js/TypeScript", "AI対戦ロジック、コンテンツ生成")
 
-  System_Ext(googleTTS, "Google Cloud TTS")
+  System_Ext(imagen3, "Imagen 3")
   System_Ext(geminiAI, "Gemini AI")
-  System_Ext(revenueCat, "RevenueCat")
+  System_Ext(liveAPI, "Live API")
 
-  Rel(learner, webapp, "HTTPS")
-  Rel(webapp, db, "Supabase Client SDK")
-  Rel(webapp, edgeFn, "HTTPS/REST")
-  Rel(edgeFn, geminiAI, "Gemini API")
-  Rel(edgeFn, googleTTS, "Cloud TTS API")
-  Rel(webapp, revenueCat, "RevenueCat SDK")
+  Rel(player, webapp, "HTTPS")
+  Rel(webapp, db, "Client SDK")
+  Rel(webapp, apiRoutes, "HTTPS/REST")
+  Rel(apiRoutes, geminiAI, "Gemini API")
+  Rel(apiRoutes, imagen3, "Imagen API")
+  Rel(webapp, liveAPI, "Live API SDK")
 ```
 
 ---
@@ -146,20 +146,20 @@ C4 の補助として、主要なデータフローを Mermaid シーケンス�
 
 ```mermaid
 sequenceDiagram
-  actor User as 学習者
-  participant App as Flutter Web App
-  participant DB as Supabase PostgreSQL
-  participant EF as Edge Functions
+  actor User as プレイヤー
+  participant App as Next.js Web App
+  participant DB as データベース
+  participant EF as API Routes
   participant AI as Gemini AI
 
-  User->>App: 学習開始
-  App->>DB: 学習データ取得
-  DB-->>App: 学習データ
+  User->>App: 対戦開始
+  App->>DB: 対戦データ取得
+  DB-->>App: 対戦データ
   App->>EF: AI コンテンツ要求
   EF->>AI: プロンプト送信
   AI-->>EF: 生成コンテンツ
   EF-->>App: コンテンツ返却
-  App-->>User: 学習画面表示
+  App-->>User: 対戦画面表示
 ```
 
 ### 記述ルール
@@ -174,13 +174,13 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-  actor User as 学習者
-  participant App as Flutter Web App
-  participant EF as Edge Functions
+  actor User as プレイヤー
+  participant App as Next.js Web App
+  participant EF as API Routes
   participant AI as Gemini AI
 
-  User->>App: AI チュータに質問
-  App->>EF: チャットリクエスト
+  User->>App: AIに対戦リクエスト
+  App->>EF: 対戦リクエスト
   EF->>AI: プロンプト送信
 
   alt 成功
@@ -209,24 +209,24 @@ sequenceDiagram
 C4Container
   title Container diagram with Boundaries
 
-  Person(learner, "学習者")
+  Person(player, "プレイヤー")
 
-  Boundary(b0, "Hackathon Project System") {
-    Container(webapp, "Flutter Web App", "Flutter/Dart", "フロントエンド")
-    ContainerDb(db, "Supabase PostgreSQL", "PostgreSQL", "データストア")
-    Container(edgeFn, "Edge Functions", "Deno/TypeScript", "サーバーレスAPI")
+  Boundary(b0, "プロジェクト System") {
+    Container(webapp, "Next.js Web App", "Next.js/React", "フロントエンド")
+    ContainerDb(db, "データベース", "ゲームデータ", "データストア")
+    Container(apiRoutes, "API Routes", "Next.js/TypeScript", "サーバーレスAPI")
   }
 
   Boundary(b1, "External Services") {
-    System_Ext(googleTTS, "Google Cloud TTS")
+    System_Ext(imagen3, "Imagen 3")
     System_Ext(geminiAI, "Gemini AI")
   }
 
-  Rel(learner, webapp, "HTTPS")
-  Rel(webapp, db, "Supabase Client SDK")
-  Rel(webapp, edgeFn, "HTTPS/REST")
-  Rel(edgeFn, geminiAI, "Gemini API")
-  Rel(edgeFn, googleTTS, "Cloud TTS API")
+  Rel(player, webapp, "HTTPS")
+  Rel(webapp, db, "Client SDK")
+  Rel(webapp, apiRoutes, "HTTPS/REST")
+  Rel(apiRoutes, geminiAI, "Gemini API")
+  Rel(apiRoutes, imagen3, "Imagen API")
 ```
 
 ### レイアウトのベストプラクティス
@@ -241,12 +241,12 @@ C4Container
 
 | 要素タイプ      | 命名パターン                | 例                      |
 | --------------- | --------------------------- | ----------------------- |
-| Person          | `<role>`                    | `learner`, `admin`      |
-| System          | `<systemName>` (camelCase)  | `vibeMentorAI`          |
+| Person          | `<role>`                    | `player`, `admin`      |
+| System          | `<systemName>` (camelCase)  | `gameSystem`          |
 | Container (App) | `<appType>`                 | `webapp`, `mobileApp`   |
 | Container (DB)  | `db` or `<dbName>`          | `db`, `cacheDb`         |
-| Container (API) | `<apiName>`                 | `edgeFn`, `authApi`     |
-| External System | `<serviceName>` (camelCase) | `googleTTS`, `geminiAI` |
+| Container (API) | `<apiName>`                 | `apiRoutes`, `authApi`     |
+| External System | `<serviceName>` (camelCase) | `imagen3`, `geminiAI` |
 
 ---
 
@@ -258,21 +258,21 @@ C4Container
 
 ```mermaid
 C4Container
-  title Container diagram - Feature: 029-vocabulary-book
+  title Container diagram - Feature: 029-battle-content
 
-  Person(learner, "学習者")
+  Person(player, "プレイヤー")
 
-  Container(webapp, "Flutter Web App", "Flutter/Dart", "単語帳UI")
-  ContainerDb(db, "Supabase PostgreSQL", "PostgreSQL", "vocabularies テーブル")
-  Container(edgeFn, "Edge Functions", "Deno/TypeScript", "既存 Edge Functions")
-  Container(newEdgeFn, "generate-vocab-quiz", "Deno/TypeScript", "単語クイズ生成 (新規)")
+  Container(webapp, "Next.js Web App", "Next.js/React", "対戦UI")
+  ContainerDb(db, "データベース", "ゲームデータ", "battles テーブル")
+  Container(apiRoutes, "API Routes", "Next.js/TypeScript", "既存 API Routes")
+  Container(newApiRoute, "generate-battle-content", "Next.js/TypeScript", "対戦コンテンツ生成 (新規)")
 
   System_Ext(geminiAI, "Gemini AI")
 
-  Rel(learner, webapp, "HTTPS")
-  Rel(webapp, db, "Supabase Client SDK")
-  Rel(webapp, newEdgeFn, "HTTPS/REST")
-  Rel(newEdgeFn, geminiAI, "Gemini API")
+  Rel(player, webapp, "HTTPS")
+  Rel(webapp, db, "Client SDK")
+  Rel(webapp, newApiRoute, "HTTPS/REST")
+  Rel(newApiRoute, geminiAI, "Gemini API")
 ```
 
 ### パターン B: 外部サービスを追加
@@ -283,20 +283,20 @@ C4Container
 C4Container
   title Container diagram - Feature: XXX-new-feature
 
-  Person(learner, "学習者")
+  Person(player, "プレイヤー")
 
-  Container(webapp, "Flutter Web App", "Flutter/Dart", "フロントエンド")
-  ContainerDb(db, "Supabase PostgreSQL", "PostgreSQL", "データストア")
-  Container(edgeFn, "Edge Functions", "Deno/TypeScript", "サーバーレスAPI")
+  Container(webapp, "Next.js Web App", "Next.js/React", "フロントエンド")
+  ContainerDb(db, "データベース", "ゲームデータ", "データストア")
+  Container(apiRoutes, "API Routes", "Next.js/TypeScript", "サーバーレスAPI")
 
   System_Ext(geminiAI, "Gemini AI")
   System_Ext(newService, "新外部サービス", "新サービスの説明")
 
-  Rel(learner, webapp, "HTTPS")
-  Rel(webapp, db, "Supabase Client SDK")
-  Rel(webapp, edgeFn, "HTTPS/REST")
-  Rel(edgeFn, geminiAI, "Gemini API")
-  Rel(edgeFn, newService, "REST API")
+  Rel(player, webapp, "HTTPS")
+  Rel(webapp, db, "Client SDK")
+  Rel(webapp, apiRoutes, "HTTPS/REST")
+  Rel(apiRoutes, geminiAI, "Gemini API")
+  Rel(apiRoutes, newService, "REST API")
 ```
 
 ---

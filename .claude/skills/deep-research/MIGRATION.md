@@ -38,20 +38,20 @@
 
 ```bash
 # OpenAI 使用
-/openai-deep-research "韓国語学習アプリの購読モデルトレンド"
+/openai-deep-research "AIゲームアプリのトレンド分析"
 
 # Google 使用
-/google-deep-research "日本市場言語学習アプリ分析"
+/google-deep-research "日本市場AIゲームアプリ分析"
 ```
 
 #### After (推奨)
 
 ```bash
 # OpenAI プロバイダー選択
-/deep-research --provider openai "韓国語学習アプリの購読モデルトレンド"
+/deep-research --provider openai "AIゲームアプリのトレンド分析"
 
 # Google プロバイダー選択
-/deep-research --provider google "日本市場言語学習アプリ分析"
+/deep-research --provider google "日本市場AIゲームアプリ分析"
 
 # デフォルト値 (openai)
 /deep-research "競合機能分析"

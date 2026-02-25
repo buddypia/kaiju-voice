@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg43" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <radialGradient id="vignette43" cx="50%" cy="50%" r="50%">
+      <stop offset="55%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.5"/>
+    </radialGradient>
+    <path id="blob43-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob43-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob43-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob43-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg43)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">PinchOverlay</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">HP危険域の演出 -- 画面端が赤く脈動する</text>
+
+  <!-- Screen mockup (organic rounded) -->
+  <g transform="translate(700, 350)">
+    <rect x="-280" y="-130" width="560" height="260" rx="30" fill="#0f172a"/>
+    <rect x="-280" y="-130" width="560" height="260" rx="30" fill="url(#vignette43)"/>
+    <!-- HP bar organic -->
+    <rect x="-180" y="-95" width="360" height="18" rx="9" fill="#1e293b"/>
+    <rect x="-180" y="-95" width="72" height="18" rx="9" fill="#ec4899"/>
+    <text x="190" y="-82" font-size="16" font-weight="800" fill="#ec4899">20%</text>
+    <!-- Heartbeat text -->
+    <text x="0" y="10" text-anchor="middle" font-size="28" font-weight="800" fill="#ec4899" opacity="0.8">heartbeat pulse</text>
+    <text x="0" y="50" text-anchor="middle" font-size="16" font-weight="600" fill="#94a3b8">画面端が赤く脈動</text>
+  </g>
+
+  <!-- Left blob: Condition -->
+  <g transform="translate(200, 350)">
+    <use href="#blob43-c3" transform="scale(1.5)" fill="#fbcfe8"/>
+    <circle cx="0" cy="-70" r="28" fill="#ec4899"/>
+    <text x="0" y="-62" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-10" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">発動条件</text>
+    <text x="0" y="25" text-anchor="middle" font-size="20" font-weight="600" fill="#ec4899">HP &lt;= 25%</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">ピンチ状態を検知</text>
+  </g>
+
+  <!-- Connector condition -> screen -->
+  <path d="M 320,350 C 370,340 380,340 420,340" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Right blob: Effects -->
+  <g transform="translate(1200, 350)">
+    <use href="#blob43-c2" transform="scale(1.5)" fill="#fed7aa"/>
+    <circle cx="0" cy="-70" r="28" fill="#f97316"/>
+    <text x="0" y="-62" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-10" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">演出効果</text>
+    <text x="0" y="25" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">赤ビネット + 脈動</text>
+    <text x="0" y="50" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">心拍パルスエフェクト</text>
+  </g>
+
+  <!-- Connector screen -> effects -->
+  <path d="M 980,350 C 1030,345 1060,345 1090,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Bottom hub: Design intent -->
+  <g transform="translate(700, 660)">
+    <use href="#blob43-hub" transform="scale(1.1)" fill="#8b5cf6"/>
+    <text x="0" y="-15" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">緊迫感を視覚的に伝える</text>
+    <text x="0" y="25" text-anchor="middle" font-size="18" font-weight="600" fill="#ffffff" opacity="0.9">プレイヤーに危機感を与え没入度を高める</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="420" y="745" width="560" height="44" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="773" text-anchor="middle" font-size="18" font-weight="600" fill="#64748b">HP低下時の赤い脈動が、プレイヤーの緊張感を最大化</text>
+</svg>

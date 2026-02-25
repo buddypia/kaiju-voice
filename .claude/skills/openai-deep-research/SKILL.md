@@ -98,7 +98,7 @@ python scripts/deep_research.py "2025年生成型AI技術トレンドと主要�
 ### 市場分析
 
 ```bash
-python scripts/deep_research.py "プログラミング学習アプリ市場分析と競合状況。主要プレイヤー、市場規模、成長率を含む" --language japanese
+python scripts/deep_research.py "AIゲームアプリ市場分析と競合状況。主要プレイヤー、市場規模、成長率を含む" --language japanese
 ```
 
 ### 学術調査
@@ -110,7 +110,7 @@ python scripts/deep_research.py "Large Language Modelの最新研究動向と主
 ### 比較分析
 
 ```bash
-python scripts/deep_research.py "Flutter vs React Native: 2025年基準の性能、エコシステム、採用市場の比較" --output flutter_vs_rn.md
+python scripts/deep_research.py "Next.js vs Remix: 2025年基準の性能、エコシステム、採用市場の比較" --output nextjs_vs_remix.md
 ```
 
 ## プロンプト作成のコツ

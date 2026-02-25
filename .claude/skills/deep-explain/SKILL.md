@@ -7,8 +7,8 @@ description: |
   例:
   - /deep-explain feature-pilot
   - /deep-explain 035
-  - /deep-explain riverpod
-  - /deep-explain oh-my-opencode
+  - /deep-explain @tanstack/react-query
+  - /deep-explain <OSS名>
   - /deep-explain feature-pilot
   - /deep-explain feature-pilot --no-save
 doc_contract:
@@ -106,7 +106,7 @@ AIは入力を分析して以下のルールで対象タイプを自動決定す
 |    1     | `.claude/skills/{input}/`ディレクトリ存在           | **skill**   | SKILL.md, MANIFEST.json |
 |    2     | 3桁数字または`docs/features/*{input}*/`マッチ       | **feature** | CONTEXT.json, SPEC.md   |
 |    3     | `docs/oss/{input}/`または`oss-sources/{input}/`存在 | **oss**     | 分析文書、ソースコード  |
-|    4     | `pubspec.yaml`のdependenciesに存在                  | **library** | pubspec.yaml, context7  |
+|    4     | `package.json`のdependenciesに存在                  | **library** | package.json, context7  |
 |    5     | 上記どこにも該当しない                              | **general** | WebSearch、一般知識     |
 
 ### タイプ別コンテキスト収集
@@ -161,14 +161,14 @@ AIは入力を分析して以下のルールで対象タイプを自動決定す
 #### library タイプ
 
 ```
-1. Read: pubspec.yaml                              ← バージョン、依存性
+1. Read: package.json                              ← バージョン、依存性
 2. context7: 公式文書検索                          ← 最新API/ガイド
-3. Grep: import.*{name} in lib/                    ← プロジェクト内実際使用箇所
-4. Read: pubspec.lock                              ← 正確なインストールバージョン（必要時）
+3. Grep: import.*{name} in src/                    ← プロジェクト内実際使用箇所
+4. Read: package-lock.json                         ← 正確なインストールバージョン（必要時）
 
 ── 関連項目収集（セクション6用）──
-5. pubspec.yamlで一緒に使用する関連パッケージ識別（例: riverpod → freezed, flutter_hooks）
-6. Grep: "{name}" in lib/features/                 ← このライブラリを使用するfeatureリスト
+5. package.jsonで一緒に使用する関連パッケージ識別（例: @tanstack/react-query → zod, axios）
+6. Grep: "{name}" in src/features/                 ← このライブラリを使用するfeatureリスト
 7. Grep: "{name}" in docs/                         ← 関連技術文書/ADR
 ```
 
@@ -301,13 +301,13 @@ AIは入力を分析して以下のルールで対象タイプを自動決定す
 
 **タイプ別セクション6作成ガイド**:
 
-| タイプ      | 主要焦点                                                     | 例                                              |
-| ----------- | ------------------------------------------------------------ | ----------------------------------------------- |
-| **skill**   | calls/called_byスキル分析、所属パイプライン                  | feature-pilotの11個下位スキル各々の役割         |
-| **feature** | 依存feature、使用するサービス/スキル、関連SPEC               | 035の依存: ai_tutor, lesson, review             |
-| **oss**     | 抽出されたメカニズム、インスパイアされたスキル、カタログ位置 | oh-my-opencode → turbo-mode, persistent-mode    |
-| **library** | 一緒に使用するパッケージ、使用するfeatureリスト              | riverpod → freezed, flutter_hooks; 30+ features |
-| **general** | プロジェクト内関連コード/文書（あれば）                      | ATAM → oss-analyzer v3.0で使用                  |
+| タイプ      | 主要焦点                                                     | 例                                               |
+| ----------- | ------------------------------------------------------------ | ------------------------------------------------ |
+| **skill**   | calls/called_byスキル分析、所属パイプライン                  | feature-pilotの11個下位スキル各々の役割          |
+| **feature** | 依存feature、使用するサービス/スキル、関連SPEC               | 035の依存: ai_tutor, lesson, review              |
+| **oss**     | 抽出されたメカニズム、インスパイアされたスキル、カタログ位置 | <OSS名> → turbo-mode, persistent-mode            |
+| **library** | 一緒に使用するパッケージ、使用するfeatureリスト              | @tanstack/react-query → zod, axios; 30+ features |
+| **general** | プロジェクト内関連コード/文書（あれば）                      | ATAM → oss-analyzer v3.0で使用                   |
 
 **作成規則**:
 
@@ -381,11 +381,11 @@ sources:
 # 機能分析 - "035番機能は何？"
 /deep-explain 035
 
-# OSS分析 - "oh-my-opencodeでhooksがどう動作する？"
-/deep-explain oh-my-opencode
+# OSS分析 - "OSSでhooksがどう動作する？"
+/deep-explain <OSS名>
 
-# ライブラリ分析 - "riverpod keepAliveは何？"
-/deep-explain riverpod keepAlive
+# ライブラリ分析 - "@tanstack/react-query staleTimeは何？"
+/deep-explain @tanstack/react-query staleTime
 
 # 一般技術 - "ATAMは何？"
 /deep-explain ATAM

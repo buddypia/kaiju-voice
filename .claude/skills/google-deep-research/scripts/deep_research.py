@@ -152,7 +152,7 @@ def main():
         epilog="""
 例:
   python deep_research.py "2025年 AI 技術トレンド"
-  python deep_research.py "韓国語学習アプリ市場分析" --language korean
+  python deep_research.py "AIゲームアプリ市場分析" --language korean
   python deep_research.py "LLM 研究動向" --output research.md
         """
     )

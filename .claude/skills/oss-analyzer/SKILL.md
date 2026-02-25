@@ -13,7 +13,7 @@ doc_contract:
 ## Purpose
 
 OSS プロジェクトから **我々の問題(Problem)に対する設計決定(Decision)を逆追跡** し、
-Hackathon Project に適用できる **具体的なレシピ(Recipe)** を導出するスキル。
+プロジェクト に適用できる **具体的なレシピ(Recipe)** を導出するスキル。
 
 **v4.0が解決する問題** (v1~v3 の繰り返し失敗から導出):
 
@@ -125,7 +125,7 @@ v3 の C4 Level 1-2 を軽量化:
 | マニフェスト              | 言語判定                                  |
 | ------------------------- | ----------------------------------------- |
 | package.json              | JS/TS (devDeps に typescript があれば TS) |
-| pubspec.yaml              | Dart                                      |
+| package.json              | TypeScript                                      |
 | Cargo.toml                | Rust                                      |
 | go.mod                    | Go                                        |
 | setup.py / pyproject.toml | Python                                    |
@@ -133,7 +133,7 @@ v3 の C4 Level 1-2 を軽量化:
 
 ### Part B: Problem Discovery (v4 核心新規)
 
-**Hackathon Project の Pain Points を構造化された Problem として収集**:
+**プロジェクト の Pain Points を構造化された Problem として収集**:
 
 ```
 1. CLAUDE.md → プロジェクトルール/制約 → 違反可能性の高い領域
@@ -242,10 +242,10 @@ OSS モジュールがどの Problem を解決できるか仮説を立てる:
 | ↔️ Tradeoff | {トレードオフ} | {根拠}   |
 ```
 
-#### 5. Hackathon Project Relevance
+#### 5. プロジェクト Relevance
 
 ```markdown
-### Hackathon Project Relevance
+### プロジェクト Relevance
 
 - **Problem Match**: {LK のどの Problem に該当するか}
 - **Forces Match**: {F1/F2 が LK でも同一か}
@@ -281,11 +281,11 @@ OSS モジュールがどの Problem を解決できるか仮説を立てる:
 ### Step 1: Context Comparison
 
 ```markdown
-| 属性         | OSS ({name}) | Hackathon Project            |   Gap   |
+| 属性         | OSS ({name}) | プロジェクト            |   Gap   |
 | ------------ | ------------ | ------------------------ | :-----: |
-| Language     | {言語}       | Dart/Flutter             | {H/M/L} |
+| Language     | {言語}       | TypeScript/Next.js             | {H/M/L} |
 | Runtime      | {ランタイム} | Mobile (iOS/Android)     | {H/M/L} |
-| Architecture | {パターン}   | Feature-First + Riverpod | {H/M/L} |
+| Architecture | {パターン}   | Feature-First + React Hooks | {H/M/L} |
 | Scale        | {規模}       | Solo dev + AI assisted   | {H/M/L} |
 | Backend      | {方式}       | Supabase (PostgreSQL)    | {H/M/L} |
 | Hook System  | {方式}       | Claude Code Hooks (.mjs) | {H/M/L} |

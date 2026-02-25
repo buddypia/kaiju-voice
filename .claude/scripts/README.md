@@ -2,7 +2,7 @@
 
 > **根本的解決策**: 拡張可能な知識管理システム (Wisdom Only アーキテクチャ)
 
-Hackathon Project プロジェクトのWisdomシステムを自動管理する統合ツールセットです.
+プロジェクトのWisdomシステムを自動管理する統合ツールセットです.
 
 > **Note**: 2026-02-05にWisdom Onlyアーキテクチャに簡素化されました. (参考: `.claude/MIGRATION_PLAN.md`)
 
@@ -132,7 +132,7 @@ python3 .claude/scripts/wisdom_splitter.py --analyze
 ```bash
 # 特定セクション参照記録
 python3 .claude/scripts/wisdom_ttl_tracker.py \
-  --track "project-patterns.md" "freezedモデルパターン"
+  --track "project-patterns.md" "コンポーネントパターン"
 
 # COLD セクションリスト (60日基準)
 python3 .claude/scripts/wisdom_ttl_tracker.py --list-cold 60
@@ -198,10 +198,10 @@ python3 .claude/scripts/wisdom_splitter.py --merge
 # crontab -e
 
 # 週間メンテナンス (毎週月曜日9時)
-0 9 * * 1 cd /path/to/hackathon-project && .claude/scripts/wisdom_manager.sh maintain
+0 9 * * 1 cd /path/to/project && .claude/scripts/wisdom_manager.sh maintain
 
 # 月間健全性チェック (毎月1日9時)
-0 9 1 * * cd /path/to/hackathon-project && .claude/scripts/wisdom_manager.sh health-check
+0 9 1 * * cd /path/to/project && .claude/scripts/wisdom_manager.sh health-check
 ```
 
 ---
@@ -268,7 +268,7 @@ python3 .claude/scripts/wisdom_splitter.py --split --threshold 10
 
 - [Wisdom Only マイグレーション計画](../.claude/MIGRATION_PLAN.md)
 - [CLAUDE.md - Wisdom セクション](../../CLAUDE.md#-wisdom-システム)
-- [oh-my-opencode パターン](../../docs/oss/oh-my-opencode/README.md)
+- [自動化パターン リファレンス](../../docs/oss/README.md)
 
 ---
 

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg26" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg26)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">ハッカソン審査基準</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">デモ(50%) + インパクト(25%) + 技術(25%)</text>
+
+  <!-- Demo 50% - Largest blob -->
+  <g transform="translate(420, 320)">
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#fbcfe8" transform="scale(2.5, 1.8)"/>
+    <circle cx="-180" cy="-130" r="45" fill="#ec4899"/>
+    <text x="-180" y="-115" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">50%</text>
+    <text x="0" y="-60" text-anchor="middle" font-size="36" font-weight="800" fill="#1e293b">Demo</text>
+    <text x="0" y="-20" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">実際に動作する形で示す</text>
+    <text x="0" y="15" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">叫び声バトルは</text>
+    <text x="0" y="45" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">デモ映え抜群</text>
+    <text x="0" y="90" text-anchor="middle" font-size="16" font-weight="600" fill="#ec4899">「見て面白い」が最重要</text>
+  </g>
+
+  <!-- Impact 25% -->
+  <g transform="translate(950, 250)">
+    <path d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z" fill="#bfdbfe" transform="scale(1.7)"/>
+    <circle cx="-110" cy="-80" r="38" fill="#3b82f6"/>
+    <text x="-110" y="-65" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">25%</text>
+    <text x="0" y="-20" text-anchor="middle" font-size="30" font-weight="800" fill="#1e293b">Impact</text>
+    <text x="0" y="18" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">将来性</text>
+    <text x="0" y="44" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">有用性</text>
+  </g>
+
+  <!-- Tech 25% -->
+  <g transform="translate(1050, 500)">
+    <path d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z" fill="#bbf7d0" transform="scale(1.7)"/>
+    <circle cx="-100" cy="-100" r="38" fill="#22c55e"/>
+    <text x="-100" y="-85" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">25%</text>
+    <text x="0" y="-25" text-anchor="middle" font-size="30" font-weight="800" fill="#1e293b">Tech</text>
+    <text x="0" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Gemini API</text>
+    <text x="0" y="38" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">の活用度</text>
+  </g>
+
+  <!-- Connectors -->
+  <path d="M 580,250 C 700,210 800,220 860,250" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 600,430 C 750,500 850,500 960,490" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- KAIJU VOICE strengths hub -->
+  <g transform="translate(700, 670)">
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#8b5cf6" transform="scale(3.2, 0.65)"/>
+    <text x="0" y="-25" text-anchor="middle" font-size="20" font-weight="600" fill="#ffffff">KAIJU VOICE が評価されたポイント</text>
+    <text x="-200" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#fca5a5">デモの盛り上がり</text>
+    <text x="0" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#93c5fd">4モデル統合</text>
+    <text x="200" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#86efac">AI実況のインパクト</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="380" y="758" width="640" height="36" rx="30" fill="white"/>
+  <text x="700" y="782" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">デモ比重50% → 「見て面白い」が最重要</text>
+</svg>

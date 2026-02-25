@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 260" font-family="system-ui, sans-serif">
+  <rect width="700" height="260" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Structured Output vs Free Text</text>
+
+  <!-- Free Text (BAD) -->
+  <rect x="30" y="50" width="310" height="170" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <rect x="30" y="50" width="310" height="30" rx="10" fill="#ef4444"/>
+  <rect x="30" y="65" width="310" height="15" fill="#ef4444"/>
+  <text x="185" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="white">Free Text（制約なし）</text>
+
+  <text x="50" y="102" font-size="10" fill="#475569" font-family="monospace">"The intensity is about 85,</text>
+  <text x="50" y="118" font-size="10" fill="#475569" font-family="monospace"> creativity is high at 72...</text>
+  <text x="50" y="134" font-size="10" fill="#475569" font-family="monospace"> and very emotional!"</text>
+
+  <text x="50" y="162" font-size="10" fill="#ef4444">JSON.parse() → 失敗</text>
+  <text x="50" y="178" font-size="10" fill="#ef4444">フィールド欠損の可能性</text>
+  <text x="50" y="194" font-size="10" fill="#ef4444">数値範囲が不定</text>
+  <text x="50" y="210" font-size="10" fill="#ef4444">ゲームが止まる</text>
+
+  <!-- Structured Output (GOOD) -->
+  <rect x="360" y="50" width="310" height="170" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <rect x="360" y="50" width="310" height="30" rx="10" fill="#22c55e"/>
+  <rect x="360" y="65" width="310" height="15" fill="#22c55e"/>
+  <text x="515" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="white">Structured Output（JSON Schema制約）</text>
+
+  <text x="380" y="102" font-size="10" fill="#475569" font-family="monospace">{ "intensity": 85,</text>
+  <text x="380" y="118" font-size="10" fill="#475569" font-family="monospace">  "creativity": 72,</text>
+  <text x="380" y="134" font-size="10" fill="#475569" font-family="monospace">  "emotion": 90 }</text>
+
+  <text x="380" y="162" font-size="10" fill="#22c55e">JSON.parse() → 常に成功</text>
+  <text x="380" y="178" font-size="10" fill="#22c55e">全フィールド保証</text>
+  <text x="380" y="194" font-size="10" fill="#22c55e">型安全（Zod検証）</text>
+  <text x="380" y="210" font-size="10" fill="#22c55e">ゲームが止まらない</text>
+
+  <text x="350" y="248" text-anchor="middle" font-size="11" fill="#94a3b8">リアルタイムゲームでは Structured Output が必須</text>
+</svg>

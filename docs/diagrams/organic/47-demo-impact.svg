@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg47" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob47-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob47-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob47-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob47-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob47-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg47)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">デモ映えの要素</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">なぜ準優勝できたか -- エンターテインメント性</text>
+
+  <!-- Element 1: Body UI -->
+  <g transform="translate(240, 310)">
+    <use href="#blob47-c3" transform="scale(1.6)" fill="#fbcfe8"/>
+    <circle cx="0" cy="-75" r="28" fill="#ec4899"/>
+    <text x="0" y="-67" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">体を使うUI</text>
+    <text x="0" y="20" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">叫ぶ行為自体が</text>
+    <text x="0" y="45" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">デモ映えする</text>
+  </g>
+
+  <!-- Element 2: AI Commentary -->
+  <g transform="translate(700, 290)">
+    <use href="#blob47-c1" transform="scale(1.6)" fill="#e9d5ff"/>
+    <circle cx="0" cy="-75" r="28" fill="#a855f7"/>
+    <text x="0" y="-67" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">AI実況</text>
+    <text x="0" y="20" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">見てる人も</text>
+    <text x="0" y="45" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">巻き込む</text>
+  </g>
+
+  <!-- Element 3: VFX -->
+  <g transform="translate(1160, 310)">
+    <use href="#blob47-c4" transform="scale(1.6)" fill="#fef08a"/>
+    <circle cx="0" cy="-75" r="28" fill="#eab308"/>
+    <text x="0" y="-67" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">VFX演出</text>
+    <text x="0" y="20" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">視覚的</text>
+    <text x="0" y="45" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">インパクト</text>
+  </g>
+
+  <!-- Connectors to hub -->
+  <path d="M 350,430 C 420,490 500,530 580,550" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 700,430 C 700,490 700,520 700,550" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 1050,430 C 980,490 900,530 820,550" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Hub: Combined effect -->
+  <g transform="translate(700, 580)">
+    <use href="#blob47-hub" transform="scale(1.3)" fill="#8b5cf6"/>
+    <text x="0" y="-40" text-anchor="middle" font-size="30" font-weight="800" fill="#ffffff">叫び声 x AI実況 x VFX</text>
+    <text x="0" y="5" text-anchor="middle" font-size="20" font-weight="600" fill="#ffffff" opacity="0.9">= プレイヤーも観客も楽しめる</text>
+    <text x="0" y="40" text-anchor="middle" font-size="20" font-weight="600" fill="#ffffff" opacity="0.9">エンターテインメント</text>
+  </g>
+
+  <!-- Learning (bottom blob) -->
+  <g transform="translate(700, 730)">
+    <rect x="-350" y="-22" width="700" height="44" rx="30" fill="#bbf7d0" opacity="0.9"/>
+    <text x="0" y="5" text-anchor="middle" font-size="18" font-weight="800" fill="#166534">学び: ハッカソンでは「技術的に凄い」より「見て面白い」が勝つ</text>
+  </g>
+</svg>

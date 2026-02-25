@@ -208,7 +208,7 @@ python scripts/deep_research.py poll <session_id>
 
 - `mkt-analysis-openai-20260208.md`
 - `ai-trend-2026-google-20260208.md`
-- `flutter-vs-rn-openai-20260208.md`
+- `nextjs-vs-remix-openai-20260208.md`
 
 ### Slug生成規則
 

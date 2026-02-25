@@ -5,9 +5,9 @@
  *
  * Context 圧縮(compaction) 前に核心コンテキストを自動保存します.
  *
- * oh-my-opencodeのPreemptive Compaction パターン:
+ * Preemptive Compaction パターン:
  * - 原本: context 78% 到達時に先制的圧縮 + 核心データ保存
- * - 適用: Claude CodeのPreCompact Hookで圧縮前コンテキスト注入
+ * - Web プロジェクトに合わせて適用: Claude CodeのPreCompact Hookで圧縮前コンテキスト注入
  *
  * 保存項目 (7個):
  * 1. 現在のブランチと最近のコミット

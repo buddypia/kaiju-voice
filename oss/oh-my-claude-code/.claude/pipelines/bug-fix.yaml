@@ -1,0 +1,150 @@
+# Pipeline as Code: BUG_FIX
+# バグ修正専用パイプライン
+
+name: BUG_FIX
+version: 1.0.0
+description: 'バグ分析 → 根本原因特定 → 回帰テスト → 修正 → 検証'
+
+# BUG_FIX は Tier 分類なし（常に同じフロー）
+tiers:
+  default:
+    - analyze
+    - root_cause
+    - regression_test
+    - fix
+    - quality_gate
+    - dod_verification
+
+steps:
+  analyze:
+    description: '症状整理・関連コード探索・ログ/エラー分析'
+    model: sonnet
+    outputs:
+      - '症状レポート'
+      - '関連コード一覧'
+    compensation:
+      action: '分析範囲を拡大して再実行'
+      revert_to: analyze
+
+  root_cause:
+    description: '仮説立案 → コードフロー追跡 → 原因検証'
+    model: sonnet
+    outputs:
+      - '根本原因レポート'
+    principles:
+      - '症状だけ見て修正しない → 根本原因を必ず特定'
+    compensation:
+      action: '仮説を再立案し、異なる経路で追跡'
+      revert_to: root_cause
+
+  regression_test:
+    description: '回帰テスト作成 → 実行 → 失敗確認 (Red)'
+    model: sonnet
+    tdd_phase: red
+    outputs:
+      - '回帰テストファイル'
+    principles:
+      - '回帰テストなしに修正完了禁止'
+      - '失敗確認（Red）なしに修正ステップ進行禁止'
+    compensation:
+      action: 'テストの期待値を見直して再作成'
+      revert_to: regression_test
+
+  fix:
+    description: '最小限のコード修正で回帰テストを通過させる (Green)'
+    model: sonnet
+    tdd_phase: green
+    principles:
+      - '最小限の変更で修正'
+      - '関連しないコードの変更禁止'
+    retry:
+      max: 3
+    compensation:
+      action: '修正をロールバックし、異なるアプローチで再実装'
+      revert_to: fix
+
+  quality_gate:
+    skill: pre-quality-gate
+    type: gate
+    checks:
+      - lint_analyze
+      - test
+    retry:
+      max: 3
+      auto_fix: true
+      auto_fix_command: 'make q.fix'
+    compensation:
+      action: 'make q.fix 実行後、再検証'
+      revert_to: quality_gate
+
+  dod_verification:
+    type: gate
+    model: sonnet
+    description: 'BRIEF §7 完了契約検証 + CONTEXT.json completion_contract 更新'
+    checks:
+      - machine_items_via_evidence_cache
+      - ai_items_via_code_scan
+    inputs:
+      - 'CONTEXT.json completion_contract'
+    outputs:
+      - 'CONTEXT.json completion_contract 更新'
+    compensation:
+      action: '失敗 DoD 項目を特定し、修正サイクルへ'
+      revert_to: fix
+
+# Base DoD (作業タイプ別共通完了条件)
+base_dod:
+  BUG_FIX:
+    - {
+        id: DoD-FT-01,
+        level: feature,
+        description: '回帰テスト追加 (Red→Green 確認済)',
+        type: machine,
+        observation: 'npm test で回帰テスト通過',
+      }
+    - {
+        id: DoD-FT-02,
+        level: feature,
+        description: 'make q.check Critical 全通過',
+        type: machine,
+        observation: 'make q.check exit 0',
+      }
+    - {
+        id: DoD-FT-03,
+        level: feature,
+        description: '根本原因レポート作成',
+        type: ai,
+        observation: 'AI が root_cause ステップの出力を確認',
+      }
+    - {
+        id: DoD-FT-04,
+        level: feature,
+        description: '最小変更 (関連しないコードの変更なし)',
+        type: ai,
+        observation: 'AI が diff を確認し最小変更を検証',
+      }
+    - {
+        id: DoD-FT-05,
+        level: feature,
+        description: '全テスト通過',
+        type: machine,
+        observation: 'npm test exit 0',
+      }
+    - {
+        id: DoD-FT-06,
+        level: feature,
+        description: 'CONTEXT.json current_state = Done',
+        type: machine,
+        observation: 'CONTEXT.json 読取で確認',
+      }
+
+global:
+  evidence_caching: true
+  evidence_cache_path: '.claude/state/evidence-cache.json'
+  pipeline_log_path: 'docs/pipeline-log/'
+  context_json_ssot: true
+  max_total_retries: 6
+  model_fallback:
+    enabled: true
+    order: [haiku, sonnet, opus]
+    max_failures_before_escalation: 3

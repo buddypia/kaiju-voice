@@ -1,7 +1,7 @@
 ---
 name: competitive-tracker
 description: |
-  Hackathon Project アプリの機能ポートフォリオを競合6アプリとMECEフレームワークで比較して
+  プロジェクト アプリの機能ポートフォリオを競合6アプリとMECEフレームワークで比較して
   ギャップ(欠けた機能)とポジション変化を追跡するスキル。
   競合データはcompetitor-registry.jsonに構造化されており、四半期ごとDeep Researchで更新する。
 

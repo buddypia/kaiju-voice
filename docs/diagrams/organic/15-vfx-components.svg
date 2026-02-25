@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg15" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-15" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-15" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-15" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4-15" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5-15" d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z"/>
+    <path id="blob-c6-15" d="M 70,-65 C 115,-45 120,10 95,55 C 65,105 -5,115 -55,85 C -105,55 -115,-15 -85,-65 C -55,-105 25,-85 70,-65 Z"/>
+    <path id="blob-hub-15" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg15)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">7つのVFXコンポーネント</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">7つのビジュアルエフェクトコンポーネント</text>
+
+  <!-- Hub -->
+  <g transform="translate(700, 400)">
+    <use href="#blob-hub-15" transform="scale(1.0)" fill="#e9d5ff"/>
+    <text x="0" y="8" text-anchor="middle" font-size="28" font-weight="800" fill="#8b5cf6">VFX</text>
+  </g>
+
+  <!-- Blob 1: UltimateCutIn (top-left) -->
+  <g transform="translate(200, 220)">
+    <use href="#blob-c1-15" transform="scale(1.2)" fill="#fef08a"/>
+    <use href="#blob-c1-15" transform="scale(1.0)" fill="#fef08a"/>
+    <circle cx="-70" cy="-70" r="24" fill="#eab308"/>
+    <text x="-70" y="-59" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-20" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">UltimateCutIn</text>
+    <text x="0" y="6" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">格ゲー風カットイン</text>
+    <text x="0" y="28" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">2500ms / 4フェーズ</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#eab308">ultimate 発動時</text>
+  </g>
+
+  <!-- Blob 2: KnockOutEffect (top) -->
+  <g transform="translate(530, 170)">
+    <use href="#blob-c2-15" transform="scale(1.2)" fill="#bfdbfe"/>
+    <use href="#blob-c2-15" transform="scale(1.0)" fill="#bfdbfe"/>
+    <circle cx="-70" cy="-65" r="24" fill="#3b82f6"/>
+    <text x="-70" y="-54" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">KnockOutEffect</text>
+    <text x="0" y="8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">K.O. 演出</text>
+    <text x="0" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">3500ms / SVGクラック</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#3b82f6">HP === 0</text>
+  </g>
+
+  <!-- Blob 3: ParticleCanvas (top-right) -->
+  <g transform="translate(900, 170)">
+    <use href="#blob-c3-15" transform="scale(1.2)" fill="#fbcfe8"/>
+    <use href="#blob-c3-15" transform="scale(1.0)" fill="#fbcfe8"/>
+    <circle cx="-70" cy="-75" r="24" fill="#ec4899"/>
+    <text x="-70" y="-63" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">ParticleCanvas</text>
+    <text x="0" y="8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">属性別パーティクル</text>
+    <text x="0" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">Canvas 2D / 6形状</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#ec4899">攻撃ヒット時</text>
+  </g>
+
+  <!-- Blob 4: VoiceVisualizer (right) -->
+  <g transform="translate(1200, 300)">
+    <use href="#blob-c4-15" transform="scale(1.2)" fill="#bbf7d0"/>
+    <use href="#blob-c4-15" transform="scale(1.0)" fill="#bbf7d0"/>
+    <circle cx="-70" cy="-60" r="24" fill="#22c55e"/>
+    <text x="-70" y="-48" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">4</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">VoiceVisualizer</text>
+    <text x="0" y="8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">音声波形ビジュアライザ</text>
+    <text x="0" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">fftSize: 256 / 3レイヤー</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#22c55e">録音中</text>
+  </g>
+
+  <!-- Blob 5: ImpactFlash (bottom-right) -->
+  <g transform="translate(1100, 560)">
+    <use href="#blob-c5-15" transform="scale(1.2)" fill="#fed7aa"/>
+    <use href="#blob-c5-15" transform="scale(1.0)" fill="#fed7aa"/>
+    <circle cx="-70" cy="-72" r="24" fill="#f97316"/>
+    <text x="-70" y="-60" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">5</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">ImpactFlash</text>
+    <text x="0" y="8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">属性カラーフラッシュ</text>
+    <text x="0" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">300ms / 500ms(crit)</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#f97316">ダメージ発生時</text>
+  </g>
+
+  <!-- Blob 6: PinchOverlay (bottom) -->
+  <g transform="translate(700, 630)">
+    <use href="#blob-c6-15" transform="scale(1.2)" fill="#e9d5ff"/>
+    <use href="#blob-c6-15" transform="scale(1.0)" fill="#e9d5ff"/>
+    <circle cx="-70" cy="-58" r="24" fill="#a855f7"/>
+    <text x="-70" y="-46" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">6</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">PinchOverlay</text>
+    <text x="0" y="8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">赤ビネット + 心拍</text>
+    <text x="0" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">heartbeat pulse</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#a855f7">HP 25% 以下</text>
+  </g>
+
+  <!-- Blob 7: VictoryCelebration (bottom-left) -->
+  <g transform="translate(300, 560)">
+    <use href="#blob-c1-15" transform="scale(1.2)" fill="#bbf7d0"/>
+    <use href="#blob-c1-15" transform="scale(1.0)" fill="#bbf7d0"/>
+    <circle cx="-70" cy="-70" r="24" fill="#22c55e"/>
+    <text x="-70" y="-59" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">7</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">VictoryCelebration</text>
+    <text x="0" y="8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">コンフェティ演出</text>
+    <text x="0" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">物理エンジン + Canvas</text>
+    <text x="0" y="52" text-anchor="middle" font-size="13" font-weight="600" fill="#22c55e">勝利時</text>
+  </g>
+
+  <!-- Connectors from hub -->
+  <path d="M 620,370 C 500,320 350,270 290,260" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 650,360 C 610,300 570,230 550,210" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 760,360 C 810,300 850,240 880,210" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 790,380 C 900,340 1050,320 1120,320" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 770,430 C 870,480 1000,520 1050,540" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 700,450 C 700,510 700,560 700,590" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 630,430 C 520,480 400,520 350,540" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Footer -->
+  <rect x="320" y="755" width="760" height="36" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="779" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">各コンポーネントが独立したトリガー条件で発動 -- requestAnimationFrame 60fps</text>
+</svg>

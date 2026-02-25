@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #1e293b; }
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 8; }
+      .card-ai { fill: #fffbeb; stroke: #f59e0b; stroke-width: 2; rx: 8; }
+      .card-error { fill: #fef2f2; stroke: #ef4444; stroke-width: 2; rx: 8; }
+      .card-success { fill: #f0fdf4; stroke: #22c55e; stroke-width: 2; rx: 8; }
+      .edge { stroke: #94a3b8; stroke-width: 2; fill: none; }
+      .edge-error { stroke: #ef4444; stroke-width: 2; fill: none; stroke-dasharray: 4; }
+      .arrow { fill: #94a3b8; }
+      .arrow-error { fill: #ef4444; }
+      .label { font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .sub { font-size: 12px; fill: #64748b; text-anchor: middle; }
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+    <marker id="arrowhead-error" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow-error" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" class="bg" />
+  <text x="30" y="40" class="title">6. Self-Healing Quality Gate</text>
+
+  <rect x="150" y="160" width="140" height="80" class="card-ai" />
+  <text x="220" y="195" class="label">Gemini 3 Flash</text>
+  <text x="220" y="215" class="sub">Code Generation</text>
+
+  <rect x="400" y="160" width="140" height="80" class="card" />
+  <text x="470" y="195" class="label">Quality Gate</text>
+  <text x="470" y="215" class="sub">Lint &amp; Vitest</text>
+
+  <rect x="650" y="160" width="100" height="80" class="card-success" />
+  <text x="700" y="200" class="label" fill="#15803d">Done / Pass</text>
+
+  <!-- Edges -->
+  <path d="M290,190 L390,190" class="edge" marker-end="url(#arrowhead)" />
+  <text x="340" y="180" class="sub">Source Code</text>
+
+  <path d="M540,200 L640,200" class="edge" marker-end="url(#arrowhead)" />
+  
+  <!-- Self Healing Loop -->
+  <path d="M470,240 Q470,300 345,300 Q220,300 220,240" class="edge-error" marker-end="url(#arrowhead-error)" />
+  <text x="345" y="320" class="sub" fill="#ef4444">Error Log (Self-Healing Loop)</text>
+</svg>

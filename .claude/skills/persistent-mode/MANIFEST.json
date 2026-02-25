@@ -23,8 +23,8 @@
   "evidence_policy": {
     "note": "Evidence FreshnessはCLAUDE.md AI行動指針で処理。別途キャッシュ実装なし",
     "recommended_freshness": [
-      { "type": "flutter_analyze", "minutes": 30, "invalidation": "lib/**/*.dart 変更時" },
-      { "type": "flutter_test", "minutes": 30, "invalidation": "test/**/*.dart 変更時" },
+      { "type": "npm_lint", "minutes": 30, "invalidation": "src/**/*.ts 変更時" },
+      { "type": "npm_test", "minutes": 30, "invalidation": "tests/**/*.ts 変更時" },
       { "type": "todo_status", "minutes": 0, "invalidation": "毎回反復ごとに再検査" }
     ]
   },
@@ -119,7 +119,7 @@
     {
       "version": "1.0.0",
       "date": "2026-02-01",
-      "changes": "MANIFEST.json 生成 - oh-my-claudecode ralph パターン適用"
+      "changes": "MANIFEST.json 生成 - ralph パターン適用"
     },
     {
       "version": "3.0.0",

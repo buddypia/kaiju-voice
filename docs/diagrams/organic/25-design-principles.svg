@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg25" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg25)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">マルチモデル統合</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">4つの設計原則</text>
+
+  <!-- Principle 1: Specialist Agent -->
+  <g transform="translate(215, 350)">
+    <path d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z" fill="#bfdbfe" transform="scale(1.55)"/>
+    <circle cx="-100" cy="-90" r="32" fill="#3b82f6"/>
+    <text x="-100" y="-78" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-45" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">専門エージェント</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">1モデル = 1役割</text>
+    <text x="0" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">分析は分析に特化</text>
+    <text x="0" y="39" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">創造は創造に特化</text>
+    <text x="0" y="75" text-anchor="middle" font-size="14" font-weight="600" fill="#3b82f6">全部入りモデルより</text>
+    <text x="0" y="97" text-anchor="middle" font-size="14" font-weight="600" fill="#3b82f6">専門家の方が強い</text>
+  </g>
+
+  <!-- Connector 1→2 -->
+  <path d="M 360,350 C 400,310 430,310 460,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Principle 2: Structured Output as Contract -->
+  <g transform="translate(520, 350)">
+    <path d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z" fill="#bbf7d0" transform="scale(1.55)"/>
+    <circle cx="-95" cy="-80" r="32" fill="#22c55e"/>
+    <text x="-95" y="-68" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">契約としてのSO</text>
+    <text x="0" y="-10" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">JSON Schema制約で</text>
+    <text x="0" y="17" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">出力形式を保証</text>
+    <text x="0" y="44" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">パースエラーゼロ</text>
+    <text x="0" y="80" text-anchor="middle" font-size="14" font-weight="600" fill="#22c55e">AIの出力を</text>
+    <text x="0" y="102" text-anchor="middle" font-size="14" font-weight="600" fill="#22c55e">「信頼できるデータ」に</text>
+  </g>
+
+  <!-- Connector 2→3 -->
+  <path d="M 665,350 C 705,310 735,310 765,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Principle 3: Latency via Architecture -->
+  <g transform="translate(830, 350)">
+    <path d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z" fill="#fbcfe8" transform="scale(1.55)"/>
+    <circle cx="-90" cy="-100" r="32" fill="#ec4899"/>
+    <text x="-90" y="-88" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-45" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">遅延はアーキで解決</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">プリフェッチ</text>
+    <text x="0" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Promise.all 並列</text>
+    <text x="0" y="39" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">段階的フォールバック</text>
+    <text x="0" y="75" text-anchor="middle" font-size="14" font-weight="600" fill="#ec4899">モデル速度の限界は</text>
+    <text x="0" y="97" text-anchor="middle" font-size="14" font-weight="600" fill="#ec4899">設計で隠す</text>
+  </g>
+
+  <!-- Connector 3→4 -->
+  <path d="M 975,350 C 1015,310 1045,310 1075,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Principle 4: Graceful Degradation -->
+  <g transform="translate(1140, 350)">
+    <path d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z" fill="#fed7aa" transform="scale(1.55)"/>
+    <circle cx="-100" cy="-90" r="32" fill="#f97316"/>
+    <text x="-100" y="-78" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">4</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">劣化しつつも動く</text>
+    <text x="0" y="-10" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">TTS → Speech</text>
+    <text x="0" y="17" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">→ テキストのみ</text>
+    <text x="0" y="44" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">常に次の手段を用意</text>
+    <text x="0" y="80" text-anchor="middle" font-size="14" font-weight="600" fill="#f97316">API失敗で</text>
+    <text x="0" y="102" text-anchor="middle" font-size="14" font-weight="600" fill="#f97316">ゲームを止めない</text>
+  </g>
+
+  <!-- Summary -->
+  <rect x="280" y="680" width="840" height="36" rx="30" fill="white"/>
+  <text x="700" y="704" text-anchor="middle" font-size="18" font-weight="800" fill="#334155">Gemini APIマルチモデル統合の設計指針</text>
+
+  <!-- Footer -->
+  <rect x="280" y="730" width="840" height="36" rx="30" fill="white"/>
+  <text x="700" y="754" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">各原則が独立して適用可能 -- 組み合わせることでリアルタイムAIゲームが実現</text>
+</svg>

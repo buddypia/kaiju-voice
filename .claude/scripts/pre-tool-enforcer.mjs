@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Web Project Pre-Tool Enforcer Hook (PreToolUse - Sisyphus)
+ * Hackathon Project Pre-Tool Enforcer Hook (PreToolUse - Sisyphus)
  *
- * oh-my-opencodeのpre-tool-enforcer.mjsをWeb Projectに忠実に移植。
+ * Hackathon Project Pre-Tool Enforcer Hook.
  * 毎ツール呼び出し前に実行され、作業状態リマインダーとツール別ヒントを注入します。
  *
  * Sisyphus哲学（原本忠実移植）:
@@ -20,9 +20,9 @@
  * 原本との差異:
  * - Todoカウントの代わりにClaude Code Taskカウントを使用
  * - ツール別ヒントをWeb開発フロー(lint/test)基準に調整
- * - Web Projectスキルシステムに合わせたメッセージ
+ * - Hackathon Projectスキルシステムに合わせたメッセージ
  *
- * @see oss-sources/oh-my-claudecode/scripts/pre-tool-enforcer.mjs (原本)
+ * @see pre-tool-enforcer パターン (原本)
  */
 
 import { join } from 'path';
@@ -76,7 +76,7 @@ function getToolTip(toolName) {
  * 現在のアクティブモードとTaskカウントをプレフィックスとして生成.
  *
  * 原本形式: [X active, Y pending]
- * Web Project形式: [MODE - PROGRESS | Tasks: N]
+ * Hackathon Project形式: [MODE - PROGRESS | Tasks: N]
  */
 function buildStatusPrefix(stateDir, sessionId) {
   const parts = [];

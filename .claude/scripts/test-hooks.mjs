@@ -3,7 +3,7 @@
 /**
  * Hookメカニズム統合テスト
  *
- * oh-my-opencodeから移植した5大メカニズムの動作を検証:
+ * 5大メカニズムの動作を検証:
  * 1. ralph-loop → stop-handler.mjs (Persistent/QA/Turbo)
  * 2. todo-continuation-enforcer → stop-handler.mjs (Task カウント)
  * 3. stop-continuation-guard → stop-handler.mjs (Safety Gates)
@@ -30,7 +30,7 @@ import {
   hasSameErrorRepeated,
   ensureStateDir,
 } from './lib/state.mjs';
-import { detectCompletionMarker, detectFlutterQaCompletion } from './lib/transcript.mjs';
+import { detectCompletionMarker, detectQaCompletion } from './lib/transcript.mjs';
 import { isContextLimitStop, isUserAbort, parsePlanProgress } from './lib/utils.mjs';
 
 // ═══════════════════════════════════════════════════════════════════
@@ -265,7 +265,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
     cleanupTestDir(testDir);
   });
 
-  it('detectFlutterQaCompletion: analyze+test 全て通過', () => {
+  it('detectQaCompletion: analyze+test 全て通過', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -274,14 +274,14 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         JSON.stringify({ type: 'assistant', content: 'All tests passed!' }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, true);
     assert.equal(r.analyzeResult, true);
     assert.equal(r.testResult, true);
     cleanupTestDir(testDir);
   });
 
-  it('detectFlutterQaCompletion: analyze 失敗', () => {
+  it('detectQaCompletion: analyze 失敗', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -290,83 +290,77 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         JSON.stringify({ type: 'assistant', content: 'All tests passed!' }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, false);
     assert.equal(r.analyzeResult, false);
     cleanupTestDir(testDir);
   });
 
-  it('detectFlutterQaCompletion: コード変更後 stale 結果 (2-pass)', () => {
+  it('detectQaCompletion: コード変更後 stale 結果 (2-pass)', () => {
     const tPath = join(testDir, 'transcript.jsonl');
-    // 2-pass 検出: "Edit" + ".dart" がJSON 行内に自然に含まれるように構成
-    // transcript.mjsは line.includes('"Edit"') && line.includes('.dart') で検出
     writeFileSync(
       tPath,
       [
         JSON.stringify({ type: 'assistant', content: 'No issues found!' }),
         JSON.stringify({ type: 'assistant', content: 'All tests passed!' }),
-        // tool_nameが"Edit"で file_pathに.dartが含む → JSONで自然にマッチング
         JSON.stringify({
           type: 'tool_use',
           tool_name: 'Edit',
-          input: { file_path: 'lib/main.dart' },
+          input: { file_path: 'src/app/page.tsx' },
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, false, 'コード変更後 stale 結果は 無視');
     cleanupTestDir(testDir);
   });
 
-  it('detectFlutterQaCompletion: ファイル なし', () => {
-    const r = detectFlutterQaCompletion('/nonexistent');
+  it('detectQaCompletion: ファイル なし', () => {
+    const r = detectQaCompletion('/nonexistent');
     assert.equal(r.complete, false);
     assert.equal(r.analyzeResult, null);
   });
 
-  it('detectFlutterQaCompletion: assistant メッセージの"Edit" 言及 → 2-pass false positive 防止', () => {
+  it('detectQaCompletion: assistant メッセージの"Edit" 言及 → 2-pass false positive 防止', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
       [
-        // まず 分析 通過
         JSON.stringify({ type: 'assistant', content: 'No issues found!' }),
         JSON.stringify({ type: 'assistant', content: 'All tests passed!' }),
-        // assistantが"Edit"と".dart"を言及するのみ 実際 tool_useではない
         JSON.stringify({
           type: 'assistant',
-          content: 'I used "Edit" to modify lib/main.dart successfully.',
+          content: 'I used "Edit" to modify src/app/page.tsx successfully.',
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, true, 'assistant メッセージは コード 変更とみなさない');
     assert.equal(r.analyzeResult, true);
     assert.equal(r.testResult, true);
     cleanupTestDir(testDir);
   });
 
-  it('detectFlutterQaCompletion: 実際の tool_use エントリのみ コード 変更で検出', () => {
+  it('detectQaCompletion: 実際の tool_use エントリのみ コード 変更で検出', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
       [
         JSON.stringify({ type: 'assistant', content: 'No issues found!' }),
         JSON.stringify({ type: 'assistant', content: 'All tests passed!' }),
-        // 実際の tool_use エントリ (tool_name + input.file_path)
         JSON.stringify({
           type: 'tool_use',
           tool_name: 'Edit',
-          input: { file_path: 'lib/service.dart' },
+          input: { file_path: 'src/features/game/components/GameBoard.tsx' },
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, false, '実際の tool_use 後のstale 結果は 無視');
     cleanupTestDir(testDir);
   });
 
-  it('detectFlutterQaCompletion: .freezed.dart tool_useは コード 変更 無視', () => {
+  it('detectQaCompletion: .min.js tool_useは コード 変更 無視', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -376,12 +370,12 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         JSON.stringify({
           type: 'tool_use',
           tool_name: 'Write',
-          input: { file_path: 'lib/model.freezed.dart' },
+          input: { file_path: 'dist/bundle.min.js' },
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
-    assert.equal(r.complete, true, '.freezed.dartは コード生成ファイルのため無視');
+    const r = detectQaCompletion(tPath);
+    assert.equal(r.complete, true, '.min.jsは生成ファイルのため無視');
     cleanupTestDir(testDir);
   });
 
@@ -419,7 +413,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
                 id: 'toolu_01ABC',
                 name: 'Edit',
                 input: {
-                  file_path: '/Users/test/lib/main.dart',
+                  file_path: '/Users/test/src/app/page.tsx',
                   old_string: 'old',
                   new_string: 'new',
                 },
@@ -429,7 +423,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, false, '実際 形式でコード変更後 stale 結果 無視');
     assert.equal(r.analyzeResult, null, 'コード 変更 以後 analyze 未実行');
     assert.equal(r.testResult, null, 'コード 変更 以後 test 未実行');
@@ -456,7 +450,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
                 id: 'toolu_01',
                 name: 'Edit',
                 input: {
-                  file_path: 'lib/service.dart',
+                  file_path: 'src/features/game/utils.ts',
                   old_string: 'a',
                   new_string: 'b',
                 },
@@ -467,7 +461,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         // 変更 後 再検証 (有効)
         JSON.stringify({
           type: 'assistant',
-          message: { content: [{ type: 'text', text: 'flutter analyze: No issues found!' }] },
+          message: { content: [{ type: 'text', text: 'No issues found!' }] },
         }),
         JSON.stringify({
           type: 'assistant',
@@ -475,7 +469,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, true, 'コード変更後 再検証 通過');
     assert.equal(r.analyzeResult, true);
     assert.equal(r.testResult, true);
@@ -495,23 +489,23 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
           type: 'assistant',
           message: { content: [{ type: 'text', text: 'All tests passed!' }] },
         }),
-        // テキストでEditと.dartを言及するのみ tool_useはではない
+        // テキストでEditとファイルパスを言及するのみ tool_useではない
         JSON.stringify({
           type: 'assistant',
           message: {
             content: [
-              { type: 'text', text: 'I used Edit tool to modify lib/main.dart successfully.' },
+              { type: 'text', text: 'I used Edit tool to modify src/app/page.tsx successfully.' },
             ],
           },
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, true, 'テキスト 言及はコード 変更がではない');
     cleanupTestDir(testDir);
   });
 
-  it('実際 形式: .freezed.dart Write → コード 変更 無視', () => {
+  it('実際 形式: .min.js Write → コード 変更 無視', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -533,8 +527,8 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
                 id: 'toolu_02',
                 name: 'Write',
                 input: {
-                  file_path: 'lib/model.freezed.dart',
-                  content: '// generated',
+                  file_path: 'dist/app.min.js',
+                  content: '// minified',
                 },
               },
             ],
@@ -542,12 +536,12 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
-    assert.equal(r.complete, true, '.freezed.dartは コード 生成のためで無視');
+    const r = detectQaCompletion(tPath);
+    assert.equal(r.complete, true, '.min.jsは生成ファイルのため無視');
     cleanupTestDir(testDir);
   });
 
-  it('実際 形式: .g.dart Write → コード 変更 無視', () => {
+  it('実際 形式: .map Write → コード 変更 無視', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -569,8 +563,8 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
                 id: 'toolu_03',
                 name: 'Write',
                 input: {
-                  file_path: 'lib/model.g.dart',
-                  content: '// generated',
+                  file_path: 'dist/app.js.map',
+                  content: '// sourcemap',
                 },
               },
             ],
@@ -578,8 +572,8 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
-    assert.equal(r.complete, true, '.g.dartは コード 生成のためで無視');
+    const r = detectQaCompletion(tPath);
+    assert.equal(r.complete, true, '.mapはソースマップファイルのため無視');
     cleanupTestDir(testDir);
   });
 
@@ -603,7 +597,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
                 id: 'toolu_04',
                 name: 'Edit',
                 input: {
-                  file_path: 'lib/widget.dart',
+                  file_path: 'src/components/Widget.tsx',
                   old_string: 'x',
                   new_string: 'y',
                 },
@@ -613,7 +607,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
                 id: 'toolu_05',
                 name: 'Edit',
                 input: {
-                  file_path: 'lib/util.dart',
+                  file_path: 'src/shared/lib/utils.ts',
                   old_string: 'a',
                   new_string: 'b',
                 },
@@ -623,7 +617,7 @@ describe('lib/transcript.mjs - Transcript Parsing', () => {
         }),
       ].join('\n'),
     );
-    const r = detectFlutterQaCompletion(tPath);
+    const r = detectQaCompletion(tPath);
     assert.equal(r.complete, false, '混合 ブロックでもtool_use 検出');
     cleanupTestDir(testDir);
   });
@@ -880,9 +874,9 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  // ── Flutter QA ──
+  // ── Web QA ──
 
-  it('Flutter QA: 未完了 → block + 案内', () => {
+  it('Web QA: 未完了 → block + 案内', () => {
     writeState(stateDir, 'web-qa', {
       active: true,
       cycle: 1,
@@ -901,7 +895,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  it('Flutter QA: max cycles → 終了', () => {
+  it('Web QA: max cycles → 終了', () => {
     writeState(stateDir, 'web-qa', {
       active: true,
       cycle: 10,
@@ -918,7 +912,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  it('Flutter QA: transcript 完了 検出 → 自動 終了', () => {
+  it('Web QA: transcript 完了 検出 → 自動 終了', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -943,7 +937,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  it('Flutter QA: error_history 累積 (Safety Gate 4 アクティブ化)', () => {
+  it('Web QA: error_history 累積 (Safety Gate 4 アクティブ化)', () => {
     // transcriptにanalyze fail 結果のみ ある状態で3回 繰り返し
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
@@ -969,7 +963,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  it('Flutter QA: 同一エラー 3回 → Safety Gate 4 中断', () => {
+  it('Web QA: 同一エラー 3回 → Safety Gate 4 中断', () => {
     // error_historyに同一時間シグニチャ 3個 事前に 設定
     writeState(stateDir, 'web-qa', {
       active: true,
@@ -992,7 +986,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  it('Flutter QA: all_passing=true → 終了 (Fallback)', () => {
+  it('Web QA: all_passing=true → 終了 (Fallback)', () => {
     writeState(stateDir, 'web-qa', {
       active: true,
       cycle: 2,
@@ -1009,7 +1003,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
     cleanupTestDir(testDir);
   });
 
-  it('Flutter QA: 実際 形式 - コード変更後 stale → block', () => {
+  it('Web QA: 実際 形式 - コード変更後 stale → block', () => {
     const tPath = join(testDir, 'transcript.jsonl');
     writeFileSync(
       tPath,
@@ -1032,7 +1026,7 @@ describe('stop-handler.mjs - 3大 メカニズム 統合', () => {
                 id: 'toolu_01',
                 name: 'Edit',
                 input: {
-                  file_path: 'lib/main.dart',
+                  file_path: 'src/app/page.tsx',
                   old_string: 'a',
                   new_string: 'b',
                 },
@@ -1263,7 +1257,7 @@ describe('qa-write-guard.mjs - Write 保護', () => {
       'qa-write-guard.mjs',
       {
         tool_name: 'Write',
-        tool_input: { file_path: '/test/a_test.dart', content: '' },
+        tool_input: { file_path: '/tests/app.test.ts', content: '' },
         cwd: testDir,
       },
       { CLAUDE_PROJECT_DIR: testDir },
@@ -1316,8 +1310,8 @@ describe('qa-write-guard.mjs - Write 保護', () => {
       cycle: 1,
       last_checked_at: new Date().toISOString(),
     });
-    const target = join(testDir, 'test', 'widget_test.dart');
-    mkdirSync(join(testDir, 'test'), { recursive: true });
+    const target = join(testDir, 'tests', 'widget.test.ts');
+    mkdirSync(join(testDir, 'tests'), { recursive: true });
     writeFileSync(target, 'existing test content long enough to be considered existing');
     const r = runHook(
       'qa-write-guard.mjs',
@@ -1345,7 +1339,7 @@ describe('qa-write-guard.mjs - Write 保護', () => {
       {
         tool_name: 'Edit',
         tool_input: {
-          file_path: '/test/auth_test.dart',
+          file_path: '/tests/auth.test.ts',
           old_string:
             'expect(result, isTrue); expect(user.name, equals(test)); expect(user.id, equals(1)); expect(valid, isFalse);',
           new_string: '// tests removed',
@@ -1368,7 +1362,7 @@ describe('qa-write-guard.mjs - Write 保護', () => {
       'qa-write-guard.mjs',
       {
         tool_name: 'Edit',
-        tool_input: { file_path: '/lib/main.dart', old_string: 'a', new_string: 'b' },
+        tool_input: { file_path: '/src/app/page.tsx', old_string: 'a', new_string: 'b' },
         cwd: testDir,
       },
       { CLAUDE_PROJECT_DIR: testDir },
@@ -1384,12 +1378,12 @@ describe('qa-write-guard.mjs - Write 保護', () => {
       last_checked_at: new Date().toISOString(),
     });
     const content =
-      "import 'package:flutter_test/flutter_test.dart';\nvoid main() {\n  test('x', () { expect(1, 1); });\n}";
+      "import { describe, it, expect } from 'vitest';\ndescribe('test', () => {\n  it('works', () => { expect(1).toBe(1); });\n});";
     const r = runHook(
       'qa-write-guard.mjs',
       {
         tool_name: 'Write',
-        tool_input: { file_path: '/test/new_test.dart', content },
+        tool_input: { file_path: '/tests/new.test.ts', content },
         cwd: testDir,
       },
       { CLAUDE_PROJECT_DIR: testDir },

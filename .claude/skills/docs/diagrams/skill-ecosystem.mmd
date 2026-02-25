@@ -1,4 +1,4 @@
-%% Hackathon Project スキルエコシステム全体アーキテクチャ
+%% プロジェクト スキルエコシステム全体アーキテクチャ
 %% 51個のスキルの階層構造と呼び出し関係を視覚化
 
 flowchart TB
@@ -39,7 +39,7 @@ flowchart TB
 
     %% Tier 3: 品質検証
     subgraph Tier3_QA["Tier 3: 品質検証"]
-        FQA[flutter-qa<br/>ESP v3.1]
+        FQA[pre-quality-gate<br/>ESP v3.1]
         SS[security-scan<br/>ESP v2.1]
         PM[persistent-mode<br/>ESP v3.1]
         PQG[pre-quality-gate]

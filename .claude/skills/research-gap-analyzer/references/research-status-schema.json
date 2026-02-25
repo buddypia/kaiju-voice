@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "research-status-schema.json",
   "title": "Research Status Schema",
-  "description": "Hackathon Project プロジェクトのリサーチ作業状態トラッキングスキーマ。AIがresearch-status.json生成/修正時に参照するルール定義。",
+  "description": "プロジェクト プロジェクトのリサーチ作業状態トラッキングスキーマ。AIがresearch-status.json生成/修正時に参照するルール定義。",
 
   "type": "object",
   "required": ["schema_version", "jobs"],

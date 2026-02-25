@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg40" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-40" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-40" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-40" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-hub-40" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+    <path id="blob-c4-40" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg40)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">SSE テキストストリーミング</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">Server-Sent Events</text>
+
+  <!-- Node 1: API Server -->
+  <g transform="translate(250, 340)">
+    <use href="#blob-hub-40" fill="#bfdbfe" transform="scale(1.3)"/>
+  </g>
+  <circle cx="140" cy="250" r="30" fill="#3b82f6"/>
+  <text x="140" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+  <text x="250" y="300" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">API Server</text>
+  <text x="250" y="340" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">/api/commentary/live</text>
+  <text x="250" y="375" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">Content-Type:</text>
+  <text x="250" y="395" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">text/event-stream</text>
+
+  <!-- SSE Stream visualization (dashed curves) -->
+  <path d="M 400,300 C 470,280 530,280 600,300" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 400,340 C 470,320 530,320 600,340" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 400,380 C 470,360 530,360 600,380" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Stream data labels -->
+  <g transform="translate(500, 285)">
+    <use href="#blob-c1-40" fill="#fef08a" transform="scale(0.35)"/>
+  </g>
+  <text x="500" y="290" text-anchor="middle" font-size="12" font-weight="600" fill="#854d0e">クリティカル</text>
+
+  <g transform="translate(500, 325)">
+    <use href="#blob-c1-40" fill="#fef08a" transform="scale(0.35)"/>
+  </g>
+  <text x="500" y="330" text-anchor="middle" font-size="12" font-weight="600" fill="#854d0e">ヒット！</text>
+
+  <g transform="translate(500, 365)">
+    <use href="#blob-c1-40" fill="#fef08a" transform="scale(0.35)"/>
+  </g>
+  <text x="500" y="370" text-anchor="middle" font-size="12" font-weight="600" fill="#854d0e">85ダメージ！</text>
+
+  <!-- Node 2: Client -->
+  <g transform="translate(730, 340)">
+    <use href="#blob-hub-40" fill="#bbf7d0" transform="scale(1.3)"/>
+  </g>
+  <circle cx="620" cy="250" r="30" fill="#22c55e"/>
+  <text x="620" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+  <text x="730" y="300" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Client</text>
+  <text x="730" y="340" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">逐次的にテキスト表示</text>
+  <text x="730" y="375" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">EventSource API</text>
+
+  <!-- Connector Client -> Display -->
+  <path d="M 880,340 C 950,320 1010,320 1060,340" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Node 3: Display -->
+  <g transform="translate(1180, 340)">
+    <use href="#blob-hub-40" fill="#e9d5ff" transform="scale(1.3)"/>
+  </g>
+  <circle cx="1070" cy="250" r="30" fill="#a855f7"/>
+  <text x="1070" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+  <text x="1180" y="300" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Display</text>
+  <text x="1180" y="340" text-anchor="middle" font-size="18" font-weight="600" fill="#a855f7">クリティカル</text>
+  <text x="1180" y="365" text-anchor="middle" font-size="18" font-weight="600" fill="#a855f7">ヒット！</text>
+  <text x="1180" y="390" text-anchor="middle" font-size="18" font-weight="600" fill="#a855f7">85ダメージ！</text>
+
+  <!-- Explanation section -->
+  <g transform="translate(700, 570)">
+    <use href="#blob-c4-40" fill="#fed7aa" transform="scale(2.5, 0.7)"/>
+  </g>
+  <text x="700" y="560" text-anchor="middle" font-size="18" font-weight="800" fill="#1e293b">SSE (Server-Sent Events)</text>
+  <text x="700" y="585" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">テキストチャンクを逐次送信</text>
+  <text x="700" y="610" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">タイプライター効果 — 生成完了を待たずに表示開始できる</text>
+
+  <!-- Footer -->
+  <rect x="300" y="720" width="800" height="50" rx="30" fill="white"/>
+  <text x="700" y="750" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Content-Type: text/event-stream / EventSource API</text>
+</svg>

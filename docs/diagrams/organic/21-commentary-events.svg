@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg21" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <clipPath id="clip-c1-21"><path d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/></clipPath>
+    <clipPath id="clip-c2-21"><path d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/></clipPath>
+    <clipPath id="clip-c3-21"><path d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/></clipPath>
+    <clipPath id="clip-c4-21"><path d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/></clipPath>
+    <clipPath id="clip-c5-21"><path d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z"/></clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg21)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">AI実況</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">5つのイベントタイプ</text>
+
+  <!-- Event 1: battle_start -->
+  <g transform="translate(160, 310)">
+    <path d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z" fill="#bbf7d0" transform="scale(1.15)"/>
+    <circle cx="-70" cy="-60" r="28" fill="#22c55e"/>
+    <text x="-70" y="-49" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="5" y="-20" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">battle_start</text>
+    <text x="5" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">バトル開幕</text>
+    <text x="5" y="40" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">対戦カード紹介</text>
+  </g>
+
+  <!-- Event 2: attack -->
+  <g transform="translate(420, 310)">
+    <path d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z" fill="#bfdbfe" transform="scale(1.15)"/>
+    <circle cx="-70" cy="-55" r="28" fill="#3b82f6"/>
+    <text x="-70" y="-44" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="5" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">attack</text>
+    <text x="5" y="17" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">通常攻撃</text>
+    <text x="5" y="45" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">技名とダメージ</text>
+  </g>
+
+  <!-- Event 3: critical -->
+  <g transform="translate(680, 310)">
+    <path d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z" fill="#fbcfe8" transform="scale(1.15)"/>
+    <circle cx="-65" cy="-65" r="28" fill="#ec4899"/>
+    <text x="-65" y="-54" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="5" y="-20" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">critical</text>
+    <text x="5" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">クリティカル！</text>
+    <text x="5" y="40" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">興奮度MAX</text>
+  </g>
+
+  <!-- Event 4: low_hp -->
+  <g transform="translate(940, 310)">
+    <path d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z" fill="#fed7aa" transform="scale(1.15)"/>
+    <circle cx="-75" cy="-60" r="28" fill="#f97316"/>
+    <text x="-75" y="-49" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">4</text>
+    <text x="5" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">low_hp</text>
+    <text x="5" y="17" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">ピンチ状態</text>
+    <text x="5" y="45" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">緊迫感の演出</text>
+  </g>
+
+  <!-- Event 5: ko -->
+  <g transform="translate(1200, 310)">
+    <path d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z" fill="#e9d5ff" transform="scale(1.15)"/>
+    <circle cx="-70" cy="-65" r="28" fill="#a855f7"/>
+    <text x="-70" y="-54" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">5</text>
+    <text x="5" y="-20" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">ko</text>
+    <text x="5" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">決着！</text>
+    <text x="5" y="40" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">劇的な締め</text>
+  </g>
+
+  <!-- Connectors between blobs -->
+  <path d="M 270,310 C 310,280 340,280 370,310" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 530,310 C 570,280 600,280 630,310" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 790,310 C 830,280 860,280 890,310" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 1050,310 C 1090,280 1110,280 1150,310" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Example output area -->
+  <g transform="translate(700, 590)">
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#8b5cf6" transform="scale(3.5, 1.4)"/>
+    <text x="0" y="-70" text-anchor="middle" font-size="22" font-weight="600" fill="#ffffff">実況の出力例 (voice: Kore)</text>
+    <text x="-280" y="-30" font-size="16" font-weight="600" fill="#bbf7d0">battle_start:</text>
+    <text x="-120" y="-30" font-size="16" font-weight="600" fill="rgba(255,255,255,0.85)">「さぁ始まりました！火と氷の宿命の対決！」</text>
+    <text x="-280" y="10" font-size="16" font-weight="600" fill="#fca5a5">critical:</text>
+    <text x="-120" y="10" font-size="16" font-weight="600" fill="rgba(255,255,255,0.85)">「クリティカルヒット！！灼熱砲が直撃ィィィ！85ダメージ！」</text>
+    <text x="-280" y="50" font-size="16" font-weight="600" fill="#e9d5ff">ko:</text>
+    <text x="-120" y="50" font-size="16" font-weight="600" fill="rgba(255,255,255,0.85)">「決着ァァァ！！インフェルヌス、5ラウンドで見事撃破！！」</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="360" y="750" width="680" height="36" rx="30" fill="white"/>
+  <text x="700" y="774" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">プロレス中継風の実況が、見ている人も巻き込むエンターテインメントに</text>
+</svg>

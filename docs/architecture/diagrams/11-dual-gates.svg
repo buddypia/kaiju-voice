@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #1e293b; }
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 8; }
+      .card-gate { fill: #fef2f2; stroke: #ef4444; stroke-width: 2; rx: 8; }
+      .edge { stroke: #94a3b8; stroke-width: 2; fill: none; stroke-dasharray: 4; }
+      .arrow { fill: #94a3b8; }
+      .label { font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .sub { font-size: 12px; fill: #64748b; text-anchor: middle; }
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" class="bg" />
+  <text x="30" y="40" class="title">11. Dual Quality Gates</text>
+
+  <rect x="50" y="160" width="120" height="80" class="card" />
+  <text x="110" y="195" class="label">Spec Gen</text>
+  <text x="110" y="215" class="sub">SPEC-*.md</text>
+
+  <rect x="230" y="120" width="120" height="160" class="card-gate" />
+  <text x="290" y="150" class="label" fill="#b91c1c">Readiness Gate</text>
+  <text x="290" y="180" class="sub">Schema Check</text>
+  <text x="290" y="200" class="sub">Contract Check</text>
+  <text x="290" y="250" class="sub" fill="#ef4444">Pre-Implementation</text>
+
+  <rect x="410" y="160" width="120" height="80" class="card" />
+  <text x="470" y="195" class="label">Implementation</text>
+  <text x="470" y="215" class="sub">Source Code</text>
+
+  <rect x="590" y="120" width="120" height="160" class="card-gate" />
+  <text x="650" y="150" class="label" fill="#b91c1c">Quality Gate</text>
+  <text x="650" y="180" class="sub">ESLint / Lint</text>
+  <text x="650" y="200" class="sub">Vitest Tests</text>
+  <text x="650" y="250" class="sub" fill="#ef4444">Post-Implementation</text>
+
+  <path d="M170,200 L230,200" class="edge" marker-end="url(#arrowhead)" />
+  <path d="M350,200 L410,200" class="edge" marker-end="url(#arrowhead)" />
+  <path d="M530,200 L590,200" class="edge" marker-end="url(#arrowhead)" />
+</svg>

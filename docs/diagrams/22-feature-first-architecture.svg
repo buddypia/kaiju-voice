@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 350" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow22" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="750" height="350" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="375" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Feature-First アーキテクチャ</text>
+
+  <!-- app/ layer -->
+  <rect x="250" y="50" width="250" height="40" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="375" y="75" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">app/ (Routes + API)</text>
+
+  <!-- Arrow -->
+  <line x1="375" y1="92" x2="375" y2="118" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow22)"/>
+
+  <!-- features/ layer -->
+  <rect x="30" y="122" width="690" height="130" rx="10" fill="#fdf4ff" stroke="#a855f7" stroke-width="2"/>
+  <text x="375" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#6b21a8">features/ (Feature Modules)</text>
+
+  <!-- Feature boxes -->
+  <rect x="45" y="158" width="90" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="90" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">battle/</text>
+  <text x="90" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">ダメージ計算</text>
+
+  <rect x="145" y="158" width="90" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="190" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">voice/</text>
+  <text x="190" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">音声キャプチャ</text>
+
+  <rect x="245" y="158" width="100" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="295" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">ai-opponent/</text>
+  <text x="295" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">プリフェッチ</text>
+
+  <rect x="355" y="158" width="100" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="405" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">commentary/</text>
+  <text x="405" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">実況オーバーレイ</text>
+
+  <rect x="465" y="158" width="80" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="505" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">kaiju/</text>
+  <text x="505" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">キャラデータ</text>
+
+  <rect x="555" y="158" width="70" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="590" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">vfx/</text>
+  <text x="590" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">VFX演出</text>
+
+  <rect x="635" y="158" width="75" height="50" rx="6" fill="white" stroke="#d8b4fe" stroke-width="1"/>
+  <text x="672" y="180" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">game/</text>
+  <text x="672" y="198" text-anchor="middle" font-size="8" fill="#94a3b8">状態管理</text>
+
+  <text x="375" y="240" text-anchor="middle" font-size="9" fill="#a855f7">各featureは index.ts (バレルファイル) 経由でのみ外部公開</text>
+
+  <!-- Arrow -->
+  <line x1="375" y1="254" x2="375" y2="270" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow22)"/>
+
+  <!-- shared/ layer -->
+  <rect x="200" y="275" width="350" height="40" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="375" y="300" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">shared/ (共通ユーティリティ・定数・型)</text>
+
+  <!-- Rules -->
+  <text x="375" y="338" text-anchor="middle" font-size="10" fill="#94a3b8">依存方向: app → features → shared（逆方向禁止）</text>
+</svg>

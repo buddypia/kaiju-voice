@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <linearGradient id="org-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+    <path id="blob-sm" d="M 35,-55 C 70,-60 80,-20 75,15 C 65,55 35,75 -15,65 C -60,55 -80,20 -65,-20 C -50,-55 -5,-50 35,-55 Z"/>
+    <style>
+      .og-title{font:800 46px 'Nunito','Quicksand',system-ui,sans-serif;fill:#334155;letter-spacing:-.5px}
+      .og-sub{font:600 22px 'Nunito','Quicksand',system-ui,sans-serif;fill:#64748b}
+      .og-h{font:800 24px 'Nunito','Quicksand',system-ui,sans-serif;fill:#1e293b}
+      .og-s{font:600 16px 'Nunito','Quicksand',system-ui,sans-serif;fill:#475569}
+      .og-xs{font:600 13px 'Nunito','Quicksand',system-ui,sans-serif;fill:#94a3b8}
+      .og-num{font:900 42px 'Nunito','Quicksand',system-ui,sans-serif;fill:#fff}
+      .og-center{font:800 32px 'Nunito','Quicksand',system-ui,sans-serif;fill:#fff}
+      .og-gate{font:700 16px 'Nunito','Quicksand',system-ui,sans-serif;fill:#64748b}
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#org-bg)"/>
+
+  <!-- Title -->
+  <text x="700" y="55" text-anchor="middle" class="og-title">3-Tier Quality Gate System</text>
+  <text x="700" y="88" text-anchor="middle" class="og-sub">Makefile SSOT — 深刻度別の自動品質検証</text>
+
+  <!-- All Connectors (bottom layer — hidden under blobs at endpoints) -->
+  <g stroke="#94a3b8" fill="none" stroke-linecap="round">
+    <!-- Tier → Hub -->
+    <g stroke-width="4" stroke-dasharray="12 12">
+      <path d="M 350,305 Q 470,365 585,395"/>
+      <path d="M 780,300 Q 850,365 790,390"/>
+      <path d="M 1050,305 Q 930,365 815,395"/>
+    </g>
+    <!-- Hub → Verification -->
+    <g stroke-width="3" stroke-dasharray="8 8">
+      <path d="M 585,615 Q 430,665 330,695"/>
+      <path d="M 620,620 Q 550,680 625,705"/>
+      <path d="M 815,615 Q 970,665 1070,695"/>
+    </g>
+  </g>
+
+  <!-- Critical tier (pink) -->
+  <g transform="translate(280,215)">
+    <use href="#blob-c3" fill="#fbcfe8"/>
+    <circle cx="-50" cy="-55" r="30" fill="#ec4899"/>
+    <text x="-50" y="-40" text-anchor="middle" class="og-num">1</text>
+    <text x="5" y="-15" text-anchor="middle" class="og-h">Critical</text>
+    <text x="5" y="10" text-anchor="middle" class="og-s" fill="#ec4899">コミット / PR 不可</text>
+    <text x="5" y="36" text-anchor="middle" class="og-s">Format / Lint+Security</text>
+    <text x="5" y="56" text-anchor="middle" class="og-s">Architecture / Tests / Build</text>
+  </g>
+
+  <!-- Major tier (yellow) -->
+  <g transform="translate(700,215)">
+    <use href="#blob-c1" fill="#fef08a"/>
+    <circle cx="-50" cy="-55" r="30" fill="#eab308"/>
+    <text x="-50" y="-40" text-anchor="middle" class="og-num">2</text>
+    <text x="5" y="-15" text-anchor="middle" class="og-h">Major</text>
+    <text x="5" y="10" text-anchor="middle" class="og-s" fill="#eab308">警告表示、進行可能</text>
+    <text x="5" y="36" text-anchor="middle" class="og-s">テストファイル存在確認</text>
+    <text x="5" y="56" text-anchor="middle" class="og-s">カバレッジ閾値 (40%+)</text>
+  </g>
+
+  <!-- Info tier (blue) -->
+  <g transform="translate(1120,215)">
+    <use href="#blob-c2" fill="#bfdbfe"/>
+    <circle cx="-50" cy="-55" r="30" fill="#3b82f6"/>
+    <text x="-50" y="-40" text-anchor="middle" class="og-num">3</text>
+    <text x="5" y="-15" text-anchor="middle" class="og-h">Info</text>
+    <text x="5" y="10" text-anchor="middle" class="og-s" fill="#3b82f6">参考情報のみ</text>
+    <text x="5" y="36" text-anchor="middle" class="og-s">品質サマリー</text>
+    <text x="5" y="56" text-anchor="middle" class="og-s">メトリクス統計</text>
+  </g>
+
+  <!-- Hub: make q.check -->
+  <g transform="translate(700,490)">
+    <use href="#blob-hub" fill="#8b5cf6"/>
+    <text x="0" y="-15" text-anchor="middle" class="og-center">make q.check</text>
+    <text x="0" y="18" text-anchor="middle" class="og-s" fill="#e2e8f0">q.critical + q.major.warn + q.info</text>
+    <text x="0" y="42" text-anchor="middle" class="og-xs" fill="#c4b5fd">一括実行で全Tier検証</text>
+  </g>
+
+  <!-- Verification points (bottom row) -->
+  <g transform="translate(280,730)">
+    <use href="#blob-sm" fill="#e0e7ff"/>
+    <text x="0" y="-8" text-anchor="middle" class="og-gate">readiness-gate</text>
+    <text x="0" y="12" text-anchor="middle" class="og-xs">実装前</text>
+  </g>
+
+  <g transform="translate(700,730)">
+    <use href="#blob-sm" fill="#e0e7ff"/>
+    <text x="0" y="-8" text-anchor="middle" class="og-gate">pre-quality-gate</text>
+    <text x="0" y="12" text-anchor="middle" class="og-xs">実装後</text>
+  </g>
+
+  <g transform="translate(1120,730)">
+    <use href="#blob-sm" fill="#e0e7ff"/>
+    <text x="0" y="-8" text-anchor="middle" class="og-gate">DoD検証</text>
+    <text x="0" y="12" text-anchor="middle" class="og-xs">完了前</text>
+  </g>
+</svg>

@@ -47,9 +47,5 @@ export const MESSAGES = {
 
   battle_log: 'バトルログ',
 
-  commentary_label: 'AI実況',
-  commentary_speaking: '実況中...',
-  commentary_waiting: '次のアクションを待機中...',
-
   vfx_energy_charging: 'エネルギー充填中...',
 } as const;

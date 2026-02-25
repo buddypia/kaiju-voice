@@ -1,23 +1,15 @@
 #!/usr/bin/env node
 
 /**
- * Hackathon Project Post-Tool Verifier Hook (PostToolUse)
+ * Post-Tool Verifier Hook (PostToolUse)
  *
- * oh-my-opencodeのpost-tool-verifier.mjsをHackathon Projectに 忠実に移植.
- * ツール実行の都度実行されて 結果を検証してセッション統計を追跡します.
+ * ツール実行の都度実行されて結果を検証してセッション統計を追跡します.
  *
- * メカニズム (原本ベース):
+ * メカニズム:
  * 1. Bash 出力から 失敗パターン検出 (error, failed, permission denied 等)
  * 2. セッション統計 追跡 (ツール呼び出しカウント, 最後のツール 等)
  * 3. ツール別検証メッセージ生成
  * 4. バックグラウンド作業検出
- *
- * 原本との差異:
- * - Remember tag 処理 除外 (Notepad システム削除済み)
- * - セッション統計を.claude/state/に保存 (原本は~/.claude/.session-stats.json)
- * - Web QA(lint/test) 中心 失敗パターン 追加
- *
- * @see oss-sources/oh-my-claudecode/scripts/post-tool-verifier.mjs (原本)
  */
 
 import { existsSync, readFileSync, writeFileSync } from 'fs';
@@ -163,8 +155,7 @@ function analyzeToolOutput(toolName, toolOutput) {
 
 /**
  * セッション統計更新.
- * 原本は~/.claude/.session-stats.jsonに保存するが,
- * Hackathon Projectは.claude/state/session-stats.jsonに保存.
+ * .claude/state/session-stats.jsonに保存.
  */
 function updateSessionStats(stateDir, toolName) {
   const statsPath = join(stateDir, 'session-stats.json');

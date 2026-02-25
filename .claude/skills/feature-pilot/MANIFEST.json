@@ -228,7 +228,7 @@
     {
       "version": "1.0.0",
       "date": "2026-02-11",
-      "changes": "Hackathon Project 向け新規作成: Flutter/Korean → Next.js/Japanese 全面移行。CONVERT_CANDIDATE/REVERT_CANDIDATE削除、Team Mode削除、flutter-qa→pre-quality-gate置換、Evidence Cache更新"
+      "changes": "プロジェクト 向け新規作成: 旧プロジェクトから Next.js/Japanese に 全面移行。CONVERT_CANDIDATE/REVERT_CANDIDATE削除、Team Mode削除、quality-gate更新置換、Evidence Cache更新"
     }
   ]
 }

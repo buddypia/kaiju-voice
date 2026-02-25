@@ -1,7 +1,7 @@
 ---
 name: research-pilot
 description: |
-  Hackathon Project プロジェクトの Product Discovery スキル。
+  プロジェクト プロジェクトの Product Discovery スキル。
   feature-pilot 進入前に「この機能を作るべきか？」と「どのように作るべきか？」を
   業界標準フレームワーク（OST + Double Diamond + Shape Up）で検証する。
 
@@ -344,7 +344,7 @@ Tier S (30分) — 上記に該当なし:
 
 ### 3.4 技術スタック適合性確認
 
-→ ツール: context7 MCP (Flutter/Supabase/Dart 最新ドキュメント)
+→ ツール: context7 MCP (Next.js/React/TypeScript 最新ドキュメント)
 → 確認: 必要なAPI/SDKが当社スタックで使用可能か
 → 成果物: 技術互換性レポート
 ```
@@ -466,7 +466,7 @@ Tier S (30分) — 上記に該当なし:
 | パフォーマンス | 応答時間          | "Edge Function 平均 23ms, P99 89ms" |
 | 精度           | 機能精度          | "STT 韓国語認識率 87%"              |
 | コスト         | API呼び出しコスト | "Gemini 1回呼び出し $0.003"         |
-| 互換性         | スタック互換      | "Flutter 3.x + Supabase 互換確認"   |
+| 互換性         | スタック互換      | "Next.js 16 + Vercel 互換確認"   |
 
 ### PoC 結果記録形式
 

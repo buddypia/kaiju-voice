@@ -42,10 +42,10 @@ gemini -m gemini-3-flash-preview
 
 ```bash
 # 単一プロンプト実行
-gemini -p "韓国語学習アプリのマーケティング文を作成して"
+gemini -p "AIゲーム対戦プロジェクトの紹介文を作成して"
 
 # ファイル内容を含めて分析
-gemini -p "このコードをレビューして" < code.dart
+gemini -p "このコードをレビューして" < code.ts
 
 # 結果をファイルに保存
 gemini -p "README 草案を作成して" > README.md
@@ -88,7 +88,7 @@ gemini
 > かわいい猫キャラクターアイコンを生成して
 
 # 非対話モード
-gemini -p "ミニマルスタイルの韓国語学習アプリロゴを生成して"
+gemini -p "ミニマルスタイルのAIゲーム対戦アプリロゴを生成して"
 ```
 
 ### Gemini 2.5 Flash Image モデル (ネイティブ画像生成)
@@ -103,14 +103,14 @@ gemini -m gemini-3-flash-preview-image -p "韓国の伝統文様が入ったバ�
 ### マーケティング文生成
 
 ```bash
-gemini -p "韓国語学習アプリ 'Hackathon Project' のアプリストア説明文を作成して。
-AI基盤学習、音声認識、オフラインサポート機能を強調して。"
+gemini -p "AIゲーム対戦プロジェクト 'プロジェクト' の紹介文を作成して。
+Gemini API活用、リアルタイム対戦、インタラクティブなゲーム体験を強調して。"
 ```
 
 ### コードレビュー
 
 ```bash
-gemini -p "このFlutterコードのパフォーマンス改善点を見つけて" < lib/features/lesson/presentation/viewmodels/lesson_session_viewmodel.dart
+gemini -p "このReactコンポーネントのパフォーマンス改善点を見つけて" < src/features/battle/components/BattleArena.tsx
 ```
 
 ### ドキュメント草案作成

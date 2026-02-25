@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <linearGradient id="temp-grad" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg-grad)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">Temperature 設計</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">用途に応じた使い分け — 低 / 中 / 高</text>
+
+  <!-- Spectrum Bar (organic pill shape) -->
+  <rect x="200" y="150" width="1000" height="30" rx="15" fill="url(#temp-grad)" opacity="0.3"/>
+  <rect x="200" y="150" width="1000" height="30" rx="15" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="200" y="205" font-size="16" font-weight="600" fill="#3b82f6">安定性重視</text>
+  <text x="1200" y="205" text-anchor="end" font-size="16" font-weight="600" fill="#ef4444">創造性重視</text>
+
+  <!-- Dot indicators on bar -->
+  <circle cx="380" cy="165" r="14" fill="#3b82f6"/>
+  <circle cx="700" cy="165" r="14" fill="#a855f7"/>
+  <circle cx="1020" cy="165" r="14" fill="#ef4444"/>
+
+  <!-- Lines from dots to cards -->
+  <line x1="380" y1="180" x2="380" y2="260" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="700" y1="180" x2="700" y2="260" stroke="#a855f7" stroke-width="3" stroke-linecap="round"/>
+  <line x1="1020" y1="180" x2="1020" y2="260" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Card 1: Voice Agent (Low) -->
+  <g transform="translate(330, 400)">
+    <use href="#blob-c1" fill="#bfdbfe" transform="scale(1.4)"/>
+    <circle cx="0" cy="-80" r="26" fill="#3b82f6"/>
+    <text x="0" y="-68" text-anchor="middle" font-size="26" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Voice Agent</text>
+    <text x="0" y="18" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">temperature: default (低)</text>
+    <text x="0" y="50" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">スコアリングは正確に</text>
+  </g>
+
+  <!-- Card 2: Live Agent (Medium) -->
+  <g transform="translate(700, 400)">
+    <use href="#blob-c2" fill="#e9d5ff" transform="scale(1.4)"/>
+    <circle cx="0" cy="-80" r="26" fill="#a855f7"/>
+    <text x="0" y="-68" text-anchor="middle" font-size="26" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Live Agent</text>
+    <text x="0" y="18" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">temperature: default</text>
+    <text x="0" y="50" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">実況は自然さ重視</text>
+  </g>
+
+  <!-- Card 3: Battle Agent (High) -->
+  <g transform="translate(1070, 400)">
+    <use href="#blob-c3" fill="#fbcfe8" transform="scale(1.4)"/>
+    <circle cx="0" cy="-80" r="26" fill="#ec4899"/>
+    <text x="0" y="-68" text-anchor="middle" font-size="26" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Battle Agent</text>
+    <text x="0" y="18" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">temperature: 1.0 (最大)</text>
+    <text x="0" y="50" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">毎回違う叫びを生成</text>
+  </g>
+
+  <!-- Key Insight Pill -->
+  <rect x="320" y="620" width="760" height="70" rx="35" fill="#8b5cf6"/>
+  <text x="700" y="650" text-anchor="middle" font-size="20" font-weight="800" fill="#ffffff">Structured Output + 高temperature</text>
+  <text x="700" y="675" text-anchor="middle" font-size="16" font-weight="600" fill="rgba(255,255,255,0.8)">= 形式は厳密に、内容は創造的に</text>
+
+  <!-- Footer pill -->
+  <rect x="280" y="730" width="840" height="44" rx="30" fill="#ffffff"/>
+  <text x="700" y="758" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">同じモデルでも temperature を変えるだけで「分析」と「創造」を使い分け</text>
+</svg>

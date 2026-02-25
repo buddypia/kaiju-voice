@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg-grad)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">TTS Fallback Strategy</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">3段階のフォールバックでゲームを止めない</text>
+
+  <!-- Level 1: Gemini TTS -->
+  <g transform="translate(700, 250)">
+    <use href="#blob-c1" fill="#bbf7d0" transform="scale(1.6, 1.0)"/>
+    <circle cx="-120" cy="-5" r="28" fill="#22c55e"/>
+    <text x="-120" y="3" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="15" y="-20" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Level 1: Gemini TTS</text>
+    <text x="15" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">gemini-2.5-flash-preview-tts</text>
+    <text x="15" y="38" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">(voice: Kore)</text>
+  </g>
+
+  <!-- Fail connector 1->2 -->
+  <path d="M 700,320 Q 700,360 700,380" stroke="#ec4899" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <text x="860" y="360" text-anchor="middle" font-size="15" font-weight="600" fill="#ec4899">セッション内で1度でも失敗</text>
+
+  <!-- Level 2: Browser SpeechSynthesis -->
+  <g transform="translate(700, 450)">
+    <use href="#blob-c2" fill="#fef08a" transform="scale(1.6, 1.0)"/>
+    <circle cx="-120" cy="-5" r="28" fill="#eab308"/>
+    <text x="-120" y="3" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="15" y="-20" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Level 2: Browser Speech</text>
+    <text x="15" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">SpeechSynthesis API</text>
+    <text x="15" y="38" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">ja-JP / rate: 1.3 / pitch: 1.1</text>
+  </g>
+
+  <!-- Fail connector 2->3 -->
+  <path d="M 700,520 Q 700,560 700,580" stroke="#ec4899" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <text x="860" y="560" text-anchor="middle" font-size="15" font-weight="600" fill="#ec4899">SpeechSynthesis 非対応</text>
+
+  <!-- Level 3: Text Only -->
+  <g transform="translate(700, 640)">
+    <use href="#blob-c3" fill="#bfdbfe" transform="scale(1.6, 1.0)"/>
+    <circle cx="-120" cy="-5" r="28" fill="#3b82f6"/>
+    <text x="-120" y="3" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="15" y="-20" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Level 3: テキストのみ表示</text>
+    <text x="15" y="12" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">音声なし</text>
+    <text x="15" y="38" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">テキスト実況のみ</text>
+  </g>
+
+  <!-- Footer pill -->
+  <rect x="300" y="740" width="800" height="44" rx="30" fill="#ffffff"/>
+  <text x="700" y="768" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">API失敗でゲームが止まらないよう、常に次の手段を用意</text>
+</svg>

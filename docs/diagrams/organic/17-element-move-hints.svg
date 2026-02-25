@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg17" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-17" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-17" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-17" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4-17" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5-17" d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z"/>
+    <path id="blob-hub-17" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg17)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">属性別 技名ヒント</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">属性別 技名ヒント -- Battle Agent への入力</text>
+
+  <!-- Fire -->
+  <g transform="translate(180, 290)">
+    <use href="#blob-c1-17" transform="scale(1.3)" fill="#fed7aa"/>
+    <use href="#blob-c1-17" transform="scale(1.1)" fill="#fed7aa"/>
+    <circle cx="-80" cy="-80" r="24" fill="#f97316"/>
+    <text x="-80" y="-69" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-28" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">火</text>
+    <text x="0" y="2" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">灼熱・業火・爆炎</text>
+    <text x="0" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b" font-style="italic">「灼熱砲ォォォ!」</text>
+  </g>
+
+  <!-- Ice -->
+  <g transform="translate(490, 290)">
+    <use href="#blob-c2-17" transform="scale(1.3)" fill="#bfdbfe"/>
+    <use href="#blob-c2-17" transform="scale(1.1)" fill="#bfdbfe"/>
+    <circle cx="-80" cy="-72" r="24" fill="#3b82f6"/>
+    <text x="-80" y="-61" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-28" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">氷</text>
+    <text x="0" y="2" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">氷結・絶零・凍牙</text>
+    <text x="0" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b" font-style="italic">「絶零砲ォォォ!」</text>
+  </g>
+
+  <!-- Thunder -->
+  <g transform="translate(800, 290)">
+    <use href="#blob-c3-17" transform="scale(1.3)" fill="#fef08a"/>
+    <use href="#blob-c3-17" transform="scale(1.1)" fill="#fef08a"/>
+    <circle cx="-80" cy="-85" r="24" fill="#eab308"/>
+    <text x="-80" y="-74" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-28" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">雷</text>
+    <text x="0" y="2" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">雷鳴・迅雷・電撃</text>
+    <text x="0" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b" font-style="italic">「迅雷の裁きィ!」</text>
+  </g>
+
+  <!-- Earth -->
+  <g transform="translate(340, 510)">
+    <use href="#blob-c4-17" transform="scale(1.3)" fill="#bbf7d0"/>
+    <use href="#blob-c4-17" transform="scale(1.1)" fill="#bbf7d0"/>
+    <circle cx="-80" cy="-70" r="24" fill="#22c55e"/>
+    <text x="-80" y="-59" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">4</text>
+    <text x="0" y="-28" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">地</text>
+    <text x="0" y="2" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">地震・岩砕・崩壊</text>
+    <text x="0" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b" font-style="italic">「大地の怒りィ!」</text>
+  </g>
+
+  <!-- Void -->
+  <g transform="translate(700, 510)">
+    <use href="#blob-c5-17" transform="scale(1.3)" fill="#e9d5ff"/>
+    <use href="#blob-c5-17" transform="scale(1.1)" fill="#e9d5ff"/>
+    <circle cx="-80" cy="-78" r="24" fill="#a855f7"/>
+    <text x="-80" y="-67" text-anchor="middle" font-size="32" font-weight="900" fill="#ffffff">5</text>
+    <text x="0" y="-28" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">虚</text>
+    <text x="0" y="2" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">虚無・消滅・暗黒</text>
+    <text x="0" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b" font-style="italic">「虚無に還れ!」</text>
+  </g>
+
+  <!-- Explanation Hub -->
+  <g transform="translate(1150, 420)">
+    <use href="#blob-hub-17" transform="scale(1.2)" fill="#fbcfe8"/>
+    <use href="#blob-hub-17" transform="scale(1.0)" fill="#fbcfe8"/>
+    <text x="0" y="-40" text-anchor="middle" font-size="20" font-weight="800" fill="#1e293b">ヒントを渡す理由</text>
+    <text x="0" y="-8" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">属性に合った技名を</text>
+    <text x="0" y="14" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">生成させるためキーワード</text>
+    <text x="0" y="36" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">ヒントをプロンプトに含める</text>
+    <text x="0" y="68" text-anchor="middle" font-size="14" font-weight="600" fill="#ec4899">制約付き創造性</text>
+    <text x="0" y="92" text-anchor="middle" font-size="13" font-weight="600" fill="#64748b">ヒント + 高temp + SO</text>
+  </g>
+
+  <!-- Connectors to explanation -->
+  <path d="M 880,310 C 960,340 1020,370 1060,390" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 810,530 C 900,510 980,480 1050,440" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Footer -->
+  <rect x="310" y="755" width="780" height="36" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="779" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">ELEMENT_MOVE_HINTS テーブルでAIの語彙を誘導</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow3" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="800" height="250" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Voice Agent — 音声分析パイプライン</text>
+
+  <!-- Mic Input -->
+  <rect x="30" y="65" width="120" height="80" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="90" y="100" text-anchor="middle" font-size="24">🎤</text>
+  <text x="90" y="125" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">音声録音 (5秒)</text>
+
+  <line x1="155" y1="105" x2="185" y2="105" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- WebM encode -->
+  <rect x="190" y="65" width="110" height="80" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="245" y="98" text-anchor="middle" font-size="11" font-weight="600" fill="#334155">audio/webm</text>
+  <text x="245" y="118" text-anchor="middle" font-size="11" fill="#64748b">→ base64</text>
+
+  <line x1="305" y1="105" x2="335" y2="105" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- Gemini API -->
+  <rect x="340" y="55" width="160" height="100" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="420" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">gemini-3-flash</text>
+  <text x="420" y="102" text-anchor="middle" font-size="10" fill="#475569">Structured Output</text>
+  <text x="420" y="118" text-anchor="middle" font-size="10" fill="#475569">responseJsonSchema</text>
+  <text x="420" y="142" text-anchor="middle" font-size="10" fill="#3b82f6">+ システムプロンプト</text>
+
+  <line x1="505" y1="105" x2="535" y2="105" stroke="#64748b" stroke-width="2" marker-end="url(#arrow3)"/>
+
+  <!-- JSON Output -->
+  <rect x="540" y="55" width="230" height="130" rx="8" fill="#fefce8" stroke="#eab308" stroke-width="1.5"/>
+  <text x="655" y="78" text-anchor="middle" font-size="11" font-weight="600" fill="#854d0e">出力 (JSON)</text>
+  <line x1="550" y1="86" x2="760" y2="86" stroke="#fde68a" stroke-width="1"/>
+  <text x="560" y="106" font-size="10" fill="#475569" font-family="monospace">intensity:  85</text>
+  <text x="560" y="122" font-size="10" fill="#475569" font-family="monospace">creativity: 72</text>
+  <text x="560" y="138" font-size="10" fill="#475569" font-family="monospace">emotion:    90</text>
+  <text x="560" y="154" font-size="10" fill="#475569" font-family="monospace">language:   "mixed"</text>
+  <text x="560" y="170" font-size="10" fill="#475569" font-family="monospace">attackType: "ultimate"</text>
+
+  <text x="400" y="220" text-anchor="middle" font-size="11" fill="#94a3b8">音声バイナリをbase64エンコードしてinlineDataとしてGeminiに送信</text>
+  <text x="400" y="238" text-anchor="middle" font-size="11" fill="#94a3b8">JSON Schema制約により、パースエラーゼロを実現</text>
+</svg>

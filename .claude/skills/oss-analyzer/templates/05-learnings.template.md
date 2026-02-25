@@ -2,7 +2,7 @@
 
 > **分析対象**: {{OSS_NAME}}
 > **分析日**: {{ANALYSIS_DATE}}
-> **適用対象**: Hackathon Project プロジェクト
+> **適用対象**: プロジェクト プロジェクト
 
 ---
 
@@ -74,7 +74,7 @@ gantt
 
 1. **High Priority 項目検討**: 実装可能性および既存コードとの互換性確認
 2. **メカニズムカタログ更新**: `docs/oss/_catalog/patterns.json`に登録
-3. **手動実装**: Hackathon Project コードベースに適用
+3. **手動実装**: プロジェクト コードベースに適用
 
 ```bash
 # メカニズムカタログ確認

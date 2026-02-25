@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <linearGradient id="org-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5" d="M 45,-75 C 95,-65 115,-5 100,45 C 85,95 25,115 -35,95 C -95,75 -115,15 -95,-40 C -75,-85 -10,-85 45,-75 Z"/>
+    <path id="blob-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+    <style>
+      .og-title{font:800 46px 'Nunito','Quicksand',system-ui,sans-serif;fill:#334155;letter-spacing:-.5px}
+      .og-sub{font:600 22px 'Nunito','Quicksand',system-ui,sans-serif;fill:#64748b}
+      .og-h{font:800 24px 'Nunito','Quicksand',system-ui,sans-serif;fill:#1e293b}
+      .og-s{font:600 16px 'Nunito','Quicksand',system-ui,sans-serif;fill:#475569}
+      .og-num{font:900 42px 'Nunito','Quicksand',system-ui,sans-serif;fill:#fff}
+      .og-center{font:800 32px 'Nunito','Quicksand',system-ui,sans-serif;fill:#fff}
+    </style>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#org-bg)"/>
+
+  <!-- Title -->
+  <text x="700" y="68" text-anchor="middle" class="og-title">feature-pilot Pipeline</text>
+  <text x="700" y="102" text-anchor="middle" class="og-sub">要件入力 → 自動設計 → TDD実装 → 品質検証 → 完了を1コマンドで実行</text>
+
+  <!-- Connectors: hub → steps -->
+  <g stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" fill="none" stroke-linecap="round">
+    <path d="M 580,388 Q 370,445 200,465"/>
+    <path d="M 628,398 Q 520,445 420,465"/>
+    <path d="M 700,415 Q 700,440 700,465"/>
+    <path d="M 772,398 Q 880,445 980,465"/>
+    <path d="M 820,388 Q 1020,445 1200,465"/>
+  </g>
+
+  <!-- Hub: feature-pilot -->
+  <g transform="translate(700,256)">
+    <use href="#blob-hub" fill="#8b5cf6"/>
+    <text x="0" y="-10" text-anchor="middle" class="og-center">feature-pilot</text>
+    <text x="0" y="30" text-anchor="middle" class="og-s" fill="#e2e8f0">Orchestrator</text>
+  </g>
+
+  <!-- Step 1: 設計 (Group: 設計フェーズ) -->
+  <g transform="translate(200,560)">
+    <use href="#blob-c1" fill="#fef08a"/>
+    <circle cx="-50" cy="-50" r="30" fill="#eab308"/>
+    <text x="-50" y="-35" text-anchor="middle" class="og-num">1</text>
+    <text x="0" y="0" text-anchor="middle" class="og-h">設計</text>
+    <text x="0" y="28" text-anchor="middle" class="og-s">feature-architect</text>
+    <text x="0" y="52" text-anchor="middle" class="og-s">BRIEF + CONTEXT生成</text>
+  </g>
+
+  <!-- Step 2: 仕様生成 (Group: 設計フェーズ) -->
+  <g transform="translate(420,560)">
+    <use href="#blob-c2" fill="#bfdbfe"/>
+    <circle cx="-50" cy="-50" r="30" fill="#3b82f6"/>
+    <text x="-50" y="-35" text-anchor="middle" class="og-num">2</text>
+    <text x="0" y="0" text-anchor="middle" class="og-h">仕様生成</text>
+    <text x="0" y="28" text-anchor="middle" class="og-s">spec-generator</text>
+    <text x="0" y="52" text-anchor="middle" class="og-s">SPEC.md + Screen文書</text>
+  </g>
+
+  <!-- Step 3: 品質ゲート (Group: 検証ゲート — 中央に独立配置) -->
+  <g transform="translate(700,560)">
+    <use href="#blob-c3" fill="#fbcfe8"/>
+    <circle cx="-50" cy="-50" r="30" fill="#ec4899"/>
+    <text x="-50" y="-35" text-anchor="middle" class="og-num">3</text>
+    <text x="0" y="0" text-anchor="middle" class="og-h">品質ゲート</text>
+    <text x="0" y="28" text-anchor="middle" class="og-s">readiness-gate</text>
+    <text x="0" y="52" text-anchor="middle" class="og-s">Go / No-Go 判定</text>
+  </g>
+
+  <!-- Step 4: TDD実装 (Group: 実装フェーズ) -->
+  <g transform="translate(980,560)">
+    <use href="#blob-c4" fill="#bbf7d0"/>
+    <circle cx="-50" cy="-50" r="30" fill="#22c55e"/>
+    <text x="-50" y="-35" text-anchor="middle" class="og-num">4</text>
+    <text x="0" y="0" text-anchor="middle" class="og-h">TDD実装</text>
+    <text x="0" y="28" text-anchor="middle" class="og-s">feature-implementer</text>
+    <text x="0" y="52" text-anchor="middle" class="og-s">Data → Logic → UI → Test</text>
+  </g>
+
+  <!-- Step 5: 統合検証 (Group: 実装フェーズ) -->
+  <g transform="translate(1200,560)">
+    <use href="#blob-c5" fill="#e9d5ff"/>
+    <circle cx="-50" cy="-50" r="30" fill="#a855f7"/>
+    <text x="-50" y="-35" text-anchor="middle" class="og-num">5</text>
+    <text x="0" y="0" text-anchor="middle" class="og-h">統合検証</text>
+    <text x="0" y="28" text-anchor="middle" class="og-s">wiring + quality</text>
+    <text x="0" y="52" text-anchor="middle" class="og-s">lint + test + build</text>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(700,740)">
+    <rect x="-450" y="-30" width="900" height="60" rx="30" fill="#ffffff"/>
+    <text x="-250" y="8" text-anchor="middle" class="og-h" fill="#eab308">NEW_FEATURE</text>
+    <text x="0" y="8" text-anchor="middle" class="og-h" fill="#3b82f6">MODIFY_FEATURE</text>
+    <text x="250" y="8" text-anchor="middle" class="og-h" fill="#ec4899">BUG_FIX</text>
+  </g>
+</svg>

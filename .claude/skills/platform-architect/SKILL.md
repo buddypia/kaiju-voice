@@ -197,7 +197,7 @@ Option A を選択する。{根拠}
 |  4  | Solution Strategy      | PADR-001~006                |
 |  5  | Building Blocks        | c4/platform-c4.md (Level 2) |
 |  6  | Runtime View           | 主要ユースケースシーケンス  |
-|  7  | Deployment View        | Supabase + Flutter配布      |
+|  7  | Deployment View        | Vercel + Next.js デプロイ      |
 |  8  | Cross-Cutting Concepts | cross-cutting/\*.md         |
 |  9  | Architecture Decisions | PADR サマリー               |
 | 10  | Tech Radar             | tech-radar.md               |

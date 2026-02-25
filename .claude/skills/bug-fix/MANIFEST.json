@@ -1,7 +1,7 @@
 {
   "skill_id": "bug-fix",
   "version": "1.0.0",
-  "description": "Hackathon Project プロジェクトのバグ修正専用スキル。バグレポートを分析し、根本原因を特定して修正し、回帰テスト(TDD)を追加する。",
+  "description": "プロジェクト プロジェクトのバグ修正専用スキル。バグレポートを分析し、根本原因を特定して修正し、回帰テスト(TDD)を追加する。",
   "triggers": ["バグ修正", "エラー発生", "動かない", "動作しない", "クラッシュ", "fix bug"],
   "calls": [],
   "called_by": ["feature-pilot"],

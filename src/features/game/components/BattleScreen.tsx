@@ -14,8 +14,6 @@ import { calculateDamage } from '@/features/battle/hooks/useBattleEngine';
 import { BattleArena } from '@/features/battle/components/BattleArena';
 import { AttackSequence } from '@/features/battle/components/AttackSequence';
 import { useBattleBGM } from '@/features/music/hooks/useBattleBGM';
-import { useCommentary } from '@/features/commentary';
-import type { CommentaryEvent } from '@/features/commentary';
 import { useAIOpponent } from '@/features/ai-opponent';
 import { UltimateCutIn, KnockOutEffect } from '@/features/vfx';
 
@@ -50,10 +48,8 @@ export function BattleScreen({
   onNextTurn,
 }: BattleScreenProps) {
   const { startBGM, stopBGM } = useBattleBGM();
-  const { commentary, generateCommentary, stopSpeaking } = useCommentary();
   const { generateAIAttack, prefetchAIAttack, consumePrefetched, isPrefetched } = useAIOpponent();
   const bgmStartedRef = useRef(false);
-  const commentaryInitRef = useRef(false);
   const aiTurnProcessingRef = useRef(false);
 
   /** 攻撃シーケンス状態 */
@@ -70,27 +66,15 @@ export function BattleScreen({
   );
   const shoutTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /** バトル開始時にBGM・怪獣画像・開幕実況を非同期生成 */
+  /** バトル開始時にBGMを非同期生成 */
   useEffect(() => {
     if (!bgmStartedRef.current) {
       bgmStartedRef.current = true;
       startBGM(players[0].kaiju.element, players[1].kaiju.element);
     }
 
-    if (!commentaryInitRef.current) {
-      commentaryInitRef.current = true;
-      generateCommentary({
-        event: 'battle_start',
-        attacker: players[0].kaiju.nameJa,
-        defender: players[1].kaiju.nameJa,
-        element1: players[0].kaiju.element,
-        element2: players[1].kaiju.element,
-      });
-    }
-
     return () => {
       stopBGM();
-      stopSpeaking();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -215,7 +199,7 @@ export function BattleScreen({
     onNextTurn();
   }, [onNextTurn]);
 
-  /** 攻撃シーケンス完了後: ダメージ適用 + 実況 + ターン進行 */
+  /** 攻撃シーケンス完了後: ダメージ適用 + ターン進行 */
   const handleSequenceComplete = useCallback(() => {
     if (!pendingAttack) return;
 
@@ -226,36 +210,7 @@ export function BattleScreen({
     setShowSequence(false);
     onApplyAttack(pendingAttack);
 
-    // AI実況を非同期で生成
     const defenderHpAfter = Math.max(0, defender.hp - pendingAttack.damage);
-    const commentaryEvent: CommentaryEvent = {
-      event: pendingAttack.isCritical ? 'critical' : 'attack',
-      attacker: attacker.kaiju.nameJa,
-      defender: defender.kaiju.nameJa,
-      attackName: pendingAttack.attackName,
-      damage: pendingAttack.damage,
-      remainingHp: defenderHpAfter,
-      maxHp: defender.maxHp,
-    };
-    generateCommentary(commentaryEvent);
-
-    if (defenderHpAfter > 0 && defenderHpAfter / defender.maxHp <= 0.3) {
-      generateCommentary({
-        event: 'low_hp',
-        defender: defender.kaiju.nameJa,
-        remainingHp: defenderHpAfter,
-        maxHp: defender.maxHp,
-      });
-    }
-
-    if (defenderHpAfter <= 0) {
-      generateCommentary({
-        event: 'ko',
-        winner: attacker.kaiju.nameJa,
-        loser: defender.kaiju.nameJa,
-        totalRounds: roundNumber,
-      });
-    }
 
     setPendingAttack(null);
 
@@ -270,7 +225,7 @@ export function BattleScreen({
         onNextTurn();
       }, 2500);
     }
-  }, [pendingAttack, players, roundNumber, onApplyAttack, onNextTurn, generateCommentary]);
+  }, [pendingAttack, players, onApplyAttack, onNextTurn]);
 
   /** 叫ぶアクション: 録音完了 → 分析 → スコア表示シーケンス → ダメージ */
   const handleShout = async (audioBlob: Blob) => {
@@ -328,10 +283,6 @@ export function BattleScreen({
         gameMode={gameMode}
         onStartRecording={onStartRecording}
         onShout={handleShout}
-        commentaryText={commentary.text}
-        commentaryIsLoading={commentary.isLoading}
-        commentaryIsSpeaking={commentary.isSpeaking}
-        commentaryIsLiveVoice={commentary.isLiveVoice}
         shoutTranscript={shoutTranscript}
       />
 

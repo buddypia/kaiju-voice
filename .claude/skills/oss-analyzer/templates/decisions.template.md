@@ -76,7 +76,7 @@ Output:
 | ⚠️ Negative | {{NEGATIVE}} | {{EVIDENCE}} |
 | ↔️ Tradeoff | {{TRADEOFF}} | {{EVIDENCE}} |
 
-### Hackathon Project Relevance
+### プロジェクト Relevance
 
 - **Problem Match**: {{LK_PROBLEM_MATCH}}
 - **Forces Match**: {{LK_FORCES_MATCH}}

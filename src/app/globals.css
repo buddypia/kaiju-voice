@@ -431,17 +431,6 @@ body::after {
   }
 }
 
-@keyframes commentary-slide-in {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 @keyframes charge-ring {
   0% {
     stroke-dashoffset: 283;
@@ -465,10 +454,6 @@ body::after {
 
 .animate-typewriter-cursor {
   animation: typewriter-cursor 0.8s step-end infinite;
-}
-
-.animate-commentary-slide-in {
-  animation: commentary-slide-in 0.3s ease-out forwards;
 }
 
 /* === Attack Sequence Animations === */

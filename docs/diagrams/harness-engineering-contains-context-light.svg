@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 690 420">
+  <title>Harness Engineering が Context Engineering を内包</title>
+  <defs>
+    <filter id="hec-sh" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="8" flood-color="#94a3b8" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .hec-title{font:700 20px system-ui,sans-serif;fill:#0f172a;letter-spacing:-0.3px}
+      .hec-label{font:600 11px system-ui,sans-serif;fill:#1e293b}
+      .hec-sub{font:400 10px system-ui,sans-serif;fill:#64748b}
+      .hec-ctx{font:600 10px system-ui,sans-serif;fill:#64748b}
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="690" height="420" rx="0" fill="#f8fafc"/>
+  <!-- Subtle top stripe -->
+  <rect width="690" height="4" fill="#3b82f6" opacity="0.08"/>
+
+  <!-- Title -->
+  <text x="345" y="38" text-anchor="middle" class="hec-title">ハーネスエンジニアリング</text>
+
+  <!-- Outer: Harness Engineering circle -->
+  <circle cx="345" cy="238" r="160" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+
+  <!-- Inner: Context Engineering circle -->
+  <circle cx="270" cy="238" r="55" fill="#fff" stroke="#e2e8f0" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="270" y="235" text-anchor="middle" class="hec-ctx">コンテキスト</text>
+  <text x="270" y="249" text-anchor="middle" class="hec-ctx">エンジニアリング</text>
+
+  <!-- Harness-only elements (card style from v1) -->
+
+  <!-- MCP Servers -->
+  <g filter="url(#hec-sh)">
+    <rect x="345" y="148" width="108" height="34" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="399" y="170" text-anchor="middle" class="hec-label" fill="#15803d">MCP Servers</text>
+  </g>
+
+  <!-- SKILL.md -->
+  <g filter="url(#hec-sh)">
+    <rect x="349" y="196" width="100" height="34" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="399" y="218" text-anchor="middle" class="hec-label" fill="#4338ca">SKILL.md</text>
+  </g>
+
+  <!-- Agents -->
+  <g filter="url(#hec-sh)">
+    <rect x="349" y="244" width="100" height="34" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="399" y="266" text-anchor="middle" class="hec-label" fill="#c2410c">Agents</text>
+  </g>
+
+  <!-- AGENTS.md -->
+  <g filter="url(#hec-sh)">
+    <rect x="345" y="292" width="108" height="34" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="399" y="314" text-anchor="middle" class="hec-label" fill="#1d4ed8">AGENTS.md</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <g fill="#e2e8f0">
+    <circle cx="30" cy="400" r="2.5"/><circle cx="44" cy="400" r="2.5"/><circle cx="58" cy="400" r="2.5"/>
+    <circle cx="632" cy="400" r="2.5"/><circle cx="646" cy="400" r="2.5"/><circle cx="660" cy="400" r="2.5"/>
+  </g>
+</svg>

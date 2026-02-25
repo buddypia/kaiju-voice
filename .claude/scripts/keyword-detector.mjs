@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Web Project Keyword Detector Hook (UserPromptSubmit) v2.1
+ * Hackathon Project Keyword Detector Hook (UserPromptSubmit) v2.1
  *
- * oh-my-opencodeのkeyword-detector.mjsをWeb Projectに忠実に移植.
+ * Hackathon Project Keyword Detector Hook.
  * Claude Code Hooks APIのUserPromptSubmitイベントで実行.
  *
  * v2.1 変更 (BUG-1 修正):
@@ -33,7 +33,7 @@
  * 10. competitive-tracker/競合他社比較: ベンチマーク追跡
  * 11. manual-generator/マニュアル: マニュアル更新/生成
  *
- * @see oss-sources/oh-my-claudecode/scripts/keyword-detector.mjs (原本)
+ * @see keyword-detector パターン (原本)
  */
 
 import { join, dirname } from 'path';

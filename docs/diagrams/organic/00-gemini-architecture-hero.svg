@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5" d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z"/>
+    <path id="blob-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg-grad)"/>
+
+  <!-- Title -->
+  <text x="700" y="58" text-anchor="middle" font-size="42" font-weight="800" fill="#334155" letter-spacing="-0.5">KAIJU VOICE — Gemini Architecture</text>
+  <text x="700" y="90" text-anchor="middle" font-size="20" font-weight="600" fill="#64748b">5つのGemini APIを専門エージェントとして統合した怪獣バトルゲーム</text>
+
+  <!-- Connectors (behind elements) -->
+  <g stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" fill="none" stroke-linecap="round">
+    <!-- Voice → Hub -->
+    <path d="M 700,275 Q 715,310 708,340"/>
+    <!-- Battle → Hub -->
+    <path d="M 325,390 Q 440,430 555,460"/>
+    <!-- Live → Hub -->
+    <path d="M 1075,390 Q 960,430 845,460"/>
+    <!-- Music → Hub -->
+    <path d="M 430,615 Q 520,555 590,510"/>
+    <!-- Image → Hub -->
+    <path d="M 970,615 Q 880,555 810,510"/>
+  </g>
+
+  <!-- Element 1: Voice Agent (top center) -->
+  <g transform="translate(700, 185)">
+    <use href="#blob-c1" fill="#fef08a" transform="scale(0.9)"/>
+    <circle cx="-55" cy="-50" r="22" fill="#eab308"/>
+    <text x="-55" y="-39" text-anchor="middle" font-size="28" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Voice Agent</text>
+    <text x="0" y="12" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">gemini-3-flash-preview</text>
+    <text x="0" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">音声 → 迫力・創造性・感情 (JSON)</text>
+  </g>
+
+  <!-- Element 2: Battle Agent (upper-left) -->
+  <g transform="translate(220, 390)">
+    <use href="#blob-c2" fill="#bfdbfe" transform="scale(0.9)"/>
+    <circle cx="-58" cy="-48" r="22" fill="#3b82f6"/>
+    <text x="-58" y="-37" text-anchor="middle" font-size="28" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Battle Agent</text>
+    <text x="0" y="12" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">gemini-3-flash-preview</text>
+    <text x="0" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">戦況 → 感情的AI攻撃</text>
+  </g>
+
+  <!-- Element 3: Live Agent (upper-right) -->
+  <g transform="translate(1180, 390)">
+    <use href="#blob-c3" fill="#fbcfe8" transform="scale(0.9)"/>
+    <circle cx="-48" cy="-55" r="22" fill="#ec4899"/>
+    <text x="-48" y="-44" text-anchor="middle" font-size="28" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-15" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Live Agent</text>
+    <text x="0" y="12" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">gemini-2.5-flash-tts</text>
+    <text x="0" y="38" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">バトル → 実況音声 (TTS)</text>
+  </g>
+
+  <!-- Element 4: Image Agent (lower-right) -->
+  <g transform="translate(1070, 660)">
+    <use href="#blob-c4" fill="#bbf7d0" transform="scale(0.85)"/>
+    <circle cx="-55" cy="-50" r="22" fill="#22c55e"/>
+    <text x="-55" y="-39" text-anchor="middle" font-size="28" font-weight="900" fill="#ffffff">4</text>
+    <text x="0" y="-12" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Image Agent</text>
+    <text x="0" y="12" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">imagen-4.0-generate</text>
+    <text x="0" y="36" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">キャラ → 怪獣画像 (PNG)</text>
+  </g>
+
+  <!-- Element 5: Music Agent (lower-left) -->
+  <g transform="translate(330, 660)">
+    <use href="#blob-c5" fill="#fed7aa" transform="scale(0.85)"/>
+    <circle cx="-50" cy="-52" r="22" fill="#f97316"/>
+    <text x="-50" y="-41" text-anchor="middle" font-size="28" font-weight="900" fill="#ffffff">5</text>
+    <text x="0" y="-12" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Music Agent</text>
+    <text x="0" y="12" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">lyria-realtime-exp</text>
+    <text x="0" y="36" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">状況 → BGM (リアルタイム)</text>
+  </g>
+
+  <!-- Hub: KAIJU VOICE -->
+  <g transform="translate(700, 470)">
+    <use href="#blob-hub" fill="#8b5cf6" transform="scale(0.9)"/>
+
+    <text x="0" y="-15" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">KAIJU VOICE</text>
+    <text x="0" y="15" text-anchor="middle" font-size="16" font-weight="600" fill="rgba(255,255,255,0.9)">叫び声で怪獣バトル</text>
+    <text x="0" y="42" text-anchor="middle" font-size="13" font-weight="600" fill="rgba(255,255,255,0.7)">Structured Output + Prefetch</text>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(700, 770)">
+    <rect x="-370" y="-22" width="740" height="44" rx="22" fill="#ffffff"/>
+    <text x="0" y="4" text-anchor="middle" font-size="17" font-weight="600" fill="#64748b">5つのGemini APIでマルチモーダルなリアルタイムゲーム体験を実現</text>
+  </g>
+</svg>

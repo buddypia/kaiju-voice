@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #1e293b; }
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 8; }
+      .card-ssot { fill: #f0fdf4; stroke: #22c55e; stroke-width: 2; rx: 8; }
+      .edge { stroke: #94a3b8; stroke-width: 2; fill: none; }
+      .arrow { fill: #94a3b8; }
+      .label { font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .sub { font-size: 12px; fill: #64748b; text-anchor: middle; }
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+    <marker id="arrowhead-reverse" markerWidth="10" markerHeight="7" refX="1" refY="3.5" orient="auto">
+      <polygon points="10 0, 0 3.5, 10 7" class="arrow" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" class="bg" />
+  <text x="30" y="40" class="title">5. SSOT &amp; 1M+ Token Context Window</text>
+
+  <!-- Giant Context Box -->
+  <rect x="80" y="80" width="640" height="260" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4" rx="8" />
+  <text x="400" y="110" class="label" fill="#2563eb">Gemini 1M+ Token Context Window</text>
+
+  <!-- Core SSOT -->
+  <rect x="330" y="160" width="140" height="70" class="card-ssot" />
+  <text x="400" y="190" class="label">CONTEXT.json</text>
+  <text x="400" y="210" class="sub">State / History</text>
+
+  <!-- Left/Right nodes -->
+  <rect x="130" y="250" width="140" height="60" class="card" />
+  <text x="200" y="275" class="label">Specifications</text>
+  <text x="200" y="295" class="sub">docs/features/</text>
+
+  <rect x="530" y="250" width="140" height="60" class="card" />
+  <text x="600" y="275" class="label">Codebase</text>
+  <text x="600" y="295" class="sub">src/</text>
+
+  <!-- Edges -->
+  <path d="M360,230 L240,250" class="edge" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-reverse)" />
+  <path d="M440,230 L560,250" class="edge" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-reverse)" />
+</svg>

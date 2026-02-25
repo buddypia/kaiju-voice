@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg16" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-wide1" d="M 200,-50 C 280,-70 320,-20 300,20 C 280,60 200,80 0,70 C -200,60 -280,30 -300,0 C -320,-30 -280,-60 -200,-50 C -100,-40 100,-30 200,-50 Z"/>
+    <path id="blob-wide2" d="M 180,-45 C 260,-55 300,-15 280,25 C 260,65 180,75 0,65 C -180,55 -260,25 -280,0 C -300,-25 -260,-50 -180,-45 C -100,-38 100,-35 180,-45 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg16)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">Tech Stack</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">5層構造のテクノロジースタック</text>
+
+  <!-- Layer 1: AI Layer -->
+  <g transform="translate(700, 190)">
+    <use href="#blob-wide1" transform="scale(1.6, 1.2)" fill="#fbcfe8"/>
+    <use href="#blob-wide2" transform="scale(1.4, 1.0)" fill="#fbcfe8"/>
+    <circle cx="-400" cy="-20" r="28" fill="#ec4899"/>
+    <text x="-400" y="-8" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">1</text>
+    <text x="-200" y="0" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">AI Layer</text>
+    <text x="50" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">gemini-3-flash</text>
+    <text x="220" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">gemini-2.5-flash-tts</text>
+    <text x="380" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Imagen 4</text>
+  </g>
+
+  <!-- Layer 2: Framework -->
+  <g transform="translate(700, 310)">
+    <use href="#blob-wide1" transform="scale(1.6, 1.2)" fill="#bfdbfe"/>
+    <use href="#blob-wide2" transform="scale(1.4, 1.0)" fill="#bfdbfe"/>
+    <circle cx="-400" cy="-20" r="28" fill="#3b82f6"/>
+    <text x="-400" y="-8" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">2</text>
+    <text x="-200" y="0" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Framework</text>
+    <text x="50" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Next.js 16</text>
+    <text x="200" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">React 19</text>
+    <text x="370" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">TypeScript (strict)</text>
+  </g>
+
+  <!-- Layer 3: State + Validation (two sub-blobs) -->
+  <g transform="translate(430, 430)">
+    <use href="#blob-wide2" transform="scale(0.9, 1.1)" fill="#bbf7d0"/>
+    <use href="#blob-wide2" transform="scale(0.7, 0.9)" fill="#bbf7d0"/>
+    <circle cx="-190" cy="-15" r="28" fill="#22c55e"/>
+    <text x="-190" y="-3" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">3</text>
+    <text x="-60" y="-5" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">State</text>
+    <text x="100" y="-5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">XState 5 + useReducer</text>
+  </g>
+
+  <g transform="translate(1000, 430)">
+    <use href="#blob-wide2" transform="scale(0.9, 1.1)" fill="#e9d5ff"/>
+    <use href="#blob-wide2" transform="scale(0.7, 0.9)" fill="#e9d5ff"/>
+    <text x="-60" y="-5" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Validation</text>
+    <text x="100" y="-5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Zod 4</text>
+  </g>
+
+  <!-- Layer 4: UI (two sub-blobs) -->
+  <g transform="translate(430, 540)">
+    <use href="#blob-wide2" transform="scale(0.9, 1.1)" fill="#fef08a"/>
+    <use href="#blob-wide2" transform="scale(0.7, 0.9)" fill="#fef08a"/>
+    <circle cx="-190" cy="-15" r="28" fill="#eab308"/>
+    <text x="-190" y="-3" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">4</text>
+    <text x="-60" y="-5" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Styling</text>
+    <text x="100" y="-5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Tailwind CSS 4</text>
+  </g>
+
+  <g transform="translate(1000, 540)">
+    <use href="#blob-wide2" transform="scale(0.9, 1.1)" fill="#fed7aa"/>
+    <use href="#blob-wide2" transform="scale(0.7, 0.9)" fill="#fed7aa"/>
+    <text x="-60" y="-5" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">Animation</text>
+    <text x="110" y="-5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Framer Motion 12</text>
+  </g>
+
+  <!-- Layer 5: Testing -->
+  <g transform="translate(700, 660)">
+    <use href="#blob-wide1" transform="scale(1.6, 1.2)" fill="#fef08a"/>
+    <use href="#blob-wide2" transform="scale(1.4, 1.0)" fill="#bfdbfe"/>
+    <circle cx="-400" cy="-20" r="28" fill="#f97316"/>
+    <text x="-400" y="-8" text-anchor="middle" font-size="36" font-weight="900" fill="#ffffff">5</text>
+    <text x="-200" y="0" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Testing</text>
+    <text x="60" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Vitest</text>
+    <text x="250" y="-8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Testing Library</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="480" y="755" width="440" height="36" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="779" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">5層構造のテクノロジースタック</text>
+</svg>

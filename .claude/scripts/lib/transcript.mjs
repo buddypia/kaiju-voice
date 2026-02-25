@@ -5,10 +5,6 @@
  * 1) 完了マーカー(<promise>...</promise>) 検出
  * 2) QA 完了 状態(静的分析 + テスト) 検出
  * 3) コード変更後の静的分析 結果 検出
- *
- * 既存 Flutter 専用実装から, Web/Node プロジェクトでも動作するように
- * ファイル拡張子と出力パターンを拡張した.
- * (レガシー互換のために Dart パターンも一緒にサポート)
  */
 
 import { existsSync, readFileSync, statSync, openSync, readSync, closeSync } from 'fs';
@@ -18,7 +14,7 @@ import { homedir } from 'os';
 /** 大容量 transcript 対応: 最大 1MBのみ 読み取り */
 const MAX_READ_BYTES = 1 * 1024 * 1024;
 
-/** 追跡 対象 ソース 拡張子 (Web + レガシー Dart) */
+/** 追跡 対象 ソース 拡張子 */
 const TRACKED_SOURCE_EXTENSIONS = new Set([
   '.js',
   '.jsx',
@@ -35,7 +31,6 @@ const TRACKED_SOURCE_EXTENSIONS = new Set([
   '.svelte',
   '.astro',
   '.json',
-  '.dart', // backward compatibility
 ]);
 
 /** 追跡 除外 パス */
@@ -52,13 +47,7 @@ const IGNORED_PATH_SEGMENTS = [
 ];
 
 /** 生成 成果物 ファイル名 パターン */
-const GENERATED_FILE_PATTERNS = [
-  /\.min\.(js|css)$/i,
-  /\.bundle\.(js|css)$/i,
-  /\.map$/i,
-  /\.freezed\.dart$/i,
-  /\.g\.dart$/i,
-];
+const GENERATED_FILE_PATTERNS = [/\.min\.(js|css)$/i, /\.bundle\.(js|css)$/i, /\.map$/i];
 
 const ANALYZE_PASS_PATTERNS = [
   /\bno issues found\b/i,
@@ -141,8 +130,7 @@ function isGeneratedFile(fp) {
 }
 
 /**
- * Web/Node 中心の追跡 対象 ファイル 判定.
- * (レガシー Dartもサポート)
+ * 追跡 対象 ファイル 判定.
  */
 function isTrackedSourceFile(fp) {
   if (!fp || typeof fp !== 'string') return false;
@@ -303,13 +291,6 @@ export function detectQaCompletion(transcriptPath) {
 }
 
 /**
- * レガシー互換用 alias.
- */
-export function detectFlutterQaCompletion(transcriptPath) {
-  return detectQaCompletion(transcriptPath);
-}
-
-/**
  * コード変更後 analyze 状態 検出 (analyze-guard用).
  */
 export function detectAnalyzeStatus(transcriptPath) {
@@ -317,7 +298,6 @@ export function detectAnalyzeStatus(transcriptPath) {
   if (!path || !existsSync(path)) {
     return {
       hasCodeChange: false,
-      hasDartCodeChange: false, // backward compatibility
       analyzeResult: null,
     };
   }
@@ -330,7 +310,6 @@ export function detectAnalyzeStatus(transcriptPath) {
     if (lastCodeChangeIdx === -1) {
       return {
         hasCodeChange: false,
-        hasDartCodeChange: false,
         analyzeResult: null,
       };
     }
@@ -344,16 +323,13 @@ export function detectAnalyzeStatus(transcriptPath) {
       }
     }
 
-    // hasDartCodeChange: 後方互換フィールド (Webプロジェクトでは常にfalse)
     return {
       hasCodeChange: true,
-      hasDartCodeChange: false,
       analyzeResult,
     };
   } catch {
     return {
       hasCodeChange: false,
-      hasDartCodeChange: false,
       analyzeResult: null,
     };
   }

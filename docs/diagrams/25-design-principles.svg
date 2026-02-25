@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 260" font-family="system-ui, sans-serif">
+  <rect width="750" height="260" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="375" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">マルチモデル統合 — 4つの設計原則</text>
+
+  <!-- Principle 1 -->
+  <rect x="25" y="55" width="165" height="145" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="25" y="55" width="165" height="32" rx="10" fill="#3b82f6"/>
+  <rect x="25" y="72" width="165" height="15" fill="#3b82f6"/>
+  <text x="107" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="white">1. 専門エージェント</text>
+  <text x="107" y="108" text-anchor="middle" font-size="10" fill="#475569">1モデル = 1役割</text>
+  <text x="107" y="128" text-anchor="middle" font-size="10" fill="#475569">分析は分析に特化</text>
+  <text x="107" y="148" text-anchor="middle" font-size="10" fill="#475569">創造は創造に特化</text>
+  <text x="107" y="172" text-anchor="middle" font-size="9" fill="#3b82f6">全部入りモデルより</text>
+  <text x="107" y="186" text-anchor="middle" font-size="9" fill="#3b82f6">専門家の方が強い</text>
+
+  <!-- Principle 2 -->
+  <rect x="205" y="55" width="165" height="145" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <rect x="205" y="55" width="165" height="32" rx="10" fill="#22c55e"/>
+  <rect x="205" y="72" width="165" height="15" fill="#22c55e"/>
+  <text x="287" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="white">2. 契約としてのSO</text>
+  <text x="287" y="108" text-anchor="middle" font-size="10" fill="#475569">JSON Schema制約で</text>
+  <text x="287" y="128" text-anchor="middle" font-size="10" fill="#475569">出力形式を保証</text>
+  <text x="287" y="148" text-anchor="middle" font-size="10" fill="#475569">パースエラーゼロ</text>
+  <text x="287" y="172" text-anchor="middle" font-size="9" fill="#22c55e">AIの出力を</text>
+  <text x="287" y="186" text-anchor="middle" font-size="9" fill="#22c55e">「信頼できるデータ」に</text>
+
+  <!-- Principle 3 -->
+  <rect x="385" y="55" width="165" height="145" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <rect x="385" y="55" width="165" height="32" rx="10" fill="#ef4444"/>
+  <rect x="385" y="72" width="165" height="15" fill="#ef4444"/>
+  <text x="467" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="white">3. 遅延はアーキで解決</text>
+  <text x="467" y="108" text-anchor="middle" font-size="10" fill="#475569">プリフェッチ</text>
+  <text x="467" y="128" text-anchor="middle" font-size="10" fill="#475569">Promise.all並列</text>
+  <text x="467" y="148" text-anchor="middle" font-size="10" fill="#475569">段階的フォールバック</text>
+  <text x="467" y="172" text-anchor="middle" font-size="9" fill="#ef4444">モデル速度の限界は</text>
+  <text x="467" y="186" text-anchor="middle" font-size="9" fill="#ef4444">設計で隠す</text>
+
+  <!-- Principle 4 -->
+  <rect x="565" y="55" width="165" height="145" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="565" y="55" width="165" height="32" rx="10" fill="#f59e0b"/>
+  <rect x="565" y="72" width="165" height="15" fill="#f59e0b"/>
+  <text x="647" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="white">4. 劣化しつつも動く</text>
+  <text x="647" y="108" text-anchor="middle" font-size="10" fill="#475569">TTS → Speech</text>
+  <text x="647" y="128" text-anchor="middle" font-size="10" fill="#475569">→ テキストのみ</text>
+  <text x="647" y="148" text-anchor="middle" font-size="10" fill="#475569">常に次の手段を用意</text>
+  <text x="647" y="172" text-anchor="middle" font-size="9" fill="#f59e0b">API失敗で</text>
+  <text x="647" y="186" text-anchor="middle" font-size="9" fill="#f59e0b">ゲームを止めない</text>
+
+  <text x="375" y="232" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">Gemini APIマルチモデル統合の設計指針</text>
+  <text x="375" y="250" text-anchor="middle" font-size="10" fill="#94a3b8">各原則が独立して適用可能 — 組み合わせることでリアルタイムAIゲームが実現</text>
+</svg>

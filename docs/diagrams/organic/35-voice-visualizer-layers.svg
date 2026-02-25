@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg35" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-35" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-35" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-35" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-hub-35" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg35)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">VoiceVisualizer</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">3レイヤー構造</text>
+
+  <!-- Central Hub: Visualizer Preview -->
+  <g transform="translate(700, 320)">
+    <use href="#blob-hub-35" fill="#8b5cf6" transform="scale(1.1)"/>
+  </g>
+  <!-- Visualizer circles in center -->
+  <circle cx="700" cy="310" r="80" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="700" cy="310" r="60" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.5"/>
+  <circle cx="700" cy="310" r="35" fill="#8b5cf6" opacity="0.15"/>
+  <circle cx="700" cy="310" r="22" fill="#8b5cf6" opacity="0.25"/>
+  <!-- Frequency bars (circular style) -->
+  <path d="M 670,260 L 670,240" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 680,255 L 680,230" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 690,258 L 690,245" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 700,252 L 700,225" stroke="#22d3ee" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 710,258 L 710,240" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 720,255 L 720,235" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 730,260 L 730,248" stroke="#22d3ee" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Layer 1: Edge Glow -->
+  <g transform="translate(250, 530)">
+    <use href="#blob-c1-35" fill="#bfdbfe" transform="scale(1.3)"/>
+  </g>
+  <circle cx="145" cy="445" r="28" fill="#3b82f6"/>
+  <text x="145" y="458" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+  <text x="250" y="505" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Layer 1</text>
+  <text x="250" y="535" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">エッジグロー</text>
+  <text x="250" y="565" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">外周リングの脈動</text>
+
+  <!-- Connector Layer 1 -> Hub -->
+  <path d="M 350,490 C 420,420 500,380 600,330" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Layer 2: Pulse Ring -->
+  <g transform="translate(700, 530)">
+    <use href="#blob-c2-35" fill="#e9d5ff" transform="scale(1.3)"/>
+  </g>
+  <circle cx="595" cy="445" r="28" fill="#a855f7"/>
+  <text x="595" y="458" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+  <text x="700" y="505" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Layer 2</text>
+  <text x="700" y="535" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">パルスリング</text>
+  <text x="700" y="565" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">中心の呼吸エフェクト</text>
+
+  <!-- Connector Layer 2 -> Hub -->
+  <path d="M 700,480 C 700,440 700,400 700,370" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Layer 3: Frequency Bars -->
+  <g transform="translate(1150, 530)">
+    <use href="#blob-c3-35" fill="#bbf7d0" transform="scale(1.3)"/>
+  </g>
+  <circle cx="1045" cy="445" r="28" fill="#22c55e"/>
+  <text x="1045" y="458" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+  <text x="1150" y="505" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Layer 3</text>
+  <text x="1150" y="535" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">周波数バー</text>
+  <text x="1150" y="565" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">64本の円形配置</text>
+
+  <!-- Connector Layer 3 -> Hub -->
+  <path d="M 1050,490 C 980,420 900,380 800,330" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Footer -->
+  <rect x="280" y="710" width="840" height="50" rx="30" fill="white"/>
+  <text x="700" y="740" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">AnalyserNode (fftSize: 256) -- getByteFrequencyData -- requestAnimationFrame</text>
+</svg>

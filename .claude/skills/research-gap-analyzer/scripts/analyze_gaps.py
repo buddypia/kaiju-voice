@@ -2,7 +2,7 @@
 """
 Research Gap Analyzer Script
 
-Hackathon Project プロジェクトの機能とリサーチ文書を分析してギャップを識別します。
+プロジェクト プロジェクトの機能とリサーチ文書を分析してギャップを識別します。
 
 Usage:
     python analyze_gaps.py --features-dir <path> --research-dir <path>

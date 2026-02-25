@@ -50,10 +50,10 @@ C4モデルは、ソフトウェアアーキテクチャを **4つの抽象化�
 **含めるべき要素**:
 | 要素 | 説明 | 例 |
 |------|------|------|
-| **Web Application** | フロントエンド | Flutter Web App |
-| **API Application** | バックエンドAPI | Edge Functions |
-| **Database** | データストア | Supabase PostgreSQL |
-| **External Service** | 外部API/サービス | Google TTS, Gemini AI |
+| **Web Application** | フロントエンド | Next.js Web App |
+| **API Application** | バックエンドAPI | API Routes |
+| **Database** | データストア | データベース |
+| **External Service** | 外部API/サービス | Gemini AI, Live API |
 | **通信プロトコル** | コンテナ間の通信方式 | HTTPS, REST, SDK |
 
 **含めないもの**:
@@ -84,47 +84,47 @@ C4モデルは、ソフトウェアアーキテクチャを **4つの抽象化�
 
 ---
 
-## 3. Hackathon Project プロジェクトでの適用
+## 3. プロジェクト プロジェクトでの適用
 
 ### Level 1: System Context
 
-Hackathon Project システムのコンテキスト図では、以下の要素を配置します。
+プロジェクト システムのコンテキスト図では、以下の要素を配置します。
 
 **アクター（Person）**:
 | アクター | 説明 |
 |---------|------|
-| 学習者 (Learner) | 韓国語を学ぶエンドユーザー。Web ブラウザからアクセス |
+| プレイヤー (Player) | AI対戦ゲームをプレイするエンドユーザー。Web ブラウザからアクセス |
 
 **中心システム（Software System）**:
 | システム | 説明 |
 |---------|------|
-| Hackathon Project | AI 駆動の韓国語学習 Web アプリケーション |
+| プロジェクト | AI 駆動のゲーム対戦 Web アプリケーション |
 
 **外部システム（External System）**:
 | 外部システム | 説明 | 連携内容 |
 |-------------|------|---------|
-| Google Cloud TTS | テキスト音声変換サービス | 韓国語テキストの音声生成 |
-| Gemini AI | Google の AI モデル | コンテンツ生成、AI チュータリング、レベル評価 |
-| RevenueCat | サブスクリプション管理 | 課金・プラン管理、レシート検証 |
+| Gemini AI | Google の AI モデル | AI対戦ロジック、コンテンツ生成、実況解説 |
+| Imagen 3 | Google の画像生成モデル | ゲーム内画像生成 |
+| Live API | Google のリアルタイム対話API | リアルタイム音声・映像対話 |
 
 ### Level 2: Container
 
-Hackathon Project システム内部のコンテナ構成:
+プロジェクト システム内部のコンテナ構成:
 
-| コンテナ                | 技術                   | 責務                                                |
-| ----------------------- | ---------------------- | --------------------------------------------------- |
-| **Flutter Web App**     | Flutter/Dart, Riverpod | UI 表示、状態管理、ユーザーインタラクション         |
-| **Supabase PostgreSQL** | PostgreSQL, RLS        | ユーザーデータ、学習進捗、コンテンツ保存            |
-| **Edge Functions**      | Deno/TypeScript        | AI チュータ、コンテンツ生成、TTS 連携、レベルテスト |
+| コンテナ            | 技術                      | 責務                                        |
+| ------------------- | ------------------------- | ------------------------------------------- |
+| **Next.js Web App** | Next.js/React, TypeScript | UI 表示、状態管理、ユーザーインタラクション |
+| **データベース**    | ゲームデータ              | ユーザーデータ、対戦データ、ランキング      |
+| **API Routes**      | Next.js/TypeScript        | AI対戦ロジック、コンテンツ生成、実況解説    |
 
 **コンテナ間の通信**:
 | From | To | プロトコル | 説明 |
 |------|----|----------|------|
-| Flutter Web App | Supabase PostgreSQL | Supabase Client SDK | リアルタイムデータ取得・更新 |
-| Flutter Web App | Edge Functions | HTTPS/REST | AI 処理リクエスト |
-| Edge Functions | Gemini AI | Gemini API (HTTPS) | AI コンテンツ生成・チュータリング |
-| Edge Functions | Google Cloud TTS | Cloud TTS API (HTTPS) | 音声生成リクエスト |
-| Flutter Web App | RevenueCat | RevenueCat SDK | サブスクリプション状態確認 |
+| Next.js Web App | データベース | Client SDK | リアルタイムデータ取得・更新 |
+| Next.js Web App | API Routes | HTTPS/REST | AI 処理リクエスト |
+| API Routes | Gemini AI | Gemini API (HTTPS) | AI対戦ロジック・コンテンツ生成 |
+| API Routes | Live API | Live API (WebSocket) | リアルタイム音声・映像対話 |
+| API Routes | Imagen 3 | Imagen API (HTTPS) | ゲーム内画像生成 |
 
 ---
 

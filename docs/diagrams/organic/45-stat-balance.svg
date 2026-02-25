@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg45" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob45-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob45-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob45-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob45-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob45-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg45)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">ステータスバランス設計</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">ATK + DEF = 20 で統一 -- 配分の違いがプレイスタイルを生む</text>
+
+  <!-- Organic spectrum bar -->
+  <text x="200" y="175" text-anchor="middle" font-size="20" font-weight="800" fill="#ec4899">ATK 重視</text>
+  <path d="M 300,165 C 500,155 900,155 1100,165" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.4"/>
+  <text x="1200" y="175" text-anchor="middle" font-size="20" font-weight="800" fill="#3b82f6">DEF 重視</text>
+
+  <!-- Attack-type blob -->
+  <g transform="translate(280, 340)">
+    <use href="#blob45-c3" transform="scale(1.6)" fill="#fbcfe8"/>
+    <circle cx="0" cy="-75" r="28" fill="#ec4899"/>
+    <text x="0" y="-67" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">攻撃型</text>
+    <text x="0" y="14" text-anchor="middle" font-size="20" font-weight="600" fill="#ec4899">ATK 12 / DEF 8</text>
+    <text x="0" y="48" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Infernus (火)</text>
+    <text x="0" y="72" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Stormbreaker (雷)</text>
+  </g>
+
+  <!-- Balanced blob -->
+  <g transform="translate(700, 340)">
+    <use href="#blob45-c1" transform="scale(1.6)" fill="#e9d5ff"/>
+    <circle cx="0" cy="-75" r="28" fill="#a855f7"/>
+    <text x="0" y="-67" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">バランス型</text>
+    <text x="0" y="14" text-anchor="middle" font-size="20" font-weight="600" fill="#a855f7">ATK 10 / DEF 10</text>
+    <text x="0" y="48" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Nihilus (虚)</text>
+    <text x="0" y="72" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Shadow Hunter (虚)</text>
+  </g>
+
+  <!-- Defense-type blob -->
+  <g transform="translate(1120, 340)">
+    <use href="#blob45-c2" transform="scale(1.6)" fill="#bfdbfe"/>
+    <circle cx="0" cy="-75" r="28" fill="#3b82f6"/>
+    <text x="0" y="-67" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-18" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">防御型</text>
+    <text x="0" y="14" text-anchor="middle" font-size="20" font-weight="600" fill="#3b82f6">ATK 8 / DEF 12</text>
+    <text x="0" y="48" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Glacius (氷)</text>
+    <text x="0" y="72" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Frostguard (氷)</text>
+  </g>
+
+  <!-- Connectors to hub -->
+  <path d="M 380,470 C 430,530 500,570 570,590" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 700,470 C 700,530 700,560 700,590" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 1020,470 C 970,530 900,570 830,590" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Hub: statRatio -->
+  <g transform="translate(700, 640)">
+    <use href="#blob45-hub" transform="scale(1.2)" fill="#8b5cf6"/>
+    <text x="0" y="-30" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">statRatio = ATK / DEF</text>
+    <text x="0" y="8" text-anchor="middle" font-size="18" font-weight="600" fill="#ffffff" opacity="0.9">攻撃型 (12/8 = 1.5x)</text>
+    <text x="0" y="40" text-anchor="middle" font-size="18" font-weight="600" fill="#ffffff" opacity="0.9">防御型 (8/12 = 0.67x)</text>
+    <text x="0" y="70" text-anchor="middle" font-size="16" font-weight="600" fill="#ffffff" opacity="0.7">組み合わせが戦略に</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="370" y="745" width="660" height="44" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="773" text-anchor="middle" font-size="18" font-weight="600" fill="#64748b">ATK + DEF = 20 で統一 -- 配分の違いがプレイスタイルを生む</text>
+</svg>

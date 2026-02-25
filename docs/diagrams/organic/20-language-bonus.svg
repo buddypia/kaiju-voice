@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg20" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-20" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-20" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-20" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg20)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">言語ボーナス</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">日英混在で威力UP</text>
+
+  <!-- Blob 1: Japanese only -->
+  <g transform="translate(260, 380)">
+    <use href="#blob-c1-20" transform="scale(1.8)" fill="#fef08a"/>
+    <use href="#blob-c1-20" transform="scale(1.5)" fill="#fef08a"/>
+    <circle cx="-110" cy="-105" r="32" fill="#eab308"/>
+    <text x="-110" y="-92" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">日本語のみ</text>
+    <text x="0" y="0" text-anchor="middle" font-size="16" font-weight="600" fill="#475569" font-style="italic">「ファイヤーーー!」</text>
+    <text x="0" y="55" text-anchor="middle" font-size="52" font-weight="800" fill="#eab308">x1.0</text>
+  </g>
+
+  <!-- Blob 2: English only -->
+  <g transform="translate(700, 380)">
+    <use href="#blob-c2-20" transform="scale(1.8)" fill="#bfdbfe"/>
+    <use href="#blob-c2-20" transform="scale(1.5)" fill="#bfdbfe"/>
+    <circle cx="-110" cy="-100" r="32" fill="#3b82f6"/>
+    <text x="-110" y="-87" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-40" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">英語のみ</text>
+    <text x="0" y="0" text-anchor="middle" font-size="16" font-weight="600" fill="#475569" font-style="italic">"Burn everything!!"</text>
+    <text x="0" y="55" text-anchor="middle" font-size="52" font-weight="800" fill="#3b82f6">x1.0</text>
+  </g>
+
+  <!-- Blob 3: Mixed (bonus!) -->
+  <g transform="translate(1140, 380)">
+    <use href="#blob-c3-20" transform="scale(2.0)" fill="#fbcfe8"/>
+    <use href="#blob-c3-20" transform="scale(1.7)" fill="#fbcfe8"/>
+    <circle cx="-120" cy="-130" r="32" fill="#ec4899"/>
+    <text x="-120" y="-117" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-45" text-anchor="middle" font-size="28" font-weight="800" fill="#1e293b">日英混在!</text>
+    <text x="0" y="-8" text-anchor="middle" font-size="15" font-weight="600" fill="#475569" font-style="italic">「ファイヤーーー!</text>
+    <text x="0" y="14" text-anchor="middle" font-size="15" font-weight="600" fill="#475569" font-style="italic">Burn everything!!」</text>
+    <text x="0" y="70" text-anchor="middle" font-size="58" font-weight="800" fill="#ec4899">x1.2</text>
+  </g>
+
+  <!-- Connectors (progression arrows) -->
+  <path d="M 410,350 C 470,330 540,330 590,345" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 860,345 C 920,330 990,330 1040,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Bottom explanation -->
+  <text x="700" y="640" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">ハッカソン会場では日英混在の叫びが飛び交い、大盛り上がり</text>
+
+  <!-- Footer -->
+  <rect x="310" y="755" width="780" height="36" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="779" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">Geminiが language: "mixed" と判定 -- langBonus = 1.2 を適用</text>
+</svg>

@@ -84,10 +84,10 @@ class ValidationResult:
 
 
 def detect_project_root(start_path: Path) -> Optional[Path]:
-    """pubspec.yamlを基準にプロジェクトルートを探索"""
+    """package.jsonを基準にプロジェクトルートを探索"""
     current = start_path.resolve()
     while current != current.parent:
-        if (current / "pubspec.yaml").exists():
+        if (current / "package.json").exists():
             return current
         current = current.parent
     return None
@@ -513,7 +513,7 @@ def main():
     parser.add_argument(
         "--project-root",
         default=None,
-        help="プロジェクトルートパス（デフォルト: pubspec.yaml自動探索）",
+        help="プロジェクトルートパス（デフォルト: package.json自動探索）",
     )
     parser.add_argument(
         "--json-only",
@@ -530,7 +530,7 @@ def main():
         script_dir = Path(__file__).resolve().parent
         project_root = detect_project_root(script_dir)
         if not project_root:
-            print("Error: pubspec.yamlが見つかりません。--project-rootを指定してください。", file=sys.stderr)
+            print("Error: package.jsonが見つかりません。--project-rootを指定してください。", file=sys.stderr)
             sys.exit(1)
 
     # nav-graph.jsonパスを決定

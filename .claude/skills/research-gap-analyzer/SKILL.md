@@ -1,13 +1,13 @@
 ---
 name: research-gap-analyzer
-description: Hackathon Project プロジェクトの機能(docs/features/)とリサーチ(docs/research/)文書を分析し、高収益/高LTV/低離脱達成のためのリサーチギャップを識別し、欠落したP0/P1リサーチを自動実行する。
+description: プロジェクト プロジェクトの機能(docs/features/)とリサーチ(docs/research/)文書を分析し、高収益/高LTV/低離脱達成のためのリサーチギャップを識別し、欠落したP0/P1リサーチを自動実行する。
 doc_contract:
   review_interval_days: 90
 ---
 
 # Research Gap Analyzer
 
-Hackathon Project プロジェクトの機能文書と既存リサーチを**ランタイムスキャン**し、高収益、高LTV、低離脱率達成に必要なリサーチギャップを自動識別するスキルである。
+プロジェクト プロジェクトの機能文書と既存リサーチを**ランタイムスキャン**し、高収益、高LTV、低離脱率達成に必要なリサーチギャップを自動識別するスキルである。
 
 ## 核心原則
 
@@ -192,7 +192,7 @@ d7_retention:
 
 ### 目標
 
-Hackathon Project アプリの {kpi_target} 達成
+プロジェクト アプリの {kpi_target} 達成
 
 ### コンテキスト
 

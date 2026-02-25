@@ -29,11 +29,11 @@
 
 ## Context Comparison
 
-| 属性         | {{OSS_NAME}}    | Hackathon Project            |   Gap   |
+| 属性         | {{OSS_NAME}}    | プロジェクト            |   Gap   |
 | ------------ | --------------- | ------------------------ | :-----: |
-| Language     | {{OSS_LANG}}    | Dart/Flutter             | {{GAP}} |
+| Language     | {{OSS_LANG}}    | TypeScript/Next.js             | {{GAP}} |
 | Runtime      | {{OSS_RUNTIME}} | Mobile (iOS/Android)     | {{GAP}} |
-| Architecture | {{OSS_ARCH}}    | Feature-First + Riverpod | {{GAP}} |
+| Architecture | {{OSS_ARCH}}    | Feature-First + React Hooks | {{GAP}} |
 | Scale        | {{OSS_SCALE}}   | Solo dev + AI assisted   | {{GAP}} |
 | Backend      | {{OSS_BACKEND}} | Supabase (PostgreSQL)    | {{GAP}} |
 | Hook System  | {{OSS_HOOKS}}   | Claude Code Hooks (.mjs) | {{GAP}} |

@@ -26,7 +26,7 @@ from pathlib import Path
 
 import pytest
 
-# プロジェクトルート探索 (pubspec.yaml 基準)
+# プロジェクトルート探索 (package.json 基準)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 NAV_GRAPH_PATH = PROJECT_ROOT / "docs" / "navigation" / "nav-graph.json"
 SCHEMA_PATH = PROJECT_ROOT / "docs" / "navigation" / "nav-graph.schema.json"

@@ -13,18 +13,18 @@ doc_contract:
 
 ## 検証範囲
 
-| 検証項目                    | 方式                            | メタスキーマ                   |
-| --------------------------- | ------------------------------- | ------------------------------ |
-| **§0.4.1 Freezed モデル**   | JSON Schema 検証                | `freezed_model.schema.json`    |
-| **§0.4.2 DB スキーマ**      | JSON Schema 検証                | `db_table.schema.json`         |
-| **§0.4.5 Write Operations** | JSON Schema 検証                | `write_operations.schema.json` |
-| **§0.5 API Contract**       | JSON Schema 検証                | `api_endpoint.schema.json`     |
-| **必須セクション存在**      | Regex マッチング                | -                              |
-| **AC 形式**                 | 5列テーブル検証                 | -                              |
-| **ハイブリッド API 完全性** | テーブル + Example 存在確認     | -                              |
-| **Example ↔ Schema 一致**   | タイプ/必須フィールド/enum 検証 | -                              |
-| **SSOT パス有効性**         | Edge Function ファイル存在確認  | -                              |
-| **Write Operations 一貫性** | API↔Operation マッピング検証    | -                              |
+| 検証項目                     | 方式                            | メタスキーマ                   |
+| ---------------------------- | ------------------------------- | ------------------------------ |
+| **§0.4.1 TypeScript モデル** | JSON Schema 検証                | `typescript_model.schema.json` |
+| **§0.4.2 DB スキーマ**       | JSON Schema 検証                | `db_table.schema.json`         |
+| **§0.4.5 Write Operations**  | JSON Schema 検証                | `write_operations.schema.json` |
+| **§0.5 API Contract**        | JSON Schema 検証                | `api_endpoint.schema.json`     |
+| **必須セクション存在**       | Regex マッチング                | -                              |
+| **AC 形式**                  | 5列テーブル検証                 | -                              |
+| **ハイブリッド API 完全性**  | テーブル + Example 存在確認     | -                              |
+| **Example ↔ Schema 一致**    | タイプ/必須フィールド/enum 検証 | -                              |
+| **SSOT パス有効性**          | API Route ファイル存在確認      | -                              |
+| **Write Operations 一貫性**  | API↔Operation マッピング検証    | -                              |
 
 ---
 
@@ -35,7 +35,7 @@ doc_contract:
 1. **単一ファイル検証**:
 
    ```bash
-   /spec-validator docs/features/029-vocabulary-book/SPEC-029.md
+   /spec-validator docs/features/029-battle/SPEC-029.md
    ```
 
 2. **全体 SPEC 検証**:
@@ -65,7 +65,7 @@ doc_contract:
 2. **サポートタイプ**:
    - `json:schema/db_table` → DB テーブル定義
    - `json:schema/api_endpoint` → API 契約
-   - `json:schema/freezed_model` → Freezed モデル
+   - `json:schema/typescript_model` → TypeScript モデル
    - `json:schema/write_operations` → データ変更仕様 (v3.4 新規)
 
 3. **抽出ロジック**:
@@ -136,7 +136,7 @@ doc_contract:
    - 入れ子オブジェクト再帰検証
 
 4. **SSOT パス有効性**:
-   - `infra/supabase/functions/*/index.ts` パス抽出
+   - `src/app/api/*/route.ts` パス抽出
    - ファイル存在有無確認
 
 ### Phase 5.5: Write Operations 検証 (v3.4 新規)
@@ -213,11 +213,11 @@ doc_contract:
 ### Phase 6: 結果出力
 
 ```markdown
-## SPEC 検証結果: SPEC-029-vocabulary-book.md
+## SPEC 検証結果: SPEC-029-battle.md
 
 ### JSON Schema 検証
 
-✅ §0.4.1 Freezed Model: OK (1個モデル)
+✅ §0.4.1 TypeScript Model: OK (1個モデル)
 ✅ §0.4.2 DB Table: OK (1個テーブル)
 ✅ §0.4.5 Write Operations: OK (3個演算)
 ✅ §0.5 API Contract: OK
@@ -242,12 +242,12 @@ doc_contract:
 ✅ Operation Mapping: 全ての Write API マッピング済 (3/3)
 ✅ テーブル参照: 全てのテーブルが §0.4.2 に定義されている
 ✅ トランザクション一貫性: 全てのトランザクション演算が有効
-⚠️ べき等性: POST /vocabularies に対する戦略未定義
+⚠️ べき等性: POST /battles に対する戦略未定義
 ✅ 監査ポリシー: Tier 2 機能で audit 活性化済
 
 ### SSOT パス検証 (v3.1)
 
-✅ infra/supabase/functions/sync-vocabulary/index.ts
+✅ src/app/api/battle/start/route.ts
 
 ### 要約
 
@@ -285,14 +285,14 @@ doc_contract:
 | `path`     |  ✅  | `/`で開始                                 |
 | `errors`   |  ⚪  | http, code, condition, client_action 必須 |
 
-### 3. Freezed Model Schema 検証
+### 3. TypeScript Model Schema 検証
 
-| フィールド      | 必須 | 検証規則            |
-| --------------- | :--: | ------------------- |
-| `name`          |  ✅  | PascalCase パターン |
-| `fields`        |  ✅  | 1個以上             |
-| `fields[].name` |  ✅  | camelCase パターン  |
-| `fields[].type` |  ✅  | Dart タイプ文字列   |
+| フィールド      | 必須 | 検証規則                |
+| --------------- | :--: | ----------------------- |
+| `name`          |  ✅  | PascalCase パターン     |
+| `fields`        |  ✅  | 1個以上                 |
+| `fields[].name` |  ✅  | camelCase パターン      |
+| `fields[].type` |  ✅  | TypeScript タイプ文字列 |
 
 ### 4. Write Operations Schema 検証 (v3.4 新規)
 
@@ -365,7 +365,7 @@ spec.validate-all:
 **使用例示**:
 
 ```bash
-make spec.validate SPEC=docs/features/029-vocabulary-book/SPEC-029.md
+make spec.validate SPEC=docs/features/029-battle/SPEC-029.md
 make spec.validate-all
 ```
 
@@ -393,7 +393,7 @@ make spec.validate-all
 
 - [メタスキーマ: db_table](../../docs/_templates/schemas/db_table.schema.json)
 - [メタスキーマ: api_endpoint](../../docs/_templates/schemas/api_endpoint.schema.json)
-- [メタスキーマ: freezed_model](../../docs/_templates/schemas/freezed_model.schema.json)
+- [メタスキーマ: typescript_model](../../docs/_templates/schemas/typescript_model.schema.json)
 - [メタスキーマ: write_operations](../../docs/_templates/schemas/write_operations.schema.json) ← v3.4 新規
 - [SPEC テンプレート](../../docs/_templates/spec_template.md)
 - [SPEC セクションガイド](../feature-spec-generator/references/spec-sections.md)

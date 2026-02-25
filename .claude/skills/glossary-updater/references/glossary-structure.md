@@ -90,7 +90,7 @@
 
 ### 3. 技術用語
 
-- **3.1 アーキテクチャ**: Feature-First + Simplified Clean Architecture, Riverpod, Freezed, Repository Pattern
+- **3.1 アーキテクチャ**: Feature-First + Simplified Clean Architecture, React Hooks, Zod, Repository Pattern
 - **3.1.1 Edge Functions**: cloud-tts, ai-tutor-chat 等 Supabase 関数
 - **3.1.2 Bridge Grammar**: BridgeStrategy, JapaneseBridgeStrategy 等
 - **3.1.3 Nunchi AI Coach**: Director-Actor-Coach, Three-Layer Feedback
@@ -104,7 +104,7 @@
 
 ### 5. UI/UX 用語
 
-- **5.1 UI 構造**: Page, Fragment, Widget, Component
+- **5.1 UI 構造**: Page, Fragment, Component, Component
 - **5.2 UI パターン**: Modal, Bottom Sheet, Snackbar, Skeleton 等
 - **5.3 主要ページ**: AI Tutor Page, Role Play Page 等実際のページ
 
@@ -152,7 +152,7 @@
 ```markdown
 | 用語     | 韓国語   | 説明         | 実装例                       |
 | -------- | -------- | ------------ | ---------------------------- |
-| **Term** | 韓国語名 | 説明テキスト | `file.dart` またはテーブル名 |
+| **Term** | 韓国語名 | 説明テキスト | `file.ts` またはテーブル名 |
 ```
 
 ### 3列形式 (技術/AI/UI)
@@ -160,7 +160,7 @@
 ```markdown
 | 用語     | 説明         | 実装        |
 | -------- | ------------ | ----------- |
-| **Term** | 説明テキスト | `file.dart` |
+| **Term** | 説明テキスト | `file.ts` |
 ```
 
 ### 略語形式

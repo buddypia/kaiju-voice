@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "skill_id": "organic-svg-diagram",
+  "skill_version": "1.0.0",
+  "tier": 3,
+  "tier_description": "Utility - Organic LightスタイルのSVGダイアグラム生成",
+  "enforced_protocol": {
+    "version": "2.0",
+    "preflight_required": true,
+    "postflight_required": true,
+    "model_routing_required": true,
+    "evidence_caching_enabled": false
+  },
+  "model_routing": {
+    "default_model": "sonnet",
+    "task_specific": {
+      "read_operations": "haiku",
+      "svg_generation": "sonnet",
+      "complex_layout": "opus"
+    },
+    "fallback_chain": ["haiku", "sonnet", "opus"]
+  },
+  "evidence_policy": {
+    "cacheable_validations": [],
+    "cache_location": "N/A"
+  },
+  "preflight_checks": [
+    {
+      "id": "PF-001",
+      "description": "スタイルガイド(docs/svg-style-organic-light.md)読込確認",
+      "blocking": true
+    },
+    {
+      "id": "PF-002",
+      "description": "図解対象の要素数・関係性の把握",
+      "blocking": true
+    },
+    {
+      "id": "PF-003",
+      "description": "レイアウトパターンの選定(A/B/C/D)",
+      "blocking": true
+    }
+  ],
+  "postflight_checks": [
+    {
+      "id": "POF-001",
+      "description": "SVGファイルが正しいXMLとして生成されている",
+      "blocking": true
+    },
+    {
+      "id": "POF-002",
+      "description": "スタイルガイド準拠確認",
+      "blocking": true
+    },
+    {
+      "id": "POF-003",
+      "description": "テキストの可読性確認（重なりなし）",
+      "blocking": true
+    }
+  ],
+  "public_api": {
+    "direct_invocable": true,
+    "trigger_keywords": [
+      "図解",
+      "ダイアグラム",
+      "SVG",
+      "Organic",
+      "organic-svg",
+      "フロー図",
+      "アーキテクチャ図"
+    ],
+    "args_pattern": "[--layout=hub|flow|hierarchy|compare] [--restyle <file>] [description]"
+  },
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "called_by": [],
+  "calls": [],
+  "outputs": [
+    {
+      "type": "file",
+      "format": "svg",
+      "description": "Organic LightスタイルのSVGダイアグラムファイル"
+    }
+  ],
+  "ssot_files": ["docs/svg-style-organic-light.md"],
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2026-02-25",
+      "changes": "新規作成 - harness-light-v13-organic.svgからスタイル抽出・スキル化"
+    }
+  ]
+}

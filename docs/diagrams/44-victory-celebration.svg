@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" font-family="system-ui, sans-serif">
+  <rect width="500" height="240" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="250" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">VictoryCelebration — 勝利コンフェティ</text>
+
+  <!-- Screen mockup -->
+  <rect x="100" y="50" width="300" height="130" rx="8" fill="#0f172a"/>
+
+  <!-- Confetti particles -->
+  <rect x="140" y="65" width="8" height="8" rx="1" fill="#ef4444" transform="rotate(30 144 69)" opacity="0.9"/>
+  <rect x="180" y="80" width="6" height="10" rx="1" fill="#3b82f6" transform="rotate(-20 183 85)" opacity="0.8"/>
+  <rect x="220" y="60" width="7" height="7" rx="1" fill="#f59e0b" transform="rotate(45 223 63)"/>
+  <rect x="260" y="75" width="8" height="6" rx="1" fill="#22c55e" transform="rotate(15 264 78)" opacity="0.9"/>
+  <rect x="300" y="65" width="6" height="9" rx="1" fill="#a855f7" transform="rotate(-35 303 69)"/>
+  <rect x="340" y="80" width="7" height="7" rx="1" fill="#ef4444" transform="rotate(50 343 83)" opacity="0.7"/>
+  <rect x="160" y="100" width="8" height="6" rx="1" fill="#f59e0b" transform="rotate(-15 164 103)"/>
+  <rect x="200" y="110" width="6" height="8" rx="1" fill="#22c55e" transform="rotate(40 203 114)" opacity="0.8"/>
+  <rect x="280" y="95" width="7" height="7" rx="1" fill="#3b82f6" transform="rotate(-45 283 98)"/>
+  <rect x="320" y="105" width="8" height="6" rx="1" fill="#a855f7" transform="rotate(25 324 108)" opacity="0.9"/>
+  <rect x="150" y="130" width="6" height="8" rx="1" fill="#ef4444" transform="rotate(60 153 134)" opacity="0.6"/>
+  <rect x="240" y="120" width="7" height="7" rx="1" fill="#f59e0b" transform="rotate(-30 243 123)" opacity="0.7"/>
+  <rect x="350" y="125" width="6" height="6" rx="1" fill="#22c55e" transform="rotate(10 353 128)" opacity="0.5"/>
+
+  <!-- Winner text -->
+  <text x="250" y="105" text-anchor="middle" font-size="18" font-weight="800" fill="#fbbf24">VICTORY!</text>
+
+  <!-- Physics description -->
+  <rect x="80" y="195" width="340" height="30" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="250" y="215" text-anchor="middle" font-size="9" fill="#475569">Canvas 2D / gravity + sin横揺れ / 500ms間隔で50個ずつ / 物理エンジン</text>
+</svg>

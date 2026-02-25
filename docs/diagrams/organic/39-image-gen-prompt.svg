@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg39" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-39" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-39" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-39" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-hub-39" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg39)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">Visual Agent</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">画像生成プロンプト構築</text>
+
+  <!-- Kaiju Template -->
+  <g transform="translate(380, 340)">
+    <use href="#blob-hub-39" fill="#fbcfe8" transform="scale(1.5)"/>
+  </g>
+  <circle cx="230" cy="230" r="30" fill="#ec4899"/>
+  <text x="230" y="244" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+  <text x="380" y="275" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">category === 'kaiju'</text>
+  <text x="380" y="315" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">"Infernus, fire element kaiju,</text>
+  <text x="380" y="340" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">dark background, epic lighting"</text>
+  <text x="380" y="385" text-anchor="middle" font-size="18" font-weight="600" fill="#ec4899">ダーク・威圧的</text>
+
+  <!-- Hero Template -->
+  <g transform="translate(1020, 340)">
+    <use href="#blob-hub-39" fill="#bfdbfe" transform="scale(1.5)"/>
+  </g>
+  <circle cx="870" cy="230" r="30" fill="#3b82f6"/>
+  <text x="870" y="244" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+  <text x="1020" y="275" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">category === 'hero'</text>
+  <text x="1020" y="315" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">"Solaris, light element hero,</text>
+  <text x="1020" y="340" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">golden aura, dark background"</text>
+  <text x="1020" y="385" text-anchor="middle" font-size="18" font-weight="600" fill="#3b82f6">+ golden aura（ヒーロー感）</text>
+
+  <!-- Center connector (VS style) -->
+  <g transform="translate(700, 340)">
+    <use href="#blob-c3-39" fill="#8b5cf6" transform="scale(0.5)"/>
+  </g>
+  <text x="700" y="348" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">VS</text>
+
+  <!-- Connector left -> center -->
+  <path d="M 530,340 C 570,330 620,330 660,340" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <!-- Connector center -> right -->
+  <path d="M 740,340 C 780,330 830,330 870,340" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Config section -->
+  <g transform="translate(700, 570)">
+    <use href="#blob-c1-39" fill="#fef08a" transform="scale(2.5, 0.7)"/>
+  </g>
+  <text x="700" y="555" text-anchor="middle" font-size="18" font-weight="800" fill="#1e293b">Config</text>
+  <text x="700" y="580" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">model: "imagen-4.0-generate-001"</text>
+  <text x="700" y="605" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">aspectRatio: "1:1" (カード用正方形)</text>
+
+  <!-- Connectors down to config -->
+  <path d="M 380,440 C 380,480 500,510 600,540" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 1020,440 C 1020,480 900,510 800,540" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Footer -->
+  <rect x="300" y="720" width="800" height="50" rx="30" fill="white"/>
+  <text x="700" y="750" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">カテゴリ別のプロンプトテンプレートで怪獣/ヒーローの画風を差別化</text>
+</svg>

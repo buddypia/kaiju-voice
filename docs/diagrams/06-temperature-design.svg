@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" font-family="system-ui, sans-serif">
+  <rect width="700" height="280" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Temperature 設計 — 用途に応じた使い分け</text>
+
+  <!-- Spectrum bar -->
+  <defs>
+    <linearGradient id="tempGrad" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="50" width="540" height="14" rx="7" fill="url(#tempGrad)" opacity="0.3"/>
+  <text x="80" y="80" font-size="10" fill="#3b82f6" font-weight="600">安定性重視</text>
+  <text x="620" y="80" text-anchor="end" font-size="10" fill="#ef4444" font-weight="600">創造性重視</text>
+
+  <!-- Voice Agent (low) -->
+  <circle cx="160" cy="57" r="8" fill="#3b82f6"/>
+  <line x1="160" y1="68" x2="160" y2="100" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="60" y="100" width="200" height="75" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="160" y="122" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">Voice Agent</text>
+  <text x="160" y="140" text-anchor="middle" font-size="10" fill="#475569">temperature: default (低)</text>
+  <text x="160" y="158" text-anchor="middle" font-size="10" fill="#64748b">スコアリングは正確に</text>
+
+  <!-- Live Agent (medium) -->
+  <circle cx="350" cy="57" r="8" fill="#a855f7"/>
+  <line x1="350" y1="68" x2="350" y2="100" stroke="#a855f7" stroke-width="1.5"/>
+  <rect x="250" y="100" width="200" height="75" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="350" y="122" text-anchor="middle" font-size="12" font-weight="600" fill="#6b21a8">Live Agent</text>
+  <text x="350" y="140" text-anchor="middle" font-size="10" fill="#475569">temperature: default</text>
+  <text x="350" y="158" text-anchor="middle" font-size="10" fill="#64748b">実況は自然さ重視</text>
+
+  <!-- Battle Agent (high) -->
+  <circle cx="540" cy="57" r="8" fill="#ef4444"/>
+  <line x1="540" y1="68" x2="540" y2="100" stroke="#ef4444" stroke-width="1.5"/>
+  <rect x="440" y="100" width="200" height="75" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="540" y="122" text-anchor="middle" font-size="12" font-weight="600" fill="#991b1b">Battle Agent</text>
+  <text x="540" y="140" text-anchor="middle" font-size="10" fill="#475569">temperature: 1.0 (最大)</text>
+  <text x="540" y="158" text-anchor="middle" font-size="10" fill="#64748b">毎回違う叫びを生成</text>
+
+  <!-- Key insight -->
+  <rect x="120" y="200" width="460" height="50" rx="25" fill="#0f172a"/>
+  <text x="350" y="222" text-anchor="middle" font-size="12" font-weight="600" fill="#22d3ee">Structured Output + 高temperature</text>
+  <text x="350" y="240" text-anchor="middle" font-size="11" fill="#94a3b8">= 形式は厳密に、内容は創造的に</text>
+
+  <text x="350" y="272" text-anchor="middle" font-size="11" fill="#94a3b8">同じモデルでも temperature を変えるだけで「分析」と「創造」を使い分け</text>
+</svg>

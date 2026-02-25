@@ -1,7 +1,7 @@
 /**
  * State Management Module
  *
- * oh-my-opencodeのralph-loop/storage.tsを Claude Code Hooksに合わせて再設計.
+ * ralph-loop/storage.tsを Claude Code Hooksに合わせて再設計.
  * ファイル 基盤 状態 管理 (PluginのインメモリMapの代わり).
  *
  * 設計原則:

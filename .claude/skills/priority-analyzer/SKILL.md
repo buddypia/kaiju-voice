@@ -1,6 +1,6 @@
 ---
 name: priority-analyzer
-description: Hackathon Project プロジェクトの開発機能優先順位を RICE(Reach × Impact × Confidence / Effort) モデルで分析するスキル。BRIEF.md/SPEC.md/CONTEXT.json/competitor-registry.json 等の多重ソースを読み取り、Evidence 基盤の優先順位スコアを算出・更新する。
+description: プロジェクト プロジェクトの開発機能優先順位を RICE(Reach × Impact × Confidence / Effort) モデルで分析するスキル。BRIEF.md/SPEC.md/CONTEXT.json/competitor-registry.json 等の多重ソースを読み取り、Evidence 基盤の優先順位スコアを算出・更新する。
 version: 3.0
 updated: 2026-02-09
 doc_contract:
@@ -11,7 +11,7 @@ doc_contract:
 
 ## Overview
 
-Hackathon Project プロジェクトの **機能優先順位を RICE(Reach × Impact × Confidence / Effort) フレームワークで算出** するスキル。
+プロジェクト プロジェクトの **機能優先順位を RICE(Reach × Impact × Confidence / Effort) フレームワークで算出** するスキル。
 
 ### v3.0 主要変更 (WSJF → RICE 転換)
 
@@ -716,7 +716,7 @@ Adjusted = 1.92 × 1.05 (comp_adj) × 1.0 (override) = 2.02
 1. **BRIEF.md パースのヒューリスティック**: セクションヘッダーパターン(`## N.`)に依存。非標準形式で精度低下。
 2. **Phase 手動設定が必要**: 自動遷移ロジックなし。PM判断が必要。
 3. **Impact は離散値**: 0.25/0.5/1/2/3 の5段階のみ許容。
-4. **単一プロジェクト最適化**: Hackathon Project 特化設計。汎用性に制限。
+4. **単一プロジェクト最適化**: プロジェクト 特化設計。汎用性に制限。
 
 ### スコア解釈の注意
 

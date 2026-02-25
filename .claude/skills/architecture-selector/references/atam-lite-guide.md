@@ -10,7 +10,7 @@ ATAM（Architecture Tradeoff Analysis Method）は、カーネギーメロン大
 
 ## ATAM Lite とは
 
-ATAM Lite は、フル ATAM プロセスを Hackathon Project プロジェクトの規模に合わせて簡略化したバージョンです。
+ATAM Lite は、フル ATAM プロセスを プロジェクト プロジェクトの規模に合わせて簡略化したバージョンです。
 
 ### フル ATAM との差分
 
@@ -40,16 +40,16 @@ ATAM Lite は、フル ATAM プロセスを Hackathon Project プロジェクト
 
 | 品質属性        | 刺激                             | 応答                     | 測定基準             |
 | --------------- | -------------------------------- | ------------------------ | -------------------- |
-| Performance     | 100件の単語リストを要求          | 単語リストを表示         | 200ms 以内           |
+| Performance     | 100件の対戦履歴を要求            | 対戦履歴を表示           | 200ms 以内           |
 | Security        | 未認証ユーザーがデータにアクセス | アクセスを拒否           | 100% ブロック        |
-| Reliability     | Edge Function がタイムアウト     | フォールバック処理を実行 | データ損失なし       |
-| Maintainability | 新しい学習モードを追加           | 既存コードの変更最小限   | 変更ファイル 5個以内 |
+| Reliability     | API Route がタイムアウト     | フォールバック処理を実行 | データ損失なし       |
+| Maintainability | 新しい対戦モードを追加           | 既存コードの変更最小限   | 変更ファイル 5個以内 |
 
-### Hackathon Project プロジェクトでの典型的なシナリオ
+### プロジェクト プロジェクトでの典型的なシナリオ
 
-1. **オフライン学習**: ネットワーク切断時 → ローカルキャッシュから表示 → 前回同期データの 100% 表示
-2. **AI コンテンツ生成**: ユーザーがレッスンを開始 → Edge Function で AI コンテンツ生成 → 3秒以内にコンテンツ表示
-3. **データ保護**: RLS ポリシー適用 → 他ユーザーのデータへのアクセスを遮断 → 0件のデータ漏洩
+1. **リアルタイム対戦**: 対戦中の接続切断時 → 自動再接続 → 対戦状態の 100% 復元
+2. **AI コンテンツ生成**: ユーザーがレッスンを開始 → API Route で AI コンテンツ生成 → 3秒以内にコンテンツ表示
+3. **データ保護**: 認証ポリシー適用 → 他プレイヤーのデータへのアクセスを遮断 → 0件のデータ漏洩
 
 ---
 
@@ -78,19 +78,19 @@ ATAM Lite は、フル ATAM プロセスを Hackathon Project プロジェクト
    - **SP-1**: キャッシュ有効期限の設定
      - 短すぎる → Performance 低下（頻繁なAPI呼び出し）
      - 長すぎる → データ鮮度の低下
-   - **SP-2**: Edge Function のタイムアウト設定
+   - **SP-2**: API Route のタイムアウト設定
      - 短すぎる → Reliability 低下（AI生成の中断）
      - 長すぎる → UX 低下（待ち時間増加）
    ```
 
-### Hackathon Project での典型的な Sensitivity Points
+### プロジェクト での典型的な Sensitivity Points
 
-| SP                           | 構成要素                            | 影響する品質属性               |
-| ---------------------------- | ----------------------------------- | ------------------------------ |
-| キャッシュ戦略               | ローカルDB の同期頻度               | Performance vs データ鮮度      |
-| AI 応答フォーマット          | Edge Function の JSON Schema 厳密度 | Reliability vs 柔軟性          |
-| Riverpod Provider のスコープ | グローバル vs Feature スコープ      | Maintainability vs Performance |
-| RLS ポリシーの粒度           | 行レベル vs テーブルレベル          | Security vs Performance        |
+| SP                     | 構成要素                            | 影響する品質属性               |
+| ---------------------- | ----------------------------------- | ------------------------------ |
+| キャッシュ戦略         | ローカルDB の同期頻度               | Performance vs データ鮮度      |
+| AI 応答フォーマット    | API Route の JSON Schema 厳密度 | Reliability vs 柔軟性          |
+| React Hooks のスコープ | グローバル vs Feature スコープ      | Maintainability vs Performance |
+| 認証ポリシーの粒度     | ルートレベル vs ページレベル        | Security vs Performance        |
 
 ---
 
@@ -118,20 +118,20 @@ ATAM Lite は、フル ATAM プロセスを Hackathon Project プロジェクト
    ```markdown
    ### Tradeoff Points
 
-   - **TP-1**: オフラインキャッシュの範囲
+   - **TP-1**: 対戦状態キャッシュの範囲
      - Performance (+): ローカルデータで高速表示
      - Maintainability (-): 同期ロジックの複雑化
      - Reliability (?): コンフリクト解決の戦略が必要
    ```
 
-### Hackathon Project での典型的な Tradeoff Points
+### プロジェクト での典型的な Tradeoff Points
 
 | TP                             | トレードオフ                 | 説明                                             |
 | ------------------------------ | ---------------------------- | ------------------------------------------------ |
 | AI コンテンツ品質 vs 応答速度  | Quality ↔ Performance        | 高品質な AI 生成にはより多くの処理時間が必要     |
 | データ暗号化 vs パフォーマンス | Security ↔ Performance       | ローカルデータの暗号化はアクセス速度を低下させる |
 | 機能分離 vs 再利用性           | Maintainability ↔ Efficiency | Feature-First 分離は再利用コードの重複を生む     |
-| オフライン対応 vs 実装コスト   | Reliability ↔ Cost           | 完全なオフライン対応は実装工数が大きい           |
+| リアルタイム同期 vs 実装コスト | Reliability ↔ Cost           | 完全なリアルタイム同期は実装工数が大きい         |
 
 ---
 
@@ -201,13 +201,13 @@ ATAM Lite は、フル ATAM プロセスを Hackathon Project プロジェクト
 ```markdown
 ### Risk Themes
 
-**RT-1: オフライン/オンライン境界の複雑性**
-関連: SP-1 (キャッシュ有効期限), TP-1 (オフラインキャッシュ範囲)
+**RT-1: リアルタイム/非同期境界の複雑性**
+関連: SP-1 (キャッシュ有効期限), TP-1 (対戦状態キャッシュ範囲)
 リスク: 同期ロジックの複雑化により、バグの温床となる可能性。
 軽減策: 同期戦略を最小限に保ち、コンフリクト解決は "last-write-wins" を採用。
 
 **RT-2: AI コンテンツ生成の信頼性**
-関連: SP-2 (Edge Function タイムアウト), TP-2 (品質 vs 速度)
+関連: SP-2 (API Route タイムアウト), TP-2 (品質 vs 速度)
 リスク: AI サービス障害時のフォールバック戦略が不十分だと UX が著しく低下。
 軽減策: 事前生成コンテンツのプールを用意し、リアルタイム生成失敗時に利用。
 ```

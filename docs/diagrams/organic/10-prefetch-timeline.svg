@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5" d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z"/>
+    <path id="blob-c6" d="M 70,-65 C 115,-45 120,10 95,55 C 65,105 -5,115 -55,85 C -105,55 -115,-15 -85,-65 C -55,-105 25,-85 70,-65 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg-grad)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">プリフェッチ最適化</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">WITH vs WITHOUT — タイムライン比較</text>
+
+  <!-- ===== WITH PREFETCH Section ===== -->
+  <text x="120" y="195" font-size="28" font-weight="800" fill="#22c55e">WITH</text>
+
+  <!-- Time axis for WITH -->
+  <line x1="250" y1="215" x2="1200" y2="215" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/>
+  <text x="250" y="240" font-size="14" font-weight="600" fill="#64748b">0s</text>
+  <text x="730" y="240" font-size="14" font-weight="600" fill="#64748b">5s</text>
+  <text x="890" y="240" font-size="14" font-weight="600" fill="#64748b">5.3s</text>
+
+  <!-- Recording bar (WITH) - organic pill -->
+  <rect x="250" y="180" width="480" height="36" rx="18" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="490" y="204" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">音声録音 (5秒)</text>
+
+  <!-- Prefetch bar (parallel) -->
+  <rect x="250" y="255" width="200" height="30" rx="15" fill="#bbf7d0" stroke="#22c55e" stroke-width="2"/>
+  <text x="350" y="276" text-anchor="middle" font-size="14" font-weight="700" fill="#166534">AI先読み</text>
+
+  <!-- Result (WITH) -->
+  <rect x="730" y="180" width="220" height="36" rx="18" fill="#bbf7d0" stroke="#22c55e" stroke-width="2.5"/>
+  <text x="840" y="204" text-anchor="middle" font-size="16" font-weight="700" fill="#166534">AI攻撃表示</text>
+
+  <!-- 300ms badge -->
+  <rect x="980" y="175" width="100" height="40" rx="20" fill="#22c55e"/>
+  <text x="1030" y="200" text-anchor="middle" font-size="18" font-weight="900" fill="#ffffff">300ms</text>
+
+  <!-- ===== Divider ===== -->
+  <path d="M 100,340 Q 700,360 1300,340" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="12 8" fill="none"/>
+
+  <!-- ===== WITHOUT PREFETCH Section ===== -->
+  <text x="120" y="420" font-size="28" font-weight="800" fill="#ef4444">WITHOUT</text>
+
+  <!-- Time axis for WITHOUT -->
+  <line x1="250" y1="440" x2="1200" y2="440" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/>
+  <text x="250" y="465" font-size="14" font-weight="600" fill="#64748b">0s</text>
+  <text x="730" y="465" font-size="14" font-weight="600" fill="#64748b">5s</text>
+  <text x="940" y="465" font-size="14" font-weight="600" fill="#64748b">5.8s</text>
+
+  <!-- Recording bar (WITHOUT) -->
+  <rect x="250" y="405" width="480" height="36" rx="18" fill="#bfdbfe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="490" y="429" text-anchor="middle" font-size="16" font-weight="700" fill="#1e293b">音声録音 (5秒)</text>
+
+  <!-- API call bar -->
+  <rect x="730" y="405" width="180" height="36" rx="18" fill="#fbcfe8" stroke="#ec4899" stroke-width="2"/>
+  <text x="820" y="429" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">API呼び出し</text>
+
+  <!-- Result (WITHOUT) -->
+  <rect x="910" y="405" width="140" height="36" rx="18" fill="#fbcfe8" stroke="#ec4899" stroke-width="2.5"/>
+  <text x="980" y="429" text-anchor="middle" font-size="16" font-weight="700" fill="#991b1b">表示</text>
+
+  <!-- 800ms badge -->
+  <rect x="1070" y="400" width="100" height="40" rx="20" fill="#ef4444"/>
+  <text x="1120" y="425" text-anchor="middle" font-size="18" font-weight="900" fill="#ffffff">800ms</text>
+
+  <!-- Key Insight -->
+  <rect x="300" y="560" width="800" height="70" rx="35" fill="#8b5cf6"/>
+  <text x="700" y="590" text-anchor="middle" font-size="24" font-weight="800" fill="#ffffff">500ms の差がゲーム体験を決定的に変える</text>
+  <text x="700" y="616" text-anchor="middle" font-size="16" font-weight="600" fill="rgba(255,255,255,0.8)">プレイヤーの「空き時間」をAI処理に活用</text>
+
+  <!-- Comparison blobs -->
+  <g transform="translate(420, 700)">
+    <use href="#blob-c5" fill="#bbf7d0" transform="scale(0.6)"/>
+    <text x="0" y="8" text-anchor="middle" font-size="18" font-weight="800" fill="#22c55e">300ms</text>
+  </g>
+  <text x="560" y="705" text-anchor="middle" font-size="22" font-weight="800" fill="#475569">vs</text>
+  <g transform="translate(700, 700)">
+    <use href="#blob-c6" fill="#fbcfe8" transform="scale(0.6)"/>
+    <text x="0" y="8" text-anchor="middle" font-size="18" font-weight="800" fill="#ec4899">800ms</text>
+  </g>
+
+  <!-- Footer pill -->
+  <rect x="380" y="750" width="640" height="40" rx="30" fill="#ffffff"/>
+  <text x="700" y="775" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">プリフェッチ最適化 — タイムライン比較</text>
+</svg>

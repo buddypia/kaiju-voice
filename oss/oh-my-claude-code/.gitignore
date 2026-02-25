@@ -1,0 +1,16 @@
+# Runtime state (session-specific, should not be committed)
+.claude/state/*.json
+.claude/state/*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files from install script
+.claude.backup.*

@@ -4,9 +4,3 @@ import { GoogleGenAI } from '@google/genai';
 export const gemini = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY!,
 });
-
-/** Lyria RealTime 用クライアント (v1alpha API) */
-export const geminiAlpha = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY!,
-  httpOptions: { apiVersion: 'v1alpha' },
-});

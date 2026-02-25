@@ -3,8 +3,8 @@
 expect_fail.py - コマンドが失敗してこそ成功とみなすTDD補助スクリプト
 
 Usage:
-  python3 .quality/scripts/expect_fail.py -- flutter test test/path_to_test.dart
-  python3 .quality/scripts/expect_fail.py flutter test test/path_to_test.dart
+  python3 .quality/scripts/expect_fail.py -- npm test test/path_to_test.ts
+  python3 .quality/scripts/expect_fail.py npm test test/path_to_test.ts
 
 Exit Codes:
   0 - コマンドが失敗した (予想通りRed)

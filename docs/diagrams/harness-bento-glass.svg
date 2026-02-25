@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <filter id="mesh-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="80" result="blur" />
+    </filter>
+    <filter id="glass-card" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.06"/>
+    </filter>
+    <style>
+      .tTitle{font:800 48px system-ui, -apple-system, sans-serif; fill:#1d1d1f; letter-spacing:-1px}
+      .tSub{font:500 18px system-ui, -apple-system, sans-serif; fill:#86868b}
+      .tCardH{font:700 28px system-ui, -apple-system, sans-serif; fill:#1d1d1f}
+      .tCardS{font:500 16px system-ui, -apple-system, sans-serif; fill:#86868b}
+      .tCenter{font:800 36px system-ui, -apple-system, sans-serif; fill:#1d1d1f; letter-spacing:-0.5px}
+      .tBadge{font:700 14px system-ui, -apple-system, sans-serif; fill:#ffffff; letter-spacing: 0.5px;}
+      .line{stroke:#d2d2d7; stroke-width:4; fill:none; stroke-linecap: round;}
+    </style>
+  </defs>
+
+  <rect width="1400" height="800" fill="#f5f5f7"/>
+  
+  <!-- Mesh Gradient Background -->
+  <g filter="url(#mesh-blur)" opacity="0.6">
+    <circle cx="300" cy="200" r="250" fill="#ffb6ff"/>
+    <circle cx="1100" cy="600" r="300" fill="#b6e3ff"/>
+    <circle cx="700" cy="400" r="200" fill="#ffdfb6"/>
+  </g>
+
+  <text x="700" y="100" text-anchor="middle" class="tTitle">ハーネスエンジニアリングとは？</text>
+
+  <!-- Thick soft lines -->
+  <path d="M 588 300 Q 450 300 360 255" class="line"/>
+  <path d="M 588 300 Q 450 300 360 445" class="line"/>
+  <path d="M 812 300 Q 950 300 1040 255" class="line"/>
+  <path d="M 812 300 Q 950 300 1040 445" class="line"/>
+
+  <!-- Center -->
+  <g transform="translate(700 300)" filter="url(#glass-card)">
+    <circle r="130" fill="rgba(255, 255, 255, 0.8)" stroke="#ffffff" stroke-width="4"/>
+    <text y="10" text-anchor="middle" class="tCenter">ハーネス</text>
+    <g transform="translate(0 130)">
+      <rect x="-85" y="-18" width="170" height="36" rx="18" fill="#0066cc"/>
+      <text y="5" text-anchor="middle" class="tBadge">中核コンポーネント</text>
+    </g>
+  </g>
+
+  <!-- Left top -->
+  <g transform="translate(180 200)" filter="url(#glass-card)">
+    <rect width="360" height="110" rx="24" fill="rgba(255, 255, 255, 0.85)" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="50" cy="55" r="20" fill="#f5f5f7"/>
+    <text x="90" y="48" class="tCardH">CLAUDE.md</text>
+    <text x="90" y="85" class="tCardS">プロジェクト指示事項</text>
+  </g>
+  <!-- Left bottom -->
+  <g transform="translate(180 390)" filter="url(#glass-card)">
+    <rect width="360" height="110" rx="24" fill="rgba(255, 255, 255, 0.85)" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="50" cy="55" r="20" fill="#f5f5f7"/>
+    <text x="90" y="48" class="tCardH">スキルファイル</text>
+    <text x="90" y="85" class="tCardS">専門スキル設定</text>
+  </g>
+  <!-- Right top -->
+  <g transform="translate(860 200)" filter="url(#glass-card)">
+    <rect width="360" height="110" rx="24" fill="rgba(255, 255, 255, 0.85)" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="50" cy="55" r="20" fill="#e8f4fd"/>
+    <text x="90" y="48" class="tCardH">MCPサーバ</text>
+    <text x="90" y="85" class="tCardS">外部ツール連携</text>
+  </g>
+  <!-- Right bottom -->
+  <g transform="translate(860 390)" filter="url(#glass-card)">
+    <rect width="360" height="110" rx="24" fill="rgba(255, 255, 255, 0.85)" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="50" cy="55" r="20" fill="#e8f4fd"/>
+    <text x="90" y="48" class="tCardH">エージェント</text>
+    <text x="90" y="85" class="tCardS">カスタム専門家</text>
+  </g>
+
+  <text x="700" y="750" text-anchor="middle" class="tSub">構成要素を組み合わせて、ハーネスが実行環境として機能するイメージ</text>
+</svg>

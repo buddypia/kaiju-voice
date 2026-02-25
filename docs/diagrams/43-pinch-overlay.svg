@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" font-family="system-ui, sans-serif">
+  <rect width="500" height="240" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="250" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">PinchOverlay — HP危険域の演出</text>
+
+  <!-- Screen mockup -->
+  <rect x="100" y="50" width="300" height="140" rx="8" fill="#0f172a"/>
+
+  <!-- Red vignette -->
+  <defs>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.6"/>
+    </radialGradient>
+  </defs>
+  <rect x="100" y="50" width="300" height="140" rx="8" fill="url(#vignette)"/>
+
+  <!-- HP bar -->
+  <rect x="150" y="70" width="200" height="12" rx="6" fill="#1e293b"/>
+  <rect x="150" y="70" width="40" height="12" rx="6" fill="#ef4444"/>
+  <text x="355" y="80" font-size="9" fill="#ef4444" font-weight="700">20%</text>
+
+  <!-- Heartbeat text -->
+  <text x="250" y="130" text-anchor="middle" font-size="14" fill="#ef4444" opacity="0.8">♥ heartbeat pulse ♥</text>
+  <text x="250" y="155" text-anchor="middle" font-size="9" fill="#94a3b8">画面端が赤く脈動</text>
+
+  <!-- Condition -->
+  <rect x="120" y="200" width="260" height="28" rx="14" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="250" y="219" text-anchor="middle" font-size="10" font-weight="600" fill="#991b1b">発動条件: HP ≤ 25%</text>
+</svg>

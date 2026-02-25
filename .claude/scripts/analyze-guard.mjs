@@ -75,8 +75,8 @@ async function main() {
     // Transcript 分析: コード 変更 + analyze 状態
     // ═══════════════════════════════════════════════════════════
     const transcriptPath = data.transcript_path || '';
-    const { hasCodeChange, hasDartCodeChange, analyzeResult } = detectAnalyzeStatus(transcriptPath);
-    const changed = Boolean(hasCodeChange ?? hasDartCodeChange);
+    const { hasCodeChange, analyzeResult } = detectAnalyzeStatus(transcriptPath);
+    const changed = Boolean(hasCodeChange);
 
     // コード 変更 なし → 許可
     if (!changed) return output({});

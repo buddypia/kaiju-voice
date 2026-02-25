@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" font-family="system-ui, sans-serif">
+  <rect width="600" height="360" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="300" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Tech Stack</text>
+
+  <!-- Layer 1: AI -->
+  <rect x="60" y="50" width="480" height="50" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="300" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#991b1b">AI Layer</text>
+  <text x="165" y="90" text-anchor="middle" font-size="9" fill="#475569">gemini-3-flash</text>
+  <text x="300" y="90" text-anchor="middle" font-size="9" fill="#475569">gemini-2.5-flash-tts</text>
+  <text x="435" y="90" text-anchor="middle" font-size="9" fill="#475569">Imagen 4</text>
+
+  <!-- Layer 2: Framework -->
+  <rect x="60" y="110" width="480" height="50" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="300" y="132" text-anchor="middle" font-size="13" font-weight="700" fill="#1e40af">Framework</text>
+  <text x="165" y="150" text-anchor="middle" font-size="9" fill="#475569">Next.js 16</text>
+  <text x="300" y="150" text-anchor="middle" font-size="9" fill="#475569">React 19</text>
+  <text x="435" y="150" text-anchor="middle" font-size="9" fill="#475569">TypeScript (strict)</text>
+
+  <!-- Layer 3: State + Validation -->
+  <rect x="60" y="170" width="230" height="50" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="175" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#166534">State</text>
+  <text x="175" y="210" text-anchor="middle" font-size="9" fill="#475569">XState 5 + useReducer</text>
+
+  <rect x="310" y="170" width="230" height="50" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="425" y="192" text-anchor="middle" font-size="12" font-weight="600" fill="#6b21a8">Validation</text>
+  <text x="425" y="210" text-anchor="middle" font-size="9" fill="#475569">Zod 4</text>
+
+  <!-- Layer 4: UI -->
+  <rect x="60" y="230" width="230" height="50" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="175" y="252" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">Styling</text>
+  <text x="175" y="270" text-anchor="middle" font-size="9" fill="#475569">Tailwind CSS 4</text>
+
+  <rect x="310" y="230" width="230" height="50" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="425" y="252" text-anchor="middle" font-size="12" font-weight="600" fill="#991b1b">Animation</text>
+  <text x="425" y="270" text-anchor="middle" font-size="9" fill="#475569">Framer Motion 12</text>
+
+  <!-- Layer 5: Testing -->
+  <rect x="60" y="290" width="480" height="45" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="300" y="312" text-anchor="middle" font-size="12" font-weight="600" fill="#475569">Testing</text>
+  <text x="200" y="328" text-anchor="middle" font-size="9" fill="#94a3b8">Vitest</text>
+  <text x="400" y="328" text-anchor="middle" font-size="9" fill="#94a3b8">Testing Library</text>
+</svg>

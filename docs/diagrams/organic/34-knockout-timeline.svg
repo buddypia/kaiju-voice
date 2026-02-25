@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg34" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-34" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-34" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-34" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4-34" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg34)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">KnockOutEffect</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">演出タイムライン (3500ms)</text>
+
+  <!-- Phase 1: White Flash -->
+  <g transform="translate(210, 340)">
+    <use href="#blob-c1-34" fill="#fef08a" transform="scale(1.35)"/>
+  </g>
+  <circle cx="110" cy="250" r="30" fill="#eab308"/>
+  <text x="110" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+  <text x="210" y="310" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">白フラッシュ</text>
+  <text x="210" y="350" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">opacity 0 -&gt; 1 -&gt; 0</text>
+  <text x="210" y="380" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~800ms</text>
+
+  <!-- Connector 1->2 -->
+  <path d="M 340,350 C 390,320 430,320 480,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Phase 2: SVG Crack -->
+  <g transform="translate(560, 340)">
+    <use href="#blob-c2-34" fill="#bfdbfe" transform="scale(1.35)"/>
+  </g>
+  <circle cx="460" cy="250" r="30" fill="#3b82f6"/>
+  <text x="460" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+  <text x="560" y="310" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">SVGクラック</text>
+  <text x="560" y="350" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">12本 / 中心から放射状 / pathLength 0→1</text>
+  <text x="560" y="380" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~1000ms</text>
+
+  <!-- Connector 2->3 -->
+  <path d="M 690,350 C 740,320 780,320 830,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Phase 3: K.O. Text -->
+  <g transform="translate(910, 340)">
+    <use href="#blob-c3-34" fill="#fbcfe8" transform="scale(1.35)"/>
+  </g>
+  <circle cx="810" cy="250" r="30" fill="#ec4899"/>
+  <text x="810" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+  <text x="910" y="310" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">"K.O."</text>
+  <text x="910" y="350" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">scale 8 -&gt; 1 / bounce</text>
+  <text x="910" y="380" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~1000ms</text>
+
+  <!-- Connector 3->4 -->
+  <path d="M 1040,350 C 1090,320 1130,320 1180,350" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Phase 4: Blackout -->
+  <g transform="translate(1230, 340)">
+    <use href="#blob-c4-34" fill="#bbf7d0" transform="scale(1.35)"/>
+  </g>
+  <circle cx="1130" cy="250" r="30" fill="#22c55e"/>
+  <text x="1130" y="264" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">4</text>
+  <text x="1230" y="310" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">暗転</text>
+  <text x="1230" y="350" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">フェードアウト</text>
+  <text x="1230" y="380" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~700ms</text>
+
+  <!-- Timeline bar -->
+  <path d="M 120,560 C 120,545 135,540 150,540 L 1280,540 C 1295,540 1310,545 1310,560 C 1310,575 1295,580 1280,580 L 150,580 C 135,580 120,575 120,560 Z" fill="#e2e8f0" opacity="0.5"/>
+  <path d="M 120,560 C 120,545 135,540 150,540 L 400,540 L 400,580 L 150,580 C 135,580 120,575 120,560 Z" fill="#fef08a" opacity="0.7"/>
+  <path d="M 400,540 L 720,540 L 720,580 L 400,580 Z" fill="#bfdbfe" opacity="0.7"/>
+  <path d="M 720,540 L 1040,540 L 1040,580 L 720,580 Z" fill="#fbcfe8" opacity="0.7"/>
+  <path d="M 1040,540 L 1280,540 C 1295,540 1310,545 1310,560 C 1310,575 1295,580 1280,580 L 1040,580 Z" fill="#bbf7d0" opacity="0.7"/>
+
+  <text x="260" y="615" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~800ms</text>
+  <text x="560" y="615" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~1000ms</text>
+  <text x="880" y="615" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~1000ms</text>
+  <text x="1175" y="615" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">~700ms</text>
+
+  <!-- Footer -->
+  <rect x="300" y="710" width="800" height="50" rx="30" fill="white"/>
+  <text x="700" y="740" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">HP === 0 で発動 / SVG pathLength アニメーションで亀裂を描画</text>
+</svg>

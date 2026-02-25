@@ -7,13 +7,13 @@
  *
  * Self-Healing Loop (核心メカニズム):
  * ┌─────────────────────────────────────────────────────────┐
- * │ 1. ClaudeがWrite/Edit → dart-format Hookがファイル再フォーマット │
+ * │ 1. ClaudeがWrite/Edit → formatter Hookがファイル再フォーマット  │
  * │ 2. Claudeがstale contentでEdit → 失敗                │
- * │ 3. がHookが検出 → "Read まず" ガイダンス注入           │
+ * │ 3. Hookが検出 → "Read まず" ガイダンス注入              │
  * │ 4. ClaudeがRead → 最新フォーマット済みcontent確保 → 成功     │
  * └─────────────────────────────────────────────────────────┘
  *
- * oh-my-opencodeのedit-error-recovery パターンをClaude Code Hookで実装.
+ * edit-error-recovery パターンをClaude Code Hookで実装.
  */
 
 async function readStdin() {
@@ -53,7 +53,7 @@ function getRecoveryGuidance(output, filePath) {
   const lower = output.toLowerCase();
 
   // Case 1: old_stringが見つからない (最も一般的なケース)
-  // 原因: dart formatがインデント/空白を変更したか、以前の編集で内容が変わった
+  // 原因: formatterがインデント/空白を変更したか、以前の編集で内容が変わった
   if (
     lower.includes('not found') ||
     lower.includes('no match') ||
@@ -61,7 +61,7 @@ function getRecoveryGuidance(output, filePath) {
   ) {
     return (
       `[Edit Recovery] "${filePath}" 編集失敗: old_stringが見つかりません.\n` +
-      `考えられる原因: dart formatがファイルを再フォーマットした可能性があります.\n` +
+      `考えられる原因: formatterがファイルを再フォーマットした可能性があります.\n` +
       `解決: Read ツールで"${filePath}"の現在の内容を読んでから再度Editしてください.`
     );
   }

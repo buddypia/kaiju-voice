@@ -1,0 +1,319 @@
+# Pipeline as Code: NEW_FEATURE
+# feature-pilot がこのファイルを参照してパイプラインを実行する。
+# Git diff で変更追跡が可能。
+
+name: NEW_FEATURE
+version: 1.0.0
+description: '新機能開発パイプライン（スクラッチ → 完了）'
+
+# Tier 別ステップ構成
+# 各 Tier で実行されるステップを定義
+tiers:
+  S:
+    - architect
+    - spec
+    - ui_approval
+    - readiness_gate
+    - implement
+    - quality_gate
+    - dod_verification
+  M:
+    - architect
+    - constraints_load
+    - discovery_lite
+    - spec
+    - ui_approval
+    - readiness_gate
+    - implement
+    - wiring
+    - status_sync
+    - quality_gate
+    - dod_verification
+  L:
+    - architect
+    - constraints_load
+    - discovery_full
+    - spec
+    - ui_approval
+    - readiness_gate
+    - implement
+    - wiring
+    - status_sync
+    - priority_calc
+    - quality_gate
+    - dod_verification
+  XL:
+    - architect
+    - constraints_load
+    - discovery_full
+    - spec
+    - ui_approval
+    - readiness_gate
+    - implement
+    - wiring
+    - status_sync
+    - priority_calc
+    - quality_gate
+    - dod_verification
+
+# ステップ定義
+steps:
+  architect:
+    skill: feature-architect
+    model: sonnet
+    outputs:
+      - BRIEF.md
+      - CONTEXT.json
+    retry:
+      max: 2
+      fallback: null
+    compensation:
+      action: 'BRIEF.md と CONTEXT.json を削除し、Step を再実行'
+      revert_to: architect
+
+  constraints_load:
+    type: automatic
+    description: 'constraints.json からプラットフォーム制約を自動ロード'
+    fallback: 'ハードコードデフォルト使用'
+
+  discovery_lite:
+    skill: domain-modeler
+    model: sonnet
+    args: ['--lightweight']
+    outputs:
+      - DOMAIN-MODEL.md
+    gate:
+      type: discovery_gate
+      fail_action: revert_to_architect
+    compensation:
+      action: 'DOMAIN-MODEL.md を削除し、BRIEF を見直して再実行'
+      revert_to: architect
+
+  discovery_full:
+    skills:
+      - skill: domain-modeler
+        model: sonnet
+      - skill: architecture-selector
+        model: opus
+      - skill: system-designer
+        model: sonnet
+    outputs:
+      - DOMAIN-MODEL.md
+      - ADR-*.md
+      - SYSTEM-DESIGN-*.md
+    gate:
+      type: discovery_gate
+      fail_action: revert_to_architect
+    compensation:
+      action: 'Discovery 成果物を全削除し、BRIEF を見直して再実行'
+      revert_to: architect
+
+  spec:
+    skill: feature-spec-generator
+    model: sonnet
+    outputs:
+      - SPEC-*.md
+      - screens/*.md
+    retry:
+      max: 2
+      fallback: null
+    compensation:
+      action: 'SPEC.md のみ再生成（BRIEF・Discovery 成果物は保持）'
+      revert_to: spec
+
+  ui_approval:
+    skill: ui-approval-gate
+    model: sonnet
+    type: gate
+    requires_user: true
+    compensation:
+      action: 'ワイヤーフレームを修正し、再承認を依頼'
+      revert_to: ui_approval
+
+  readiness_gate:
+    type: gate
+    model: sonnet
+    checks:
+      - schema_validation
+      - upstream_contract
+      - tech_contract
+      - implementation_safety
+      - ui_flow_contract
+    retry:
+      max: 2
+      fallback: null
+    compensation:
+      action: 'Gate 失敗項目に対応する SPEC セクションを修正'
+      revert_to: spec
+
+  implement:
+    skill: feature-implementer
+    model: sonnet
+    batch_order:
+      - name: 'Data Layer'
+        parallel: true
+        items: ['TypeScript Type + Zod Schema', 'API Layer']
+      - name: 'Logic Layer'
+        parallel: false
+        items: ['Custom Hook']
+      - name: 'Presentation Layer'
+        parallel: false
+        items: ['Component']
+      - name: 'Test Layer'
+        parallel: false
+        items: ['API Test', 'Hook Test', 'Component Test']
+    tdd: true
+    retry:
+      max: 3
+      fallback: null
+    compensation:
+      action: '失敗バッチのみ再実装（成功バッチは保持）'
+      revert_to: implement
+
+  wiring:
+    skill: feature-wiring
+    model: sonnet
+    atomic: true
+    items:
+      - 'データソース連動（API Layer → Backend）'
+      - 'Next.js App Router 連動'
+      - 'UI Flow Graph 更新・検証'
+    compensation:
+      action: '連動を全ロールバックし、再実行'
+      revert_to: wiring
+
+  status_sync:
+    skill: feature-status-sync
+    model: haiku
+    outputs:
+      - index.md
+    compensation:
+      action: 'index.md を CONTEXT.json から再生成'
+      revert_to: status_sync
+
+  priority_calc:
+    skill: priority-analyzer
+    model: haiku
+    trigger_condition: 'progress >= 10% 変化時'
+    optional: true
+    compensation:
+      action: 'RICE スコアを再計算'
+      revert_to: priority_calc
+
+  quality_gate:
+    skill: pre-quality-gate
+    type: gate
+    checks:
+      - lint_analyze
+      - test
+      - architecture_check
+    retry:
+      max: 3
+      auto_fix: true
+      auto_fix_command: 'make q.fix'
+    compensation:
+      action: 'make q.fix 実行後、再検証'
+      revert_to: quality_gate
+
+  dod_verification:
+    type: gate
+    model: sonnet
+    description: 'BRIEF §7 完了契約検証 + CONTEXT.json completion_contract 更新'
+    checks:
+      - machine_items_via_evidence_cache
+      - ai_items_via_code_scan
+      - human_items_via_user_prompt
+    inputs:
+      - 'BRIEF.md §7'
+      - 'CONTEXT.json completion_contract'
+    outputs:
+      - 'CONTEXT.json completion_contract 更新'
+    compensation:
+      action: '失敗 DoD 項目を特定し、修正サイクルへ'
+      revert_to: implement
+
+# Base DoD (作業タイプ別共通完了条件)
+base_dod:
+  NEW_FEATURE:
+    - {
+        id: DoD-FT-01,
+        level: feature,
+        description: '全 FR の DoD 通過',
+        type: machine,
+        observation: 'progress.percentage == 100',
+      }
+    - {
+        id: DoD-FT-02,
+        level: feature,
+        description: 'make q.check Critical 全通過',
+        type: machine,
+        observation: 'make q.check exit 0',
+      }
+    - {
+        id: DoD-FT-03,
+        level: feature,
+        description: 'SPEC §0 準拠 (Target Files, State/Hook, Error Handling)',
+        type: ai,
+        observation: 'AI が SPEC §0 vs 実装を比較',
+      }
+    - {
+        id: DoD-FT-04,
+        level: feature,
+        description: 'Feature-First 依存関係ルール準拠',
+        type: machine,
+        observation: 'make q.check-architecture exit 0',
+      }
+    - {
+        id: DoD-FT-05,
+        level: feature,
+        description: '変更ファイルに対応するテスト追加',
+        type: machine,
+        observation: 'make q.test-exists exit 0',
+      }
+    - {
+        id: DoD-FT-06,
+        level: feature,
+        description: 'TypeScript strict エラーなし',
+        type: machine,
+        observation: 'npm run build exit 0',
+      }
+    - {
+        id: DoD-FT-07,
+        level: feature,
+        description: 'i18n ハードコーディングなし',
+        type: ai,
+        observation: 'AI が JSX 内文字列リテラルをスキャン',
+      }
+    - {
+        id: DoD-FT-08,
+        level: feature,
+        description: '日本語 JSDoc コメント (公開関数/コンポーネント)',
+        type: ai,
+        observation: 'AI が export 関数の JSDoc 存在を確認',
+      }
+    - {
+        id: DoD-FT-09,
+        level: feature,
+        description: 'UI Flow Graph 整合性',
+        type: machine,
+        observation: 'make q.ui-flow exit 0',
+      }
+    - {
+        id: DoD-FT-10,
+        level: feature,
+        description: 'CONTEXT.json current_state = Done',
+        type: machine,
+        observation: 'CONTEXT.json 読取で確認',
+      }
+
+# グローバル設定
+global:
+  evidence_caching: true
+  evidence_cache_path: '.claude/state/evidence-cache.json'
+  pipeline_log_path: 'docs/pipeline-log/'
+  context_json_ssot: true
+  max_total_retries: 10
+  model_fallback:
+    enabled: true
+    order: [haiku, sonnet, opus]
+    max_failures_before_escalation: 3

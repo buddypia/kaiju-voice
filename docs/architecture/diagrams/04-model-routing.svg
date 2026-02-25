@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <style>
+      text { font-family: system-ui, sans-serif; fill: #1e293b; }
+      .bg { fill: #f8fafc; }
+      .card { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 8; }
+      .card-pro { fill: #fef2f2; stroke: #ef4444; stroke-width: 2; rx: 8; }
+      .card-flash { fill: #fffbeb; stroke: #f59e0b; stroke-width: 2; rx: 8; }
+      .edge { stroke: #94a3b8; stroke-width: 2; fill: none; }
+      .arrow { fill: #94a3b8; }
+      .label { font-size: 14px; font-weight: bold; text-anchor: middle; }
+      .sub { font-size: 12px; fill: #64748b; text-anchor: middle; }
+      .title { font-size: 20px; font-weight: bold; fill: #0f172a; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" class="bg" />
+  <text x="30" y="40" class="title">4. Intelligent Model Routing</text>
+
+  <rect x="100" y="160" width="140" height="80" class="card" />
+  <text x="170" y="195" class="label">Orchestrator</text>
+  <text x="170" y="215" class="sub">feature-pilot</text>
+
+  <rect x="450" y="80" width="200" height="80" class="card-pro" />
+  <text x="550" y="115" class="label">Gemini 3 Pro</text>
+  <text x="550" y="135" class="sub">Deep Reasoning / Architecture</text>
+
+  <rect x="450" y="240" width="200" height="80" class="card-flash" />
+  <text x="550" y="275" class="label">Gemini 3 Flash</text>
+  <text x="550" y="295" class="sub">Fast Implementation / Fixes</text>
+
+  <!-- Edges -->
+  <path d="M240,180 C320,180 350,120 440,120" class="edge" marker-end="url(#arrowhead)" />
+  <text x="350" y="135" class="sub">Complex Task</text>
+
+  <path d="M240,220 C320,220 350,280 440,280" class="edge" marker-end="url(#arrowhead)" />
+  <text x="350" y="275" class="sub">Speed Required</text>
+</svg>

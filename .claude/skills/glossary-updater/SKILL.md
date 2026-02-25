@@ -1,6 +1,6 @@
 ---
 name: glossary-updater
-description: Hackathon Project プロジェクトの glossary.md 用語集を更新するスキル。PRD/FRD 文書変更、新機能追加、コードベース変更後に用語集同期が必要なときにこのスキルを使用する。「用語集更新」、「glossary 同期」、「新用語追加」などの要求でトリガーされる。
+description: プロジェクト プロジェクトの glossary.md 用語集を更新するスキル。PRD/FRD 文書変更、新機能追加、コードベース変更後に用語集同期が必要なときにこのスキルを使用する。「用語集更新」、「glossary 同期」、「新用語追加」などの要求でトリガーされる。
 doc_contract:
   review_interval_days: 90
 ---
@@ -9,7 +9,7 @@ doc_contract:
 
 ## Overview
 
-Hackathon Project プロジェクトのドメイン用語集（`docs/glossary.md`）を最新状態に保つスキル。PRD/FRD 文書、コードベース（enum、モデル）、データベーススキーマから新用語を発見して用語集に追加する。
+プロジェクト プロジェクトのドメイン用語集（`docs/glossary.md`）を最新状態に保つスキル。PRD/FRD 文書、コードベース（enum、型定義）から新用語を発見して用語集に追加する。
 
 ## トリガー条件
 
@@ -44,31 +44,23 @@ Read docs/features/{feature-number}/FRD-*.md
 #### B. コードベース分析（コード変更時） - Feature-First 構造
 
 ```
-# 新しく追加された enum/モデル確認（Feature-First）
-Glob lib/features/**/data/models/*.dart
-Grep "enum " lib/features/**/data/models/
-Grep "@freezed" lib/features/**/data/models/
+# 新しく追加された enum/型定義確認（Feature-First）
+Glob src/features/**/types/*.ts
+Grep "enum " src/features/**/types/
+Grep "interface " src/features/**/types/
+Grep "type " src/features/**/types/
 
-# 新 Repository/ViewModel 確認（Feature-First）
-Glob lib/features/**/data/repositories/*.dart
-Glob lib/features/**/presentation/viewmodels/*.dart
-```
-
-#### C. データベース分析（スキーマ変更時）
-
-```
-# マイグレーションファイル確認
-Read infra/supabase/migrations/_migrations_list.json
-Glob infra/supabase/migrations/*.sql
+# 新 API / コンポーネント確認（Feature-First）
+Glob src/features/**/api/*.ts
+Glob src/features/**/components/*.tsx
 ```
 
 ### 3. 欠落用語識別
 
 既存用語集とソースを比較して欠落した用語を識別する:
 
-- 新 enum 値（例: `LessonPhase`, `DirectorMode`）
-- 新データモデル（例: `WrongNote`, `StreakModel`）
-- 新 DB テーブル
+- 新 enum 値（例: `GamePhase`, `BattleMode`）
+- 新型定義（例: `BattleResult`, `PlayerState`）
 - PRD/FRD で定義された新概念
 
 ### 4. 用語追加
@@ -77,22 +69,16 @@ Glob infra/supabase/migrations/*.sql
 
 各セクションに適したテーブル形式で追加:
 
-**ビジネス/学習システム用語:**
+**ビジネス/ゲームシステム用語:**
 
 ```markdown
-| **Term** | 韓国語 | 説明 | 実装例 |
+| **Term** | 日本語 | 説明 | 実装例 |
 ```
 
 **技術用語:**
 
 ```markdown
 | **Term** | 説明 | 実装 |
-```
-
-**データベーステーブル:**
-
-```markdown
-| **table_name** | 用途 | 備考 |
 ```
 
 #### セクション選択基準
@@ -109,8 +95,8 @@ Glob infra/supabase/migrations/*.sql
 
 - **重複防止**: 既に存在する用語は追加しない
 - **一貫した形式**: 既存テーブル形式と同じように維持
-- **韓国語説明**: すべての説明は韓国語で作成
-- **実装例**: 可能であれば実際のファイル名/テーブル名を明示
+- **日本語説明**: すべての説明は日本語で作成
+- **実装例**: 可能であれば実際のファイル名/型名を明示
 
 ## Resources
 

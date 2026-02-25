@@ -109,11 +109,11 @@ doc_contract:
 
 **フォールバック（constraints.json 非存在時）**:
 
-- **アーキテクチャ**: Feature-First + Simplified Clean Architecture + Riverpod 3.1+
-- **バックエンド**: Supabase (PostgreSQL) + Edge Functions
-- **データモデル**: Freezed (不変)
-- **状態管理**: `@riverpod` Notifier（StatefulWidget 直接状態管理禁止）
-- **プラットフォーム**: iOS 12.0+, Android API 21+
+- **アーキテクチャ**: Feature-First + Simplified Clean Architecture + React Hooks 3.1+
+- **バックエンド**: API Routes (Next.js)
+- **データモデル**: TypeScript + Zod (不変)
+- **状態管理**: React Hooks + Custom Hooks（直接DOM操作禁止）
+- **プラットフォーム**: Web (モダンブラウザ)
 
 #### 1.4 Business Constraints（ビジネス制約）
 
@@ -291,7 +291,7 @@ Option {X} を選択する。
 
 - ✅ 最低3つの代替案を生成する
 - ✅ ATAM Lite マトリクスで客観的に評価する
-- ✅ Hackathon Project プロジェクトの既存アーキテクチャ（Feature-First + Simplified Clean Architecture + Riverpod）を前提制約として考慮する
+- ✅ プロジェクト プロジェクトの既存アーキテクチャ（Feature-First + Simplified Clean Architecture + React Hooks）を前提制約として考慮する
 - ✅ トレードオフ分析に Opus モデルを使用する
 - ✅ BRIEF.md の内容を尊重し、ユーザーの意図に沿った選定を行う
 - ✅ DOMAIN-MODEL.md が存在する場合、ドメインモデルとの整合性を検証する

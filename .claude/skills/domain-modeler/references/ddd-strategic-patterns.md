@@ -1,7 +1,7 @@
 # DDD Strategic Patterns ガイド
 
 > **用途**: `domain-modeler` スキルの3段階（Strategic DDD）および4段階（Ubiquitous Language）で参照するパターンリファレンス。
-> Eric Evans の Domain-Driven Design の戦略的パターンを Hackathon Project プロジェクト向けに整理したガイドです。
+> Eric Evans の Domain-Driven Design の戦略的パターンを プロジェクト プロジェクト向けに整理したガイドです。
 
 ---
 
@@ -15,13 +15,13 @@ Bounded Context（BC）は、特定のドメインモデルが適用される明
 
 以下の指標を使用して BC の境界を識別します:
 
-| 指標                     | 説明                              | 例                                               |
-| ------------------------ | --------------------------------- | ------------------------------------------------ |
-| **言語の境界**           | 同じ用語が異なる意味を持つ場所    | 「セッション」= 学習セッション vs 認証セッション |
-| **チームの境界**         | 異なるチーム/責任者が管理する領域 | コンテンツチーム vs インフラチーム               |
-| **データの境界**         | 独立して変更可能なデータの集合    | ユーザープロフィール vs 学習履歴                 |
-| **ビジネスルールの境界** | 異なるルールが適用される領域      | 課金ルール vs 学習進捗ルール                     |
-| **変更頻度の境界**       | 異なる頻度で変更される領域        | UIレイアウト vs SRSアルゴリズム                  |
+| 指標                     | 説明                              | 例                                              |
+| ------------------------ | --------------------------------- | ----------------------------------------------- |
+| **言語の境界**           | 同じ用語が異なる意味を持つ場所    | 「ターン」= ゲームターン vs APIリクエストターン |
+| **チームの境界**         | 異なるチーム/責任者が管理する領域 | ゲームロジックチーム vs インフラチーム          |
+| **データの境界**         | 独立して変更可能なデータの集合    | ユーザープロフィール vs 対戦履歴                |
+| **ビジネスルールの境界** | 異なるルールが適用される領域      | 対戦ルール vs スコア計算ルール                  |
+| **変更頻度の境界**       | 異なる頻度で変更される領域        | UIレイアウト vs AI対戦アルゴリズム              |
 
 ### 1.3 識別プロセス
 
@@ -47,7 +47,7 @@ Step 6: 既存 BC との重複・統合を検討
 | **適切**     | BC 内に 2-5 個の Aggregate      | そのまま維持           |
 | **粗すぎ**   | BC 内に 6 個以上の Aggregate    | 分割を検討             |
 
-**注意**: Hackathon Project プロジェクトでは、機能単位（Feature）と BC が1対1で対応しないこともあります。1つの Feature が複数の BC にまたがる場合や、複数の Feature が1つの BC に属する場合があります。
+**注意**: プロジェクト プロジェクトでは、機能単位（Feature）と BC が1対1で対応しないこともあります。1つの Feature が複数の BC にまたがる場合や、複数の Feature が1つの BC に属する場合があります。
 
 ---
 
@@ -101,13 +101,13 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph Core["Core Domain"]
-        LC[LearningContext]
-        RC[ReviewContext]
+        BC[BattleContext]
+        GC[GameContext]
     end
 
     subgraph Supporting["Supporting Domain"]
         CC[ContentContext]
-        AC[AudioContext]
+        AC[AnalysisContext]
     end
 
     subgraph Generic["Generic Domain"]
@@ -115,15 +115,15 @@ flowchart LR
         NC[NotificationContext]
     end
 
-    LC -->|Customer-Supplier| CC
-    LC -->|Shared Kernel| RC
-    LC -->|Customer-Supplier| AC
-    CC -->|ACL| ExtAI[External: AI Service]
-    AC -->|ACL| ExtTTS[External: TTS Service]
-    UC -->|Conformist| ExtAuth[External: Supabase Auth]
+    BC -->|Customer-Supplier| CC
+    BC -->|Shared Kernel| GC
+    BC -->|Customer-Supplier| AC
+    CC -->|ACL| ExtAI[External: Gemini AI]
+    AC -->|ACL| ExtAPI[External: Gemini API]
+    UC -->|Conformist| ExtAuth[External: Auth Provider]
 
-    style LC fill:#DC143C,color:#fff
-    style RC fill:#DC143C,color:#fff
+    style BC fill:#DC143C,color:#fff
+    style GC fill:#DC143C,color:#fff
     style CC fill:#4169E1,color:#fff
     style AC fill:#4169E1,color:#fff
     style UC fill:#808080,color:#fff
@@ -161,17 +161,16 @@ flowchart TD
     style Gen fill:#808080,color:#fff
 ```
 
-### 3.3 Hackathon Project プロジェクトの分類例
+### 3.3 プロジェクト プロジェクトの分類例
 
-| 分類           | BC 例                      | 理由                                            |
-| -------------- | -------------------------- | ----------------------------------------------- |
-| **Core**       | Learning, Review, Tutoring | AI ベースのプログラミング学習が最大の差別化要素 |
-| **Core**       | Assessment                 | IRT レベルテストは独自の学習体験を提供          |
-| **Supporting** | Content                    | AI コンテンツ生成は重要だが、手法自体は汎用的   |
-| **Supporting** | Audio                      | 音声中心学習の基盤だが、TTS 自体は外部サービス  |
-| **Generic**    | User                       | 認証・プロフィール管理は Supabase Auth で代替   |
-| **Generic**    | Notification               | 通知は汎用的なパターン                          |
-| **Generic**    | Payment                    | 課金は RevenueCat で代替                        |
+| 分類           | BC 例        | 理由                                           |
+| -------------- | ------------ | ---------------------------------------------- |
+| **Core**       | Battle, Game | AI対戦ロジックが最大の差別化要素               |
+| **Core**       | Strategy     | AI戦略選択は独自のゲーム体験を提供             |
+| **Supporting** | Content      | AIコンテンツ生成は重要だが、手法自体は汎用的   |
+| **Supporting** | Analysis     | 対戦分析の基盤だが、分析手法自体は外部サービス |
+| **Generic**    | User         | 認証・プロフィール管理は汎用的な認証で代替     |
+| **Generic**    | Notification | 通知は汎用的なパターン                         |
 
 ---
 
@@ -199,119 +198,115 @@ Step 6: 所属 BC を特定
 
 ### 4.3 用語テーブルの作成規則
 
-| ルール                     | 説明                             | 例                                            |
-| -------------------------- | -------------------------------- | --------------------------------------------- |
-| **英語が正**               | コード内で使用する正式名称は英語 | `Vocabulary` (not `Tango`)                    |
-| **PascalCase**             | クラス名・型名は PascalCase      | `ReviewSession`                               |
-| **camelCase**              | 変数名・メソッド名は camelCase   | `addVocabulary()`                             |
-| **日本語はドキュメント用** | UI 表示・ドキュメントで使用      | 「単語帳」                                    |
-| **1用語1定義**             | 曖昧さを排除し、BC 内で一意      | 「セッション」= 学習セッション（Learning BC） |
+| ルール                     | 説明                             | 例                                    |
+| -------------------------- | -------------------------------- | ------------------------------------- |
+| **英語が正**               | コード内で使用する正式名称は英語 | `BattleResult` (not `TaisenKekka`)    |
+| **PascalCase**             | クラス名・型名は PascalCase      | `BattleSession`                       |
+| **camelCase**              | 変数名・メソッド名は camelCase   | `startBattle()`                       |
+| **日本語はドキュメント用** | UI 表示・ドキュメントで使用      | 「対戦」                              |
+| **1用語1定義**             | 曖昧さを排除し、BC 内で一意      | 「ターン」= ゲームターン（Battle BC） |
 
 ### 4.4 テーブルフォーマット
 
 ```markdown
-| Term (EN)       | 日本語         | Definition                                           | Context           |
-| --------------- | -------------- | ---------------------------------------------------- | ----------------- |
-| Vocabulary      | 単語           | 学習対象の単語。意味・読み・例文を含む               | VocabularyContext |
-| ReviewSession   | 復習セッション | SRS アルゴリズムに基づく復習の1回分の実行単位        | ReviewContext     |
-| LearningSession | 学習セッション | レッスン内での連続した学習活動の単位                 | LearningContext   |
-| Lesson          | レッスン       | 特定のトピック・レベルに対応する学習コンテンツの単位 | ContentContext    |
-| SRSItem         | SRS アイテム   | 間隔反復スケジュールで管理される個別の学習項目       | ReviewContext     |
+| Term (EN)    | 日本語         | Definition                                      | Context       |
+| ------------ | -------------- | ----------------------------------------------- | ------------- |
+| Battle       | 対戦           | プレイヤーとAIの1回分の対戦セッション           | BattleContext |
+| Turn         | ターン         | 対戦内でプレイヤーまたはAIが行動する1回分の単位 | BattleContext |
+| BattleResult | 対戦結果       | 対戦の勝敗・スコア等の結果データ                | BattleContext |
+| GamePhase    | ゲームフェーズ | ゲーム進行の段階（準備・対戦中・結果表示等）    | GameContext   |
+| PlayerState  | プレイヤー状態 | プレイヤーの現在の状態（HP、スコア等）          | GameContext   |
 ```
 
 ### 4.5 用語間の関係性パターン
 
-| 関係タイプ               | 記法           | 例                                            |
-| ------------------------ | -------------- | --------------------------------------------- |
-| **IS-A**（継承）         | `A is a B`     | `MultipleChoiceQuestion` is a `Question`      |
-| **HAS-A**（構成）        | `A has B`      | `Vocabulary` has `Example`                    |
-| **USES**（利用）         | `A uses B`     | `ReviewSession` uses `SRSItem`                |
-| **PRODUCES**（生成）     | `A produces B` | `ContentGenerator` produces `Lesson`          |
-| **TRIGGERS**（トリガー） | `A triggers B` | `AnswerSubmitted` triggers `ScoreCalculation` |
+| 関係タイプ               | 記法           | 例                                          |
+| ------------------------ | -------------- | ------------------------------------------- |
+| **IS-A**（継承）         | `A is a B`     | `AIBattle` is a `Battle`                    |
+| **HAS-A**（構成）        | `A has B`      | `Battle` has `Turn`                         |
+| **USES**（利用）         | `A uses B`     | `BattleSession` uses `PlayerState`          |
+| **PRODUCES**（生成）     | `A produces B` | `BattleEngine` produces `BattleResult`      |
+| **TRIGGERS**（トリガー） | `A triggers B` | `TurnSubmitted` triggers `ScoreCalculation` |
 
 ### 4.6 Mermaid での関係性表現
 
 ```mermaid
 classDiagram
-    class Vocabulary {
-        +String word
-        +String meaning
-        +String pronunciation
-    }
-    class Example {
-        +String sentence
-        +String translation
-    }
-    class Tag {
-        +String name
-    }
-    class ReviewSession {
+    class Battle {
+        +string id
+        +GamePhase phase
         +DateTime startedAt
-        +SessionStatus status
     }
-    class SRSItem {
-        +int interval
-        +double easeFactor
-        +DateTime nextReviewAt
+    class Turn {
+        +number turnNumber
+        +string action
+        +string result
+    }
+    class PlayerState {
+        +number score
+        +number hp
+    }
+    class BattleResult {
+        +string winner
+        +number finalScore
+        +DateTime completedAt
     }
 
-    Vocabulary "1" --> "*" Example : has
-    Vocabulary "1" --> "*" Tag : has
-    ReviewSession "1" --> "*" SRSItem : uses
-    SRSItem "1" --> "1" Vocabulary : references
+    Battle "1" --> "*" Turn : has
+    Battle "1" --> "2" PlayerState : has
+    Battle "1" --> "1" BattleResult : produces
 ```
 
 ---
 
-## 5. Hackathon Project プロジェクトでの適用例
+## 5. プロジェクト プロジェクトでの適用例
 
-### 5.1 機能例: 単語帳管理（029-vocabulary-book）
+### 5.1 機能例: AI対戦管理（battle）
 
 #### Bounded Context 識別
 
-| BC                    | 分類       | 責務                             |
-| --------------------- | ---------- | -------------------------------- |
-| **VocabularyContext** | Core       | 単語の追加・管理・分類           |
-| **ReviewContext**     | Core       | SRS ベースの復習スケジュール管理 |
-| **ContentContext**    | Supporting | AI による例文・コンテンツ生成    |
-| **UserContext**       | Generic    | ユーザー認証・プロフィール       |
+| BC                 | 分類       | 責務                       |
+| ------------------ | ---------- | -------------------------- |
+| **BattleContext**  | Core       | 対戦の開始・進行・結果管理 |
+| **GameContext**    | Core       | ゲームフェーズ・状態管理   |
+| **ContentContext** | Supporting | AI によるコンテンツ生成    |
+| **UserContext**    | Generic    | ユーザー認証・プロフィール |
 
 #### Context Map
 
 ```mermaid
 flowchart LR
-    VC[VocabularyContext] -->|Shared Kernel| RC[ReviewContext]
-    VC -->|Customer-Supplier| CC[ContentContext]
+    BC[BattleContext] -->|Shared Kernel| GC[GameContext]
+    BC -->|Customer-Supplier| CC[ContentContext]
     CC -->|ACL| AI[External: Gemini AI]
-    VC -->|Conformist| UC[UserContext]
-    UC -->|Conformist| Auth[External: Supabase Auth]
+    BC -->|Conformist| UC[UserContext]
+    UC -->|Conformist| Auth[External: Auth Provider]
 
-    style VC fill:#DC143C,color:#fff
-    style RC fill:#DC143C,color:#fff
+    style BC fill:#DC143C,color:#fff
+    style GC fill:#DC143C,color:#fff
     style CC fill:#4169E1,color:#fff
     style UC fill:#808080,color:#fff
 ```
 
 #### Ubiquitous Language
 
-| Term (EN)      | 日本語           | Definition                           | Context           |
-| -------------- | ---------------- | ------------------------------------ | ----------------- |
-| VocabularyBook | 単語帳           | ユーザーが管理する単語のコレクション | VocabularyContext |
-| Vocabulary     | 単語             | 学習対象の単語                       | VocabularyContext |
-| Bookmark       | お気に入り       | ユーザーが重要とマークした単語       | VocabularyContext |
-| ReviewSchedule | 復習スケジュール | SRS に基づく次回復習日時             | ReviewContext     |
+| Term (EN)    | 日本語         | Definition                            | Context       |
+| ------------ | -------------- | ------------------------------------- | ------------- |
+| Battle       | 対戦           | プレイヤーとAIの1回分の対戦セッション | BattleContext |
+| Turn         | ターン         | 対戦内の1回分の行動単位               | BattleContext |
+| BattleResult | 対戦結果       | 勝敗・スコア等の結果データ            | BattleContext |
+| GamePhase    | ゲームフェーズ | ゲーム進行の段階                      | GameContext   |
 
 ### 5.2 既存コードベースとの統合ポイント
 
 新機能のドメインモデリング時に確認すべき既存パターン:
 
-| 確認項目            | 場所                         | 目的                       |
-| ------------------- | ---------------------------- | -------------------------- |
-| 既存 Freezed モデル | `lib/model/`                 | 命名パターン・構造の一貫性 |
-| 既存 Notifier       | `lib/notifier/`              | 状態管理パターンの整合     |
-| DB マイグレーション | `infra/supabase/migrations/` | テーブル構造・RLS パターン |
-| Edge Functions      | `infra/supabase/functions/`  | 外部サービス統合パターン   |
-| 既存 SPEC 文書      | `docs/features/*/SPEC-*.md`  | ドメイン用語の一貫性       |
+| 確認項目               | 場所                        | 目的                       |
+| ---------------------- | --------------------------- | -------------------------- |
+| 既存 TypeScript 型定義 | `src/shared/types/`         | 命名パターン・構造の一貫性 |
+| 既存 Hooks             | `src/features/**/hooks/`    | 状態管理パターンの整合     |
+| API Routes             | `src/app/api/`              | 外部サービス統合パターン   |
+| 既存 SPEC 文書         | `docs/features/*/SPEC-*.md` | ドメイン用語の一貫性       |
 
 ---
 
@@ -327,11 +322,11 @@ flowchart LR
 | **Technical BC**      | 技術的関心事で BC を分割      | ビジネスドメインで分割          |
 | **用語の曖昧さ**      | 同じ用語が複数の意味を持つ    | BC ごとに明確な定義を持つ       |
 
-### 6.2 Hackathon Project 固有の注意点
+### 6.2 プロジェクト 固有の注意点
 
-1. **Learning と Review の境界**: 学習中の練習問題と SRS レビューは異なる BC に属する可能性が高い
-2. **Content 生成の位置付け**: AI コンテンツ生成は Supporting であり Core ではない（差別化は学習体験であり生成手法ではない）
-3. **Audio の扱い**: TTS は External System として ACL 越しにアクセスする
+1. **Battle と Game の境界**: 対戦ロジックとゲーム状態管理は密結合しやすいが、異なる BC として分離を検討する
+2. **Content 生成の位置付け**: AI コンテンツ生成は Supporting であり Core ではない（差別化はゲーム体験であり生成手法ではない）
+3. **Gemini API の扱い**: Gemini API は External System として ACL 越しにアクセスする
 
 ---
 

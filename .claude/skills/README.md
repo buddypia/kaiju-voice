@@ -1,6 +1,6 @@
 # Skills Directory
 
-Hackathon Project プロジェクトのAIスキル定義を管理するディレクトリです。
+プロジェクト プロジェクトのAIスキル定義を管理するディレクトリです。
 
 ---
 

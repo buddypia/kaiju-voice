@@ -1,6 +1,6 @@
 # Skill System Governance
 
-> **目的**: Hackathon Project プロジェクトのスキルシステムを**長期運用**可能に管理するためのガバナンスフレームワーク
+> **目的**: プロジェクトのスキルシステムを**長期運用**可能に管理するためのガバナンスフレームワーク
 
 ---
 
@@ -148,8 +148,8 @@
   "evidence_policy": {
     "note": "Evidence FreshnessはCLAUDE.md AI行動指針で処理。別途キャッシュ実装なし",
     "recommended_freshness": [
-      { "type": "flutter_analyze", "minutes": 30, "invalidation": "lib/**/*.dart変更時" },
-      { "type": "flutter_test", "minutes": 30, "invalidation": "test/**/*.dart変更時" }
+      { "type": "lint", "minutes": 30, "invalidation": "src/**/*変更時" },
+      { "type": "test", "minutes": 30, "invalidation": "tests/**/*、src/**/*変更時" }
     ]
   }
 }
@@ -166,13 +166,13 @@
 
 ### ESP適用スキル一覧
 
-| スキル          | Schema | ESP Version |    状態     |
-| --------------- | :----: | :---------: | :---------: |
-| turbo-mode      |   2    |    v2.0     |   ✅ v3.0   |
-| persistent-mode |   2    |    v2.0     |   ✅ v3.0   |
-| flutter-qa      |   2    |    v2.0     |   ✅ v3.0   |
-| security-scan   | **2**  |  **v2.0**   | ✅ **v2.0** |
-| feature-pilot   | **2**  |  **v2.0**   | ✅ **v9.0** |
+| スキル           | Schema | ESP Version |    状態     |
+| ---------------- | :----: | :---------: | :---------: |
+| turbo-mode       |   2    |    v2.0     |   ✅ v3.0   |
+| persistent-mode  |   2    |    v2.0     |   ✅ v3.0   |
+| pre-quality-gate |   2    |    v2.0     |   ✅ v3.0   |
+| security-scan    | **2**  |  **v2.0**   | ✅ **v2.0** |
+| feature-pilot    | **2**  |  **v2.0**   | ✅ **v9.0** |
 
 ---
 
@@ -557,25 +557,19 @@ CONTEXT.json progressセクションに記録 (選択的)
 
 #### Tier 3: Utility (15個)
 
-| スキル                  |    状態    | バージョン | Schema |            MANIFEST            |  ESP   | 説明                         |
-| ----------------------- | :--------: | :--------: | :----: | :----------------------------: | :----: | ---------------------------- |
-| flutter-qa              |   Active   |  **v3.0**  | **2**  |               ✅               | **✅** | QAサイクル (ESP適用)         |
-| security-scan           |   Active   |  **v2.0**  | **2**  |               ✅               | **✅** | セキュリティ検査 (ESP適用)   |
-| persistent-mode         |   Active   |  **v3.0**  | **2**  |               ✅               | **✅** | 完了まで自動持続 (ESP適用)   |
-| skill-health-check      |   Active   |  **v2.0**  | **2**  |               ✅               | **✅** | ガバナンス自動監査 + ESP検証 |
-| arb-sync                | Deprecated |    v1.0    |   ❌   |     (日本語専用のため廃止)     |
-| edge-function-validator |   Active   |    v1.0    |   ❌   |       Edge Function検証        |
-| test-coverage-check     |   Active   |    v1.0    |   ❌   |        テストカバレッジ        |
-| sync-claude-md          |   Active   |    v1.0    |   ❌   |         CLAUDE.md同期          |
-| glossary-updater        |   Active   |    v1.0    |   ❌   |           用語集更新           |
-| hardcoded-text-finder   |   Active   |    v1.0    |   ❌   | ハードコーディングテキスト検出 |
-| hardcoded-color-finder  |   Active   |    v1.0    |   ❌   |    ハードコーディング色検出    |
-| migration-sync          |   Active   |    v1.0    |   ❌   |      マイグレーション同期      |
-| supabase-sync           |   Active   |    v1.0    |   ❌   |          Supabase同期          |
-| gemini                  |   Active   |    v1.0    |   ❌   |         Gemini CLI連携         |
-| openai-deep-research    |   Active   |    v1.0    |   ❌   |     OpenAIディープリサーチ     |
-| google-deep-research    |   Active   |    v1.0    |   ❌   |     Googleディープリサーチ     |
-| app-review-analyzer     |   Active   |    v1.0    |   ❌   |    アプリストアレビュー分析    |
+| スキル               |  状態  | バージョン | Schema |         MANIFEST         |  ESP   | 説明                         |
+| -------------------- | :----: | :--------: | :----: | :----------------------: | :----: | ---------------------------- |
+| pre-quality-gate     | Active |  **v3.0**  | **2**  |            ✅            | **✅** | 品質検証 (ESP適用)           |
+| security-scan        | Active |  **v2.0**  | **2**  |            ✅            | **✅** | セキュリティ検査 (ESP適用)   |
+| persistent-mode      | Active |  **v3.0**  | **2**  |            ✅            | **✅** | 完了まで自動持続 (ESP適用)   |
+| skill-health-check   | Active |  **v2.0**  | **2**  |            ✅            | **✅** | ガバナンス自動監査 + ESP検証 |
+| test-coverage-check  | Active |    v1.0    |   ❌   |     テストカバレッジ     |
+| sync-claude-md       | Active |    v1.0    |   ❌   |      CLAUDE.md同期       |
+| glossary-updater     | Active |    v1.0    |   ❌   |        用語集更新        |
+| gemini               | Active |    v1.0    |   ❌   |      Gemini CLI連携      |
+| openai-deep-research | Active |    v1.0    |   ❌   |  OpenAIディープリサーチ  |
+| google-deep-research | Active |    v1.0    |   ❌   |  Googleディープリサーチ  |
+| app-review-analyzer  | Active |    v1.0    |   ❌   | アプリストアレビュー分析 |
 
 #### Deprecated (2個) - 整理予定
 
@@ -591,7 +585,7 @@ CONTEXT.json progressセクションに記録 (選択的)
 | 優先順位 | スキル                 | 理由                         | 措置期限  |
 | :------: | ---------------------- | ---------------------------- | :-------: |
 |  ~~P0~~  | ~~turbo-mode~~         | ✅ **完了** (2026-02-01)     |     -     |
-|  ~~P1~~  | ~~flutter-qa~~         | ✅ **完了** (2026-02-01)     |     -     |
+|  ~~P1~~  | ~~pre-quality-gate~~   | ✅ **完了** (2026-02-01)     |     -     |
 |  ~~P1~~  | ~~security-scan~~      | ✅ **完了** (2026-02-01)     |     -     |
 |  ~~P1~~  | ~~persistent-mode~~    | ✅ **完了** (2026-02-01)     |     -     |
 |  ~~P1~~  | ~~skill-health-check~~ | ✅ **新規作成** (2026-02-01) |     -     |
@@ -640,7 +634,7 @@ ui-approval       -      -      -      -       -       -
 
 1. ~~**即時**: turbo-mode MANIFEST.json生成~~ ✅ **完了** (2026-02-01)
 2. ~~**即時**: Deprecatedスキル MANIFEST.json生成~~ ✅ **完了** (2026-02-01)
-3. **1週間以内**: flutter-qa, security-scan, persistent-mode MANIFEST生成
+3. **1週間以内**: pre-quality-gate, security-scan, persistent-mode MANIFEST生成
 4. **1ヶ月以内**: 残りのスキルMANIFEST補完
 5. **四半期**: Deprecatedスキル整理状態レビュー
 
@@ -715,8 +709,8 @@ cp -r .claude/skills/_templates/skill-template .claude/skills/{{new-skill-name}}
 | 2026-02-02 | v2.3 - **願望文書化の根源除去**: Evidence Policyからcache_location削除、"AI行動指針で処理"原則明示。スキルMANIFESTで参照していた未実装フィールドの原因除去                                                                 |
 | 2026-02-01 | v2.2 - **MANIFEST.json実際アップグレード**: skill-health-check v2.0 ESP適用 (文書-実態不一致解消), security-scan v2.0 ESP適用 (セキュリティスキル強制化完了)                                                               |
 | 2026-02-01 | v2.1 - **ESP Enforcement Layer 3-Tier実装**: Runtime(esp_execution_log), Post-hoc(skill-health-check v2.0), Audit(GOVERNANCEメトリクス). feature-pilot v9.0 ESP適用, context_template.json esp_execution_logセクション追加 |
-| 2026-02-01 | v2.0 - **Enforced Skill Pattern (ESP) v2.0導入**, schema_version 2定義, turbo-mode/persistent-mode/flutter-qa v3.0アップグレード (ESP適用), スキルテンプレートv2追加 (`_templates/skill-template-v2/`)                     |
-| 2026-02-01 | v1.4 - P1スキルMANIFEST完了 (flutter-qa, security-scan, persistent-mode), skill-health-check新規作成, スキルテンプレート標準化 (`_templates/`), MANIFEST保有率51%達成                                                      |
+| 2026-02-01 | v2.0 - **Enforced Skill Pattern (ESP) v2.0導入**, schema_version 2定義, turbo-mode/persistent-mode/pre-quality-gate v3.0アップグレード (ESP適用), スキルテンプレートv2追加 (`_templates/skill-template-v2/`)               |
+| 2026-02-01 | v1.4 - P1スキルMANIFEST完了 (pre-quality-gate, security-scan, persistent-mode), skill-health-check新規作成, スキルテンプレート標準化 (`_templates/`), MANIFEST保有率51%達成                                                |
 | 2026-02-01 | v1.3 - Deprecatedスキル(feature-data-wiring, feature-navigation-wiring) MANIFEST.json生成, ヘルス状態改善 (38%→43%), Medium Issue解決                                                                                      |
 | 2026-02-01 | v1.2 - 効果測定フレームワーク大幅拡張 (KPI定義, ログフォーマット, トークンコストモデル, 四半期レポートテンプレート)                                                                                                        |
 | 2026-02-01 | v1.1 - スキルインベントリヘルスチェック完了, 全体37個スキル分類, MANIFESTギャップ分析, turbo-mode MANIFEST生成                                                                                                             |

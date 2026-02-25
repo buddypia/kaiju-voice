@@ -3,7 +3,7 @@
 /**
  * QA Write Guard - PreToolUse Hook
  *
- * oh-my-opencodeのOrchestrator Role Enforcementパターン (Pattern #7) ポーティング.
+ * Orchestrator Role Enforcementパターン (Pattern #7) のHackathon Project向け実装.
  *
  * 原本 Atlas Hook:
  * - Atlasが.sisyphus/ 外部にWrite/Edit 試行時 ブロック

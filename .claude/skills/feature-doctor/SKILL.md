@@ -1,7 +1,7 @@
 ---
 name: feature-doctor
 description: |
-  Hackathon Project プロジェクトの CONTEXT.json/状態不整合/破損を診断し自動復旧(Self-Healing)するスキル。
+  プロジェクト プロジェクトの CONTEXT.json/状態不整合/破損を診断し自動復旧(Self-Healing)するスキル。
   CONTEXT.json エラー、状態不整合、JSON 破損、欠落コンテキスト、related_code 不整合等を復旧する必要がある時に使用する。
   「context 壊れた」「CONTEXT.json エラー」「状態不整合」「self-heal」「doctor」リクエストでトリガーされる。
 doc_contract:

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 280" font-family="system-ui, sans-serif">
+  <rect width="750" height="280" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="375" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">4つのGemini API — 入出力比較</text>
+
+  <!-- Header -->
+  <rect x="30" y="48" width="120" height="28" rx="4" fill="#0f172a"/>
+  <text x="90" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#22d3ee">Agent</text>
+  <rect x="155" y="48" width="140" height="28" rx="4" fill="#0f172a"/>
+  <text x="225" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#22d3ee">入力</text>
+  <rect x="300" y="48" width="140" height="28" rx="4" fill="#0f172a"/>
+  <text x="370" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#22d3ee">出力</text>
+  <rect x="445" y="48" width="100" height="28" rx="4" fill="#0f172a"/>
+  <text x="495" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#22d3ee">応答形式</text>
+  <rect x="550" y="48" width="170" height="28" rx="4" fill="#0f172a"/>
+  <text x="635" y="66" text-anchor="middle" font-size="9" font-weight="600" fill="#22d3ee">特徴的な設定</text>
+
+  <!-- Voice -->
+  <rect x="30" y="82" width="120" height="40" rx="4" fill="#eff6ff" stroke="#3b82f6" stroke-width="1"/>
+  <text x="90" y="106" text-anchor="middle" font-size="9" font-weight="600" fill="#1e40af">Voice Agent</text>
+  <rect x="155" y="82" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="225" y="106" text-anchor="middle" font-size="9" fill="#475569">audio/webm (base64)</text>
+  <rect x="300" y="82" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="370" y="106" text-anchor="middle" font-size="9" fill="#475569">3軸スコア (JSON)</text>
+  <rect x="445" y="82" width="100" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="495" y="106" text-anchor="middle" font-size="9" fill="#475569">JSON Schema</text>
+  <rect x="550" y="82" width="170" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="635" y="106" text-anchor="middle" font-size="9" fill="#475569">inlineData (音声)</text>
+
+  <!-- Battle -->
+  <rect x="30" y="128" width="120" height="40" rx="4" fill="#fef2f2" stroke="#ef4444" stroke-width="1"/>
+  <text x="90" y="152" text-anchor="middle" font-size="9" font-weight="600" fill="#991b1b">Battle Agent</text>
+  <rect x="155" y="128" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="225" y="152" text-anchor="middle" font-size="9" fill="#475569">戦況テキスト</text>
+  <rect x="300" y="128" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="370" y="152" text-anchor="middle" font-size="9" fill="#475569">攻撃データ (JSON)</text>
+  <rect x="445" y="128" width="100" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="495" y="152" text-anchor="middle" font-size="9" fill="#475569">JSON Schema</text>
+  <rect x="550" y="128" width="170" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="635" y="152" text-anchor="middle" font-size="9" fill="#475569">temp:1.0 / maxTokens:150</text>
+
+  <!-- Live -->
+  <rect x="30" y="174" width="120" height="40" rx="4" fill="#fdf4ff" stroke="#a855f7" stroke-width="1"/>
+  <text x="90" y="198" text-anchor="middle" font-size="9" font-weight="600" fill="#6b21a8">Live Agent</text>
+  <rect x="155" y="174" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="225" y="198" text-anchor="middle" font-size="9" fill="#475569">イベント説明</text>
+  <rect x="300" y="174" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="370" y="198" text-anchor="middle" font-size="9" fill="#475569">テキスト + PCM音声</text>
+  <rect x="445" y="174" width="100" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="495" y="198" text-anchor="middle" font-size="9" fill="#475569">AUDIO mode</text>
+  <rect x="550" y="174" width="170" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="635" y="198" text-anchor="middle" font-size="9" fill="#475569">voice: Kore / 24kHz</text>
+
+  <!-- Visual -->
+  <rect x="30" y="220" width="120" height="40" rx="4" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+  <text x="90" y="244" text-anchor="middle" font-size="9" font-weight="600" fill="#92400e">Visual Agent</text>
+  <rect x="155" y="220" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="225" y="244" text-anchor="middle" font-size="9" fill="#475569">プロンプトテキスト</text>
+  <rect x="300" y="220" width="140" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="370" y="244" text-anchor="middle" font-size="9" fill="#475569">画像 (base64)</text>
+  <rect x="445" y="220" width="100" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="495" y="244" text-anchor="middle" font-size="9" fill="#475569">IMAGE mode</text>
+  <rect x="550" y="220" width="170" height="40" rx="4" fill="white" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="635" y="244" text-anchor="middle" font-size="9" fill="#475569">1:1 aspect ratio</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg50" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob50-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob50-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob50-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob50-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob50-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg50)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">ハッカソンでの学び</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">3つのポイント</text>
+
+  <!-- Learning 1: Demo impact -->
+  <g transform="translate(240, 340)">
+    <use href="#blob50-c3" transform="scale(1.8)" fill="#fbcfe8"/>
+    <circle cx="0" cy="-90" r="32" fill="#ec4899"/>
+    <text x="0" y="-80" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-30" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">デモ映えが全て</text>
+    <text x="0" y="5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">技術的に凄くても</text>
+    <text x="0" y="28" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">デモで伝わらなければ</text>
+    <text x="0" y="51" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">意味がない</text>
+    <text x="0" y="82" text-anchor="middle" font-size="16" font-weight="600" fill="#ec4899">「叫ぶ」行為自体が</text>
+    <text x="0" y="104" text-anchor="middle" font-size="16" font-weight="600" fill="#ec4899">デモ映えする</text>
+  </g>
+
+  <!-- Learning 2: AI Emotion -->
+  <g transform="translate(700, 320)">
+    <use href="#blob50-c1" transform="scale(1.8)" fill="#bfdbfe"/>
+    <circle cx="0" cy="-90" r="32" fill="#3b82f6"/>
+    <text x="0" y="-80" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-30" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">AIの感情は没入感</text>
+    <text x="0" y="5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">AI対戦相手に</text>
+    <text x="0" y="28" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">感情的な振る舞いをさせると</text>
+    <text x="0" y="51" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">没入度が段違いに上がる</text>
+    <text x="0" y="82" text-anchor="middle" font-size="16" font-weight="600" fill="#3b82f6">HP減少 → 必死の叫び</text>
+    <text x="0" y="104" text-anchor="middle" font-size="16" font-weight="600" fill="#3b82f6">= プレイヤーの共感</text>
+  </g>
+
+  <!-- Learning 3: Structured Output -->
+  <g transform="translate(1160, 340)">
+    <use href="#blob50-c4" transform="scale(1.8)" fill="#bbf7d0"/>
+    <circle cx="0" cy="-90" r="32" fill="#22c55e"/>
+    <text x="0" y="-80" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-30" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Structured Output</text>
+    <text x="0" y="5" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Gemini + JSON Schema で</text>
+    <text x="0" y="28" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">AIの出力が安定的にパース</text>
+    <text x="0" y="51" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">リアルタイムアプリでは必須</text>
+    <text x="0" y="82" text-anchor="middle" font-size="16" font-weight="600" fill="#22c55e">パースエラーゼロ</text>
+    <text x="0" y="104" text-anchor="middle" font-size="16" font-weight="600" fill="#22c55e">= ゲームが止まらない</text>
+  </g>
+
+  <!-- Connectors to hub -->
+  <path d="M 370,480 C 430,540 520,580 590,610" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 700,470 C 700,530 700,570 700,610" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 1030,480 C 970,540 880,580 810,610" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Hub -->
+  <g transform="translate(700, 650)">
+    <use href="#blob50-hub" transform="scale(1.2)" fill="#8b5cf6"/>
+    <text x="0" y="-20" text-anchor="middle" font-size="28" font-weight="800" fill="#ffffff">Gemini 3 のマルチモーダル能力</text>
+    <text x="0" y="20" text-anchor="middle" font-size="22" font-weight="600" fill="#ffffff" opacity="0.9">想像以上に強い。</text>
+    <text x="0" y="55" text-anchor="middle" font-size="18" font-weight="600" fill="#ffffff" opacity="0.7">次のハッカソンでも使いたい。</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="370" y="748" width="660" height="44" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="776" text-anchor="middle" font-size="18" font-weight="600" fill="#64748b">デモ映え x AIの感情 x Structured Output = 最強の組み合わせ</text>
+</svg>

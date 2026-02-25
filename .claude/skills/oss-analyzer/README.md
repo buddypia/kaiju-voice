@@ -6,16 +6,16 @@
 
 ```bash
 # OSS 分析
-/oss-analyzer --source oss-sources/oh-my-opencode/
+/oss-analyzer --source oss-sources/<OSS名>/
 
 # 特定問題に集中
-/oss-analyzer --source oss-sources/oh-my-opencode/ --problem P-HOOK-01
+/oss-analyzer --source oss-sources/<OSS名>/ --problem P-HOOK-01
 
 # 特定領域に集中
-/oss-analyzer --source oss-sources/oh-my-opencode/ --focus hooks
+/oss-analyzer --source oss-sources/<OSS名>/ --focus hooks
 
 # キャッシュ無視して再分析
-/oss-analyzer --source oss-sources/oh-my-opencode/ --force
+/oss-analyzer --source oss-sources/<OSS名>/ --force
 ```
 
 ---
@@ -89,7 +89,7 @@ cat docs/oss/new-oss/v4/adoption.md
 ### 特定問題に対する OSS ソリューション探索
 
 ```bash
-/oss-analyzer --source oss-sources/oh-my-opencode/ --problem P-HOOK-04
+/oss-analyzer --source oss-sources/<OSS名>/ --problem P-HOOK-04
 ```
 
 ### カタログ確認

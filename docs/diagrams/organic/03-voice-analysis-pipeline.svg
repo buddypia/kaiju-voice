@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#bg-grad)"/>
+
+  <!-- Title -->
+  <text x="700" y="75" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">Voice Analysis Pipeline</text>
+  <text x="700" y="110" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">音声録音 → base64 → Gemini → JSON出力</text>
+
+  <!-- Step 1: Mic Recording -->
+  <g transform="translate(170, 370)">
+    <use href="#blob-c1" fill="#bbf7d0" transform="scale(1.2)"/>
+    <circle cx="0" cy="-65" r="26" fill="#22c55e"/>
+    <text x="0" y="-57" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="5" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">音声録音</text>
+    <text x="0" y="35" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">5秒間</text>
+  </g>
+
+  <!-- Connector 1->2 -->
+  <path d="M 300,370 Q 380,340 460,370" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Step 2: base64 Encode -->
+  <g transform="translate(470, 370)">
+    <use href="#blob-c2" fill="#fef08a" transform="scale(1.1)"/>
+    <circle cx="0" cy="-60" r="26" fill="#eab308"/>
+    <text x="0" y="-52" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="5" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Encode</text>
+    <text x="0" y="35" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">audio/webm</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">-- base64</text>
+  </g>
+
+  <!-- Connector 2->3 -->
+  <path d="M 590,370 Q 670,340 750,370" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Step 3: Gemini API -->
+  <g transform="translate(770, 370)">
+    <use href="#blob-c3" fill="#bfdbfe" transform="scale(1.3)"/>
+    <circle cx="0" cy="-70" r="26" fill="#3b82f6"/>
+    <text x="0" y="-62" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="0" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">Gemini API</text>
+    <text x="0" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">gemini-3-flash</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Structured Output</text>
+    <text x="0" y="78" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">responseJsonSchema</text>
+    <text x="0" y="98" text-anchor="middle" font-size="14" font-weight="600" fill="#3b82f6">+ システムプロンプト</text>
+  </g>
+
+  <!-- Connector 3->4 -->
+  <path d="M 920,370 Q 1010,340 1100,370" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Step 4: JSON Output -->
+  <g transform="translate(1130, 370)">
+    <use href="#blob-c4" fill="#fed7aa" transform="scale(1.3)"/>
+    <circle cx="0" cy="-70" r="26" fill="#f97316"/>
+    <text x="0" y="-62" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">4</text>
+    <text x="0" y="-5" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">出力 (JSON)</text>
+    <text x="0" y="25" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">intensity:  85</text>
+    <text x="0" y="45" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">creativity: 72</text>
+    <text x="0" y="65" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">emotion:    90</text>
+    <text x="0" y="85" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">language:   "mixed"</text>
+    <text x="0" y="105" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">attackType: "ultimate"</text>
+  </g>
+
+  <!-- Footer pill -->
+  <rect x="300" y="700" width="800" height="56" rx="30" fill="#ffffff"/>
+  <text x="700" y="722" text-anchor="middle" font-size="15" font-weight="600" fill="#475569">音声バイナリをbase64エンコードしてinlineDataとしてGeminiに送信</text>
+  <text x="700" y="744" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">JSON Schema制約により、パースエラーゼロを実現</text>
+</svg>

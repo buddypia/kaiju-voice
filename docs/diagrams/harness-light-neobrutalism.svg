@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <style>
+      .tTitle{font:900 48px system-ui, sans-serif; fill:#000000; letter-spacing:-1px}
+      .tSub{font:700 20px system-ui, sans-serif; fill:#000000}
+      .tCardH{font:900 36px system-ui, sans-serif; fill:#000000; letter-spacing:0px}
+      .tCardS{font:700 20px system-ui, sans-serif; fill:#000000}
+      .tCenter{font:900 32px system-ui, sans-serif; fill:#000000; letter-spacing:1px}
+      .tBadge{font:800 16px system-ui, sans-serif; fill:#ffffff}
+      .line{stroke:#000000; stroke-width:6; fill:none}
+      .lineA{stroke:#000000; stroke-width:6; fill:none; stroke-dasharray: 12 12}
+    </style>
+  </defs>
+
+  <rect width="1400" height="800" fill="#fef08a"/>
+  
+  <text x="700" y="90" text-anchor="middle" class="tTitle">ハーネスエンジニアリングとは？</text>
+
+  <!-- Connection Lines -->
+  <path d="M 610 300 L 395 255" class="line"/>
+  <path d="M 610 300 L 395 495" class="line"/>
+  <path d="M 790 300 L 1005 255" class="lineA"/>
+  <path d="M 790 300 L 1005 495" class="lineA"/>
+
+  <!-- Left top -->
+  <g transform="translate(180 180)">
+    <!-- Shadow -->
+    <rect width="430" height="150" x="12" y="12" rx="0" fill="#000000"/>
+    <!-- Card -->
+    <rect width="430" height="150" rx="0" fill="#ffffff" stroke="#000000" stroke-width="6"/>
+    <rect width="430" height="40" fill="#000000" stroke="#000000" stroke-width="6"/>
+    <text x="20" y="28" class="tBadge" fill="#ffffff">COMPONENT</text>
+    <text x="40" y="90" class="tCardH">CLAUDE.md</text>
+    <text x="40" y="125" class="tCardS">プロジェクト指示事項</text>
+  </g>
+  <!-- Left bottom -->
+  <g transform="translate(180 420)">
+    <!-- Shadow -->
+    <rect width="430" height="150" x="12" y="12" rx="0" fill="#000000"/>
+    <!-- Card -->
+    <rect width="430" height="150" rx="0" fill="#bfdbfe" stroke="#000000" stroke-width="6"/>
+    <rect width="430" height="40" fill="#000000" stroke="#000000" stroke-width="6"/>
+    <text x="20" y="28" class="tBadge" fill="#ffffff">SKILLS</text>
+    <text x="40" y="90" class="tCardH">スキルファイル</text>
+    <text x="40" y="125" class="tCardS">専門スキル設定</text>
+  </g>
+  <!-- Right top -->
+  <g transform="translate(790 180)">
+    <rect width="430" height="150" x="12" y="12" rx="0" fill="#000000"/>
+    <rect width="430" height="150" rx="0" fill="#fecaca" stroke="#000000" stroke-width="6"/>
+    <rect width="430" height="40" fill="#000000" stroke="#000000" stroke-width="6"/>
+    <text x="20" y="28" class="tBadge" fill="#ffffff">EXTERNAL</text>
+    <text x="40" y="90" class="tCardH">MCPサーバ</text>
+    <text x="40" y="125" class="tCardS">外部ツール連携</text>
+  </g>
+  <!-- Right bottom -->
+  <g transform="translate(790 420)">
+    <rect width="430" height="150" x="12" y="12" rx="0" fill="#000000"/>
+    <rect width="430" height="150" rx="0" fill="#bbf7d0" stroke="#000000" stroke-width="6"/>
+    <rect width="430" height="40" fill="#000000" stroke="#000000" stroke-width="6"/>
+    <text x="20" y="28" class="tBadge" fill="#ffffff">AI AGENT</text>
+    <text x="40" y="90" class="tCardH">エージェント</text>
+    <text x="40" y="125" class="tCardS">カスタム専門家</text>
+  </g>
+
+  <!-- Center -->
+  <g transform="translate(700 300)">
+    <circle r="112" cx="12" cy="12" fill="#000000"/>
+    <circle r="112" fill="#3b82f6" stroke="#000000" stroke-width="6"/>
+    <circle r="92" fill="#ffffff" stroke="#000000" stroke-width="6"/>
+    <text y="10" text-anchor="middle" class="tCenter">ハーネス</text>
+    <g transform="translate(0 92)">
+      <rect x="-83" y="-12" width="166" height="40" fill="#000000"/>
+      <rect x="-87" y="-16" width="166" height="40" rx="0" fill="#f97316" stroke="#000000" stroke-width="4"/>
+      <text y="10" text-anchor="middle" class="tBadge">中核コンポーネント</text>
+    </g>
+  </g>
+
+  <rect x="250" y="730" width="900" height="40" fill="#ffffff" stroke="#000000" stroke-width="4"/>
+  <text x="700" y="758" text-anchor="middle" class="tSub">構成要素を組み合わせて、ハーネスが実行環境として機能するイメージ</text>
+</svg>

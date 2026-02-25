@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 280" font-family="system-ui, sans-serif">
+  <rect width="750" height="280" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="375" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">ハッカソンでの学び — 3つのポイント</text>
+
+  <!-- Learning 1 -->
+  <rect x="25" y="55" width="225" height="140" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <circle cx="55" cy="82" r="16" fill="#ef4444"/>
+  <text x="55" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="white">1</text>
+  <text x="150" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">デモ映えが全て</text>
+  <line x1="40" y1="96" x2="235" y2="96" stroke="#fecaca" stroke-width="1"/>
+  <text x="137" y="116" text-anchor="middle" font-size="9" fill="#475569">技術的に凄くても</text>
+  <text x="137" y="132" text-anchor="middle" font-size="9" fill="#475569">デモで伝わらなければ</text>
+  <text x="137" y="148" text-anchor="middle" font-size="9" fill="#475569">意味がない</text>
+  <text x="137" y="172" text-anchor="middle" font-size="9" fill="#ef4444" font-style="italic">「叫ぶ」行為自体が</text>
+  <text x="137" y="186" text-anchor="middle" font-size="9" fill="#ef4444" font-style="italic">デモ映えする</text>
+
+  <!-- Learning 2 -->
+  <rect x="262" y="55" width="225" height="140" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <circle cx="292" cy="82" r="16" fill="#3b82f6"/>
+  <text x="292" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="white">2</text>
+  <text x="387" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">AIの感情は没入感</text>
+  <line x1="277" y1="96" x2="472" y2="96" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="374" y="116" text-anchor="middle" font-size="9" fill="#475569">AI対戦相手に</text>
+  <text x="374" y="132" text-anchor="middle" font-size="9" fill="#475569">感情的な振る舞いをさせると</text>
+  <text x="374" y="148" text-anchor="middle" font-size="9" fill="#475569">没入度が段違いに上がる</text>
+  <text x="374" y="172" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">HP減少 → 必死の叫び</text>
+  <text x="374" y="186" text-anchor="middle" font-size="9" fill="#3b82f6" font-style="italic">= プレイヤーの共感</text>
+
+  <!-- Learning 3 -->
+  <rect x="500" y="55" width="225" height="140" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <circle cx="530" cy="82" r="16" fill="#22c55e"/>
+  <text x="530" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="white">3</text>
+  <text x="625" y="82" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">Structured Output</text>
+  <line x1="515" y1="96" x2="710" y2="96" stroke="#dcfce7" stroke-width="1"/>
+  <text x="612" y="116" text-anchor="middle" font-size="9" fill="#475569">Gemini + JSON Schema で</text>
+  <text x="612" y="132" text-anchor="middle" font-size="9" fill="#475569">AIの出力が安定的にパース</text>
+  <text x="612" y="148" text-anchor="middle" font-size="9" fill="#475569">リアルタイムアプリでは必須</text>
+  <text x="612" y="172" text-anchor="middle" font-size="9" fill="#22c55e" font-style="italic">パースエラーゼロ</text>
+  <text x="612" y="186" text-anchor="middle" font-size="9" fill="#22c55e" font-style="italic">= ゲームが止まらない</text>
+
+  <!-- Bottom -->
+  <rect x="150" y="215" width="450" height="42" rx="10" fill="#0f172a"/>
+  <text x="375" y="236" text-anchor="middle" font-size="12" font-weight="600" fill="#22d3ee">Gemini 3 のマルチモーダル能力、想像以上に強い。</text>
+  <text x="375" y="252" text-anchor="middle" font-size="10" fill="#94a3b8">次のハッカソンでも使いたい。</text>
+</svg>

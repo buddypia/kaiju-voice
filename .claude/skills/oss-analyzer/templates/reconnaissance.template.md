@@ -46,9 +46,9 @@
 
 ---
 
-## Part B: Problem Registry (Hackathon Project)
+## Part B: Problem Registry (プロジェクト)
 
-> 以下は Hackathon Projectの Pain Pointsを構造化した Problem 一覧です。
+> 以下は プロジェクトの Pain Pointsを構造化した Problem 一覧です。
 > 各 Problemには **Forces(衝突する制約)**が最小 2個定義されます。
 
 ### Problem: {{PROBLEM_1_ID}} — {{PROBLEM_1_TITLE}}

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * Web Project - Unified Stop/SubagentStop Handler (v2.0)
+ * Hackathon Project - Unified Stop/SubagentStop Handler (v2.0)
  *
- * oh-my-opencodeの3大メカニズムをClaude Code Hooks Stop APIに
+ * 3大メカニズムをClaude Code Hooks Stop APIに
  * 根本的に再設計してポーティング:
  *
  * ┌─────────────────────────┐    ┌──────────────────────────┐
- * │ oh-my-opencode (Plugin) │    │ Claude Code Hooks (v2.0) │
+ * │ 原本 (Plugin)           │    │ Claude Code Hooks (v2.0) │
  * ├─────────────────────────┤    ├──────────────────────────┤
  * │ ralph-loop              │ → │ stop-handler.mjs         │
  * │  ├ session.idle event   │    │  ├ Stop event            │

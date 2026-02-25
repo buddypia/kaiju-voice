@@ -41,8 +41,8 @@ if [ $PYTHON_EXIT_CODE -ne 0 ]; then
   echo "$CROSS_FEATURE_VIOLATIONS"
   echo ""
   echo "[INFO] 正しい方法:"
-  echo "   ❌ import 'package:hackathon_project/features/lesson/data/models/sentence.dart';"
-  echo "   ✅ import 'package:hackathon_project/features/lesson/lesson.dart';"
+  echo "   ❌ import { useFoo } from '@/features/foo/hooks/use-foo';"
+  echo "   ✅ import { useFoo } from '@/features/foo';"
   echo ""
   VIOLATIONS=$((VIOLATIONS + 1))
 else
@@ -55,11 +55,10 @@ fi
 echo ""
 echo "[2/3] Core → Feature import 検査..."
 
-CORE_TO_FEATURE=$(grep -rn "import 'package:hackathon_project/features/" \
-  "$PROJECT_ROOT/lib/core" \
-  --include="*.dart" \
-  --exclude="*.g.dart" \
-  --exclude="*.freezed.dart" \
+CORE_TO_FEATURE=$(grep -rn "from '@/features/" \
+  "$PROJECT_ROOT/src/core" \
+  --include="*.ts" \
+  --include="*.tsx" \
   2>/dev/null || true)
 
 if [ -n "$CORE_TO_FEATURE" ]; then
@@ -80,11 +79,10 @@ fi
 echo ""
 echo "[3/3] Shared → Feature import 検査..."
 
-SHARED_FEATURE_COUNT=$(grep -rn "import 'package:hackathon_project/features/" \
-  "$PROJECT_ROOT/lib/shared" \
-  --include="*.dart" \
-  --exclude="*.g.dart" \
-  --exclude="*.freezed.dart" \
+SHARED_FEATURE_COUNT=$(grep -rn "from '@/features/" \
+  "$PROJECT_ROOT/src/shared" \
+  --include="*.ts" \
+  --include="*.tsx" \
   2>/dev/null | wc -l | tr -d ' ')
 
 if [ "$SHARED_FEATURE_COUNT" -gt 0 ]; then

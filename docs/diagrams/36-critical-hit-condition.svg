@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 250" font-family="system-ui, sans-serif">
+  <rect width="600" height="250" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="300" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">クリティカルヒット判定</text>
+
+  <!-- Condition 1 -->
+  <rect x="50" y="55" width="200" height="70" rx="10" fill="#fdf4ff" stroke="#a855f7" stroke-width="2"/>
+  <text x="150" y="80" text-anchor="middle" font-size="12" font-weight="700" fill="#6b21a8">条件 1</text>
+  <text x="150" y="100" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">creativity &gt; 80</text>
+  <text x="150" y="115" text-anchor="middle" font-size="9" fill="#94a3b8">創造的な叫びが必要</text>
+
+  <!-- AND -->
+  <rect x="270" y="72" width="60" height="36" rx="18" fill="#0f172a"/>
+  <text x="300" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#22d3ee">AND</text>
+
+  <!-- Condition 2 -->
+  <rect x="350" y="55" width="200" height="70" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="450" y="80" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">条件 2</text>
+  <text x="450" y="100" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">Math.random() &lt; 0.2</text>
+  <text x="450" y="115" text-anchor="middle" font-size="9" fill="#94a3b8">20%の確率</text>
+
+  <!-- Arrow -->
+  <line x1="300" y1="130" x2="300" y2="155" stroke="#64748b" stroke-width="2"/>
+  <polygon points="293,155 300,168 307,155" fill="#64748b"/>
+
+  <!-- Result -->
+  <rect x="150" y="172" width="300" height="50" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2.5"/>
+  <text x="300" y="195" text-anchor="middle" font-size="16" font-weight="800" fill="#ef4444">CRITICAL! damage × 2</text>
+  <text x="300" y="213" text-anchor="middle" font-size="10" fill="#64748b">ダメージが2倍に増幅</text>
+
+  <text x="300" y="242" text-anchor="middle" font-size="10" fill="#94a3b8">「創造的に叫べば叫ぶほどクリティカル率UP」 → 叫び方の工夫を促す設計</text>
+</svg>

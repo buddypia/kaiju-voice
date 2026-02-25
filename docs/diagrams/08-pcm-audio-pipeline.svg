@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="arrow8" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="800" height="200" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="400" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">PCM音声再生パイプライン</text>
+
+  <!-- Step 1: base64 -->
+  <rect x="20" y="55" width="120" height="70" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5"/>
+  <text x="80" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#6b21a8">base64</text>
+  <text x="80" y="98" text-anchor="middle" font-size="10" fill="#64748b">Geminiが返す</text>
+  <text x="80" y="112" text-anchor="middle" font-size="10" fill="#64748b">生データ</text>
+
+  <line x1="145" y1="90" x2="170" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow8)"/>
+
+  <!-- Step 2: Int16 -->
+  <rect x="175" y="55" width="120" height="70" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="235" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">Int16Array</text>
+  <text x="235" y="98" text-anchor="middle" font-size="10" fill="#64748b">16bit PCM</text>
+  <text x="235" y="112" text-anchor="middle" font-size="10" fill="#64748b">デコード</text>
+
+  <line x1="300" y1="90" x2="325" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow8)"/>
+
+  <!-- Step 3: Float32 -->
+  <rect x="330" y="55" width="130" height="70" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="395" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">Float32Array</text>
+  <text x="395" y="98" text-anchor="middle" font-size="10" fill="#64748b">÷ 32768 正規化</text>
+  <text x="395" y="112" text-anchor="middle" font-size="10" fill="#64748b">[-1.0, 1.0] 範囲</text>
+
+  <line x1="465" y1="90" x2="490" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow8)"/>
+
+  <!-- Step 4: AudioBuffer -->
+  <rect x="495" y="55" width="130" height="70" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="560" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">AudioBuffer</text>
+  <text x="560" y="98" text-anchor="middle" font-size="10" fill="#64748b">24000Hz</text>
+  <text x="560" y="112" text-anchor="middle" font-size="10" fill="#64748b">モノラル</text>
+
+  <line x1="630" y1="90" x2="655" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow8)"/>
+
+  <!-- Step 5: Speaker -->
+  <rect x="660" y="55" width="110" height="70" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="715" y="82" text-anchor="middle" font-size="20">🔊</text>
+  <text x="715" y="110" text-anchor="middle" font-size="10" fill="#94a3b8">Web Audio</text>
+
+  <!-- Pipeline steps -->
+  <text x="80" y="150" text-anchor="middle" font-size="9" fill="#a855f7">①</text>
+  <text x="235" y="150" text-anchor="middle" font-size="9" fill="#3b82f6">②</text>
+  <text x="395" y="150" text-anchor="middle" font-size="9" fill="#22c55e">③</text>
+  <text x="560" y="150" text-anchor="middle" font-size="9" fill="#f59e0b">④</text>
+  <text x="715" y="150" text-anchor="middle" font-size="9" fill="#94a3b8">⑤</text>
+
+  <text x="400" y="175" text-anchor="middle" font-size="11" fill="#94a3b8">Gemini TTS → Web Audio API のデータ変換パイプライン</text>
+  <text x="400" y="192" text-anchor="middle" font-size="10" fill="#94a3b8">copyToChannel(float32, 0) でバッファに書き込み → AudioBufferSourceNode で再生</text>
+</svg>

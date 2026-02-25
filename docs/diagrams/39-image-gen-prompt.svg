@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 260" font-family="system-ui, sans-serif">
+  <defs>
+    <marker id="a39" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="700" height="260" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Visual Agent — 画像生成プロンプト構築</text>
+
+  <!-- Kaiju template -->
+  <rect x="30" y="55" width="310" height="85" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="185" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">category === 'kaiju'</text>
+  <line x1="40" y1="86" x2="330" y2="86" stroke="#fecaca" stroke-width="1"/>
+  <rect x="45" y="95" width="285" height="32" rx="4" fill="#0f172a"/>
+  <text x="50" y="115" font-size="8" fill="#22d3ee" font-family="monospace">"Infernus, fire element kaiju,</text>
+  <text x="50" y="127" font-size="8" fill="#22d3ee" font-family="monospace"> dark background, epic lighting"</text>
+
+  <!-- Hero template -->
+  <rect x="360" y="55" width="310" height="85" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="515" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">category === 'hero'</text>
+  <line x1="370" y1="86" x2="660" y2="86" stroke="#bfdbfe" stroke-width="1"/>
+  <rect x="375" y="95" width="285" height="32" rx="4" fill="#0f172a"/>
+  <text x="380" y="115" font-size="8" fill="#22d3ee" font-family="monospace">"Solaris, light element hero,</text>
+  <text x="380" y="127" font-size="8" fill="#22d3ee" font-family="monospace"> golden aura, dark background"</text>
+
+  <!-- Difference highlight -->
+  <text x="185" y="160" text-anchor="middle" font-size="10" fill="#ef4444">ダーク・威圧的</text>
+  <text x="515" y="160" text-anchor="middle" font-size="10" fill="#3b82f6">+ golden aura（ヒーロー感）</text>
+
+  <!-- Config -->
+  <rect x="140" y="180" width="420" height="45" rx="8" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1"/>
+  <text x="350" y="200" text-anchor="middle" font-size="10" fill="#475569" font-family="monospace">model: "imagen-4.0-generate-001"</text>
+  <text x="350" y="216" text-anchor="middle" font-size="10" fill="#475569" font-family="monospace">aspectRatio: "1:1" (カード用正方形)</text>
+
+  <text x="350" y="250" text-anchor="middle" font-size="10" fill="#94a3b8">カテゴリ別のプロンプトテンプレートで怪獣/ヒーローの画風を差別化</text>
+</svg>

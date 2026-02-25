@@ -1,7 +1,7 @@
 ---
 name: cancel
 description: |
-  Hackathon Project プロジェクトの持続モード(persistent-mode, web-qa, turbo-mode)を安全に終了するスキル.
+  プロジェクト プロジェクトの持続モード(persistent-mode, web-qa, turbo-mode)を安全に終了するスキル.
   State ファイルを削除してStop HookがAIをブロックしないようにします.
 
   "キャンセル", "中断", "cancel", "stop mode" 等のリクエストでトリガーされます.
@@ -107,7 +107,7 @@ rm -f .claude/state/*-state.json
   "started_at": "2026-02-05T10:00:00+09:00",
   "last_checked_at": "2026-02-05T10:15:00+09:00",
   "prompt": "全てのテスト通過まで続行して",
-  "error_history": ["flutter analyze: 2 warnings", "flutter test: 1 failed"]
+  "error_history": ["npm run lint: 2 warnings", "npm test: 1 failed"]
 }
 ```
 
@@ -121,7 +121,7 @@ rm -f .claude/state/*-state.json
   "started_at": "2026-02-05T10:00:00+09:00",
   "last_checked_at": "2026-02-05T10:10:00+09:00",
   "all_passing": false,
-  "last_failure": "flutter test: 2 tests failed"
+  "last_failure": "npm test: 2 tests failed"
 }
 ```
 
@@ -207,5 +207,5 @@ rm -f .claude/state/*-state.json
 
 | 日付       | バージョン | 変更内容                                                   |
 | ---------- | ---------- | ---------------------------------------------------------- |
-| 2026-02-05 | v1.0       | 新規作成 - oh-my-claudecode cancel パターン適用            |
+| 2026-02-05 | v1.0       | 新規作成 - cancel パターン適用            |
 | 2026-02-07 | v1.1       | Plan ファイル cleanup 手順追加 (persistent-mode v5.0 連携) |

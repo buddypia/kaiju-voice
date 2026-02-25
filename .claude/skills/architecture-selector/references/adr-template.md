@@ -19,10 +19,10 @@ ADR（Architecture Decision Record）は、アーキテクチャ上の重要な�
 ```
 
 - `feature_id`: 機能 ID（例: `029`）
-- `Decision Title`: 決定内容を簡潔に表す（例: "単語データのローカルキャッシュ戦略"）
+- `Decision Title`: 決定内容を簡潔に表す（例: "AI対戦データのキャッシュ戦略"）
 - 命名規則: `ADR-<feature_id>.md`
 
-**良い例**: `ADR-029: Hive を使用したオフラインファースト単語キャッシュ`
+**良い例**: `ADR-029: React Query を使用したサーバー状態キャッシュ`
 **悪い例**: `ADR-029: データベース` （曖昧すぎる）
 
 #### 2. Status（ステータス）
@@ -193,7 +193,7 @@ Superseded by [ADR-035](./ADR-035.md)
 
 ---
 
-## Hackathon Project プロジェクトでの ADR 運用ルール
+## プロジェクト プロジェクトでの ADR 運用ルール
 
 ### ファイル配置
 
@@ -211,26 +211,26 @@ docs/features/<id>-<name>/
 | 条件                         | ADR 必要 | 例                                   |
 | ---------------------------- | :------: | ------------------------------------ |
 | Tier L/XL の新機能           |    ✅    | 新しいドメインモデル、複雑な状態管理 |
-| 既存アーキテクチャからの逸脱 |    ✅    | Riverpod 以外の状態管理の検討        |
+| 既存アーキテクチャからの逸脱 |    ✅    | React Hooks 以外の状態管理の検討     |
 | 新しい外部サービス導入       |    ✅    | 新しい AI API、決済サービス          |
 | Tier S/M の単純機能          |    ❌    | UI 調整、既存パターンの踏襲          |
 | バグ修正                     |    ❌    | 既存設計の範囲内                     |
 
-### Hackathon Project 固有の制約
+### プロジェクト 固有の制約
 
 以下は ADR の Technical Constraints に必ず含める:
 
-1. **Feature-First + Simplified Clean Architecture**: `presentation/ → domain/ → data/`
-2. **Riverpod 3.1+**: `@riverpod` Notifier 使用必須
-3. **Freezed**: 不変データモデル
-4. **Supabase**: PostgreSQL + Edge Functions
+1. **Feature-First + Simplified Clean Architecture**: `components/ → hooks/ → api/`
+2. **React Hooks**: カスタムフックによる状態管理必須
+3. **TypeScript**: strict モード + Zod バリデーションによる型安全性
+4. **Next.js API Routes**: `src/app/api/*/route.ts` によるサーバーサイドロジック
 
 ---
 
 ## 良い ADR の例
 
 ```markdown
-# ADR-029: Hive を使用したオフラインファースト単語キャッシュ
+# ADR-029: React Query を使用したサーバー状態キャッシュ
 
 ## Status
 
@@ -238,26 +238,26 @@ Proposed
 
 ## Context
 
-単語帳機能では、ユーザーが学習した単語をオフラインでも閲覧・復習できる必要がある。
-現在のアプリはネットワーク接続を前提としており、オフライン対応のキャッシュ戦略が未定義である。
-Supabase からのデータ取得は平均 200ms だが、地下鉄等の通信環境では 5 秒以上のタイムアウトが発生する。
+対戦機能では、ユーザーの対戦履歴や戦績データを効率的に取得・キャッシュする必要がある。
+現在のアプリは毎回 API Route からデータを取得しており、キャッシュ戦略が未定義である。
+API Route からのデータ取得は平均 200ms だが、AI 生成含む場合は 3 秒以上のレスポンス時間が発生する。
 
 ## Architecture Drivers
 
 ### Functional Drivers
 
-- オフライン時に最新100件の単語を表示可能
-- オンライン復帰時に自動同期
+- 対戦履歴を高速に表示可能
+- バックグラウンドでの自動再フェッチ
 
 ### Quality Attribute Drivers
 
-- Performance: オフライン時の表示は 50ms 以内
-- Reliability: データ損失なし
+- Performance: キャッシュヒット時の表示は 50ms 以内
+- Reliability: データ整合性の維持
 
 ### Technical Constraints
 
-- Riverpod による状態管理
-- Freezed による不変モデル
+- React Hooks による状態管理
+- TypeScript による型安全なモデル
 
 ### Business Constraints
 
@@ -265,8 +265,8 @@ Supabase からのデータ取得は平均 200ms だが、地下鉄等の通信�
 
 ## Decision
 
-Option A（Hive ローカルキャッシュ）を選択する。
-Flutter エコシステムでの実績と、Freezed との親和性が決め手となった。
+Option A（React Query サーバー状態キャッシュ）を選択する。
+React エコシステムでの実績と、TypeScript との親和性が決め手となった。
 ```
 
 ## 悪い ADR の例

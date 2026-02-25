@@ -90,7 +90,7 @@ python scripts/deep_research.py "2025年生成型AI技術トレンドと主要�
 ### 市場分析
 
 ```bash
-python scripts/deep_research.py "プログラミング学習アプリ市場分析と競合状況" --language japanese
+python scripts/deep_research.py "AIゲームアプリ市場分析と競合状況" --language japanese
 ```
 
 ### 学術調査

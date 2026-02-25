@@ -1,8 +1,8 @@
 ---
 name: persistent-mode
 description: |
-  Hackathon Project プロジェクトの **強制持続モード**.
-  oh-my-claudecodeのralphパターンをFlutter/Dartに合わせて適用.
+  プロジェクト プロジェクトの **強制持続モード**.
+  ralph パターンを Web プロジェクトに合わせて適用.
 
   **核心メカニズム**: Stop Hook + State ファイル基盤の強制反復
   - AIが停止しようとした時にStop Hookがstop-handler.mjsを実行
@@ -28,7 +28,7 @@ doc_contract:
 
 > **核心コンセプト**: Stop Hook + State ファイル基盤の **技術的強制**
 >
-> oh-my-claudecodeのralphパターンをHackathon Project Flutterプロジェクトに合わせてポーティング。
+> ralph パターンを Web プロジェクトに合わせてポーティング。
 > ドキュメントで「繰り返せ」と書くだけではなく、**実際にAIを強制**します。
 
 ---
@@ -192,11 +192,11 @@ FR-02901: 単語帳リスト画面の実装
 
 ## 前回の失敗
 
-- flutter analyze: 2個 warning (unused import)
+- npm run lint: 2個 warning (unused import)
 
 ## 修正作業
 
-- lib/features/vocabulary/presentation/pages/list_page.dart:3
+- src/features/vocabulary/components/ListPage.tsx:3
   - 未使用 import 削除
 
 ## 再検証中...
@@ -230,7 +230,7 @@ State ファイル削除完了
   "started_at": "2026-02-05T10:00:00+09:00",
   "last_checked_at": "2026-02-05T10:15:00+09:00",
   "prompt": "全てのテスト通過まで続行して",
-  "error_history": ["flutter analyze: 2 warnings", "flutter test: 1 failed"]
+  "error_history": ["npm run lint: 2 warnings", "npm test: 1 failed"]
 }
 ```
 
@@ -251,8 +251,8 @@ State ファイル削除完了
 ### 成功終了
 
 1. 全ての検証通過:
-   - `flutter analyze`: Exit 0, エラー 0個
-   - `flutter test`: 全テスト通過
+   - `npm run lint`: Exit 0, エラー 0個
+   - `npm test`: 全テスト通過
    - Task システム: pending/in_progress 0個
 
 2. `/cancel` 実行でState ファイル削除
@@ -264,8 +264,8 @@ State ファイル削除完了
 
 | 項目            |     状態     |
 | --------------- | :----------: |
-| flutter analyze |   0 issues   |
-| flutter test    | 47/47 passed |
+| npm run lint    |   0 issues   |
+| npm test        | 47/47 passed |
 | Tasks           |  0 pending   |
 
 → 全ての検証通過!
@@ -287,7 +287,7 @@ State ファイル削除完了
 
 ## 同一エラー3回反復
 
-エラー: flutter test - VocabularyViewModelTest 失敗
+エラー: npm test - VocabularyViewModel テスト失敗
 原因: MockSupabase 設定の問題と推定
 
 ## 推奨対処

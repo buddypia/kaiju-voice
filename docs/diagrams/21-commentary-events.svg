@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" font-family="system-ui, sans-serif">
+  <rect width="700" height="300" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">AI実況 — 5つのイベントタイプ</text>
+
+  <!-- battle_start -->
+  <rect x="30" y="55" width="120" height="70" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="90" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#166534">battle_start</text>
+  <text x="90" y="98" text-anchor="middle" font-size="9" fill="#475569">バトル開幕</text>
+  <text x="90" y="112" text-anchor="middle" font-size="9" fill="#64748b">対戦カード紹介</text>
+
+  <!-- attack -->
+  <rect x="165" y="55" width="120" height="70" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="225" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">attack</text>
+  <text x="225" y="98" text-anchor="middle" font-size="9" fill="#475569">通常攻撃</text>
+  <text x="225" y="112" text-anchor="middle" font-size="9" fill="#64748b">技名とダメージ</text>
+
+  <!-- critical -->
+  <rect x="300" y="55" width="120" height="70" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="360" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">critical</text>
+  <text x="360" y="98" text-anchor="middle" font-size="9" fill="#475569">クリティカル！</text>
+  <text x="360" y="112" text-anchor="middle" font-size="9" fill="#64748b">興奮度MAX</text>
+
+  <!-- low_hp -->
+  <rect x="435" y="55" width="120" height="70" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+  <text x="495" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">low_hp</text>
+  <text x="495" y="98" text-anchor="middle" font-size="9" fill="#475569">ピンチ状態</text>
+  <text x="495" y="112" text-anchor="middle" font-size="9" fill="#64748b">緊迫感の演出</text>
+
+  <!-- ko -->
+  <rect x="570" y="55" width="100" height="70" rx="8" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <text x="620" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="#e2e8f0">ko</text>
+  <text x="620" y="98" text-anchor="middle" font-size="9" fill="#94a3b8">決着！</text>
+  <text x="620" y="112" text-anchor="middle" font-size="9" fill="#64748b">劇的な締め</text>
+
+  <!-- Example outputs -->
+  <rect x="40" y="150" width="620" height="120" rx="10" fill="#0f172a"/>
+  <text x="350" y="175" text-anchor="middle" font-size="11" font-weight="600" fill="#22d3ee">実況の出力例 (voice: Kore)</text>
+
+  <text x="60" y="200" font-size="10" fill="#22c55e">battle_start:</text>
+  <text x="165" y="200" font-size="10" fill="#94a3b8">「さぁ始まりました！火と氷の宿命の対決！」</text>
+
+  <text x="60" y="220" font-size="10" fill="#ef4444">critical:</text>
+  <text x="165" y="220" font-size="10" fill="#94a3b8">「クリティカルヒット！！灼熱砲が直撃ィィィ！85ダメージ！」</text>
+
+  <text x="60" y="240" font-size="10" fill="#e2e8f0">ko:</text>
+  <text x="165" y="240" font-size="10" fill="#94a3b8">「決着ァァァ！！インフェルヌス、5ラウンドで見事撃破！！」</text>
+
+  <text x="350" y="290" text-anchor="middle" font-size="11" fill="#94a3b8">プロレス中継風の実況が、見ている人も巻き込むエンターテインメントに</text>
+</svg>

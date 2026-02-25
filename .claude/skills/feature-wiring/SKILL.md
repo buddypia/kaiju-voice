@@ -1,7 +1,7 @@
 ---
 name: feature-wiring
 description: |
-  Hackathon Project プロジェクトの機能統合検証スキル。
+  プロジェクト プロジェクトの機能統合検証スキル。
   実装された機能の Export、ルート、データフロー、Lint を検証し、
   全コンポーネントが正しく接続されていることを確認する。
 

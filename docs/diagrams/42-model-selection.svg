@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" font-family="system-ui, sans-serif">
+  <rect width="700" height="280" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="350" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">Gemini モデル選定理由</text>
+
+  <!-- gemini-3-flash -->
+  <rect x="30" y="55" width="310" height="90" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="185" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">gemini-3-flash-preview</text>
+  <text x="185" y="98" text-anchor="middle" font-size="10" fill="#475569">音声分析 + AI対戦ロジック</text>
+  <line x1="45" y1="108" x2="325" y2="108" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="50" y="126" font-size="9" fill="#64748b">速い応答速度（リアルタイムゲームに必須）</text>
+  <text x="50" y="140" font-size="9" fill="#64748b">Structured Output の安定性が高い</text>
+
+  <!-- gemini-2.5-flash-tts -->
+  <rect x="360" y="55" width="310" height="90" rx="10" fill="#fdf4ff" stroke="#a855f7" stroke-width="2"/>
+  <text x="515" y="78" text-anchor="middle" font-size="12" font-weight="700" fill="#6b21a8">gemini-2.5-flash-preview-tts</text>
+  <text x="515" y="98" text-anchor="middle" font-size="10" fill="#475569">リアルタイム TTS 実況</text>
+  <line x1="375" y1="108" x2="655" y2="108" stroke="#e9d5ff" stroke-width="1"/>
+  <text x="380" y="126" font-size="9" fill="#64748b">音声生成に特化したモデル</text>
+  <text x="380" y="140" font-size="9" fill="#64748b">voice: Kore（日本語対応の自然な声）</text>
+
+  <!-- Imagen 4 -->
+  <rect x="30" y="165" width="310" height="75" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
+  <text x="185" y="188" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">imagen-4.0-generate-001</text>
+  <text x="185" y="208" text-anchor="middle" font-size="10" fill="#475569">怪獣・ヒーロー画像生成</text>
+  <line x1="45" y1="218" x2="325" y2="218" stroke="#fde68a" stroke-width="1"/>
+  <text x="50" y="234" font-size="9" fill="#64748b">高品質な画像生成（キャラクターのビジュアル）</text>
+
+  <!-- Rationale -->
+  <rect x="360" y="165" width="310" height="75" rx="10" fill="#0f172a"/>
+  <text x="515" y="190" text-anchor="middle" font-size="11" font-weight="600" fill="#22d3ee">選定の共通基準</text>
+  <text x="515" y="212" text-anchor="middle" font-size="9" fill="#94a3b8">1. 速度（リアルタイム性）</text>
+  <text x="515" y="228" text-anchor="middle" font-size="9" fill="#94a3b8">2. 専門性（用途に最適化）</text>
+
+  <text x="350" y="268" text-anchor="middle" font-size="10" fill="#94a3b8">「1つの万能モデル」ではなく「用途別の専門モデル」を組み合わせる戦略</text>
+</svg>

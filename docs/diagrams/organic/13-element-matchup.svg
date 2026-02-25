@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg13" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1-13" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2-13" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3-13" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4-13" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5-13" d="M 40,-85 C 95,-75 115,-15 105,35 C 95,85 35,115 -25,95 C -85,75 -115,15 -95,-45 C -75,-85 -15,-95 40,-85 Z"/>
+    <path id="blob-c6-13" d="M 70,-65 C 115,-45 120,10 95,55 C 65,105 -5,115 -55,85 C -105,55 -115,-15 -85,-65 C -55,-105 25,-85 70,-65 Z"/>
+    <marker id="arrow13o" markerWidth="12" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0,0 L 12,4 L 0,8 Z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg13)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">6属性相性テーブル</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">6属性相性テーブル -- 六角形配置</text>
+
+  <!-- Hexagonal layout: center at 700,410 radius ~220 -->
+  <!-- Fire: top (700, 190) -->
+  <g transform="translate(700, 200)">
+    <use href="#blob-c1-13" transform="scale(1.0)" fill="#fed7aa"/>
+    <use href="#blob-c1-13" transform="scale(0.8)" fill="#fed7aa"/>
+    <circle cx="0" cy="-5" r="36" fill="#f97316" opacity="0.9"/>
+    <text x="0" y="5" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">火</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Fire</text>
+  </g>
+
+  <!-- Ice: top-right (910, 330) -->
+  <g transform="translate(950, 330)">
+    <use href="#blob-c2-13" transform="scale(1.0)" fill="#bfdbfe"/>
+    <use href="#blob-c2-13" transform="scale(0.8)" fill="#bfdbfe"/>
+    <circle cx="0" cy="-5" r="36" fill="#3b82f6" opacity="0.9"/>
+    <text x="0" y="5" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">氷</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Ice</text>
+  </g>
+
+  <!-- Thunder: bottom-right (910, 530) -->
+  <g transform="translate(950, 530)">
+    <use href="#blob-c3-13" transform="scale(1.0)" fill="#fef08a"/>
+    <use href="#blob-c3-13" transform="scale(0.8)" fill="#fef08a"/>
+    <circle cx="0" cy="-5" r="36" fill="#eab308" opacity="0.9"/>
+    <text x="0" y="5" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">雷</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Thunder</text>
+  </g>
+
+  <!-- Earth: bottom (700, 660) -->
+  <g transform="translate(700, 650)">
+    <use href="#blob-c4-13" transform="scale(1.0)" fill="#bbf7d0"/>
+    <use href="#blob-c4-13" transform="scale(0.8)" fill="#bbf7d0"/>
+    <circle cx="0" cy="-5" r="36" fill="#22c55e" opacity="0.9"/>
+    <text x="0" y="5" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">地</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Earth</text>
+  </g>
+
+  <!-- Void: bottom-left (450, 530) -->
+  <g transform="translate(450, 530)">
+    <use href="#blob-c5-13" transform="scale(1.0)" fill="#e9d5ff"/>
+    <use href="#blob-c5-13" transform="scale(0.8)" fill="#e9d5ff"/>
+    <circle cx="0" cy="-5" r="36" fill="#a855f7" opacity="0.9"/>
+    <text x="0" y="5" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">虚</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Void</text>
+  </g>
+
+  <!-- Light: top-left (450, 330) -->
+  <g transform="translate(450, 330)">
+    <use href="#blob-c6-13" transform="scale(1.0)" fill="#fef08a"/>
+    <use href="#blob-c6-13" transform="scale(0.8)" fill="#fed7aa"/>
+    <circle cx="0" cy="-5" r="36" fill="#f97316" opacity="0.8"/>
+    <text x="0" y="5" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">光</text>
+    <text x="0" y="55" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Light</text>
+  </g>
+
+  <!-- Advantage arrows (clockwise): Fire→Ice, Ice→Thunder, Thunder→Earth, Earth→Void, Void→Fire, Light special -->
+  <!-- Fire → Ice -->
+  <path d="M 760,220 C 820,240 880,270 920,300" stroke="#f97316" stroke-width="3.5" stroke-linecap="round" fill="none" marker-end="url(#arrow13o)"/>
+  <text x="860" y="248" text-anchor="middle" font-size="14" font-weight="800" fill="#f97316">x1.5</text>
+
+  <!-- Ice → Thunder -->
+  <path d="M 955,380 C 960,420 960,460 955,500" stroke="#3b82f6" stroke-width="3.5" stroke-linecap="round" fill="none" marker-end="url(#arrow13o)"/>
+  <text x="990" y="440" text-anchor="middle" font-size="14" font-weight="800" fill="#3b82f6">x1.5</text>
+
+  <!-- Thunder → Earth -->
+  <path d="M 900,560 C 840,590 790,620 750,640" stroke="#eab308" stroke-width="3.5" stroke-linecap="round" fill="none" marker-end="url(#arrow13o)"/>
+  <text x="850" y="610" text-anchor="middle" font-size="14" font-weight="800" fill="#eab308">x1.5</text>
+
+  <!-- Earth → Void -->
+  <path d="M 645,640 C 590,620 540,590 500,560" stroke="#22c55e" stroke-width="3.5" stroke-linecap="round" fill="none" marker-end="url(#arrow13o)"/>
+  <text x="550" y="610" text-anchor="middle" font-size="14" font-weight="800" fill="#22c55e">x1.5</text>
+
+  <!-- Void → Fire -->
+  <path d="M 465,490 C 500,400 560,300 660,230" stroke="#a855f7" stroke-width="3.5" stroke-linecap="round" fill="none" marker-end="url(#arrow13o)"/>
+  <text x="530" y="350" text-anchor="middle" font-size="14" font-weight="800" fill="#a855f7">x1.5</text>
+
+  <!-- Legend -->
+  <rect x="100" y="210" width="240" height="90" rx="30" fill="#ffffff" opacity="0.85"/>
+  <text x="220" y="243" text-anchor="middle" font-size="16" font-weight="800" fill="#1e293b">凡例</text>
+  <line x1="140" y1="262" x2="190" y2="262" stroke="#f97316" stroke-width="3" marker-end="url(#arrow13o)"/>
+  <text x="250" y="267" text-anchor="middle" font-size="14" font-weight="600" fill="#475569">有利 (x1.5)</text>
+  <text x="220" y="288" text-anchor="middle" font-size="14" font-weight="600" fill="#64748b">逆方向は不利 (x0.8)</text>
+
+  <!-- Footer -->
+  <rect x="470" y="755" width="460" height="36" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="779" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">6属性相性テーブル -- 六角形配置</text>
+</svg>

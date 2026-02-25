@@ -1,6 +1,6 @@
 # SPEC セクション詳細ガイド
 
-> Hackathon Project プロジェクトの Feature-First + Simplified Clean Architecture + React 19 + Zod に最適化された SPEC 作成ガイド
+> プロジェクト プロジェクトの Feature-First + Simplified Clean Architecture + React 19 + Zod に最適化された SPEC 作成ガイド
 >
 > **v3.6 (2026-02-11)**: 簡素化 - 過度な抽象化を除去、Next.js/React/TypeScript に適応
 >

@@ -37,7 +37,7 @@ from typing import Any
 FEATURES_DIR = Path("docs/features")
 TEMPLATE_PATH = Path("docs/_templates/context_template.json")
 SCHEMA_PATH = Path("docs/_templates/context_schema.json")
-VERIFY_STATUS_DART = Path("scripts/sync_feature_status/bin/verify_feature_status.dart")
+VERIFY_STATUS_TS = Path("scripts/sync_feature_status/bin/verify_feature_status.ts")
 
 EXCLUDE_DIRS = {"_templates", "candidates", "priority"}
 
@@ -540,10 +540,10 @@ def _repair_invalid_json(
 
 
 def _run_verify_status(fix: bool, feature_filter: str | None) -> tuple[bool, str]:
-    if not VERIFY_STATUS_DART.exists():
-        return False, "verify_feature_status.dart なし (スキップ)"
+    if not VERIFY_STATUS_TS.exists():
+        return False, "verify_feature_status.ts なし (スキップ)"
 
-    cmd = ["dart", "run", str(VERIFY_STATUS_DART)]
+    cmd = ["npx", "tsx", str(VERIFY_STATUS_TS)]
     if fix:
         cmd.append("--fix")
     if feature_filter:
@@ -552,7 +552,7 @@ def _run_verify_status(fix: bool, feature_filter: str | None) -> tuple[bool, str
     try:
         result = subprocess.run(cmd, capture_output=True, text=True)
     except OSError as e:
-        return False, f"dart実行失敗: {e}"
+        return False, f"ts実行失敗: {e}"
 
     if result.returncode == 0:
         return True, "verify_feature_status 完了"

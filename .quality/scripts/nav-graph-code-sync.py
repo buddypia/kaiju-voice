@@ -28,12 +28,12 @@ from typing import Optional
 
 
 def find_project_root(start: Optional[str] = None) -> Path:
-    """pubspec.yamlを探してプロジェクトルートを返却"""
+    """package.jsonを探してプロジェクトルートを返却"""
     search = Path(start) if start else Path.cwd()
     for candidate in [search, *search.parents]:
-        if (candidate / "pubspec.yaml").exists():
+        if (candidate / "package.json").exists():
             return candidate
-    print("ERROR: pubspec.yamlが見つかりません。", file=sys.stderr)
+    print("ERROR: package.jsonが見つかりません。", file=sys.stderr)
     sys.exit(1)
 
 
@@ -215,7 +215,7 @@ def main() -> int:
         "--project-root",
         type=str,
         default=None,
-        help="プロジェクトルートパス（デフォルト: pubspec.yaml自動探索）",
+        help="プロジェクトルートパス（デフォルト: package.json自動探索）",
     )
     args = parser.parse_args()
 

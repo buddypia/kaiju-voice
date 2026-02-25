@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg42" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob42-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob42-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob42-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob42-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob42-hub" d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z"/>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg42)"/>
+
+  <!-- Title -->
+  <text x="700" y="70" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">Gemini モデル選定理由</text>
+  <text x="700" y="105" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">用途別の専門モデルを組み合わせる戦略</text>
+
+  <!-- Model 1: gemini-3-flash -->
+  <g transform="translate(250, 310)">
+    <use href="#blob42-c2" transform="scale(1.7)" fill="#bfdbfe"/>
+    <circle cx="0" cy="-80" r="28" fill="#3b82f6"/>
+    <text x="0" y="-72" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">1</text>
+    <text x="0" y="-25" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">gemini-3-flash</text>
+    <text x="0" y="8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">音声分析 + AI対戦ロジック</text>
+    <text x="0" y="40" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">速い応答速度</text>
+    <text x="0" y="62" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Structured Output 安定性</text>
+  </g>
+
+  <!-- Model 2: gemini-2.5-flash-tts -->
+  <g transform="translate(700, 290)">
+    <use href="#blob42-c3" transform="scale(1.7)" fill="#e9d5ff"/>
+    <circle cx="0" cy="-85" r="28" fill="#a855f7"/>
+    <text x="0" y="-77" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">2</text>
+    <text x="0" y="-25" text-anchor="middle" font-size="22" font-weight="800" fill="#1e293b">gemini-2.5-flash-tts</text>
+    <text x="0" y="8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">リアルタイム TTS 実況</text>
+    <text x="0" y="40" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">音声生成に特化</text>
+    <text x="0" y="62" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">voice: Kore（自然な日本語）</text>
+  </g>
+
+  <!-- Model 3: imagen-4.0 -->
+  <g transform="translate(1150, 310)">
+    <use href="#blob42-c1" transform="scale(1.7)" fill="#fef08a"/>
+    <circle cx="0" cy="-80" r="28" fill="#eab308"/>
+    <text x="0" y="-72" text-anchor="middle" font-size="42" font-weight="900" fill="#ffffff">3</text>
+    <text x="0" y="-25" text-anchor="middle" font-size="24" font-weight="800" fill="#1e293b">imagen-4.0</text>
+    <text x="0" y="8" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">怪獣・ヒーロー画像生成</text>
+    <text x="0" y="40" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">高品質な画像生成</text>
+    <text x="0" y="62" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">キャラクターのビジュアル</text>
+  </g>
+
+  <!-- Connectors to hub -->
+  <path d="M 350,440 C 420,520 480,560 560,580" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 700,430 C 700,500 690,540 680,570" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+  <path d="M 1050,440 C 980,520 920,560 840,580" stroke="#94a3b8" stroke-width="4" stroke-dasharray="12 12" stroke-linecap="round" fill="none"/>
+
+  <!-- Hub: Selection criteria -->
+  <g transform="translate(700, 620)">
+    <use href="#blob42-hub" transform="scale(1.3)" fill="#8b5cf6"/>
+    <text x="0" y="-30" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">選定の共通基準</text>
+    <text x="0" y="12" text-anchor="middle" font-size="20" font-weight="600" fill="#ffffff" opacity="0.9">1. 速度（リアルタイム性）</text>
+    <text x="0" y="45" text-anchor="middle" font-size="20" font-weight="600" fill="#ffffff" opacity="0.9">2. 専門性（用途に最適化）</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="320" y="740" width="760" height="44" rx="30" fill="#ffffff" opacity="0.9"/>
+  <text x="700" y="768" text-anchor="middle" font-size="18" font-weight="600" fill="#64748b">「1つの万能モデル」ではなく「用途別の専門モデル」を組み合わせる戦略</text>
+</svg>

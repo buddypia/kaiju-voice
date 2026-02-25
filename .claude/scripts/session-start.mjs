@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Hackathon Project Session Start Hook (SessionStart)
+ * Session Start Hook (SessionStart)
  *
- * oh-my-opencodeのsession-start.mjsをHackathon Projectに忠実に移植.
  * Claude Code セッション開始時に実行されて前セッションのアクティブ状態を復元します.
  *
- * メカニズム (原本と同一):
+ * メカニズム:
  * 1. State ディレクトリでアクティブモード検索
  * 2. アクティブモード発見時に復元メッセージ生成
  * 3. 未完了 Task カウント含む
@@ -16,13 +15,6 @@
  * - セッションがcontext compactionで再起動された時、AIは以前の状態を把握していない
  * - Stop hookがブロックしてもAIが「なぜ」ブロックされるか分からないと混乱発生
  * - Session start hookが以前の状態を復元する必要がありAIが正しく対応
- *
- * 原本との差異:
- * - HUD(状態表示バー) チェック除外 (Hackathon ProjectにHUD なし)
- * - Notepad 抽出除外 (Notepad システム削除済み)
- * - グローバル状態チェック除外 (localのみ使用)
- *
- * @see oss-sources/oh-my-claudecode/scripts/session-start.mjs (原本)
  */
 
 import { join } from 'path';

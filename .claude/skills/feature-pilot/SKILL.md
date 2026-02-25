@@ -1,7 +1,7 @@
 ---
 name: feature-pilot
 description: |
-  Hackathon Project プロジェクトのAI主導機能開発を統合するオーケストレーター。
+  プロジェクト プロジェクトのAI主導機能開発を統合するオーケストレーター。
   すべての開発要求の単一進入点として、作業タイプを自動判別し、適切な下位スキルを調整する。
   **Readiness Gate 機能が内蔵されており、Go/No-Go 検証を直接実行する。**
 
@@ -1515,4 +1515,4 @@ Phase 0 で CLAUDE.md 確認を強制します:
 
 | 日付       | バージョン | 変更内容                                                                                                                                                                                                                                                                                                                                                                    |
 | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-02-11 | v1.0.0     | **Hackathon Project 向け新規作成**: Flutter/Korean ソースから Next.js/Japanese に全面移行。CONVERT_CANDIDATE/REVERT_CANDIDATE パイプライン削除。Team Mode 削除。flutter-qa → pre-quality-gate 置換。security-scan 独立スキル参照削除。Evidence Cache を npm run lint / npm test に更新。turbo-mode バッチ順序を Type+API → Hook → Component → Test に変更。全テキスト日本語化。 |
+| 2026-02-11 | v1.0.0     | **プロジェクト 向け新規作成**: 旧プロジェクトから Next.js/Japanese に全面移行。CONVERT_CANDIDATE/REVERT_CANDIDATE パイプライン削除。Team Mode 削除。品質ゲート更新。security-scan 独立スキル参照削除。Evidence Cache を npm run lint / npm test に更新。turbo-mode バッチ順序を Type+API → Hook → Component → Test に変更。全テキスト日本語化。 |

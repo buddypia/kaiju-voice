@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" font-family="'Nunito', 'Quicksand', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg30" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="800" fill="url(#bg30)"/>
+
+  <!-- Title -->
+  <text x="700" y="65" text-anchor="middle" font-size="46" font-weight="800" fill="#334155">Structured Output vs Free Text</text>
+  <text x="700" y="100" text-anchor="middle" font-size="22" font-weight="600" fill="#64748b">リアルタイムゲームでは Structured Output が必須</text>
+
+  <!-- VS Divider -->
+  <g transform="translate(700, 420)">
+    <circle cx="0" cy="0" r="40" fill="#8b5cf6"/>
+    <text x="0" y="12" text-anchor="middle" font-size="32" font-weight="800" fill="#ffffff">VS</text>
+  </g>
+
+  <!-- FREE TEXT (Left side - Bad) -->
+  <g transform="translate(350, 360)">
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#fbcfe8" transform="scale(2.2, 2.0)"/>
+
+    <!-- Header blob -->
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#ec4899" transform="translate(0, -180) scale(1.8, 0.35)"/>
+    <text x="0" y="-175" text-anchor="middle" font-size="24" font-weight="800" fill="#ffffff">Free Text（制約なし）</text>
+
+    <!-- Code example -->
+    <text x="-120" y="-95" font-size="15" font-weight="600" fill="#475569" font-style="italic">"The intensity is about 85,</text>
+    <text x="-120" y="-70" font-size="15" font-weight="600" fill="#475569" font-style="italic"> creativity is high at 72...</text>
+    <text x="-120" y="-45" font-size="15" font-weight="600" fill="#475569" font-style="italic"> and very emotional!"</text>
+
+    <!-- Problems -->
+    <text x="-120" y="5" font-size="16" font-weight="600" fill="#ec4899">JSON.parse() → 失敗</text>
+    <text x="-120" y="35" font-size="16" font-weight="600" fill="#ec4899">フィールド欠損の可能性</text>
+    <text x="-120" y="65" font-size="16" font-weight="600" fill="#ec4899">数値範囲が不定</text>
+    <text x="-120" y="95" font-size="18" font-weight="800" fill="#ec4899">ゲームが止まる</text>
+  </g>
+
+  <!-- STRUCTURED OUTPUT (Right side - Good) -->
+  <g transform="translate(1050, 360)">
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#bbf7d0" transform="scale(2.2, 2.0)"/>
+
+    <!-- Header blob -->
+    <path d="M 90,-120 C 150,-100 160,-20 140,50 C 120,120 40,160 -40,140 C -120,120 -160,40 -130,-30 C -100,-100 -10,-140 90,-120 Z" fill="#22c55e" transform="translate(0, -180) scale(1.8, 0.35)"/>
+    <text x="0" y="-175" text-anchor="middle" font-size="22" font-weight="800" fill="#ffffff">Structured Output（JSON Schema制約）</text>
+
+    <!-- Code example -->
+    <text x="-120" y="-95" font-size="15" font-weight="600" fill="#475569">{ "intensity": 85,</text>
+    <text x="-120" y="-70" font-size="15" font-weight="600" fill="#475569">  "creativity": 72,</text>
+    <text x="-120" y="-45" font-size="15" font-weight="600" fill="#475569">  "emotion": 90 }</text>
+
+    <!-- Benefits -->
+    <text x="-120" y="5" font-size="16" font-weight="600" fill="#22c55e">JSON.parse() → 常に成功</text>
+    <text x="-120" y="35" font-size="16" font-weight="600" fill="#22c55e">全フィールド保証</text>
+    <text x="-120" y="65" font-size="16" font-weight="600" fill="#22c55e">型安全 (Zod検証)</text>
+    <text x="-120" y="95" font-size="18" font-weight="800" fill="#22c55e">ゲームが止まらない</text>
+  </g>
+
+  <!-- Footer -->
+  <rect x="340" y="755" width="720" height="36" rx="30" fill="white"/>
+  <text x="700" y="779" text-anchor="middle" font-size="16" font-weight="600" fill="#64748b">リアルタイムゲームでは Structured Output が必須</text>
+</svg>

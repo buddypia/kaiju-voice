@@ -121,7 +121,7 @@ REQUIRED_RESEARCH = {
 
 ### 目標
 
-Hackathon Project アプリの {kpi_target} 達成
+プロジェクト アプリの {kpi_target} 達成
 
 ### コンテキスト
 

@@ -1,7 +1,7 @@
 # Event Storming Lite パターンガイド
 
 > **用途**: `domain-modeler` スキルの2段階（Event Storming Lite）で参照するパターンリファレンス。
-> Alberto Brandolini の Event Storming メソッドを Hackathon Project プロジェクト向けに簡略化したガイドです。
+> Alberto Brandolini の Event Storming メソッドを プロジェクト プロジェクト向けに簡略化したガイドです。
 
 ---
 
@@ -51,15 +51,15 @@ Event Storming は Alberto Brandolini が考案したワークショップ手法
 
 - 英語 PascalCase + 過去形
 - `{Entity}{Action}ed` 形式
-- 例: `VocabularyAdded`, `ReviewCompleted`, `LevelAssessed`
+- 例: `ActionSubmitted`, `BattleCompleted`, `RankEvaluated`
 
 **抽出テーブル**:
 
-| User Story の動詞    | Domain Event      | 説明                             |
-| -------------------- | ----------------- | -------------------------------- |
-| 単語を追加する       | `VocabularyAdded` | 新しい単語が単語帳に追加された   |
-| レビューを完了する   | `ReviewCompleted` | SRS レビューセッションが完了した |
-| レベルテストを受ける | `LevelAssessed`   | レベル評価が実施された           |
+| User Story の動詞    | Domain Event      | 説明                                 |
+| -------------------- | ----------------- | ------------------------------------ |
+| アクションを提出する | `ActionSubmitted` | 新しいアクションがバトルに提出された |
+| バトルを完了する     | `BattleCompleted` | バトルセッションが完了した           |
+| ランク評価を受ける   | `RankEvaluated`   | ランク評価が実施された               |
 
 ### 2.2 コマンド（Commands）の識別
 
@@ -75,15 +75,15 @@ Event Storming は Alberto Brandolini が考案したワークショップ手法
 
 - 英語 PascalCase + 命令形
 - `{Action}{Entity}` 形式
-- 例: `AddVocabulary`, `StartReview`, `SubmitAnswer`
+- 例: `SubmitAction`, `StartBattle`, `ExecuteMove`
 
 **変換テーブル**:
 
 | Domain Event      | Command          | Actor   | トリガー           |
 | ----------------- | ---------------- | ------- | ------------------ |
-| `VocabularyAdded` | `AddVocabulary`  | Learner | ユーザーアクション |
-| `ReviewCompleted` | `CompleteReview` | System  | セッション終了時   |
-| `LevelAssessed`   | `AssessLevel`    | System  | テスト回答送信時   |
+| `ActionSubmitted` | `SubmitAction`   | Learner | ユーザーアクション |
+| `BattleCompleted` | `CompleteBattle` | System  | セッション終了時   |
+| `RankEvaluated`   | `EvaluateRank`   | System  | テスト回答送信時   |
 
 ### 2.3 アグリゲート（Aggregates）の識別
 
@@ -98,14 +98,14 @@ Event Storming は Alberto Brandolini が考案したワークショップ手法
 **命名規則**:
 
 - 英語 PascalCase + 単数形
-- 例: `Vocabulary`, `ReviewSession`, `LevelTest`
+- 例: `BattleAction`, `BattleSession`, `RankTest`
 
 **識別テーブル**:
 
-| Aggregate       | Root Entity | 関連エンティティ   | 主要インバリアント           |
-| --------------- | ----------- | ------------------ | ---------------------------- |
-| `Vocabulary`    | Vocabulary  | Example, Tag       | 同一単語の重複登録不可       |
-| `ReviewSession` | Session     | ReviewItem, Answer | セッション内のアイテム数上限 |
+| Aggregate       | Root Entity  | 関連エンティティ | 主要インバリアント               |
+| --------------- | ------------ | ---------------- | -------------------------------- |
+| `BattleAction`  | BattleAction | Effect, Target   | 同一ターンでの重複アクション不可 |
+| `BattleSession` | Session      | TurnItem, Answer | セッション内のターン数上限       |
 
 ---
 
@@ -122,48 +122,48 @@ sequenceDiagram
     participant Ext as External System
 
     Note over Learner,Ext: 単語追加フロー
-    Learner->>Cmd: AddVocabulary(word, meaning)
-    Cmd->>Agg: Vocabulary
+    Learner->>Cmd: SubmitAction(word, meaning)
+    Cmd->>Agg: BattleAction
     Agg-->>Agg: 重複チェック (BR-01)
-    Agg->>Evt: VocabularyAdded
+    Agg->>Evt: ActionSubmitted
     Evt->>Ext: SRS Schedule (初回スケジュール登録)
 
     Note over Learner,Ext: レビューフロー
-    Learner->>Cmd: StartReview()
-    Cmd->>Agg: ReviewSession
-    Agg->>Evt: ReviewStarted
-    Learner->>Cmd: SubmitAnswer(answer)
-    Cmd->>Agg: ReviewSession
+    Learner->>Cmd: StartBattle()
+    Cmd->>Agg: BattleSession
+    Agg->>Evt: BattleStarted
+    Learner->>Cmd: ExecuteMove(answer)
+    Cmd->>Agg: BattleSession
     Agg-->>Agg: 正誤判定 (BR-02)
-    Agg->>Evt: AnswerSubmitted
-    Agg->>Evt: ReviewCompleted
+    Agg->>Evt: MoveExecuted
+    Agg->>Evt: BattleCompleted
 ```
 
 ### 3.2 Aggregate 関係図（Flowchart）
 
 ```mermaid
 flowchart TD
-    subgraph VocabularyContext["Vocabulary Context"]
-        V[Vocabulary] --> E[Example]
+    subgraph BattleActionContext["Battle Action Context"]
+        V[BattleAction] --> E[Example]
         V --> T[Tag]
     end
 
-    subgraph ReviewContext["Review Context"]
-        RS[ReviewSession] --> RI[ReviewItem]
+    subgraph ReviewContext["Battle Context"]
+        RS[BattleSession] --> RI[TurnItem]
         RS --> A[Answer]
     end
 
-    VocabularyContext -->|provides items| ReviewContext
+    BattleActionContext -->|provides actions| ReviewContext
 ```
 
 ### 3.3 コマンド-イベントフロー（Flowchart）
 
 ```mermaid
 flowchart LR
-    C1[AddVocabulary] -->|triggers| E1[VocabularyAdded]
-    C2[StartReview] -->|triggers| E2[ReviewStarted]
-    C3[SubmitAnswer] -->|triggers| E3[AnswerSubmitted]
-    E3 -->|policy: all items done| E4[ReviewCompleted]
+    C1[SubmitAction] -->|triggers| E1[ActionSubmitted]
+    C2[StartBattle] -->|triggers| E2[BattleStarted]
+    C3[ExecuteMove] -->|triggers| E3[MoveExecuted]
+    E3 -->|policy: all items done| E4[BattleCompleted]
 
     style C1 fill:#4169E1,color:#fff
     style C2 fill:#4169E1,color:#fff
@@ -176,25 +176,25 @@ flowchart LR
 
 ---
 
-## 4. Hackathon Project プロジェクトでの適用ガイドライン
+## 4. プロジェクト プロジェクトでの適用ガイドライン
 
 ### 4.1 ドメイン固有の考慮事項
 
-Hackathon Project プロジェクトは韓国語学習 Web サービスであり、以下のドメイン特性を考慮する必要があります。
+プロジェクトは AI ゲーム対戦 Web サービスであり、以下のドメイン特性を考慮する必要があります。
 
-| 特性                      | 影響                             | Event Storming での対応                     |
-| ------------------------- | -------------------------------- | ------------------------------------------- |
-| **AI 生成コンテンツ**     | コンテンツ生成は非同期・外部依存 | External System として Edge Function を明示 |
-| **音声中心学習**          | TTS/音声認識が中核               | 音声関連イベントを独立カテゴリとして扱う    |
-| **SRS (間隔反復)**        | 学習スケジュールが自動計算       | Policy として SRS エンジンを明示            |
-| **Supabase バックエンド** | RLS + Edge Functions             | 認証・認可イベントを考慮                    |
+| 特性                  | 影響                             | Event Storming での対応                     |
+| --------------------- | -------------------------------- | ------------------------------------------- |
+| **AI 生成コンテンツ** | コンテンツ生成は非同期・外部依存 | External System として API Route を明示 |
+| **リアルタイム対戦**  | 対戦マッチングとターン管理が中核 | 対戦関連イベントを独立カテゴリとして扱う    |
+| **AI 対戦ロジック**   | AI の行動決定が自動計算          | Policy として AI エンジンを明示             |
+| **API バックエンド**  | API Routes + 認証                | 認証・認可イベントを考慮                    |
 
 ### 4.2 よく出現するドメインパターン
 
-**学習セッション系**:
+**対戦セッション系**:
 
 ```
-StartSession → SessionStarted → SubmitAnswer → AnswerEvaluated → CompleteSession → SessionCompleted
+StartBattle → BattleStarted → SubmitAction → ActionEvaluated → CompleteBattle → BattleCompleted
 ```
 
 **コンテンツ生成系**:
@@ -206,7 +206,7 @@ RequestContent → ContentRequested → (AI Processing) → ContentGenerated →
 **進捗管理系**:
 
 ```
-CompleteLesson → LessonCompleted → UpdateProgress → ProgressUpdated → (Policy) → LevelUpAchieved
+CompleteBattle → BattleCompleted → UpdateRanking → RankingUpdated → (Policy) → RankUpAchieved
 ```
 
 ### 4.3 既存 Bounded Context との整合
@@ -215,19 +215,19 @@ CompleteLesson → LessonCompleted → UpdateProgress → ProgressUpdated → (P
 
 | 既存 BC（推定） | 主要 Aggregate            | 関連 Edge Function    |
 | --------------- | ------------------------- | --------------------- |
-| Learning        | LearningSession, Lesson   | `generate-content`    |
-| Review          | ReviewSession, SRSItem    | -                     |
-| Assessment      | LevelTest, Question       | `level-test-evaluate` |
-| Tutoring        | TutorChat, Message        | `ai-tutor-chat`       |
-| Audio           | AudioClip, TTSRequest     | `cloud-tts`           |
+| Battle          | BattleSession, Turn       | `generate-content`    |
+| Ranking         | PlayerRank, MatchResult   | -                     |
+| Matchmaking     | MatchQueue, MatchRule     | `match-evaluate`      |
+| AI Opponent     | AIStrategy, AIAction      | `ai-opponent`         |
+| Commentary      | Commentary, Narration     | `generate-commentary` |
 | User            | UserProfile, Subscription | -                     |
 
 ### 4.4 イベント命名の統一規則
 
-Hackathon Project プロジェクトでのイベント命名は以下の規則に従ってください:
+プロジェクト プロジェクトでのイベント命名は以下の規則に従ってください:
 
 1. **ドメイン接頭辞なし**: `Learning.SessionStarted` ではなく `SessionStarted`（BC 内で一意であれば十分）
-2. **ビジネス用語使用**: 技術用語（`RowInserted`）ではなくビジネス用語（`VocabularyAdded`）
+2. **ビジネス用語使用**: 技術用語（`RowInserted`）ではなくビジネス用語（`ActionSubmitted`）
 3. **粒度の目安**: ユーザーが認識できる単位（`ButtonClicked` は細かすぎ、`EverythingDone` は粗すぎ）
 
 ---

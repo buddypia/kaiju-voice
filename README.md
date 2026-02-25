@@ -1,5 +1,7 @@
 # KAIJU VOICE — 声で戦え、怪獣バトル
 
+🏆 **Gemini 3 Tokyo Hackathon 2026 - 2nd Place (準優勝)** 🏆
+
 **叫べ。その声が、攻撃になる。**
 
 Gemini APIのマルチモーダル能力をフル活用した、音声入力リアルタイムバトルゲーム。

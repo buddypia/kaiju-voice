@@ -1,7 +1,7 @@
 ---
 name: feature-status-sync
 description: |
-  Hackathon Project プロジェクトの CONTEXT.json(SSOT) と index.md を同期するスキル。
+  プロジェクト プロジェクトの CONTEXT.json(SSOT) と index.md を同期するスキル。
   CONTEXT.json の progress 情報を基にコード存在有無を検証し、index.md を生成/更新する。
   feature-pilot の実装完了後の状態更新ステップで呼び出される。
   "機能状態同期", "ドキュメント・コード同期", "index.md 更新", "feature status sync" 等のリクエストでもトリガーされる。
@@ -13,7 +13,7 @@ doc_contract:
 
 ## Overview
 
-Hackathon Project プロジェクトにおける **CONTEXT.json(SSOT) とコード/ドキュメント間の同期** を実行するスキル。
+プロジェクト プロジェクトにおける **CONTEXT.json(SSOT) とコード/ドキュメント間の同期** を実行するスキル。
 
 ### SSOT 構造
 
@@ -399,4 +399,4 @@ CONTEXT.json 未存在
 
 | 日付       | バージョン | 変更内容                                                     |
 | ---------- | ---------- | ------------------------------------------------------------ |
-| 2026-02-11 | v1.0       | Hackathon Project 向けに移植 - Flutter/Dart → Next.js/TypeScript |
+| 2026-02-11 | v1.0       | プロジェクト 向けに移植 - Next.js/TypeScript 適応 |

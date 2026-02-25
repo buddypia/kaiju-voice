@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800">
+  <defs>
+    <linearGradient id="org-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdfbfb"/>
+      <stop offset="100%" stop-color="#ebedee"/>
+    </linearGradient>
+    <path id="blob-c1" d="M 50,-80 C 100,-90 120,-30 110,20 C 100,80 50,110 -20,100 C -90,90 -120,30 -100,-30 C -80,-80 -10,-70 50,-80 Z"/>
+    <path id="blob-c2" d="M 60,-70 C 110,-60 120,0 90,50 C 60,100 -10,120 -60,90 C -110,60 -120,-10 -90,-60 C -60,-100 10,-80 60,-70 Z"/>
+    <path id="blob-c3" d="M 30,-90 C 90,-80 110,-20 100,40 C 90,100 20,110 -40,90 C -100,70 -110,10 -80,-40 C -50,-90 -20,-100 30,-90 Z"/>
+    <path id="blob-c4" d="M 80,-60 C 120,-30 110,40 70,80 C 30,120 -40,110 -80,70 C -120,30 -110,-40 -70,-80 C -30,-120 40,-90 80,-60 Z"/>
+    <path id="blob-c5" d="M 45,-75 C 95,-65 115,-5 100,45 C 85,95 25,115 -35,95 C -95,75 -115,15 -95,-40 C -75,-85 -10,-85 45,-75 Z"/>
+    <path id="blob-c6" d="M 55,-75 C 105,-65 115,-10 95,45 C 75,95 15,110 -40,90 C -95,70 -110,5 -85,-45 C -60,-85 5,-85 55,-75 Z"/>
+    <style>
+      .og-title{font:800 42px 'Nunito','Quicksand',system-ui,sans-serif;fill:#334155;letter-spacing:-.5px}
+      .og-sub{font:600 20px 'Nunito','Quicksand',system-ui,sans-serif;fill:#64748b}
+      .og-h{font:800 22px 'Nunito','Quicksand',system-ui,sans-serif;fill:#1e293b}
+      .og-s{font:600 15px 'Nunito','Quicksand',system-ui,sans-serif;fill:#475569}
+      .og-num{font:900 36px 'Nunito','Quicksand',system-ui,sans-serif;fill:#fff}
+      .og-phase{font:700 16px 'Nunito','Quicksand',system-ui,sans-serif;fill:#94a3b8;letter-spacing:2px}
+      .og-tier{font:800 18px 'Nunito','Quicksand',system-ui,sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1400" height="800" fill="url(#org-bg)"/>
+
+  <!-- Title -->
+  <text x="700" y="58" text-anchor="middle" class="og-title">NEW_FEATURE Pipeline</text>
+  <text x="700" y="88" text-anchor="middle" class="og-sub">ゼロから機能を構築する 設計 → 仕様 → 承認 → 実装 → 検証 の完全フロー</text>
+
+  <!-- Phase labels -->
+  <text x="130" y="150" class="og-phase">DESIGN PHASE</text>
+  <text x="130" y="420" class="og-phase">IMPLEMENTATION PHASE</text>
+
+  <!-- Row 1 Connectors: 1→2, 2→3 -->
+  <g stroke="#94a3b8" stroke-width="3.5" stroke-dasharray="10 10" fill="none" stroke-linecap="round">
+    <path d="M 370,260 Q 430,225 490,260"/>
+    <path d="M 730,260 Q 790,225 850,260"/>
+    <!-- Turn: 3→4 (sweeping curve) -->
+    <path d="M 970,355 C 1080,430 180,430 250,470"/>
+    <!-- Row 2 Connectors: 4→5, 5→6 -->
+    <path d="M 370,530 Q 430,495 490,530"/>
+    <path d="M 730,530 Q 790,495 850,530"/>
+  </g>
+
+  <!-- Step 1: architect (yellow) -->
+  <g transform="translate(250,265)">
+    <use href="#blob-c1" fill="#fef08a"/>
+    <circle cx="-50" cy="-50" r="26" fill="#eab308"/>
+    <text x="-50" y="-36" text-anchor="middle" class="og-num">1</text>
+    <text x="0" y="-2" text-anchor="middle" class="og-h">設計</text>
+    <text x="0" y="22" text-anchor="middle" class="og-s">feature-architect</text>
+    <text x="0" y="44" text-anchor="middle" class="og-s">BRIEF + CONTEXT生成</text>
+  </g>
+
+  <!-- Step 2: spec-generator (blue) -->
+  <g transform="translate(610,265)">
+    <use href="#blob-c2" fill="#bfdbfe"/>
+    <circle cx="-50" cy="-50" r="26" fill="#3b82f6"/>
+    <text x="-50" y="-36" text-anchor="middle" class="og-num">2</text>
+    <text x="0" y="-2" text-anchor="middle" class="og-h">仕様生成</text>
+    <text x="0" y="22" text-anchor="middle" class="og-s">spec-generator</text>
+    <text x="0" y="44" text-anchor="middle" class="og-s">SPEC.md + Screen文書</text>
+  </g>
+
+  <!-- Step 3: readiness-gate (pink) -->
+  <g transform="translate(970,265)">
+    <use href="#blob-c3" fill="#fbcfe8"/>
+    <circle cx="-50" cy="-50" r="26" fill="#ec4899"/>
+    <text x="-50" y="-36" text-anchor="middle" class="og-num">3</text>
+    <text x="0" y="-2" text-anchor="middle" class="og-h">Readiness Gate</text>
+    <text x="0" y="22" text-anchor="middle" class="og-s">readiness-gate</text>
+    <text x="0" y="44" text-anchor="middle" class="og-s">Go / No-Go 判定</text>
+  </g>
+
+  <!-- Step 4: implement (green) -->
+  <g transform="translate(250,535)">
+    <use href="#blob-c4" fill="#bbf7d0"/>
+    <circle cx="-50" cy="-50" r="26" fill="#22c55e"/>
+    <text x="-50" y="-36" text-anchor="middle" class="og-num">4</text>
+    <text x="0" y="-2" text-anchor="middle" class="og-h">TDD実装</text>
+    <text x="0" y="22" text-anchor="middle" class="og-s">feature-implementer</text>
+    <text x="0" y="44" text-anchor="middle" class="og-s">Data → Logic → UI → Test</text>
+  </g>
+
+  <!-- Step 5: quality-gate (purple) -->
+  <g transform="translate(610,535)">
+    <use href="#blob-c5" fill="#e9d5ff"/>
+    <circle cx="-50" cy="-50" r="26" fill="#a855f7"/>
+    <text x="-50" y="-36" text-anchor="middle" class="og-num">5</text>
+    <text x="0" y="-2" text-anchor="middle" class="og-h">品質検証</text>
+    <text x="0" y="22" text-anchor="middle" class="og-s">pre-quality-gate</text>
+    <text x="0" y="44" text-anchor="middle" class="og-s">lint + test + build</text>
+  </g>
+
+  <!-- Step 6: DoD (orange) -->
+  <g transform="translate(970,535)">
+    <use href="#blob-c6" fill="#fed7aa"/>
+    <circle cx="-50" cy="-50" r="26" fill="#f97316"/>
+    <text x="-50" y="-36" text-anchor="middle" class="og-num">6</text>
+    <text x="0" y="-2" text-anchor="middle" class="og-h">完了検証</text>
+    <text x="0" y="22" text-anchor="middle" class="og-s">DoD verification</text>
+    <text x="0" y="44" text-anchor="middle" class="og-s">10項目の完了契約</text>
+  </g>
+
+  <!-- Footer: Tier info -->
+  <g transform="translate(700,740)">
+    <rect x="-560" y="-28" width="1120" height="56" rx="28" fill="#ffffff"/>
+    <text x="-370" y="7" text-anchor="middle" class="og-tier" fill="#22c55e">S-Tier: 上記6ステップ</text>
+    <text x="0" y="7" text-anchor="middle" class="og-tier" fill="#3b82f6">M-Tier: + UI承認 / 統合検証 / 状態同期</text>
+    <text x="370" y="7" text-anchor="middle" class="og-tier" fill="#8b5cf6">L-Tier: + 優先度分析</text>
+  </g>
+</svg>

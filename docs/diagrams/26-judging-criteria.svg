@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 280" font-family="system-ui, sans-serif">
+  <rect width="600" height="280" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="300" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#0f172a">ハッカソン審査基準</text>
+
+  <!-- Demo 50% -->
+  <rect x="40" y="55" width="520" height="55" rx="8" fill="#ef4444" opacity="0.15"/>
+  <rect x="40" y="55" width="520" height="55" rx="8" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <text x="60" y="80" font-size="14" font-weight="700" fill="#991b1b">Demo</text>
+  <text x="540" y="80" text-anchor="end" font-size="24" font-weight="800" fill="#ef4444">50%</text>
+  <text x="60" y="98" font-size="10" fill="#475569">実際に動作する形で示す — 叫び声バトルはデモ映え抜群</text>
+
+  <!-- Impact 25% -->
+  <rect x="40" y="120" width="260" height="55" rx="8" fill="#3b82f6" opacity="0.12"/>
+  <rect x="40" y="120" width="260" height="55" rx="8" fill="none" stroke="#3b82f6" stroke-width="2"/>
+  <text x="60" y="145" font-size="14" font-weight="700" fill="#1e40af">Impact</text>
+  <text x="280" y="145" text-anchor="end" font-size="24" font-weight="800" fill="#3b82f6">25%</text>
+  <text x="60" y="163" font-size="10" fill="#475569">将来性・有用性</text>
+
+  <!-- Tech 25% -->
+  <rect x="310" y="120" width="250" height="55" rx="8" fill="#22c55e" opacity="0.12"/>
+  <rect x="310" y="120" width="250" height="55" rx="8" fill="none" stroke="#22c55e" stroke-width="2"/>
+  <text x="330" y="145" font-size="14" font-weight="700" fill="#166534">Tech</text>
+  <text x="540" y="145" text-anchor="end" font-size="24" font-weight="800" fill="#22c55e">25%</text>
+  <text x="330" y="163" font-size="10" fill="#475569">Gemini APIの活用度</text>
+
+  <!-- KAIJU VOICE strengths -->
+  <rect x="40" y="195" width="520" height="65" rx="10" fill="#0f172a"/>
+  <text x="300" y="218" text-anchor="middle" font-size="12" font-weight="600" fill="#22d3ee">KAIJU VOICE が評価されたポイント</text>
+  <text x="110" y="240" text-anchor="middle" font-size="10" fill="#fca5a5">デモの盛り上がり</text>
+  <text x="300" y="240" text-anchor="middle" font-size="10" fill="#93c5fd">4モデル統合</text>
+  <text x="480" y="240" text-anchor="middle" font-size="10" fill="#86efac">AI実況のインパクト</text>
+
+  <text x="300" y="275" text-anchor="middle" font-size="10" fill="#94a3b8">デモ比重50% → 「見て面白い」が最重要</text>
+</svg>

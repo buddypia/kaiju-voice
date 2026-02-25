@@ -45,7 +45,7 @@ Terraform不要、gcloud CLI のみで Cloud Run にデプロイする。
 
 | 設定                | デフォルト値          | 環境変数 / オプション               |
 | ------------------- | --------------------- | ----------------------------------- |
-| **GCPプロジェクト** | `n8n-open-playground` | `--project <id>`                    |
+| **GCPプロジェクト** | `gemini-3-tokyo-hackathon` | `--project <id>`                    |
 | **リージョン**      | `asia-northeast1`     | `--region <region>`                 |
 | **サービス名**      | `hackathon-project`       | `--service <name>`                  |
 | **認証**            | 未認証アクセス許可    | `--no-allow-unauthenticated` で変更 |
@@ -158,7 +158,7 @@ Terraform不要、gcloud CLI のみで Cloud Run にデプロイする。
 | -------------- | ---------------------------------------- |
 | サービス       | hackathon-project                            |
 | リージョン     | asia-northeast1                          |
-| プロジェクト   | n8n-open-playground                      |
+| プロジェクト   | gemini-3-tokyo-hackathon                      |
 | URL            | https://hackathon-project-xxxxx-an.a.run.app |
 | ヘルスチェック | HTTP 200 OK                              |
 

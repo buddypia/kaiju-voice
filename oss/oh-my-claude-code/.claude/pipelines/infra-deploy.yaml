@@ -1,0 +1,91 @@
+# Pipeline as Code: INFRA_DEPLOY
+# インフラストラクチャのデプロイパイプライン定義
+
+name: INFRA_DEPLOY
+version: 1.0.0
+description: 'GCP Cloud Run インフラデプロイパイプライン'
+
+tiers:
+  S:
+    - validate
+    - plan
+    - apply
+    - health_check
+  M:
+    - validate
+    - plan
+    - approval_gate
+    - apply
+    - health_check
+    - rollback_verify
+
+steps:
+  validate:
+    type: automatic
+    model: haiku
+    description: 'Terraform 構文検証 + フォーマットチェック'
+    commands:
+      - 'cd terraform && terraform validate'
+      - 'cd terraform && terraform fmt -check'
+    retry:
+      max: 1
+      fallback: null
+
+  plan:
+    type: automatic
+    model: haiku
+    description: 'Terraform plan 実行（dry-run）'
+    commands:
+      - 'make infra.plan'
+    outputs:
+      - terraform/tfplan
+    retry:
+      max: 2
+      fallback: null
+
+  approval_gate:
+    type: gate
+    requires_user: true
+    description: 'Plan 結果を確認し、ユーザー承認を取得'
+    compensation:
+      action: 'Plan を再実行して差分を確認'
+      revert_to: plan
+
+  apply:
+    type: automatic
+    model: sonnet
+    description: 'Terraform apply 実行'
+    commands:
+      - 'make infra.apply'
+    retry:
+      max: 1
+      fallback: null
+    compensation:
+      action: 'apply 失敗時は state を確認して手動介入'
+      revert_to: plan
+
+  health_check:
+    type: automatic
+    model: haiku
+    description: 'デプロイ後のヘルスチェック'
+    commands:
+      - 'curl -sf $(make infra.output 2>/dev/null | grep service_url | awk "{print $3}")'
+    retry:
+      max: 5
+      interval_seconds: 15
+      fallback: null
+
+  rollback_verify:
+    type: automatic
+    model: haiku
+    description: 'ロールバック手順の確認（実行はしない）'
+    optional: true
+
+global:
+  evidence_caching: true
+  evidence_cache_path: '.claude/state/evidence-cache.json'
+  max_total_retries: 10
+  model_fallback:
+    enabled: true
+    order: [haiku, sonnet, opus]
+    max_failures_before_escalation: 3
