@@ -268,7 +268,6 @@ python3 .claude/scripts/wisdom_splitter.py --split --threshold 10
 
 - [Wisdom Only マイグレーション計画](../.claude/MIGRATION_PLAN.md)
 - [CLAUDE.md - Wisdom セクション](../../CLAUDE.md#-wisdom-システム)
-- [自動化パターン リファレンス](../../docs/oss/README.md)
 
 ---
 
